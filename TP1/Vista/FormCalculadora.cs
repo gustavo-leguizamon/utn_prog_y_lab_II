@@ -17,5 +17,10 @@ namespace Vista
             InitializeComponent();
         }
 
+        private void FormCalculadora_Load(object sender, EventArgs e)
+        {
+            //btnLimpiar.Click();
+            //LLAMER METODO LIMPIAR
+        }
     }
 }

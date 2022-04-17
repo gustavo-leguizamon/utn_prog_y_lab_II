@@ -82,10 +82,18 @@ namespace Vista
         {
             if (!string.IsNullOrWhiteSpace(lblResultado.Text))
             {
-                Operando operando = new Operando();
-                string resultado = operando.DecimalBinario(lblResultado.Text);
-                lstOperaciones.Items.Add($"{Math.Floor(Math.Abs(double.Parse(lblResultado.Text)))} a binario = {resultado}");
-                lblResultado.Text = resultado;
+                double number;
+                if (double.TryParse(lblResultado.Text, out number))
+                {
+                    Operando operando = new Operando();
+                    string resultado = operando.DecimalBinario(lblResultado.Text);
+                    lstOperaciones.Items.Add($"{Math.Floor(Math.Abs(number))} a binario = {resultado}");
+                    lblResultado.Text = resultado;
+                }
+                else
+                {
+                    MessageBox.Show("No hay resultado para convertir", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
             else
             {

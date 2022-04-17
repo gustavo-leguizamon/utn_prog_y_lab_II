@@ -64,6 +64,7 @@
             this.cmbOperador.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.cmbOperador.FormattingEnabled = true;
             this.cmbOperador.Items.AddRange(new object[] {
+            "",
             "+",
             "-",
             "/",
@@ -90,6 +91,7 @@
             this.btnLimpiar.TabIndex = 5;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnCerrar
             // 

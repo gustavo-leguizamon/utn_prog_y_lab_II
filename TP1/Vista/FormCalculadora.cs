@@ -61,9 +61,16 @@ namespace Vista
             {
                 operador = (string)cmbOperador.SelectedItem;
             }
-            double resultado = Operar(valor1, valor2, operador);
-            lblResultado.Text = resultado.ToString();
-            lstOperaciones.Items.Add($"{valor1} {operador} {valor2} = {resultado}");
+            if (!string.IsNullOrWhiteSpace(operador))
+            {
+                double resultado = Operar(valor1, valor2, operador);
+                lblResultado.Text = resultado.ToString();
+                lstOperaciones.Items.Add($"{valor1} {operador} {valor2} = {resultado}");
+            }
+            else
+            {
+                MessageBox.Show("Debe indicar una operacion", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -78,6 +85,18 @@ namespace Vista
                 Operando operando = new Operando();
                 string resultado = operando.DecimalBinario(lblResultado.Text);
                 lstOperaciones.Items.Add($"{Math.Floor(Math.Abs(double.Parse(lblResultado.Text)))} a binario = {resultado}");
+                lblResultado.Text = resultado;
+            }
+        }
+
+        private void btnConvertirADecimal_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(lblResultado.Text))
+            {
+                Operando operando = new Operando();
+                string resultado = operando.BinarioDecimal(lblResultado.Text);
+                lstOperaciones.Items.Add($"{lblResultado.Text} a decimal = {resultado}");
+                lblResultado.Text = resultado;
             }
         }
     }

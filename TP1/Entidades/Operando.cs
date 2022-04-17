@@ -170,7 +170,7 @@ namespace Entidades
             double numeroAbsoluto = Math.Abs(numero);
             string binario = string.Empty;
             int resto;
-            double resultado = numero;
+            double resultado = numeroAbsoluto;
 
             do
             {

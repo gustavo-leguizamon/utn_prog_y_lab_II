@@ -25,10 +25,18 @@ namespace Vista
         {
             txtNumero1.Text = string.Empty;
             txtNumero2.Text = string.Empty;
-            lblResultado.Text = "0";
+            lblResultado.Text = string.Empty;
             cmbOperador.SelectedIndex = 0;
         }
 
+
+        /// <summary>
+        /// Realiza la operacion seleccionada
+        /// </summary>
+        /// <param name="numero1">Operando A</param>
+        /// <param name="numero2">Operando B</param>
+        /// <param name="operador">Tipo de operacion</param>
+        /// <returns>Resultado de la operacion</returns>
         private static double Operar(string numero1, string numero2, string operador)
         {
             return Calculadora.Operar(new Operando(numero1), new Operando(numero2), operador[0]);
@@ -61,6 +69,16 @@ namespace Vista
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnConvertirABinario_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(lblResultado.Text))
+            {
+                Operando operando = new Operando();
+                string resultado = operando.DecimalBinario(lblResultado.Text);
+                lstOperaciones.Items.Add($"{Math.Floor(Math.Abs(double.Parse(lblResultado.Text)))} a binario = {resultado}");
+            }
         }
     }
 }

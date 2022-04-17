@@ -112,6 +112,7 @@
             this.btnConvertirABinario.TabIndex = 7;
             this.btnConvertirABinario.Text = "Convertir a Binario";
             this.btnConvertirABinario.UseVisualStyleBackColor = true;
+            this.btnConvertirABinario.Click += new System.EventHandler(this.btnConvertirABinario_Click);
             // 
             // btnConvertirADecimal
             // 
@@ -129,7 +130,7 @@
             this.lstOperaciones.ItemHeight = 21;
             this.lstOperaciones.Location = new System.Drawing.Point(480, 10);
             this.lstOperaciones.Name = "lstOperaciones";
-            this.lstOperaciones.Size = new System.Drawing.Size(170, 235);
+            this.lstOperaciones.Size = new System.Drawing.Size(324, 235);
             this.lstOperaciones.TabIndex = 3;
             // 
             // lblResultado
@@ -138,15 +139,14 @@
             this.lblResultado.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblResultado.Location = new System.Drawing.Point(378, 9);
             this.lblResultado.Name = "lblResultado";
-            this.lblResultado.Size = new System.Drawing.Size(33, 37);
+            this.lblResultado.Size = new System.Drawing.Size(0, 37);
             this.lblResultado.TabIndex = 9;
-            this.lblResultado.Text = "0";
             // 
             // FormCalculadora
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(658, 253);
+            this.ClientSize = new System.Drawing.Size(816, 253);
             this.Controls.Add(this.lblResultado);
             this.Controls.Add(this.lstOperaciones);
             this.Controls.Add(this.btnConvertirADecimal);

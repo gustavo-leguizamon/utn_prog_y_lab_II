@@ -57,5 +57,10 @@ namespace Vista
             lblResultado.Text = resultado.ToString();
             lstOperaciones.Items.Add($"{valor1} {operador} {valor2} = {resultado}");
         }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

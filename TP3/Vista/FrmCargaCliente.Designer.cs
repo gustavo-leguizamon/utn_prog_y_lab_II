@@ -129,6 +129,7 @@
             this.btnCancelar.TabIndex = 10;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // FrmCargaCliente
             // 
@@ -151,6 +152,7 @@
             this.Name = "FrmCargaCliente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmCargaCliente";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmCargaCliente_FormClosing);
             this.Load += new System.EventHandler(this.FrmCargaCliente_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtDni)).EndInit();
             this.ResumeLayout(false);

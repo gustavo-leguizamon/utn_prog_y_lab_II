@@ -42,5 +42,13 @@ namespace Vista
                 MessageBox.Show($"Error inesperado. {ex.Message} - {ex.StackTrace}");
             }
         }
+
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("¿Desea salir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Hand) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

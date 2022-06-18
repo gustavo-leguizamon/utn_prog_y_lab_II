@@ -43,8 +43,11 @@ namespace Vista
         {
             try
             {
-                FrmCargaMascota frm = new FrmCargaMascota();
-                frm.ShowDialog();
+                FrmCargaMascota frm = new FrmCargaMascota(this.clientes);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("Se agregó la mascota!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {

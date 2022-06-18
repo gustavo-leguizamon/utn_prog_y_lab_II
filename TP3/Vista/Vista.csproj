@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Archivos\Archivos.csproj" />
     <ProjectReference Include="..\Entidades\Entidades.csproj" />
+    <ProjectReference Include="..\Logica\Logica.csproj" />
   </ItemGroup>
 
 </Project>

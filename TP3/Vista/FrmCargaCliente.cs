@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Logica;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,12 +15,14 @@ namespace Vista
     public partial class FrmCargaCliente : Form
     {
         private List<Cliente> clientes;
+        private BusquedaCliente busquedaCliente;
 
         public FrmCargaCliente(List<Cliente> clientes)
         {
             InitializeComponent();
 
             this.clientes = clientes;
+            this.busquedaCliente = new BusquedaCliente(clientes);
         }
 
         #region Methods
@@ -49,12 +52,7 @@ namespace Vista
 
         private bool ValidaClienteUnico()
         {
-            foreach (Cliente cliente in this.clientes)
-            {
-                if (cliente.Dni == (long)this.txtDni.Value)
-                    return false;
-            }
-            return true;
+            return !this.busquedaCliente.Existe((long)this.txtDni.Value);
         }
 
         #endregion

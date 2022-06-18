@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 namespace Archivos
 {
     public class ArchivoXml<T> : Archivo, IArchivo<T>
-      where T : class, new()
+      where T : class
     {
         protected override string Extension => ".xml";
 

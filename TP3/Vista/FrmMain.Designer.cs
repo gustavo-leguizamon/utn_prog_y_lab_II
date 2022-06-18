@@ -30,6 +30,8 @@
         {
             this.btnCargarCliente = new System.Windows.Forms.Button();
             this.btnCargarMascota = new System.Windows.Forms.Button();
+            this.btnExportarClientes = new System.Windows.Forms.Button();
+            this.btnImportarClientes = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCargarCliente
@@ -54,11 +56,35 @@
             this.btnCargarMascota.UseVisualStyleBackColor = true;
             this.btnCargarMascota.Click += new System.EventHandler(this.btnCargarMascota_Click);
             // 
+            // btnExportarClientes
+            // 
+            this.btnExportarClientes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnExportarClientes.Location = new System.Drawing.Point(12, 67);
+            this.btnExportarClientes.Name = "btnExportarClientes";
+            this.btnExportarClientes.Size = new System.Drawing.Size(279, 49);
+            this.btnExportarClientes.TabIndex = 2;
+            this.btnExportarClientes.Text = "Exportar clientes";
+            this.btnExportarClientes.UseVisualStyleBackColor = true;
+            this.btnExportarClientes.Click += new System.EventHandler(this.btnExportarClientes_Click);
+            // 
+            // btnImportarClientes
+            // 
+            this.btnImportarClientes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnImportarClientes.Location = new System.Drawing.Point(298, 67);
+            this.btnImportarClientes.Name = "btnImportarClientes";
+            this.btnImportarClientes.Size = new System.Drawing.Size(279, 49);
+            this.btnImportarClientes.TabIndex = 3;
+            this.btnImportarClientes.Text = "Importar clientes";
+            this.btnImportarClientes.UseVisualStyleBackColor = true;
+            this.btnImportarClientes.Click += new System.EventHandler(this.btnImportarClientes_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(589, 70);
+            this.ClientSize = new System.Drawing.Size(589, 146);
+            this.Controls.Add(this.btnImportarClientes);
+            this.Controls.Add(this.btnExportarClientes);
             this.Controls.Add(this.btnCargarMascota);
             this.Controls.Add(this.btnCargarCliente);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -76,5 +102,7 @@
 
         private System.Windows.Forms.Button btnCargarCliente;
         private System.Windows.Forms.Button btnCargarMascota;
+        private System.Windows.Forms.Button btnExportarClientes;
+        private System.Windows.Forms.Button btnImportarClientes;
     }
 }

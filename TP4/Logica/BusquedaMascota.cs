@@ -1,4 +1,5 @@
-﻿using Entidades;
+﻿using Datos;
+using Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Logica
         {
             foreach (Mascota mascota in this.mascotas)
             {
-                if (mascota.DniDuenio == id)
+                if (mascota.DniCliente == id)
                 {
                     return mascota;
                 }
@@ -39,6 +40,18 @@ namespace Logica
             {
                 return false;
             }
+        }
+
+        public bool Existe(Mascota mascota)
+        {
+            foreach (Mascota item in this.mascotas)
+            {
+                if (mascota == item)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

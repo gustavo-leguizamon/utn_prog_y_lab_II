@@ -5,11 +5,13 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vista", "Vista\Vista.csproj", "{1094EBDE-8F86-4522-9A82-CD8657F328A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archivos", "Archivos\Archivos.csproj", "{4A092981-8604-44B7-B443-2B742C9BB999}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Archivos", "Archivos\Archivos.csproj", "{4A092981-8604-44B7-B443-2B742C9BB999}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Entidades.csproj", "{661C8114-7746-4E6D-84A3-AC85FD80F8C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entidades", "Entidades\Entidades.csproj", "{661C8114-7746-4E6D-84A3-AC85FD80F8C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logica", "Logica\Logica.csproj", "{D953A267-A711-4FCB-8D67-C431E835047E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logica", "Logica\Logica.csproj", "{D953A267-A711-4FCB-8D67-C431E835047E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datos", "Datos\Datos.csproj", "{C982E48F-B819-4F4D-B46B-C0549A997555}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D953A267-A711-4FCB-8D67-C431E835047E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D953A267-A711-4FCB-8D67-C431E835047E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D953A267-A711-4FCB-8D67-C431E835047E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C982E48F-B819-4F4D-B46B-C0549A997555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C982E48F-B819-4F4D-B46B-C0549A997555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C982E48F-B819-4F4D-B46B-C0549A997555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C982E48F-B819-4F4D-B46B-C0549A997555}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

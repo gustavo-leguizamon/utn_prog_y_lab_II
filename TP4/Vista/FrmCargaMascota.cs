@@ -1,4 +1,5 @@
-﻿using Entidades;
+﻿using Datos;
+using Entidades;
 using Logica;
 using System;
 using System.Collections.Generic;
@@ -14,17 +15,16 @@ namespace Vista
 {
     public partial class FrmCargaMascota : Form
     {
-        //private List<Cliente> clientes;
-        private BusquedaCliente busquedaCliente;
-        private BusquedaMascota busquedaMascota;
         private Cliente cliente;
+        private MascotaDAO mascotaDAO;
+        private ClienteDAO clienteDAO;
 
-        public FrmCargaMascota(List<Cliente> clientes)
+        public FrmCargaMascota(MascotaDAO mascotaDAO)
         {
             InitializeComponent();
 
-            //this.clientes = clientes;
-            this.busquedaCliente = new BusquedaCliente(clientes);
+            this.mascotaDAO = mascotaDAO;
+            this.clienteDAO = new ClienteDAO();
         }
 
         #region Methods
@@ -51,15 +51,14 @@ namespace Vista
 
         private bool ValidaMascotaUnica()
         {
-            this.busquedaMascota = new BusquedaMascota(this.cliente.Mascotas);
-            return !this.busquedaMascota.Existe((long)this.txtDni.Value);
+            return !new BusquedaMascota(this.cliente.Mascotas).Existe(new Mascota(this.cliente.Dni, this.txtNombre.Text, (float)this.txtPeso.Value, this.dtFechaNacimiento.Value));
         }
 
         private void EstablecerCliente()
         {
             try
             {
-                this.cliente = this.busquedaCliente.Buscar((long)this.txtDni.Value);
+                this.cliente = this.clienteDAO.LeerPorId((long)txtDni.Value, new Type[] { typeof(Mascota) });
                 this.txtNombreCliente.Text = $"{this.cliente.Nombre} {this.cliente.Apellido}";
                 this.grpMascota.Enabled = true;
                 this.btnAgregar.Enabled = true;
@@ -120,13 +119,8 @@ namespace Vista
             {
                 if (SeCompletaronTodosLosCampos())
                 {
-                    this.cliente.Mascotas.Add(new Mascota()
-                    {
-                        DniDuenio = this.cliente.Dni,
-                        FechaNacimiento = this.dtFechaNacimiento.Value,
-                        Nombre = this.txtNombre.Text,
-                        Peso = (float)this.txtPeso.Value,
-                    });
+                    Mascota mascota = new Mascota(this.cliente.Dni, this.txtNombre.Text, (float)this.txtPeso.Value, this.dtFechaNacimiento.Value);
+                    this.mascotaDAO.Guardar(mascota);
                     this.DialogResult = DialogResult.OK;
                     ReiniciarCampos();
                     this.Close();

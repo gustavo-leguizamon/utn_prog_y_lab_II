@@ -1,4 +1,5 @@
-﻿using Entidades;
+﻿using Datos;
+using Entidades;
 using Logica;
 using System;
 using System.Collections.Generic;
@@ -14,15 +15,13 @@ namespace Vista
 {
     public partial class FrmCargaCliente : Form
     {
-        private List<Cliente> clientes;
-        private BusquedaCliente busquedaCliente;
+        private ClienteDAO clienteDAO;
 
-        public FrmCargaCliente(List<Cliente> clientes)
+        public FrmCargaCliente(ClienteDAO clienteDAO)
         {
             InitializeComponent();
 
-            this.clientes = clientes;
-            this.busquedaCliente = new BusquedaCliente(clientes);
+            this.clienteDAO = clienteDAO;
         }
 
         #region Methods
@@ -31,6 +30,7 @@ namespace Vista
         {
             return this.txtNombre.Text.Trim().Length > 0 ||
                    this.txtApellido.Text.Trim().Length > 0 ||
+                   this.txtDireccion.Text.Trim().Length > 0 ||
                    this.txtDni.Value > 0;
 
         }
@@ -39,6 +39,7 @@ namespace Vista
         {
             this.txtNombre.Text = string.Empty;
             this.txtApellido.Text = string.Empty;
+            this.txtDireccion.Text = string.Empty;
             this.txtDni.Value = 0;
         }
 
@@ -46,13 +47,21 @@ namespace Vista
         {
             return this.txtNombre.Text.Trim().Length > 0 &&
                    this.txtApellido.Text.Trim().Length > 0 &&
+                   this.txtDireccion.Text.Trim().Length > 0 &&
                    this.txtDni.Value > 0;
 
         }
 
         private bool ValidaClienteUnico()
         {
-            return !this.busquedaCliente.Existe((long)this.txtDni.Value);
+            try
+            {
+                return !this.clienteDAO.Existe((long)this.txtDni.Value);
+            }
+            catch (EntidadInexistenteException)
+            {
+                return true;
+            }
         }
 
         #endregion
@@ -81,13 +90,8 @@ namespace Vista
             {
                 if (SeCompletaronTodosLosCampos())
                 {
-                    this.clientes.Add(new Cliente()
-                    {
-                        Nombre = this.txtNombre.Text,
-                        Apellido = this.txtApellido.Text,
-                        Dni = (long)this.txtDni.Value,
-                        FechaNacimiento = this.dtFechaNacimiento.Value
-                    });
+                    Cliente cliente = new Cliente((long)this.txtDni.Value, this.txtNombre.Text, this.txtApellido.Text, this.dtFechaNacimiento.Value, this.txtDireccion.Text);
+                    this.clienteDAO.Guardar(cliente);
                     this.DialogResult = DialogResult.OK;
                     ReiniciarCampos();
                     this.Close();

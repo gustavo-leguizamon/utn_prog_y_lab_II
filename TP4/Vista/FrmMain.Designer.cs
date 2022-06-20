@@ -28,81 +28,199 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnCargarCliente = new System.Windows.Forms.Button();
-            this.btnCargarMascota = new System.Windows.Forms.Button();
-            this.btnExportarClientes = new System.Windows.Forms.Button();
-            this.btnImportarClientes = new System.Windows.Forms.Button();
+            this.mnuContainer = new System.Windows.Forms.MenuStrip();
+            this.altaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuVerClientes = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAltaCliente = new System.Windows.Forms.ToolStripMenuItem();
+            this.mascotaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.darDeBajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mascotasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuVerMascotas = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAltaMascota = new System.Windows.Forms.ToolStripMenuItem();
+            this.modificarDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.darDeBajaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.archivosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuImportarDatos = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuExportarDatos = new System.Windows.Forms.ToolStripMenuItem();
+            this.dtgClientes = new System.Windows.Forms.DataGridView();
+            this.dtgMascotas = new System.Windows.Forms.DataGridView();
+            this.mnuContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgClientes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgMascotas)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnCargarCliente
+            // mnuContainer
             // 
-            this.btnCargarCliente.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnCargarCliente.Location = new System.Drawing.Point(12, 12);
-            this.btnCargarCliente.Name = "btnCargarCliente";
-            this.btnCargarCliente.Size = new System.Drawing.Size(279, 49);
-            this.btnCargarCliente.TabIndex = 0;
-            this.btnCargarCliente.Text = "Cargar nuevo cliente";
-            this.btnCargarCliente.UseVisualStyleBackColor = true;
-            this.btnCargarCliente.Click += new System.EventHandler(this.btnCargarCliente_Click);
+            this.mnuContainer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.altaToolStripMenuItem,
+            this.mascotasToolStripMenuItem,
+            this.archivosToolStripMenuItem});
+            this.mnuContainer.Location = new System.Drawing.Point(0, 0);
+            this.mnuContainer.Name = "mnuContainer";
+            this.mnuContainer.Size = new System.Drawing.Size(589, 24);
+            this.mnuContainer.TabIndex = 4;
+            this.mnuContainer.Text = "menuStrip";
             // 
-            // btnCargarMascota
+            // altaToolStripMenuItem
             // 
-            this.btnCargarMascota.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnCargarMascota.Location = new System.Drawing.Point(297, 12);
-            this.btnCargarMascota.Name = "btnCargarMascota";
-            this.btnCargarMascota.Size = new System.Drawing.Size(279, 49);
-            this.btnCargarMascota.TabIndex = 1;
-            this.btnCargarMascota.Text = "Cargar nueva mascota";
-            this.btnCargarMascota.UseVisualStyleBackColor = true;
-            this.btnCargarMascota.Click += new System.EventHandler(this.btnCargarMascota_Click);
+            this.altaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuVerClientes,
+            this.mnuAltaCliente,
+            this.mascotaToolStripMenuItem,
+            this.darDeBajaToolStripMenuItem});
+            this.altaToolStripMenuItem.Name = "altaToolStripMenuItem";
+            this.altaToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.altaToolStripMenuItem.Text = "Clientes";
             // 
-            // btnExportarClientes
+            // mnuVerClientes
             // 
-            this.btnExportarClientes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnExportarClientes.Location = new System.Drawing.Point(12, 67);
-            this.btnExportarClientes.Name = "btnExportarClientes";
-            this.btnExportarClientes.Size = new System.Drawing.Size(279, 49);
-            this.btnExportarClientes.TabIndex = 2;
-            this.btnExportarClientes.Text = "Exportar clientes";
-            this.btnExportarClientes.UseVisualStyleBackColor = true;
-            this.btnExportarClientes.Click += new System.EventHandler(this.btnExportarClientes_Click);
+            this.mnuVerClientes.Name = "mnuVerClientes";
+            this.mnuVerClientes.Size = new System.Drawing.Size(169, 22);
+            this.mnuVerClientes.Text = "Ver clientes";
+            this.mnuVerClientes.Click += new System.EventHandler(this.mnuVerClientes_Click);
             // 
-            // btnImportarClientes
+            // mnuAltaCliente
             // 
-            this.btnImportarClientes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnImportarClientes.Location = new System.Drawing.Point(298, 67);
-            this.btnImportarClientes.Name = "btnImportarClientes";
-            this.btnImportarClientes.Size = new System.Drawing.Size(279, 49);
-            this.btnImportarClientes.TabIndex = 3;
-            this.btnImportarClientes.Text = "Importar clientes";
-            this.btnImportarClientes.UseVisualStyleBackColor = true;
-            this.btnImportarClientes.Click += new System.EventHandler(this.btnImportarClientes_Click);
+            this.mnuAltaCliente.Name = "mnuAltaCliente";
+            this.mnuAltaCliente.Size = new System.Drawing.Size(169, 22);
+            this.mnuAltaCliente.Text = "Alta nuevo cliente";
+            this.mnuAltaCliente.Click += new System.EventHandler(this.mnuAltaCliente_Click);
+            // 
+            // mascotaToolStripMenuItem
+            // 
+            this.mascotaToolStripMenuItem.Name = "mascotaToolStripMenuItem";
+            this.mascotaToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.mascotaToolStripMenuItem.Text = "Modificar datos";
+            // 
+            // darDeBajaToolStripMenuItem
+            // 
+            this.darDeBajaToolStripMenuItem.Name = "darDeBajaToolStripMenuItem";
+            this.darDeBajaToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.darDeBajaToolStripMenuItem.Text = "Dar de baja";
+            // 
+            // mascotasToolStripMenuItem
+            // 
+            this.mascotasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuVerMascotas,
+            this.mnuAltaMascota,
+            this.modificarDatosToolStripMenuItem,
+            this.darDeBajaToolStripMenuItem1});
+            this.mascotasToolStripMenuItem.Name = "mascotasToolStripMenuItem";
+            this.mascotasToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+            this.mascotasToolStripMenuItem.Text = "Mascotas";
+            // 
+            // mnuVerMascotas
+            // 
+            this.mnuVerMascotas.Name = "mnuVerMascotas";
+            this.mnuVerMascotas.Size = new System.Drawing.Size(180, 22);
+            this.mnuVerMascotas.Text = "Ver mascotas";
+            this.mnuVerMascotas.Click += new System.EventHandler(this.mnuVerMascotas_Click);
+            // 
+            // mnuAltaMascota
+            // 
+            this.mnuAltaMascota.Name = "mnuAltaMascota";
+            this.mnuAltaMascota.Size = new System.Drawing.Size(180, 22);
+            this.mnuAltaMascota.Text = "Nueva mascota";
+            this.mnuAltaMascota.Click += new System.EventHandler(this.mnuAltaMascota_Click);
+            // 
+            // modificarDatosToolStripMenuItem
+            // 
+            this.modificarDatosToolStripMenuItem.Name = "modificarDatosToolStripMenuItem";
+            this.modificarDatosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.modificarDatosToolStripMenuItem.Text = "Modificar datos";
+            // 
+            // darDeBajaToolStripMenuItem1
+            // 
+            this.darDeBajaToolStripMenuItem1.Name = "darDeBajaToolStripMenuItem1";
+            this.darDeBajaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.darDeBajaToolStripMenuItem1.Text = "Dar de baja";
+            // 
+            // archivosToolStripMenuItem
+            // 
+            this.archivosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuImportarDatos,
+            this.mnuExportarDatos});
+            this.archivosToolStripMenuItem.Name = "archivosToolStripMenuItem";
+            this.archivosToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.archivosToolStripMenuItem.Text = "Archivos";
+            // 
+            // mnuImportarDatos
+            // 
+            this.mnuImportarDatos.Name = "mnuImportarDatos";
+            this.mnuImportarDatos.Size = new System.Drawing.Size(152, 22);
+            this.mnuImportarDatos.Text = "Importar datos";
+            this.mnuImportarDatos.Click += new System.EventHandler(this.mnuImportarDatos_Click);
+            // 
+            // mnuExportarDatos
+            // 
+            this.mnuExportarDatos.Name = "mnuExportarDatos";
+            this.mnuExportarDatos.Size = new System.Drawing.Size(152, 22);
+            this.mnuExportarDatos.Text = "Exportar datos";
+            this.mnuExportarDatos.Click += new System.EventHandler(this.mnuExportarDatos_Click);
+            // 
+            // dtgClientes
+            // 
+            this.dtgClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgClientes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtgClientes.Location = new System.Drawing.Point(0, 24);
+            this.dtgClientes.Name = "dtgClientes";
+            this.dtgClientes.RowTemplate.Height = 25;
+            this.dtgClientes.Size = new System.Drawing.Size(589, 247);
+            this.dtgClientes.TabIndex = 5;
+            // 
+            // dtgMascotas
+            // 
+            this.dtgMascotas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgMascotas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtgMascotas.Location = new System.Drawing.Point(0, 24);
+            this.dtgMascotas.Name = "dtgMascotas";
+            this.dtgMascotas.RowTemplate.Height = 25;
+            this.dtgMascotas.Size = new System.Drawing.Size(589, 247);
+            this.dtgMascotas.TabIndex = 6;
+            this.dtgMascotas.Visible = false;
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(589, 146);
-            this.Controls.Add(this.btnImportarClientes);
-            this.Controls.Add(this.btnExportarClientes);
-            this.Controls.Add(this.btnCargarMascota);
-            this.Controls.Add(this.btnCargarCliente);
+            this.ClientSize = new System.Drawing.Size(589, 271);
+            this.Controls.Add(this.dtgMascotas);
+            this.Controls.Add(this.dtgClientes);
+            this.Controls.Add(this.mnuContainer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MainMenuStrip = this.mnuContainer;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Veterinaria";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
+            this.Load += new System.EventHandler(this.FrmMain_Load);
+            this.mnuContainer.ResumeLayout(false);
+            this.mnuContainer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgClientes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgMascotas)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnCargarCliente;
-        private System.Windows.Forms.Button btnCargarMascota;
-        private System.Windows.Forms.Button btnExportarClientes;
-        private System.Windows.Forms.Button btnImportarClientes;
+        private System.Windows.Forms.MenuStrip mnuContainer;
+        private System.Windows.Forms.ToolStripMenuItem altaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuAltaCliente;
+        private System.Windows.Forms.ToolStripMenuItem mascotaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem darDeBajaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mascotasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuAltaMascota;
+        private System.Windows.Forms.ToolStripMenuItem modificarDatosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem darDeBajaToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem archivosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuImportarDatos;
+        private System.Windows.Forms.ToolStripMenuItem mnuExportarDatos;
+        private System.Windows.Forms.DataGridView dtgClientes;
+        private System.Windows.Forms.ToolStripMenuItem mnuVerClientes;
+        private System.Windows.Forms.ToolStripMenuItem mnuVerMascotas;
+        private System.Windows.Forms.DataGridView dtgMascotas;
     }
 }

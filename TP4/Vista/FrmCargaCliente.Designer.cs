@@ -38,6 +38,8 @@
             this.txtDni = new System.Windows.Forms.NumericUpDown();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.txtDireccion = new System.Windows.Forms.TextBox();
+            this.lblDireccion = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.txtDni)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,7 +63,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(250, 63);
+            this.label1.Location = new System.Drawing.Point(250, 125);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(117, 15);
             this.label1.TabIndex = 2;
@@ -69,7 +71,7 @@
             // 
             // dtFechaNacimiento
             // 
-            this.dtFechaNacimiento.Location = new System.Drawing.Point(250, 81);
+            this.dtFechaNacimiento.Location = new System.Drawing.Point(250, 143);
             this.dtFechaNacimiento.Name = "dtFechaNacimiento";
             this.dtFechaNacimiento.Size = new System.Drawing.Size(200, 23);
             this.dtFechaNacimiento.TabIndex = 3;
@@ -77,7 +79,7 @@
             // lblDni
             // 
             this.lblDni.AutoSize = true;
-            this.lblDni.Location = new System.Drawing.Point(12, 63);
+            this.lblDni.Location = new System.Drawing.Point(12, 125);
             this.lblDni.Name = "lblDni";
             this.lblDni.Size = new System.Drawing.Size(27, 15);
             this.lblDni.TabIndex = 4;
@@ -102,7 +104,7 @@
             // 
             // txtDni
             // 
-            this.txtDni.Location = new System.Drawing.Point(12, 81);
+            this.txtDni.Location = new System.Drawing.Point(12, 143);
             this.txtDni.Maximum = new decimal(new int[] {
             99999999,
             0,
@@ -114,7 +116,7 @@
             // 
             // btnRegistrar
             // 
-            this.btnRegistrar.Location = new System.Drawing.Point(69, 117);
+            this.btnRegistrar.Location = new System.Drawing.Point(69, 179);
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(143, 23);
             this.btnRegistrar.TabIndex = 9;
@@ -124,7 +126,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(250, 117);
+            this.btnCancelar.Location = new System.Drawing.Point(250, 179);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(143, 23);
             this.btnCancelar.TabIndex = 10;
@@ -132,11 +134,30 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // txtDireccion
+            // 
+            this.txtDireccion.Location = new System.Drawing.Point(12, 84);
+            this.txtDireccion.MaxLength = 100;
+            this.txtDireccion.Name = "txtDireccion";
+            this.txtDireccion.Size = new System.Drawing.Size(438, 23);
+            this.txtDireccion.TabIndex = 12;
+            // 
+            // lblDireccion
+            // 
+            this.lblDireccion.AutoSize = true;
+            this.lblDireccion.Location = new System.Drawing.Point(12, 66);
+            this.lblDireccion.Name = "lblDireccion";
+            this.lblDireccion.Size = new System.Drawing.Size(57, 15);
+            this.lblDireccion.TabIndex = 11;
+            this.lblDireccion.Text = "Dirección";
+            // 
             // FrmCargaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 152);
+            this.ClientSize = new System.Drawing.Size(469, 212);
+            this.Controls.Add(this.txtDireccion);
+            this.Controls.Add(this.lblDireccion);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.txtDni);
@@ -173,5 +194,7 @@
         private System.Windows.Forms.NumericUpDown txtDni;
         private System.Windows.Forms.Button btnRegistrar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.TextBox txtDireccion;
+        private System.Windows.Forms.Label lblDireccion;
     }
 }

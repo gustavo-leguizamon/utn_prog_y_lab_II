@@ -14,6 +14,7 @@ namespace Datos
 
         public event DelegadoActualizacionDatosHandler OnNuevosDatos;
 
+
         public override void Eliminar(long id)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -90,6 +91,17 @@ namespace Datos
                 if (incluirRelaciones.Contains(typeof(Mascota)))
                 {
                     cliente.Mascotas = new MascotaDAO().Leer(x => x.DniCliente == cliente.Dni);
+                }
+                if (incluirRelaciones.Contains(typeof(Turno)))
+                {
+                    if (cliente.Mascotas is null || cliente.Mascotas.Count == 0)
+                    {
+                        cliente.Mascotas = new MascotaDAO().Leer(x => x.DniCliente == cliente.Dni);
+                    }
+                    foreach (Mascota mascota in cliente.Mascotas)
+                    {
+                        mascota.Turnos = new TurnoDAO().Leer(x => x.IdMascota == mascota.Id);
+                    }
                 }
             }
 

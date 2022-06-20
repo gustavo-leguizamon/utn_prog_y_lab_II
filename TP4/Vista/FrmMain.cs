@@ -19,6 +19,9 @@ namespace Vista
         private MascotaDAO mascotaDAO;
         private TurnoDAO turnoDAO;
 
+        private ArchivoXml<List<Cliente>> archivoXml;
+        private ArchivoJson<List<Cliente>> archivoJson;
+
         public FrmMain()
         {
             InitializeComponent();
@@ -26,6 +29,9 @@ namespace Vista
             this.clienteDAO = new ClienteDAO();
             this.mascotaDAO = new MascotaDAO();
             this.turnoDAO = new TurnoDAO();
+
+            this.archivoXml = new ArchivoXml<List<Cliente>>();
+            this.archivoJson = new ArchivoJson<List<Cliente>>();
         }
 
         private void ActualizarDatosClientes()
@@ -95,11 +101,23 @@ namespace Vista
                 };
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    ArchivoXml<List<Cliente>> xml = new ArchivoXml<List<Cliente>>();
-                    List<Cliente> clientes = this.clienteDAO.Leer();
-                    xml.Guardar(saveFileDialog.FileName, clientes);
+                    List<Cliente> clientes = this.clienteDAO.Leer(new Type[] { typeof(Mascota), typeof(Turno) });
+                    try
+                    {
+                        archivoXml.ValidarExtension(saveFileDialog.FileName);
+                        archivoXml.Guardar(saveFileDialog.FileName, clientes);
+                    }
+                    catch (ExtensionIncorrectaException)
+                    {
+                        archivoJson.Guardar(saveFileDialog.FileName, clientes);
+                    }
+
                     MessageBox.Show($"Se realizó la exportación de {clientes.Count} clientes", "Exportación completa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show($"No tiene permisos para guardar el archivo en esa carpeta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {

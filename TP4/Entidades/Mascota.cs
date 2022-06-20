@@ -17,29 +17,38 @@ namespace Entidades
         public long Id
         {
             get { return id; }
+            set { id = value; }
         }
 
         public long DniCliente
         {
             get { return dniCliente; }
+            set { dniCliente = value; }
         }
 
         public string Nombre
         {
             get { return nombre; }
+            set { nombre = value; }
         }
 
         public float Peso
         {
             get { return peso; }
+            set { peso = value; }
         }
 
         public DateTime FechaNacimiento
         {
             get { return fechaNacimiento; }
+            set { fechaNacimiento = value; }
         }
 
-        public List<Turno> Turnos { get; set; }
+        public List<Turno> Turnos 
+        { 
+            get;
+            set;
+        }
 
         public Mascota()
         {

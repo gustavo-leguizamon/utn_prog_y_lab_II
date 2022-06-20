@@ -18,27 +18,36 @@ namespace Entidades
         public long Id
         {
             get { return id; }
+            set { id = value; }
         }
 
         public long IdMascota
         {
             get { return idMascota; }
+            set { idMascota = value; }
         }
 
         public DateTime Fecha
         {
             get { return fecha; }
+            set { fecha = value; }
         }
 
         public string Comentario
         {
             get { return comentario; }
+            set { comentario = value; }
         }
 
         public Mascota Mascota
         {
             get { return mascota; }
             set { mascota = value; }
+        }
+
+        public Turno()
+        {
+
         }
 
         public Turno(long id, long idMascota, DateTime fecha, string comentario)

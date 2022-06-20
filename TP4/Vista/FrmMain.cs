@@ -17,6 +17,7 @@ namespace Vista
     {
         private ClienteDAO clienteDAO;
         private MascotaDAO mascotaDAO;
+        private TurnoDAO turnoDAO;
 
         public FrmMain()
         {
@@ -24,6 +25,7 @@ namespace Vista
 
             this.clienteDAO = new ClienteDAO();
             this.mascotaDAO = new MascotaDAO();
+            this.turnoDAO = new TurnoDAO();
         }
 
         private void ActualizarDatosClientes()
@@ -38,6 +40,13 @@ namespace Vista
             dtgMascotas.DataSource = this.mascotaDAO.Leer();
             dtgMascotas.Update();
             dtgMascotas.Refresh();
+        }
+
+        private void ActualizarDatosTurnos()
+        {
+            dtgTurnos.DataSource = this.turnoDAO.Leer();
+            dtgTurnos.Update();
+            dtgTurnos.Refresh();
         }
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -137,12 +146,17 @@ namespace Vista
             dtgClientes.DataSource = this.clienteDAO.Leer();
             this.clienteDAO.OnNuevosDatos += ActualizarDatosClientes;
             this.mascotaDAO.OnNuevosDatos += ActualizarDatosMascotas;
+            this.turnoDAO.OnNuevosDatos += ActualizarDatosTurnos;
+
+            DateTime fecha = this.turnoDAO.Max(x => x.Fecha);
+            new FrmProximoTurno(fecha).Show();
         }
 
         private void mnuVerClientes_Click(object sender, EventArgs e)
         {
             dtgClientes.Visible = true;
             dtgMascotas.Visible = false;
+            dtgTurnos.Visible = false;
             ActualizarDatosClientes();
         }
 
@@ -150,7 +164,32 @@ namespace Vista
         {
             dtgClientes.Visible = false;
             dtgMascotas.Visible = true;
+            dtgTurnos.Visible = false;
             ActualizarDatosMascotas();
+        }
+
+        private void mnuVerTurnos_Click(object sender, EventArgs e)
+        {
+            dtgClientes.Visible = false;
+            dtgMascotas.Visible = false;
+            dtgTurnos.Visible = true;
+            ActualizarDatosTurnos();
+        }
+
+        private void mnuNuevoTurno_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FrmCargarTurno frm = new FrmCargarTurno(this.turnoDAO);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("Se agregó el turno!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error inesperado. {ex.Message} - {ex.StackTrace}");
+            }
         }
     }
 }

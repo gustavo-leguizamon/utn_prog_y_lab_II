@@ -14,31 +14,26 @@ namespace Entidades
         public long Dni
         {
             get { return dni; }
-            set { dni = value; }
         }
 
         public string Nombre
         {
             get { return nombre; }
-            set { nombre = value; }
         }
 
         public string Apellido
         {
             get { return apellido; }
-            set { apellido = value; }
         }
 
         public DateTime FechaNacimiento
         {
             get { return fechaNacimiento; }
-            set { fechaNacimiento = value; }
         }
 
         public string Direccion
         {
             get { return direccion; }
-            set { direccion = value; }
         }
 
         public List<Mascota> Mascotas { get; set; }

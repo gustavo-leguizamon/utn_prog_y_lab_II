@@ -83,12 +83,16 @@ namespace Datos
 
         public override List<Mascota> Leer(Type[] incluirRelaciones)
         {
-            throw new NotImplementedException();
-        }
+            List<Mascota> mascotas = Leer();
+            foreach (Mascota mascota in mascotas)
+            {
+                if (incluirRelaciones.Contains(typeof(Turno)))
+                {
+                    mascota.Turnos = new TurnoDAO().Leer(x => x.IdMascota == mascota.Id);
+                }
+            }
 
-        public override List<Mascota> Leer(Func<Mascota, bool> predicate)
-        {
-            return Leer().Where(predicate).ToList();
+            return mascotas;
         }
 
         public override Mascota LeerPorId(long id)
@@ -118,7 +122,12 @@ namespace Datos
 
         public override Mascota LeerPorId(long id, Type[] incluirRelaciones)
         {
-            throw new NotImplementedException();
+            Mascota mascota = LeerPorId(id);
+            if (incluirRelaciones.Contains(typeof(Turno)))
+            {
+                mascota.Turnos = new TurnoDAO().Leer(x => x.IdMascota == mascota.Id);
+            }
+            return mascota;
         }
 
         public override void Modificar(Mascota entidad)

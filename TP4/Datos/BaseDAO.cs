@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace Datos
 {
@@ -24,7 +25,11 @@ namespace Datos
         }
 
         public abstract List<E> Leer();
-        public abstract List<E> Leer(Func<E, bool> predicate);
+
+        public virtual List<E> Leer(Func<E, bool> predicate)
+        {
+            return Leer().Where(predicate).ToList();
+        }
         public abstract List<E> Leer(Type[] incluirRelaciones);
 
         public abstract E LeerPorId(ID id);
@@ -37,6 +42,11 @@ namespace Datos
         public virtual bool Existe(ID id)
         {
             return LeerPorId(id) is not null;
+        }
+
+        public virtual T Max<T>(Func<E, T> predicate)
+        {
+            return Leer().Max(predicate);
         }
     }
 }

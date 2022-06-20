@@ -89,16 +89,11 @@ namespace Datos
             {
                 if (incluirRelaciones.Contains(typeof(Mascota)))
                 {
-                    cliente.Mascotas = new MascotaDAO().Leer();
+                    cliente.Mascotas = new MascotaDAO().Leer(x => x.DniCliente == cliente.Dni);
                 }
             }
 
             return clientes;
-        }
-
-        public override List<Cliente> Leer(Func<Cliente, bool> predicate)
-        {
-            return Leer().Where(predicate).ToList();
         }
 
         public override Cliente LeerPorId(long id)

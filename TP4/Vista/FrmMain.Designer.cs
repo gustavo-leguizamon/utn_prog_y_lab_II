@@ -44,9 +44,14 @@
             this.mnuExportarDatos = new System.Windows.Forms.ToolStripMenuItem();
             this.dtgClientes = new System.Windows.Forms.DataGridView();
             this.dtgMascotas = new System.Windows.Forms.DataGridView();
+            this.dtgTurnos = new System.Windows.Forms.DataGridView();
+            this.turnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNuevoTurno = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuVerTurnos = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgClientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgMascotas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgTurnos)).BeginInit();
             this.SuspendLayout();
             // 
             // mnuContainer
@@ -54,6 +59,7 @@
             this.mnuContainer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.altaToolStripMenuItem,
             this.mascotasToolStripMenuItem,
+            this.turnosToolStripMenuItem,
             this.archivosToolStripMenuItem});
             this.mnuContainer.Location = new System.Drawing.Point(0, 0);
             this.mnuContainer.Name = "mnuContainer";
@@ -112,27 +118,27 @@
             // mnuVerMascotas
             // 
             this.mnuVerMascotas.Name = "mnuVerMascotas";
-            this.mnuVerMascotas.Size = new System.Drawing.Size(180, 22);
+            this.mnuVerMascotas.Size = new System.Drawing.Size(157, 22);
             this.mnuVerMascotas.Text = "Ver mascotas";
             this.mnuVerMascotas.Click += new System.EventHandler(this.mnuVerMascotas_Click);
             // 
             // mnuAltaMascota
             // 
             this.mnuAltaMascota.Name = "mnuAltaMascota";
-            this.mnuAltaMascota.Size = new System.Drawing.Size(180, 22);
+            this.mnuAltaMascota.Size = new System.Drawing.Size(157, 22);
             this.mnuAltaMascota.Text = "Nueva mascota";
             this.mnuAltaMascota.Click += new System.EventHandler(this.mnuAltaMascota_Click);
             // 
             // modificarDatosToolStripMenuItem
             // 
             this.modificarDatosToolStripMenuItem.Name = "modificarDatosToolStripMenuItem";
-            this.modificarDatosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.modificarDatosToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.modificarDatosToolStripMenuItem.Text = "Modificar datos";
             // 
             // darDeBajaToolStripMenuItem1
             // 
             this.darDeBajaToolStripMenuItem1.Name = "darDeBajaToolStripMenuItem1";
-            this.darDeBajaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.darDeBajaToolStripMenuItem1.Size = new System.Drawing.Size(157, 22);
             this.darDeBajaToolStripMenuItem1.Text = "Dar de baja";
             // 
             // archivosToolStripMenuItem
@@ -179,11 +185,46 @@
             this.dtgMascotas.TabIndex = 6;
             this.dtgMascotas.Visible = false;
             // 
+            // dtgTurnos
+            // 
+            this.dtgTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgTurnos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtgTurnos.Location = new System.Drawing.Point(0, 24);
+            this.dtgTurnos.Name = "dtgTurnos";
+            this.dtgTurnos.RowTemplate.Height = 25;
+            this.dtgTurnos.Size = new System.Drawing.Size(589, 247);
+            this.dtgTurnos.TabIndex = 7;
+            this.dtgTurnos.Visible = false;
+            // 
+            // turnosToolStripMenuItem
+            // 
+            this.turnosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuVerTurnos,
+            this.mnuNuevoTurno});
+            this.turnosToolStripMenuItem.Name = "turnosToolStripMenuItem";
+            this.turnosToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.turnosToolStripMenuItem.Text = "Turnos";
+            // 
+            // mnuNuevoTurno
+            // 
+            this.mnuNuevoTurno.Name = "mnuNuevoTurno";
+            this.mnuNuevoTurno.Size = new System.Drawing.Size(180, 22);
+            this.mnuNuevoTurno.Text = "Nuevo turno";
+            this.mnuNuevoTurno.Click += new System.EventHandler(this.mnuNuevoTurno_Click);
+            // 
+            // mnuVerTurnos
+            // 
+            this.mnuVerTurnos.Name = "mnuVerTurnos";
+            this.mnuVerTurnos.Size = new System.Drawing.Size(180, 22);
+            this.mnuVerTurnos.Text = "Ver turnos";
+            this.mnuVerTurnos.Click += new System.EventHandler(this.mnuVerTurnos_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(589, 271);
+            this.Controls.Add(this.dtgTurnos);
             this.Controls.Add(this.dtgMascotas);
             this.Controls.Add(this.dtgClientes);
             this.Controls.Add(this.mnuContainer);
@@ -200,6 +241,7 @@
             this.mnuContainer.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgClientes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgMascotas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgTurnos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -222,5 +264,9 @@
         private System.Windows.Forms.ToolStripMenuItem mnuVerClientes;
         private System.Windows.Forms.ToolStripMenuItem mnuVerMascotas;
         private System.Windows.Forms.DataGridView dtgMascotas;
+        private System.Windows.Forms.DataGridView dtgTurnos;
+        private System.Windows.Forms.ToolStripMenuItem turnosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuNuevoTurno;
+        private System.Windows.Forms.ToolStripMenuItem mnuVerTurnos;
     }
 }

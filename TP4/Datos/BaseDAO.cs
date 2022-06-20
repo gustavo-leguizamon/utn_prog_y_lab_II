@@ -44,9 +44,24 @@ namespace Datos
             return LeerPorId(id) is not null;
         }
 
+        public virtual T Min<T>(Func<E, T> predicate)
+        {
+            List<E> lista = Leer();
+            if (lista.Any())
+            {
+                return lista.Min(predicate);
+            }
+            throw new InvalidOperationException("No hay datos para evaluar la condicion");
+        }
+
         public virtual T Max<T>(Func<E, T> predicate)
         {
-            return Leer().Max(predicate);
+            List<E> lista = Leer();
+            if (lista.Any())
+            {
+                return lista.Max(predicate);
+            }
+            throw new InvalidOperationException("No hay datos para evaluar la condicion");
         }
     }
 }

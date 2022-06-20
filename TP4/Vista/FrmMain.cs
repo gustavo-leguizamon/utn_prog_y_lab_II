@@ -75,9 +75,60 @@ namespace Vista
                 };
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    ArchivoXml<List<Cliente>> xml = new ArchivoXml<List<Cliente>>();
-                    List<Cliente> clientes = xml.Leer(openFileDialog.FileName);
-                    this.clienteDAO.Guardar(clientes);
+                    List<Cliente> clientes = null;
+                    try
+                    {
+                        archivoXml.ValidarExtension(openFileDialog.FileName);
+                        clientes = archivoXml.Leer(openFileDialog.FileName);
+                    }
+                    catch (ExtensionIncorrectaException)
+                    {
+                        clientes = archivoJson.Leer(openFileDialog.FileName);
+                    }
+
+                    List<Cliente> clientesGuardar = new List<Cliente>();
+                    List<Mascota> mascotasGuardar = new List<Mascota>();
+                    List<Turno> turnosGuardar = new List<Turno>();
+
+                    foreach (Cliente cliente in clientes)
+                    {
+                        foreach (Mascota mascota in cliente.Mascotas)
+                        {
+                            foreach (Turno turno in mascota.Turnos)
+                            {
+                                try
+                                {
+                                    this.turnoDAO.Existe(turno.Id);
+                                }
+                                catch (EntidadInexistenteException)
+                                {
+                                    turnosGuardar.Add(turno);
+                                }
+                            }
+
+                            try
+                            {
+                                this.mascotaDAO.Existe(mascota.Id);
+                            }
+                            catch (EntidadInexistenteException)
+                            {
+                                mascotasGuardar.Add(mascota);
+                            }
+                        }
+
+                        try
+                        {
+                            this.clienteDAO.Existe(cliente.Dni);
+                        }
+                        catch (EntidadInexistenteException)
+                        {
+                            clientesGuardar.Add(cliente);
+                        }
+                    }
+
+                    this.clienteDAO.Guardar(clientesGuardar);
+                    this.mascotaDAO.Guardar(mascotasGuardar);
+                    this.turnoDAO.Guardar(turnosGuardar);
                     MessageBox.Show($"Se realizó la importación de {clientes.Count} clientes", "Importación completa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -166,7 +217,16 @@ namespace Vista
             this.mascotaDAO.OnNuevosDatos += ActualizarDatosMascotas;
             this.turnoDAO.OnNuevosDatos += ActualizarDatosTurnos;
 
-            DateTime fecha = this.turnoDAO.Max(x => x.Fecha);
+            DateTime? fecha = null;
+            try
+            {
+                fecha = this.turnoDAO.Min(x => x.Fecha);
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
+
             new FrmProximoTurno(fecha).Show();
         }
 

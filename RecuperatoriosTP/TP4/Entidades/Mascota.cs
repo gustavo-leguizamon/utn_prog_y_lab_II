@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Mascota
+    public class Mascota : IEntidad
     {
         private long id;
-        private long dniCliente;
+        private long clienteId;
         private string nombre;
         private float peso;
         private DateTime fechaNacimiento;
@@ -20,10 +20,10 @@ namespace Entidades
             set { id = value; }
         }
 
-        public long DniCliente
+        public long ClienteId
         {
-            get { return dniCliente; }
-            set { dniCliente = value; }
+            get { return clienteId; }
+            set { clienteId = value; }
         }
 
         public string Nombre
@@ -44,22 +44,22 @@ namespace Entidades
             set { fechaNacimiento = value; }
         }
 
-        public List<Turno> Turnos 
-        { 
+        public List<Turno> Turnos
+        {
             get;
             set;
         }
 
         public Mascota()
         {
-
+            this.Turnos = new List<Turno>();
         }
 
         public Mascota(long id, long cliente, string nombre, float peso, DateTime nacimiento)
             : this()
         {
             this.id = id;
-            this.dniCliente = cliente;
+            this.clienteId = cliente;
             this.nombre = nombre;
             this.peso = peso;
             this.fechaNacimiento = nacimiento;
@@ -74,7 +74,7 @@ namespace Entidades
 
         public static bool operator ==(Mascota m1, Mascota m2)
         {
-            return m1.DniCliente == m2.DniCliente &&
+            return m1.ClienteId == m2.ClienteId &&
                    m1.Nombre == m2.Nombre &&
                    m1.FechaNacimiento.Date == m2.FechaNacimiento.Date;
         }

@@ -3,13 +3,20 @@ using System.Collections.Generic;
 
 namespace Entidades
 {
-    public class Cliente
+    public class Cliente : IEntidad
     {
+        private long id;
         private long dni;
         private string nombre;
         private string apellido;
         private DateTime fechaNacimiento;
         private string direccion;
+
+        public long Id 
+        {
+            get { return this.id; }
+            set { this.id = value; }
+        }
 
         public long Dni
         {
@@ -41,10 +48,10 @@ namespace Entidades
             set { direccion = value; }
         }
 
-        public List<Mascota> Mascotas 
-        { 
-            get; 
-            set; 
+        public List<Mascota> Mascotas
+        {
+            get;
+            set;
         }
 
         public Cliente()
@@ -52,9 +59,10 @@ namespace Entidades
             Mascotas = new List<Mascota>();
         }
 
-        public Cliente(long dni, string nombre, string apellido, DateTime nacimiento, string direccion)
+        public Cliente(long id, long dni, string nombre, string apellido, DateTime nacimiento, string direccion)
             : this()
         {
+            this.id = id;
             this.dni = dni;
             this.nombre = nombre;
             this.apellido = apellido;
@@ -62,8 +70,13 @@ namespace Entidades
             this.fechaNacimiento = nacimiento;
         }
 
-        public Cliente(long dni, string nombre, string apellido, DateTime nacimiento, string direccion, List<Mascota> mascotas)
-            : this(dni, nombre, apellido, nacimiento, direccion)
+        public Cliente(long dni, string nombre, string apellido, DateTime nacimiento, string direccion)
+            : this(0, dni, nombre, apellido, nacimiento, direccion)
+        {
+        }
+
+        public Cliente(long id, long dni, string nombre, string apellido, DateTime nacimiento, string direccion, List<Mascota> mascotas)
+            : this(id, dni, nombre, apellido, nacimiento, direccion)
         {
             this.Mascotas = mascotas;
         }

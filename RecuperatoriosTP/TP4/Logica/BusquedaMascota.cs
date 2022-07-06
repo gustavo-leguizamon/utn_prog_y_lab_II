@@ -21,7 +21,7 @@ namespace Logica
         {
             foreach (Mascota mascota in this.mascotas)
             {
-                if (mascota.DniCliente == id)
+                if (mascota.ClienteId == id)
                 {
                     return mascota;
                 }

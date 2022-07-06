@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Turno
+    public class Turno : IEntidad
     {
         private long id;
-        private long idMascota;
+        private long mascotaId;
         private DateTime fecha;
         private string comentario;
 
@@ -21,10 +21,10 @@ namespace Entidades
             set { id = value; }
         }
 
-        public long IdMascota
+        public long MascotaId
         {
-            get { return idMascota; }
-            set { idMascota = value; }
+            get { return mascotaId; }
+            set { mascotaId = value; }
         }
 
         public DateTime Fecha
@@ -53,7 +53,7 @@ namespace Entidades
         public Turno(long id, long idMascota, DateTime fecha, string comentario)
         {
             this.id = id;
-            this.idMascota = idMascota;
+            this.mascotaId = idMascota;
             this.fecha = fecha;
             this.comentario = comentario;
         }

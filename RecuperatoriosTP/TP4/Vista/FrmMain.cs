@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Vista.Mapeadores;
+using Vista.Modelos;
 
 namespace Vista
 {
@@ -50,7 +52,8 @@ namespace Vista
 
         private void ActualizarDatosTurnos()
         {
-            dtgTurnos.DataSource = this.turnoDAO.Leer();
+            List<Turno> turnos = this.turnoDAO.Leer(new Type[] { typeof(Mascota) });
+            dtgTurnos.DataSource = TurnoMapper.Map(turnos);
             dtgTurnos.Update();
             dtgTurnos.Refresh();
         }

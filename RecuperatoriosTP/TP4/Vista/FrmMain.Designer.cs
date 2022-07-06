@@ -41,13 +41,9 @@
             this.archivosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImportarDatos = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExportarDatos = new System.Windows.Forms.ToolStripMenuItem();
-            this.dtgClientes = new System.Windows.Forms.DataGridView();
-            this.dtgMascotas = new System.Windows.Forms.DataGridView();
-            this.dtgTurnos = new System.Windows.Forms.DataGridView();
+            this.dtgResultados = new System.Windows.Forms.DataGridView();
             this.mnuContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgClientes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgMascotas)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgTurnos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgResultados)).BeginInit();
             this.SuspendLayout();
             // 
             // mnuContainer
@@ -155,46 +151,22 @@
             this.mnuExportarDatos.Text = "Exportar datos";
             this.mnuExportarDatos.Click += new System.EventHandler(this.mnuExportarDatos_Click);
             // 
-            // dtgClientes
+            // dtgResultados
             // 
-            this.dtgClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgClientes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtgClientes.Location = new System.Drawing.Point(0, 24);
-            this.dtgClientes.Name = "dtgClientes";
-            this.dtgClientes.RowTemplate.Height = 25;
-            this.dtgClientes.Size = new System.Drawing.Size(589, 247);
-            this.dtgClientes.TabIndex = 5;
-            // 
-            // dtgMascotas
-            // 
-            this.dtgMascotas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgMascotas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtgMascotas.Location = new System.Drawing.Point(0, 24);
-            this.dtgMascotas.Name = "dtgMascotas";
-            this.dtgMascotas.RowTemplate.Height = 25;
-            this.dtgMascotas.Size = new System.Drawing.Size(589, 247);
-            this.dtgMascotas.TabIndex = 6;
-            this.dtgMascotas.Visible = false;
-            // 
-            // dtgTurnos
-            // 
-            this.dtgTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgTurnos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtgTurnos.Location = new System.Drawing.Point(0, 24);
-            this.dtgTurnos.Name = "dtgTurnos";
-            this.dtgTurnos.RowTemplate.Height = 25;
-            this.dtgTurnos.Size = new System.Drawing.Size(589, 247);
-            this.dtgTurnos.TabIndex = 7;
-            this.dtgTurnos.Visible = false;
+            this.dtgResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgResultados.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtgResultados.Location = new System.Drawing.Point(0, 24);
+            this.dtgResultados.Name = "dtgResultados";
+            this.dtgResultados.RowTemplate.Height = 25;
+            this.dtgResultados.Size = new System.Drawing.Size(589, 247);
+            this.dtgResultados.TabIndex = 5;
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(589, 271);
-            this.Controls.Add(this.dtgTurnos);
-            this.Controls.Add(this.dtgMascotas);
-            this.Controls.Add(this.dtgClientes);
+            this.Controls.Add(this.dtgResultados);
             this.Controls.Add(this.mnuContainer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.mnuContainer;
@@ -207,9 +179,7 @@
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.mnuContainer.ResumeLayout(false);
             this.mnuContainer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgClientes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgMascotas)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgTurnos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgResultados)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,11 +194,9 @@
         private System.Windows.Forms.ToolStripMenuItem archivosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuImportarDatos;
         private System.Windows.Forms.ToolStripMenuItem mnuExportarDatos;
-        private System.Windows.Forms.DataGridView dtgClientes;
+        private System.Windows.Forms.DataGridView dtgResultados;
         private System.Windows.Forms.ToolStripMenuItem mnuVerClientes;
         private System.Windows.Forms.ToolStripMenuItem mnuVerMascotas;
-        private System.Windows.Forms.DataGridView dtgMascotas;
-        private System.Windows.Forms.DataGridView dtgTurnos;
         private System.Windows.Forms.ToolStripMenuItem turnosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuNuevoTurno;
         private System.Windows.Forms.ToolStripMenuItem mnuVerTurnos;

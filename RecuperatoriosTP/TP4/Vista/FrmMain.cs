@@ -38,24 +38,24 @@ namespace Vista
 
         private void ActualizarDatosClientes()
         {
-            dtgClientes.DataSource = this.clienteDAO.Leer();
-            dtgClientes.Update();
-            dtgClientes.Refresh();
+            dtgResultados.DataSource = this.clienteDAO.Leer();
+            dtgResultados.Update();
+            dtgResultados.Refresh();
         }
 
         private void ActualizarDatosMascotas()
         {
-            dtgMascotas.DataSource = this.mascotaDAO.Leer();
-            dtgMascotas.Update();
-            dtgMascotas.Refresh();
+            dtgResultados.DataSource = this.mascotaDAO.Leer();
+            dtgResultados.Update();
+            dtgResultados.Refresh();
         }
 
         private void ActualizarDatosTurnos()
         {
             List<Turno> turnos = this.turnoDAO.Leer(new Type[] { typeof(Mascota) });
-            dtgTurnos.DataSource = TurnoMapper.Map(turnos);
-            dtgTurnos.Update();
-            dtgTurnos.Refresh();
+            dtgResultados.DataSource = TurnoMapper.Map(turnos);
+            dtgResultados.Update();
+            dtgResultados.Refresh();
         }
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -215,7 +215,7 @@ namespace Vista
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            dtgClientes.DataSource = this.clienteDAO.Leer();
+            dtgResultados.DataSource = this.clienteDAO.Leer();
             this.clienteDAO.OnNuevosDatos += ActualizarDatosClientes;
             this.mascotaDAO.OnNuevosDatos += ActualizarDatosMascotas;
             this.turnoDAO.OnNuevosDatos += ActualizarDatosTurnos;
@@ -235,25 +235,25 @@ namespace Vista
 
         private void mnuVerClientes_Click(object sender, EventArgs e)
         {
-            dtgClientes.Visible = true;
-            dtgMascotas.Visible = false;
-            dtgTurnos.Visible = false;
+            //dtgResultados.Visible = true;
+            //dtgMascotas.Visible = false;
+            //dtgTurnos.Visible = false;
             ActualizarDatosClientes();
         }
 
         private void mnuVerMascotas_Click(object sender, EventArgs e)
         {
-            dtgClientes.Visible = false;
-            dtgMascotas.Visible = true;
-            dtgTurnos.Visible = false;
+            //dtgResultados.Visible = false;
+            //dtgMascotas.Visible = true;
+            //dtgTurnos.Visible = false;
             ActualizarDatosMascotas();
         }
 
         private void mnuVerTurnos_Click(object sender, EventArgs e)
         {
-            dtgClientes.Visible = false;
-            dtgMascotas.Visible = false;
-            dtgTurnos.Visible = true;
+            //dtgResultados.Visible = false;
+            //dtgMascotas.Visible = false;
+            //dtgTurnos.Visible = true;
             ActualizarDatosTurnos();
         }
 

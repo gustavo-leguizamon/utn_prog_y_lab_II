@@ -81,6 +81,10 @@ namespace Entidades
             this.Mascotas = mascotas;
         }
 
+        public override string ToString()
+        {
+            return $"{this.dni} - {this.apellido} {this.nombre}";
+        }
 
         #region Operators
 

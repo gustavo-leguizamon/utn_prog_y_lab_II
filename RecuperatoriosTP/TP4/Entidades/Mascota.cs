@@ -77,6 +77,11 @@ namespace Entidades
         {
         }
 
+        public override string ToString()
+        {
+            return String.Format("#{0,-8} - {1}", this.id, this.nombre);
+        }
+
         #region Operators
 
         public static bool operator ==(Mascota m1, Mascota m2)

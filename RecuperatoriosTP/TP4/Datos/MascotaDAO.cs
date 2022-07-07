@@ -88,6 +88,10 @@ namespace Datos
             List<Mascota> mascotas = Leer();
             foreach (Mascota mascota in mascotas)
             {
+                if (incluirRelaciones.Contains(typeof(Cliente)))
+                {
+                    mascota.Cliente = new ClienteDAO().LeerPorId(mascota.ClienteId);
+                }
                 if (incluirRelaciones.Contains(typeof(Turno)))
                 {
                     mascota.Turnos = new TurnoDAO().Leer(x => x.MascotaId == mascota.Id);

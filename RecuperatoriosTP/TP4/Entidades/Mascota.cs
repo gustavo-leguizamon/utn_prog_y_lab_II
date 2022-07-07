@@ -14,6 +14,8 @@ namespace Entidades
         private float peso;
         private DateTime fechaNacimiento;
 
+        private Cliente cliente;
+
         public long Id
         {
             get { return id; }
@@ -48,6 +50,11 @@ namespace Entidades
         {
             get;
             set;
+        }
+        public Cliente Cliente
+        {
+            get { return cliente; }
+            set { cliente = value; }
         }
 
         public Mascota()

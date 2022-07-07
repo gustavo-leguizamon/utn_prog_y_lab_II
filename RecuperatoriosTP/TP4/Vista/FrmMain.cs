@@ -38,14 +38,18 @@ namespace Vista
 
         private void ActualizarDatosClientes()
         {
-            dtgResultados.DataSource = this.clienteDAO.Leer();
+            List<Cliente> clientes = this.clienteDAO.Leer();
+            dtgResultados.DataSource = ClienteMapper.Map(clientes);
+            dtgResultados.Columns["Id"].Visible = false;
             dtgResultados.Update();
             dtgResultados.Refresh();
         }
 
         private void ActualizarDatosMascotas()
         {
-            dtgResultados.DataSource = this.mascotaDAO.Leer();
+            List<Mascota> mascotas = this.mascotaDAO.Leer(new Type[] { typeof(Cliente) });
+            dtgResultados.DataSource = MascotaMapper.Map(mascotas);
+            dtgResultados.Columns["Id"].Visible = true;
             dtgResultados.Update();
             dtgResultados.Refresh();
         }
@@ -215,7 +219,6 @@ namespace Vista
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            dtgResultados.DataSource = this.clienteDAO.Leer();
             this.clienteDAO.OnNuevosDatos += ActualizarDatosClientes;
             this.mascotaDAO.OnNuevosDatos += ActualizarDatosMascotas;
             this.turnoDAO.OnNuevosDatos += ActualizarDatosTurnos;
@@ -231,6 +234,8 @@ namespace Vista
             }
 
             new FrmProximoTurno(fecha).Show();
+
+            ActualizarDatosClientes();
         }
 
         private void mnuVerClientes_Click(object sender, EventArgs e)

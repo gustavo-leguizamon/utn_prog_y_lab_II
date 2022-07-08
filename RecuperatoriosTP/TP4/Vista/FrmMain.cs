@@ -205,11 +205,11 @@ namespace Vista
         {
             try
             {
-                FrmCargaCliente frm = new FrmCargaCliente(this.clienteDAO);
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    MessageBox.Show("Se agregó el cliente!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                //FrmABMCliente frm = new FrmABMCliente(this.clienteDAO);
+                //if (frm.ShowDialog() == DialogResult.OK)
+                //{
+                //    MessageBox.Show("Se agregó el cliente!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //}
             }
             catch (Exception ex)
             {

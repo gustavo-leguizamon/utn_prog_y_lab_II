@@ -29,11 +29,13 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnVerCliente = new System.Windows.Forms.Button();
             this.btnEliminarCliente = new System.Windows.Forms.Button();
             this.btnEditarCliente = new System.Windows.Forms.Button();
             this.btnNuevoCliente = new System.Windows.Forms.Button();
             this.lstClientes = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnVerMascota = new System.Windows.Forms.Button();
             this.btnEliminarMascota = new System.Windows.Forms.Button();
             this.btnEditarMascota = new System.Windows.Forms.Button();
             this.btnNuevaMascota = new System.Windows.Forms.Button();
@@ -44,6 +46,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnVerCliente);
             this.groupBox1.Controls.Add(this.btnEliminarCliente);
             this.groupBox1.Controls.Add(this.btnEditarCliente);
             this.groupBox1.Controls.Add(this.btnNuevoCliente);
@@ -54,6 +57,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Clientes";
+            // 
+            // btnVerCliente
+            // 
+            this.btnVerCliente.Enabled = false;
+            this.btnVerCliente.Location = new System.Drawing.Point(262, 109);
+            this.btnVerCliente.Name = "btnVerCliente";
+            this.btnVerCliente.Size = new System.Drawing.Size(100, 23);
+            this.btnVerCliente.TabIndex = 4;
+            this.btnVerCliente.Text = "Ver";
+            this.btnVerCliente.UseVisualStyleBackColor = true;
+            this.btnVerCliente.Click += new System.EventHandler(this.btnVerCliente_Click);
             // 
             // btnEliminarCliente
             // 
@@ -93,9 +107,11 @@
             this.lstClientes.Size = new System.Drawing.Size(250, 274);
             this.lstClientes.TabIndex = 0;
             this.lstClientes.Click += new System.EventHandler(this.lstClientes_Click);
+            this.lstClientes.DoubleClick += new System.EventHandler(this.lstClientes_DoubleClick);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnVerMascota);
             this.groupBox2.Controls.Add(this.btnEliminarMascota);
             this.groupBox2.Controls.Add(this.btnEditarMascota);
             this.groupBox2.Controls.Add(this.btnNuevaMascota);
@@ -106,6 +122,16 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Mascotas";
+            // 
+            // btnVerMascota
+            // 
+            this.btnVerMascota.Enabled = false;
+            this.btnVerMascota.Location = new System.Drawing.Point(262, 109);
+            this.btnVerMascota.Name = "btnVerMascota";
+            this.btnVerMascota.Size = new System.Drawing.Size(100, 23);
+            this.btnVerMascota.TabIndex = 5;
+            this.btnVerMascota.Text = "Ver";
+            this.btnVerMascota.UseVisualStyleBackColor = true;
             // 
             // btnEliminarMascota
             // 
@@ -154,6 +180,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmMain2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Veterinaria";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain2_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain2_Load);
@@ -175,5 +202,7 @@
         private System.Windows.Forms.Button btnEditarMascota;
         private System.Windows.Forms.Button btnNuevaMascota;
         private System.Windows.Forms.ListBox lstMascotas;
+        private System.Windows.Forms.Button btnVerCliente;
+        private System.Windows.Forms.Button btnVerMascota;
     }
 }

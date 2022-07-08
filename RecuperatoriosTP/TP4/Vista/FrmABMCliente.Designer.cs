@@ -1,6 +1,6 @@
 ﻿namespace Vista
 {
-    partial class FrmCargaCliente
+    partial class FrmABMCliente
     {
         /// <summary>
         /// Required designer variable.
@@ -36,7 +36,7 @@
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.lblApellido = new System.Windows.Forms.Label();
             this.txtDni = new System.Windows.Forms.NumericUpDown();
-            this.btnRegistrar = new System.Windows.Forms.Button();
+            this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.lblDireccion = new System.Windows.Forms.Label();
@@ -71,6 +71,8 @@
             // 
             // dtFechaNacimiento
             // 
+            this.dtFechaNacimiento.CustomFormat = "dd/MM/yyyy";
+            this.dtFechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtFechaNacimiento.Location = new System.Drawing.Point(250, 143);
             this.dtFechaNacimiento.Name = "dtFechaNacimiento";
             this.dtFechaNacimiento.Size = new System.Drawing.Size(200, 23);
@@ -114,15 +116,15 @@
             this.txtDni.Size = new System.Drawing.Size(120, 23);
             this.txtDni.TabIndex = 8;
             // 
-            // btnRegistrar
+            // btnAceptar
             // 
-            this.btnRegistrar.Location = new System.Drawing.Point(69, 179);
-            this.btnRegistrar.Name = "btnRegistrar";
-            this.btnRegistrar.Size = new System.Drawing.Size(143, 23);
-            this.btnRegistrar.TabIndex = 9;
-            this.btnRegistrar.Text = "Registrar";
-            this.btnRegistrar.UseVisualStyleBackColor = true;
-            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
+            this.btnAceptar.Location = new System.Drawing.Point(69, 179);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(143, 23);
+            this.btnAceptar.TabIndex = 9;
+            this.btnAceptar.Text = "Registrar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // btnCancelar
             // 
@@ -151,7 +153,7 @@
             this.lblDireccion.TabIndex = 11;
             this.lblDireccion.Text = "Dirección";
             // 
-            // FrmCargaCliente
+            // FrmABMCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -159,7 +161,7 @@
             this.Controls.Add(this.txtDireccion);
             this.Controls.Add(this.lblDireccion);
             this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnRegistrar);
+            this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.txtDni);
             this.Controls.Add(this.txtApellido);
             this.Controls.Add(this.lblApellido);
@@ -171,11 +173,11 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FrmCargaCliente";
+            this.Name = "FrmABMCliente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FrmCargaCliente";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmCargaCliente_FormClosing);
-            this.Load += new System.EventHandler(this.FrmCargaCliente_Load);
+            this.Text = "Cliente";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmABMCliente_FormClosing);
+            this.Load += new System.EventHandler(this.FrmABMCliente_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtDni)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -192,7 +194,7 @@
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.Label lblApellido;
         private System.Windows.Forms.NumericUpDown txtDni;
-        private System.Windows.Forms.Button btnRegistrar;
+        private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox txtDireccion;
         private System.Windows.Forms.Label lblDireccion;

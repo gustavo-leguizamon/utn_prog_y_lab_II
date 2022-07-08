@@ -58,14 +58,18 @@ namespace Vista
             Cliente cliente = this.lstClientes.SelectedItem as Cliente;
             if (cliente is not null)
             {
-                HabilitarModificacionCliente(true);
+                HabilitarControlesCliente(true);
                 BuscarMascotas(cliente);
             }
             else
             {
-                HabilitarModificacionCliente(false);
-                HabilitarModificacionMascota(false);
+                HabilitarControlesCliente(false);
+                HabilitarControlesMascota(false);
             }
+        }
+        private void lstClientes_DoubleClick(object sender, EventArgs e)
+        {
+            VerDatosCliente();
         }
 
         #endregion
@@ -77,12 +81,21 @@ namespace Vista
             Mascota mascota = this.lstMascotas.SelectedItem as Mascota;
             if (mascota is not null)
             {
-                HabilitarModificacionMascota(true);
+                HabilitarControlesMascota(true);
             }
             else
             {
-                HabilitarModificacionMascota(false);
+                HabilitarControlesMascota(false);
             }
+        }
+
+        #endregion
+
+        #region Botones
+
+        private void btnVerCliente_Click(object sender, EventArgs e)
+        {
+            VerDatosCliente();
         }
 
         #endregion
@@ -99,7 +112,7 @@ namespace Vista
             this.lstClientes.Update();
             this.lstClientes.Refresh();
             this.lstClientes.SelectedItem = null;
-            HabilitarModificacionCliente(false);
+            HabilitarControlesCliente(false);
         }
 
         //private void ActualizarDatosMascotas()
@@ -111,16 +124,18 @@ namespace Vista
         //    this.lstMascotas.Refresh();
         //}
 
-        private void HabilitarModificacionCliente(bool habilitar)
+        private void HabilitarControlesCliente(bool habilitar)
         {
             this.btnEditarCliente.Enabled = habilitar;
             this.btnEliminarCliente.Enabled = habilitar;
+            this.btnVerCliente.Enabled = habilitar;
         }
 
-        private void HabilitarModificacionMascota(bool habilitar)
+        private void HabilitarControlesMascota(bool habilitar)
         {
             this.btnEditarMascota.Enabled = habilitar;
             this.btnEliminarMascota.Enabled = habilitar;
+            this.btnVerMascota.Enabled = habilitar;
         }
 
         private void BuscarMascotas(Cliente cliente)
@@ -131,7 +146,7 @@ namespace Vista
             this.lstMascotas.Update();
             this.lstMascotas.Refresh();
             this.lstMascotas.SelectedItem = null;
-            HabilitarModificacionMascota(false);
+            HabilitarControlesMascota(false);
         }
 
         //private void ActualizarDatosTurnos()
@@ -141,6 +156,20 @@ namespace Vista
         //    dtgResultados.Update();
         //    dtgResultados.Refresh();
         //}
+
+        private void VerDatosCliente()
+        {
+            Cliente cliente = this.lstClientes.SelectedItem as Cliente;
+            if (cliente is not null)
+            {
+                Form form = new FrmABMCliente(this.clienteDAO, eFrmABM.Ver, cliente);
+                form.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un cliente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
 
         #endregion
 

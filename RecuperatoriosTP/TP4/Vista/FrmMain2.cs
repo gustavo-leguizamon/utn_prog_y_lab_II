@@ -69,7 +69,7 @@ namespace Vista
         }
         private void lstClientes_DoubleClick(object sender, EventArgs e)
         {
-            VerDatosCliente();
+            VerDatosCliente(eFrmABM.Ver);
         }
 
         #endregion
@@ -95,7 +95,26 @@ namespace Vista
 
         private void btnVerCliente_Click(object sender, EventArgs e)
         {
-            VerDatosCliente();
+            VerDatosCliente(eFrmABM.Ver);
+        }
+
+        private void btnEditarCliente_Click(object sender, EventArgs e)
+        {
+            VerDatosCliente(eFrmABM.Editar);
+        }
+
+        private void btnEliminarCliente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnNuevoCliente_Click(object sender, EventArgs e)
+        {
+            Form form = new FrmABMCliente(this.clienteDAO);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show("Se agregó el cliente!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         #endregion
@@ -109,9 +128,9 @@ namespace Vista
             List<Cliente> clientes = this.clienteDAO.Leer();
             //this.lstClientes.Items.Clear();
             this.lstClientes.DataSource = clientes;
+            this.lstClientes.SelectedItem = null;
             this.lstClientes.Update();
             this.lstClientes.Refresh();
-            this.lstClientes.SelectedItem = null;
             HabilitarControlesCliente(false);
         }
 
@@ -143,9 +162,9 @@ namespace Vista
             List<Mascota> mascotas = this.mascotaDAO.Leer(mascota => mascota.ClienteId == cliente.Id);
             //this.lstMascotas.Items.Clear();
             this.lstMascotas.DataSource = mascotas;
+            this.lstMascotas.SelectedItem = null;
             this.lstMascotas.Update();
             this.lstMascotas.Refresh();
-            this.lstMascotas.SelectedItem = null;
             HabilitarControlesMascota(false);
         }
 
@@ -157,12 +176,12 @@ namespace Vista
         //    dtgResultados.Refresh();
         //}
 
-        private void VerDatosCliente()
+        private void VerDatosCliente(eFrmABM eFrmABM)
         {
             Cliente cliente = this.lstClientes.SelectedItem as Cliente;
             if (cliente is not null)
             {
-                Form form = new FrmABMCliente(this.clienteDAO, eFrmABM.Ver, cliente);
+                Form form = new FrmABMCliente(this.clienteDAO, eFrmABM, cliente);
                 form.ShowDialog();
             }
             else

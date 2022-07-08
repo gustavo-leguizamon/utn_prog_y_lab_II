@@ -19,17 +19,17 @@ namespace Vista
         private eFrmABM eFrmABM;
         private Cliente cliente;
 
-        public FrmABMCliente(ClienteDAO clienteDAO, eFrmABM eFrmABM)
+        public FrmABMCliente(ClienteDAO clienteDAO)
+            : this(clienteDAO, eFrmABM.Crear, null)
+        {
+        }
+
+        public FrmABMCliente(ClienteDAO clienteDAO, eFrmABM eFrmABM, Cliente cliente)
         {
             InitializeComponent();
 
             this.clienteDAO = clienteDAO;
             this.eFrmABM = eFrmABM;
-        }
-
-        public FrmABMCliente(ClienteDAO clienteDAO, eFrmABM eFrmABM, Cliente cliente)
-            : this(clienteDAO, eFrmABM)
-        {
             this.cliente = cliente;
         }
 
@@ -37,10 +37,15 @@ namespace Vista
 
         private bool SeRealizaronCambios()
         {
-            return this.txtNombre.Text.Trim().Length > 0 ||
-                   this.txtApellido.Text.Trim().Length > 0 ||
-                   this.txtDireccion.Text.Trim().Length > 0 ||
-                   this.txtDni.Value > 0;
+            return (this.eFrmABM == eFrmABM.Crear && (this.txtNombre.Text.Trim().Length > 0 ||
+                                                       this.txtApellido.Text.Trim().Length > 0 ||
+                                                       this.txtDireccion.Text.Trim().Length > 0 ||
+                                                       this.txtDni.Value > 0)) ||
+                   (this.eFrmABM == eFrmABM.Editar && (this.txtNombre.Text.Trim() != this.cliente.Nombre.Trim() ||
+                                                       this.txtApellido.Text.Trim() != this.cliente.Apellido.Trim() ||
+                                                       this.txtDireccion.Text.Trim() != this.cliente.Direccion.Trim() ||
+                                                       this.txtDni.Value != this.cliente.Dni ||
+                                                       this.dtFechaNacimiento.Value != this.cliente.FechaNacimiento));
 
         }
 
@@ -61,7 +66,7 @@ namespace Vista
 
         }
 
-        private bool EsNuevoCliente()
+        private bool EsDniUnico()
         {
             try
             {
@@ -91,7 +96,8 @@ namespace Vista
             }
             else
             {
-                this.btnAceptar.Text = "Aceptar";
+                this.btnAceptar.Visible = false;
+                this.btnCancelar.Text = "Aceptar";
             }
         }
 
@@ -141,24 +147,24 @@ namespace Vista
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             if (this.eFrmABM != eFrmABM.Ver)
-            {
+            { 
                 if (SeCompletaronTodosLosCampos())
                 {
-                    Cliente cliente = new Cliente((long)this.txtDni.Value, this.txtNombre.Text, this.txtApellido.Text, this.dtFechaNacimiento.Value, this.txtDireccion.Text);
-                    if (this.eFrmABM == eFrmABM.Crear)
+                    if (EsDniUnico())
                     {
-                        if (EsNuevoCliente())
+                        Cliente cliente = new Cliente((long)this.txtDni.Value, this.txtNombre.Text, this.txtApellido.Text, this.dtFechaNacimiento.Value, this.txtDireccion.Text);
+                        if (this.eFrmABM == eFrmABM.Crear)
                         {
                             this.clienteDAO.Guardar(cliente);
                         }
-                        else
+                        else if (this.eFrmABM == eFrmABM.Editar)
                         {
-                            MessageBox.Show("Debe indicar un DNI diferente ya que hay otro cliente con el mismo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            this.clienteDAO.Modificar(cliente);
                         }
                     }
-                    else if (this.eFrmABM == eFrmABM.Editar)
+                    else
                     {
-                        this.clienteDAO.Modificar(cliente);
+                        MessageBox.Show("Debe indicar un DNI diferente ya que hay otro cliente con el mismo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     this.DialogResult = DialogResult.OK;
                     ReiniciarCampos();

@@ -78,6 +78,7 @@
             this.btnEliminarCliente.TabIndex = 3;
             this.btnEliminarCliente.Text = "Borrar";
             this.btnEliminarCliente.UseVisualStyleBackColor = true;
+            this.btnEliminarCliente.Click += new System.EventHandler(this.btnEliminarCliente_Click);
             // 
             // btnEditarCliente
             // 
@@ -88,6 +89,7 @@
             this.btnEditarCliente.TabIndex = 2;
             this.btnEditarCliente.Text = "Editar";
             this.btnEditarCliente.UseVisualStyleBackColor = true;
+            this.btnEditarCliente.Click += new System.EventHandler(this.btnEditarCliente_Click);
             // 
             // btnNuevoCliente
             // 
@@ -97,6 +99,7 @@
             this.btnNuevoCliente.TabIndex = 1;
             this.btnNuevoCliente.Text = "Nuevo cliente";
             this.btnNuevoCliente.UseVisualStyleBackColor = true;
+            this.btnNuevoCliente.Click += new System.EventHandler(this.btnNuevoCliente_Click);
             // 
             // lstClientes
             // 

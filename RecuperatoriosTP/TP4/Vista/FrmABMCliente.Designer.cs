@@ -40,7 +40,9 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.lblDireccion = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.txtDni)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblNombre
@@ -118,9 +120,9 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(69, 179);
+            this.btnAceptar.Location = new System.Drawing.Point(272, 12);
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(143, 23);
+            this.btnAceptar.Size = new System.Drawing.Size(77, 23);
             this.btnAceptar.TabIndex = 9;
             this.btnAceptar.Text = "Registrar";
             this.btnAceptar.UseVisualStyleBackColor = true;
@@ -128,9 +130,9 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(250, 179);
+            this.btnCancelar.Location = new System.Drawing.Point(355, 12);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(143, 23);
+            this.btnCancelar.Size = new System.Drawing.Size(77, 23);
             this.btnCancelar.TabIndex = 10;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -153,15 +155,24 @@
             this.lblDireccion.TabIndex = 11;
             this.lblDireccion.Text = "Dirección";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnAceptar);
+            this.groupBox1.Controls.Add(this.btnCancelar);
+            this.groupBox1.Location = new System.Drawing.Point(12, 172);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(438, 42);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            // 
             // FrmABMCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 212);
+            this.ClientSize = new System.Drawing.Size(469, 219);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtDireccion);
             this.Controls.Add(this.lblDireccion);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.txtDni);
             this.Controls.Add(this.txtApellido);
             this.Controls.Add(this.lblApellido);
@@ -179,6 +190,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmABMCliente_FormClosing);
             this.Load += new System.EventHandler(this.FrmABMCliente_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtDni)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,5 +210,6 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox txtDireccion;
         private System.Windows.Forms.Label lblDireccion;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

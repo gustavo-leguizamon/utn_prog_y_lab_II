@@ -36,6 +36,14 @@ namespace Entidades
             set { apellido = value; }
         }
 
+        public string NombreCompleto 
+        {
+            get
+            {
+                return $"{this.apellido} {this.nombre}";
+            }
+        }
+
         public DateTime FechaNacimiento
         {
             get { return fechaNacimiento; }
@@ -83,7 +91,7 @@ namespace Entidades
 
         public override string ToString()
         {
-            return $"{this.dni} - {this.apellido} {this.nombre}";
+            return $"{this.dni} - {this.NombreCompleto}";
         }
 
         #region Operators

@@ -189,11 +189,11 @@ namespace Vista
         {
             try
             {
-                FrmCargaMascota frm = new FrmCargaMascota(this.mascotaDAO);
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    MessageBox.Show("Se agregó la mascota!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                //FrmABMMascota frm = new FrmABMMascota(this.mascotaDAO);
+                //if (frm.ShowDialog() == DialogResult.OK)
+                //{
+                //    MessageBox.Show("Se agregó la mascota!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //}
             }
             catch (Exception ex)
             {
@@ -205,11 +205,11 @@ namespace Vista
         {
             try
             {
-                //FrmABMCliente frm = new FrmABMCliente(this.clienteDAO);
-                //if (frm.ShowDialog() == DialogResult.OK)
-                //{
-                //    MessageBox.Show("Se agregó el cliente!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //}
+                FrmABMCliente frm = new FrmABMCliente(this.clienteDAO);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("Se agregó el cliente!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {

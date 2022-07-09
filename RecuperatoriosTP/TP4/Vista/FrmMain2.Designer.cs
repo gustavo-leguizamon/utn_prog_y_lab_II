@@ -135,6 +135,7 @@
             this.btnVerMascota.TabIndex = 5;
             this.btnVerMascota.Text = "Ver";
             this.btnVerMascota.UseVisualStyleBackColor = true;
+            this.btnVerMascota.Click += new System.EventHandler(this.btnVerMascota_Click);
             // 
             // btnEliminarMascota
             // 
@@ -155,15 +156,18 @@
             this.btnEditarMascota.TabIndex = 5;
             this.btnEditarMascota.Text = "Editar";
             this.btnEditarMascota.UseVisualStyleBackColor = true;
+            this.btnEditarMascota.Click += new System.EventHandler(this.btnEditarMascota_Click);
             // 
             // btnNuevaMascota
             // 
+            this.btnNuevaMascota.Enabled = false;
             this.btnNuevaMascota.Location = new System.Drawing.Point(262, 22);
             this.btnNuevaMascota.Name = "btnNuevaMascota";
             this.btnNuevaMascota.Size = new System.Drawing.Size(100, 23);
             this.btnNuevaMascota.TabIndex = 4;
             this.btnNuevaMascota.Text = "Nueva mascota";
             this.btnNuevaMascota.UseVisualStyleBackColor = true;
+            this.btnNuevaMascota.Click += new System.EventHandler(this.btnNuevaMascota_Click);
             // 
             // lstMascotas
             // 
@@ -179,7 +183,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(870, 450);
+            this.ClientSize = new System.Drawing.Size(805, 450);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmMain2";

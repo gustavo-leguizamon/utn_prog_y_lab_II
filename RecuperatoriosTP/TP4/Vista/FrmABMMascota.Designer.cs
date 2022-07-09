@@ -1,6 +1,6 @@
 ﻿namespace Vista
 {
-    partial class FrmCargaMascota
+    partial class FrmABMMascota
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.grpCliente = new System.Windows.Forms.GroupBox();
+            this.txtDni = new System.Windows.Forms.TextBox();
             this.txtNombreCliente = new System.Windows.Forms.TextBox();
-            this.txtDni = new System.Windows.Forms.NumericUpDown();
             this.lblNombreCliente = new System.Windows.Forms.Label();
             this.lblDniCliente = new System.Windows.Forms.Label();
             this.grpMascota = new System.Windows.Forms.GroupBox();
@@ -41,17 +41,18 @@
             this.lblNombre = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnAceptar = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.grpCliente.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDni)).BeginInit();
             this.grpMascota.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPeso)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpCliente
             // 
-            this.grpCliente.Controls.Add(this.txtNombreCliente);
             this.grpCliente.Controls.Add(this.txtDni);
+            this.grpCliente.Controls.Add(this.txtNombreCliente);
             this.grpCliente.Controls.Add(this.lblNombreCliente);
             this.grpCliente.Controls.Add(this.lblDniCliente);
             this.grpCliente.Location = new System.Drawing.Point(12, 12);
@@ -61,6 +62,14 @@
             this.grpCliente.TabStop = false;
             this.grpCliente.Text = "Cliente";
             // 
+            // txtDni
+            // 
+            this.txtDni.Enabled = false;
+            this.txtDni.Location = new System.Drawing.Point(11, 37);
+            this.txtDni.Name = "txtDni";
+            this.txtDni.Size = new System.Drawing.Size(138, 23);
+            this.txtDni.TabIndex = 15;
+            // 
             // txtNombreCliente
             // 
             this.txtNombreCliente.Enabled = false;
@@ -68,20 +77,6 @@
             this.txtNombreCliente.Name = "txtNombreCliente";
             this.txtNombreCliente.Size = new System.Drawing.Size(195, 23);
             this.txtNombreCliente.TabIndex = 14;
-            // 
-            // txtDni
-            // 
-            this.txtDni.Location = new System.Drawing.Point(11, 37);
-            this.txtDni.Maximum = new decimal(new int[] {
-            99999999,
-            0,
-            0,
-            0});
-            this.txtDni.Name = "txtDni";
-            this.txtDni.Size = new System.Drawing.Size(120, 23);
-            this.txtDni.TabIndex = 13;
-            this.txtDni.ValueChanged += new System.EventHandler(this.txtDni_ValueChanged);
-            this.txtDni.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDni_KeyDown);
             // 
             // lblNombreCliente
             // 
@@ -180,51 +175,62 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(200, 23);
             this.txtNombre.TabIndex = 11;
+            this.txtNombre.Text = "5";
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(221, 257);
+            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancelar.Location = new System.Drawing.Point(312, 13);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(143, 23);
+            this.btnCancelar.Size = new System.Drawing.Size(77, 23);
             this.btnCancelar.TabIndex = 10;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // btnAgregar
+            // btnAceptar
             // 
-            this.btnAgregar.Enabled = false;
-            this.btnAgregar.Location = new System.Drawing.Point(39, 257);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(143, 23);
-            this.btnAgregar.TabIndex = 9;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            this.btnAceptar.Location = new System.Drawing.Point(224, 13);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(77, 23);
+            this.btnAceptar.TabIndex = 9;
+            this.btnAceptar.Text = "Agregar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
-            // FrmCargaMascota
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnAceptar);
+            this.groupBox1.Controls.Add(this.btnCancelar);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox1.Location = new System.Drawing.Point(0, 253);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(395, 42);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            // 
+            // FrmABMMascota
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 286);
+            this.ClientSize = new System.Drawing.Size(395, 295);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grpMascota);
             this.Controls.Add(this.grpCliente);
-            this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.btnCancelar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FrmCargaMascota";
+            this.Name = "FrmABMMascota";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Carga de mascota";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmCargaMascota_FormClosing);
             this.Load += new System.EventHandler(this.FrmCargaMascota_Load);
             this.grpCliente.ResumeLayout(false);
             this.grpCliente.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDni)).EndInit();
             this.grpMascota.ResumeLayout(false);
             this.grpMascota.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPeso)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -233,7 +239,6 @@
 
         private System.Windows.Forms.GroupBox grpCliente;
         private System.Windows.Forms.TextBox txtNombreCliente;
-        private System.Windows.Forms.NumericUpDown txtDni;
         private System.Windows.Forms.Label lblNombreCliente;
         private System.Windows.Forms.Label lblDniCliente;
         private System.Windows.Forms.GroupBox grpMascota;
@@ -244,6 +249,8 @@
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox txtDni;
     }
 }

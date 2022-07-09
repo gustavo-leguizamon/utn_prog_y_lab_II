@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Vista.Exceptions;
 
 namespace Vista
 {
@@ -55,17 +56,30 @@ namespace Vista
 
         private void lstClientes_Click(object sender, EventArgs e)
         {
-            Cliente cliente = this.lstClientes.SelectedItem as Cliente;
-            if (cliente is not null)
+            try
             {
+                Cliente cliente = ClienteSeleccionado();
+                this.btnNuevaMascota.Enabled = true;
                 HabilitarControlesCliente(true);
                 BuscarMascotas(cliente);
             }
-            else
+            catch (ElementoNoSeleccionadoException)
             {
                 HabilitarControlesCliente(false);
                 HabilitarControlesMascota(false);
             }
+            //Cliente cliente = this.lstClientes.SelectedItem as Cliente;
+            //if (cliente is not null)
+            //{
+            //    this.btnNuevaMascota.Enabled = true;
+            //    HabilitarControlesCliente(true);
+            //    BuscarMascotas(cliente);
+            //}
+            //else
+            //{
+            //    HabilitarControlesCliente(false);
+            //    HabilitarControlesMascota(false);
+            //}
         }
         private void lstClientes_DoubleClick(object sender, EventArgs e)
         {
@@ -78,15 +92,29 @@ namespace Vista
 
         private void lstMascotas_Click(object sender, EventArgs e)
         {
-            Mascota mascota = this.lstMascotas.SelectedItem as Mascota;
-            if (mascota is not null)
+            try
             {
+                MascotaSeleccionada();
                 HabilitarControlesMascota(true);
             }
-            else
+            catch (ElementoNoSeleccionadoException)
             {
                 HabilitarControlesMascota(false);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error inesperado. {ex.Message} - {ex.StackTrace}");
+            }
+
+            //Mascota mascota = this.lstMascotas.SelectedItem as Mascota;
+            //if (mascota is not null)
+            //{
+            //    HabilitarControlesMascota(true);
+            //}
+            //else
+            //{
+            //    HabilitarControlesMascota(false);
+            //}
         }
 
         #endregion
@@ -110,10 +138,47 @@ namespace Vista
 
         private void btnNuevoCliente_Click(object sender, EventArgs e)
         {
-            Form form = new FrmABMCliente(this.clienteDAO);
-            if (form.ShowDialog() == DialogResult.OK)
+            try
             {
-                MessageBox.Show("Se agregó el cliente!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Form form = new FrmABMCliente(this.clienteDAO);
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("Se agregó el cliente!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error inesperado. {ex.Message} - {ex.StackTrace}");
+            }
+        }
+
+        private void btnVerMascota_Click(object sender, EventArgs e)
+        {
+            VerDatosMascota(eFrmABM.Ver);
+        }
+
+        private void btnEditarMascota_Click(object sender, EventArgs e)
+        {
+            VerDatosMascota(eFrmABM.Editar);
+        }
+
+        private void btnNuevaMascota_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Form form = new FrmABMMascota(this.mascotaDAO, ClienteSeleccionado());
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("Se agregó la mascota!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (ElementoNoSeleccionadoException)
+            {
+                MessageBox.Show("Debe seleccionar un cliente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error inesperado. {ex.Message} - {ex.StackTrace}");
             }
         }
 
@@ -152,6 +217,7 @@ namespace Vista
 
         private void HabilitarControlesMascota(bool habilitar)
         {
+            //this.btnNuevaMascota.Enabled = habilitar;
             this.btnEditarMascota.Enabled = habilitar;
             this.btnEliminarMascota.Enabled = habilitar;
             this.btnVerMascota.Enabled = habilitar;
@@ -178,16 +244,57 @@ namespace Vista
 
         private void VerDatosCliente(eFrmABM eFrmABM)
         {
-            Cliente cliente = this.lstClientes.SelectedItem as Cliente;
-            if (cliente is not null)
+            try
             {
-                Form form = new FrmABMCliente(this.clienteDAO, eFrmABM, cliente);
+                Form form = new FrmABMCliente(this.clienteDAO, eFrmABM, ClienteSeleccionado());
                 form.ShowDialog();
             }
-            else
+            catch (ElementoNoSeleccionadoException)
             {
                 MessageBox.Show("Debe seleccionar un cliente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error inesperado. {ex.Message} - {ex.StackTrace}");
+            }
+        }
+
+        private Cliente ClienteSeleccionado()
+        {
+            Cliente cliente = this.lstClientes.SelectedItem as Cliente;
+            if (cliente is null)
+            {
+                throw new ElementoNoSeleccionadoException();
+            }
+            return cliente;
+        }
+
+        private void VerDatosMascota(eFrmABM eFrmABM)
+        {
+            try
+            {
+                Form form = new FrmABMMascota(this.mascotaDAO, eFrmABM, MascotaSeleccionada());
+                form.ShowDialog();
+            }
+            catch (ElementoNoSeleccionadoException)
+            {
+                MessageBox.Show("Debe seleccionar una mascota", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error inesperado. {ex.Message} - {ex.StackTrace}");
+            }
+        }
+
+        private Mascota MascotaSeleccionada()
+        {
+            Mascota mascota = this.lstMascotas.SelectedItem as Mascota;
+            mascota.Cliente = ClienteSeleccionado();
+            if (mascota is null)
+            {
+                throw new ElementoNoSeleccionadoException();
+            }
+            return mascota;
         }
 
         #endregion

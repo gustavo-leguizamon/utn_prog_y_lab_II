@@ -62,18 +62,23 @@ namespace Entidades
             this.Turnos = new List<Turno>();
         }
 
-        public Mascota(long id, long cliente, string nombre, float peso, DateTime nacimiento)
+        public Mascota(Cliente cliente)
+        {
+            this.cliente = cliente;
+        }
+
+        public Mascota(long id, long clienteId, string nombre, float peso, DateTime nacimiento)
             : this()
         {
             this.id = id;
-            this.clienteId = cliente;
+            this.clienteId = clienteId;
             this.nombre = nombre;
             this.peso = peso;
             this.fechaNacimiento = nacimiento;
         }
 
-        public Mascota(long cliente, string nombre, float peso, DateTime nacimiento)
-            : this(0, cliente, nombre, peso, nacimiento)
+        public Mascota(long clienteId, string nombre, float peso, DateTime nacimiento)
+            : this(0, clienteId, nombre, peso, nacimiento)
         {
         }
 

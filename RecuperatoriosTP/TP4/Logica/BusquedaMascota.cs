@@ -1,4 +1,5 @@
 ﻿using Datos;
+using Datos.Exceptions;
 using Entidades;
 using System;
 using System.Collections.Generic;

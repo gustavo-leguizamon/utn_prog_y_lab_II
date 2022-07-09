@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public interface IEntidad
+    public interface IActivable
     {
-        long Id { get; set; }
+        bool Activo { get; set; }
     }
 }

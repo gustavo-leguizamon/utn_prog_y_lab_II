@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Mascota : IEntidad
+    public class Mascota : IEntidad, IActivable
     {
         private long id;
         private long clienteId;
         private string nombre;
         private float peso;
         private DateTime fechaNacimiento;
+        private bool activo;
 
         private Cliente cliente;
 
@@ -44,6 +45,12 @@ namespace Entidades
         {
             get { return fechaNacimiento; }
             set { fechaNacimiento = value; }
+        }
+
+        public bool Activo
+        {
+            get { return activo; }
+            set { activo = value; }
         }
 
         public List<Turno> Turnos

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Entidades
 {
-    public class Cliente : IEntidad
+    public class Cliente : IEntidad, IActivable
     {
         private long id;
         private long dni;
@@ -11,6 +11,7 @@ namespace Entidades
         private string apellido;
         private DateTime fechaNacimiento;
         private string direccion;
+        private bool activo;
 
         public long Id 
         {
@@ -54,6 +55,12 @@ namespace Entidades
         {
             get { return direccion; }
             set { direccion = value; }
+        }
+
+        public bool Activo
+        {
+            get { return activo; }
+            set { activo = value; }
         }
 
         public List<Mascota> Mascotas

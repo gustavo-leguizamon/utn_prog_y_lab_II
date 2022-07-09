@@ -1,4 +1,5 @@
-﻿using Entidades;
+﻿using Datos.Exceptions;
+using Entidades;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -184,6 +185,36 @@ namespace Datos
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("id", id);
+                command.ExecuteNonQuery();
+            }
+
+            if (OnNuevosDatos is not null)
+            {
+                OnNuevosDatos.Invoke();
+            }
+        }
+
+        /// <summary>
+        /// Elimina logicamente una entidad de la BD
+        /// </summary>
+        /// <param name="entidad"></param>
+        /// <exception cref="ArgumentException">Lanzada cuando la entidad no es del tipo IActivable para realizar una baja logica</exception>
+        public void EliminarLogico(E entidad)
+        {
+            if (entidad is not IActivable)
+            {
+                throw new ArgumentException("La entidad no es activable para para realizar un borrado logico");
+            }
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = $"UPDATE FROM {Tabla} SET Activo = @activo WHERE Id = @id";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("id", entidad.Id);
+                command.Parameters.AddWithValue("activo", false);
                 command.ExecuteNonQuery();
             }
 

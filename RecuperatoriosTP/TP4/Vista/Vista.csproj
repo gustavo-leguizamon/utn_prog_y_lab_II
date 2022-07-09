@@ -14,4 +14,10 @@
     <ProjectReference Include="..\Logica\Logica.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="FrmABMTurno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

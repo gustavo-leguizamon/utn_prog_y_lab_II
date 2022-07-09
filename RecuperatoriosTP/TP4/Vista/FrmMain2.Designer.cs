@@ -40,8 +40,12 @@
             this.btnEditarMascota = new System.Windows.Forms.Button();
             this.btnNuevaMascota = new System.Windows.Forms.Button();
             this.lstMascotas = new System.Windows.Forms.ListBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.archivosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuTurnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -51,7 +55,7 @@
             this.groupBox1.Controls.Add(this.btnEditarCliente);
             this.groupBox1.Controls.Add(this.btnNuevoCliente);
             this.groupBox1.Controls.Add(this.lstClientes);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 27);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(368, 311);
             this.groupBox1.TabIndex = 0;
@@ -76,7 +80,7 @@
             this.btnEliminarCliente.Name = "btnEliminarCliente";
             this.btnEliminarCliente.Size = new System.Drawing.Size(100, 23);
             this.btnEliminarCliente.TabIndex = 3;
-            this.btnEliminarCliente.Text = "Borrar";
+            this.btnEliminarCliente.Text = "Dar de baja";
             this.btnEliminarCliente.UseVisualStyleBackColor = true;
             this.btnEliminarCliente.Click += new System.EventHandler(this.btnEliminarCliente_Click);
             // 
@@ -119,7 +123,7 @@
             this.groupBox2.Controls.Add(this.btnEditarMascota);
             this.groupBox2.Controls.Add(this.btnNuevaMascota);
             this.groupBox2.Controls.Add(this.lstMascotas);
-            this.groupBox2.Location = new System.Drawing.Point(425, 12);
+            this.groupBox2.Location = new System.Drawing.Point(425, 27);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(368, 311);
             this.groupBox2.TabIndex = 1;
@@ -144,8 +148,9 @@
             this.btnEliminarMascota.Name = "btnEliminarMascota";
             this.btnEliminarMascota.Size = new System.Drawing.Size(100, 23);
             this.btnEliminarMascota.TabIndex = 6;
-            this.btnEliminarMascota.Text = "Borrar";
+            this.btnEliminarMascota.Text = "Dar de baja";
             this.btnEliminarMascota.UseVisualStyleBackColor = true;
+            this.btnEliminarMascota.Click += new System.EventHandler(this.btnEliminarMascota_Click);
             // 
             // btnEditarMascota
             // 
@@ -179,6 +184,30 @@
             this.lstMascotas.TabIndex = 1;
             this.lstMascotas.Click += new System.EventHandler(this.lstMascotas_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.archivosToolStripMenuItem,
+            this.mnuTurnosToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(805, 24);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // archivosToolStripMenuItem
+            // 
+            this.archivosToolStripMenuItem.Name = "archivosToolStripMenuItem";
+            this.archivosToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.archivosToolStripMenuItem.Text = "Archivos";
+            // 
+            // mnuTurnosToolStripMenuItem
+            // 
+            this.mnuTurnosToolStripMenuItem.Name = "mnuTurnosToolStripMenuItem";
+            this.mnuTurnosToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.mnuTurnosToolStripMenuItem.Text = "Turnos";
+            this.mnuTurnosToolStripMenuItem.Click += new System.EventHandler(this.mnuTurnosToolStripMenuItem_Click);
+            // 
             // FrmMain2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -186,6 +215,8 @@
             this.ClientSize = new System.Drawing.Size(805, 450);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmMain2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Veterinaria";
@@ -193,7 +224,10 @@
             this.Load += new System.EventHandler(this.FrmMain2_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -211,5 +245,8 @@
         private System.Windows.Forms.ListBox lstMascotas;
         private System.Windows.Forms.Button btnVerCliente;
         private System.Windows.Forms.Button btnVerMascota;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem archivosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuTurnosToolStripMenuItem;
     }
 }

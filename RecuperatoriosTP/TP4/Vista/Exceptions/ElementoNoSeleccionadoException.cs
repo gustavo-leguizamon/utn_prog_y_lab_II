@@ -8,5 +8,10 @@ namespace Vista.Exceptions
 {
     internal class ElementoNoSeleccionadoException : Exception
     {
+        public ElementoNoSeleccionadoException(string mensaje)
+            : base(mensaje)
+        {
+
+        }
     }
 }

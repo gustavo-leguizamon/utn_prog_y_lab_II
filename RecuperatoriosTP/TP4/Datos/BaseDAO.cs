@@ -31,6 +31,14 @@ namespace Datos
         protected abstract SqlCommand CrearCommandInsert(E entidad);
         protected abstract SqlCommand CrearCommandUpdate(E entidad);
 
+        protected void InvocarActualizacionDatos()
+        {
+            if (OnNuevosDatos is not null)
+            {
+                OnNuevosDatos.Invoke();
+            }
+        }
+
         /// <summary>
         /// Almacena los datos de una entidad en la BD
         /// </summary>
@@ -46,10 +54,7 @@ namespace Datos
                 command.ExecuteNonQuery();
             }
 
-            if (OnNuevosDatos is not null)
-            {
-                OnNuevosDatos.Invoke();
-            }
+            InvocarActualizacionDatos();
         }
 
         /// <summary>
@@ -165,10 +170,7 @@ namespace Datos
                 command.ExecuteNonQuery();
             }
 
-            if (OnNuevosDatos is not null)
-            {
-                OnNuevosDatos.Invoke();
-            }
+            InvocarActualizacionDatos();
         }
 
         /// <summary>
@@ -188,10 +190,7 @@ namespace Datos
                 command.ExecuteNonQuery();
             }
 
-            if (OnNuevosDatos is not null)
-            {
-                OnNuevosDatos.Invoke();
-            }
+            InvocarActualizacionDatos();
         }
 
         /// <summary>
@@ -219,10 +218,7 @@ namespace Datos
                 command.ExecuteNonQuery();
             }
 
-            if (OnNuevosDatos is not null)
-            {
-                OnNuevosDatos.Invoke();
-            }
+            InvocarActualizacionDatos();
         }
 
         /// <summary>

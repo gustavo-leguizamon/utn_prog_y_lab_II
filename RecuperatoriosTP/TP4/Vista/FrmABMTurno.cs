@@ -75,12 +75,13 @@ namespace Vista
         {
             if (this.turno is not null)
             {
-                this.txtComentario.Text = this.turno.Comentario;
+                this.txtIdMascota.Text = this.turno.MascotaId.ToString();
+                this.txtNombreMascota.Text = this.turno.Mascota.Nombre;
+                this.txtPeso.Value = (decimal)this.turno.Mascota.Peso;
+                this.dtFechaNacimiento.Value = this.turno.Mascota.FechaNacimiento;
                 if (turno.Id > 0)
                 {
-                    this.txtNombreMascota.Text = this.turno.Mascota.Nombre;
-                    this.txtPeso.Value = (decimal)this.turno.Mascota.Peso;
-                    this.dtFechaNacimiento.Value = this.turno.Mascota.FechaNacimiento;
+                    this.txtComentario.Text = this.turno.Comentario;
                     //this.grpTurno.Enabled = true;
                     this.btnAceptar.Enabled = true;
                 }
@@ -139,7 +140,7 @@ namespace Vista
         {
             if (SeCompletaronTodosLosCampos())
             {
-                Turno turno = new Turno((long)txtIdMascota.Value, dtFecha.Value, txtComentario.Text);
+                Turno turno = new Turno(Convert.ToInt64(txtIdMascota.Text), dtFecha.Value, txtComentario.Text);
                 if (this.eFrmABM == eFrmABM.Crear)
                 {
                     this.turnoDAO.Guardar(turno);

@@ -177,15 +177,8 @@ namespace Vista
             try
             {
                 Cliente cliente = ClienteSeleccionado();
-                string mensaje;
-                if (cliente.Activo)
-                {
-                    mensaje = $"Dar de baja al cliente: {cliente.NombreCompleto}?";
-                }
-                else
-                {
-                    mensaje = $"Reactivar al cliente: {cliente.NombreCompleto}?";
-                }
+                string mensaje = cliente.Activo ? $"Dar de baja" : $"Reactivar";
+                mensaje += $" al cliente: {cliente.NombreCompleto}?";
 
                 if (MessageBox.Show(mensaje, "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
@@ -229,15 +222,8 @@ namespace Vista
             try
             {
                 Mascota mascota = MascotaSeleccionada();
-                string mensaje;
-                if (mascota.Activo)
-                {
-                    mensaje = $"Dar de baja la mascota {mascota.Nombre} del cliente {mascota.Cliente.NombreCompleto}?";
-                }
-                else
-                {
-                    mensaje = $"Reactivar la mascota {mascota.Nombre} del cliente {mascota.Cliente.NombreCompleto}?";
-                }
+                string mensaje = mascota.Activo ? "Dar de baja" : "Reactivar";
+                mensaje += $" la mascota {mascota.Nombre} del cliente {mascota.Cliente.NombreCompleto}?";
 
                 if (MessageBox.Show(mensaje, "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
@@ -288,7 +274,15 @@ namespace Vista
 
         private void mnuTurnosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                Form form = new FrmListadoDeTurnos();
+                form.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
         }
 
         #endregion

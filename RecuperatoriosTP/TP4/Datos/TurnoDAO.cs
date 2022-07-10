@@ -121,7 +121,12 @@ namespace Datos
 
         public override Turno LeerPorId(long id, Type[] incluirRelaciones)
         {
-            throw new NotImplementedException();
+            Turno turno = LeerPorId(id);
+            if (incluirRelaciones.Contains(typeof(Mascota)))
+            {
+                turno.Mascota = new MascotaDAO().LeerPorId(turno.MascotaId);
+            }
+            return turno;
         }
 
         //public override void Modificar(Turno entidad)
@@ -179,6 +184,64 @@ namespace Datos
             string comentario = reader["Comentario"].ToString();
 
             return new Turno(id, mascotaId, fecha, comentario);
+        }
+
+        public List<InformacionTurno> ObtenerListadoDeTurnos()
+        {
+            List<InformacionTurno> list = new List<InformacionTurno>();
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = @"SELECT 
+                                T.Id AS 'NroTurno', T.Fecha, T.Comentario, ET.Id AS 'EstadoTurnoId',
+                                ET.Descripcion AS 'Estado', C.Dni, C.Apellido + ' ' + C.Nombre AS 'Cliente', M.Nombre AS 'Mascota'
+                                FROM Turnos T JOIN Mascotas     M  ON T.MascotaId = M.Id
+                                              JOIN EstadosTurno ET ON T.EstadoTurnoId = ET.Id
+			                                  JOIN Clientes     C  ON M.ClienteId = C.Id";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                SqlDataReader reader = command.ExecuteReader();
+                long nroTurno;
+                DateTime fecha;
+                string comentario;
+                short estadoId;
+                string estado;
+                string cliente;
+                string mascota;
+                while (reader.Read())
+                {
+                    nroTurno = Convert.ToInt64(reader["NroTurno"].ToString());
+                    fecha = Convert.ToDateTime(reader["Fecha"].ToString());
+                    comentario = reader["Comentario"].ToString();
+                    estadoId = Convert.ToInt16(reader["EstadoTurnoId"].ToString());
+                    estado = reader["Estado"].ToString();
+                    cliente = reader["Cliente"].ToString();
+                    mascota = reader["Mascota"].ToString();
+                    InformacionTurno informacionTurno = new InformacionTurno(nroTurno, fecha, comentario, estadoId, estado, cliente, mascota);
+                    list.Add(informacionTurno);
+                }
+            }
+
+            return list;
+        }
+
+        public void CambiarEstado(long turnoId, EstadoTurno.eEstadoTurno estadoTurno)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                
+                string query = $"UPDATE {Tabla} SET EstadoTurnoId = @estadoId WHERE Id = @id";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("id", turnoId);
+                command.Parameters.AddWithValue("estadoId", (short)estadoTurno);
+                command.ExecuteNonQuery();
+            }
+
+            InvocarActualizacionDatos();
         }
     }
 }

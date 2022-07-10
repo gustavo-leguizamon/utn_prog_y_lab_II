@@ -34,7 +34,6 @@
             this.txtPeso = new System.Windows.Forms.NumericUpDown();
             this.lblPeso = new System.Windows.Forms.Label();
             this.txtNombreMascota = new System.Windows.Forms.TextBox();
-            this.txtIdMascota = new System.Windows.Forms.NumericUpDown();
             this.lblNombreCliente = new System.Windows.Forms.Label();
             this.lblIdMascota = new System.Windows.Forms.Label();
             this.grpTurno = new System.Windows.Forms.GroupBox();
@@ -42,25 +41,25 @@
             this.dtFecha = new System.Windows.Forms.DateTimePicker();
             this.lblFecha = new System.Windows.Forms.Label();
             this.lblComentario = new System.Windows.Forms.Label();
-            this.txtComentario = new System.Windows.Forms.TextBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtIdMascota = new System.Windows.Forms.TextBox();
+            this.txtComentario = new System.Windows.Forms.RichTextBox();
             this.grpMascota.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPeso)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtIdMascota)).BeginInit();
             this.grpTurno.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpMascota
             // 
+            this.grpMascota.Controls.Add(this.txtIdMascota);
             this.grpMascota.Controls.Add(this.lblFechaNacimiento);
             this.grpMascota.Controls.Add(this.dtFechaNacimiento);
             this.grpMascota.Controls.Add(this.txtPeso);
             this.grpMascota.Controls.Add(this.lblPeso);
             this.grpMascota.Controls.Add(this.txtNombreMascota);
-            this.grpMascota.Controls.Add(this.txtIdMascota);
             this.grpMascota.Controls.Add(this.lblNombreCliente);
             this.grpMascota.Controls.Add(this.lblIdMascota);
             this.grpMascota.Location = new System.Drawing.Point(12, 12);
@@ -73,7 +72,7 @@
             // lblFechaNacimiento
             // 
             this.lblFechaNacimiento.AutoSize = true;
-            this.lblFechaNacimiento.Location = new System.Drawing.Point(157, 62);
+            this.lblFechaNacimiento.Location = new System.Drawing.Point(251, 19);
             this.lblFechaNacimiento.Name = "lblFechaNacimiento";
             this.lblFechaNacimiento.Size = new System.Drawing.Size(101, 15);
             this.lblFechaNacimiento.TabIndex = 20;
@@ -81,12 +80,14 @@
             // 
             // dtFechaNacimiento
             // 
+            this.dtFechaNacimiento.CustomFormat = "dd/MM/yyyy";
             this.dtFechaNacimiento.Enabled = false;
-            this.dtFechaNacimiento.Location = new System.Drawing.Point(157, 81);
+            this.dtFechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtFechaNacimiento.Location = new System.Drawing.Point(251, 37);
             this.dtFechaNacimiento.MaxDate = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
             this.dtFechaNacimiento.MinDate = new System.DateTime(1800, 1, 1, 0, 0, 0, 0);
             this.dtFechaNacimiento.Name = "dtFechaNacimiento";
-            this.dtFechaNacimiento.Size = new System.Drawing.Size(200, 23);
+            this.dtFechaNacimiento.Size = new System.Drawing.Size(101, 23);
             this.dtFechaNacimiento.TabIndex = 19;
             this.dtFechaNacimiento.Value = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
             // 
@@ -99,7 +100,7 @@
             0,
             0,
             131072});
-            this.txtPeso.Location = new System.Drawing.Point(11, 81);
+            this.txtPeso.Location = new System.Drawing.Point(146, 37);
             this.txtPeso.Maximum = new decimal(new int[] {
             500,
             0,
@@ -112,7 +113,7 @@
             // lblPeso
             // 
             this.lblPeso.AutoSize = true;
-            this.lblPeso.Location = new System.Drawing.Point(11, 63);
+            this.lblPeso.Location = new System.Drawing.Point(146, 19);
             this.lblPeso.Name = "lblPeso";
             this.lblPeso.Size = new System.Drawing.Size(57, 15);
             this.lblPeso.TabIndex = 17;
@@ -121,27 +122,15 @@
             // txtNombreMascota
             // 
             this.txtNombreMascota.Enabled = false;
-            this.txtNombreMascota.Location = new System.Drawing.Point(157, 36);
+            this.txtNombreMascota.Location = new System.Drawing.Point(11, 90);
             this.txtNombreMascota.Name = "txtNombreMascota";
-            this.txtNombreMascota.Size = new System.Drawing.Size(195, 23);
+            this.txtNombreMascota.Size = new System.Drawing.Size(341, 23);
             this.txtNombreMascota.TabIndex = 14;
-            // 
-            // txtIdMascota
-            // 
-            this.txtIdMascota.Location = new System.Drawing.Point(11, 37);
-            this.txtIdMascota.Maximum = new decimal(new int[] {
-            99999999,
-            0,
-            0,
-            0});
-            this.txtIdMascota.Name = "txtIdMascota";
-            this.txtIdMascota.Size = new System.Drawing.Size(120, 23);
-            this.txtIdMascota.TabIndex = 13;
             // 
             // lblNombreCliente
             // 
             this.lblNombreCliente.AutoSize = true;
-            this.lblNombreCliente.Location = new System.Drawing.Point(157, 18);
+            this.lblNombreCliente.Location = new System.Drawing.Point(6, 72);
             this.lblNombreCliente.Name = "lblNombreCliente";
             this.lblNombreCliente.Size = new System.Drawing.Size(51, 15);
             this.lblNombreCliente.TabIndex = 12;
@@ -158,15 +147,15 @@
             // 
             // grpTurno
             // 
+            this.grpTurno.Controls.Add(this.txtComentario);
             this.grpTurno.Controls.Add(this.dtHora);
             this.grpTurno.Controls.Add(this.dtFecha);
             this.grpTurno.Controls.Add(this.lblFecha);
             this.grpTurno.Controls.Add(this.lblComentario);
-            this.grpTurno.Controls.Add(this.txtComentario);
             this.grpTurno.Enabled = false;
-            this.grpTurno.Location = new System.Drawing.Point(7, 173);
+            this.grpTurno.Location = new System.Drawing.Point(12, 153);
             this.grpTurno.Name = "grpTurno";
-            this.grpTurno.Size = new System.Drawing.Size(371, 133);
+            this.grpTurno.Size = new System.Drawing.Size(371, 173);
             this.grpTurno.TabIndex = 15;
             this.grpTurno.TabStop = false;
             this.grpTurno.Text = "Turno";
@@ -175,7 +164,7 @@
             // 
             this.dtHora.CustomFormat = "HH:mm";
             this.dtHora.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtHora.Location = new System.Drawing.Point(117, 94);
+            this.dtHora.Location = new System.Drawing.Point(112, 140);
             this.dtHora.MaxDate = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
             this.dtHora.MinDate = new System.DateTime(1800, 1, 1, 0, 0, 0, 0);
             this.dtHora.Name = "dtHora";
@@ -187,7 +176,7 @@
             // 
             this.dtFecha.CustomFormat = "dd/MM/yyyy";
             this.dtFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFecha.Location = new System.Drawing.Point(11, 94);
+            this.dtFecha.Location = new System.Drawing.Point(6, 140);
             this.dtFecha.MaxDate = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
             this.dtFecha.MinDate = new System.DateTime(1800, 1, 1, 0, 0, 0, 0);
             this.dtFecha.Name = "dtFecha";
@@ -198,7 +187,7 @@
             // lblFecha
             // 
             this.lblFecha.AutoSize = true;
-            this.lblFecha.Location = new System.Drawing.Point(11, 76);
+            this.lblFecha.Location = new System.Drawing.Point(6, 122);
             this.lblFecha.Name = "lblFecha";
             this.lblFecha.Size = new System.Drawing.Size(38, 15);
             this.lblFecha.TabIndex = 14;
@@ -212,15 +201,6 @@
             this.lblComentario.Size = new System.Drawing.Size(70, 15);
             this.lblComentario.TabIndex = 12;
             this.lblComentario.Text = "Comentario";
-            // 
-            // txtComentario
-            // 
-            this.txtComentario.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtComentario.Location = new System.Drawing.Point(11, 40);
-            this.txtComentario.MaxLength = 50;
-            this.txtComentario.Name = "txtComentario";
-            this.txtComentario.Size = new System.Drawing.Size(341, 23);
-            this.txtComentario.TabIndex = 11;
             // 
             // btnAceptar
             // 
@@ -248,17 +228,33 @@
             this.groupBox1.Controls.Add(this.btnCancelar);
             this.groupBox1.Controls.Add(this.btnAceptar);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(0, 306);
+            this.groupBox1.Location = new System.Drawing.Point(0, 332);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(395, 42);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             // 
+            // txtIdMascota
+            // 
+            this.txtIdMascota.Enabled = false;
+            this.txtIdMascota.Location = new System.Drawing.Point(11, 36);
+            this.txtIdMascota.Name = "txtIdMascota";
+            this.txtIdMascota.Size = new System.Drawing.Size(100, 23);
+            this.txtIdMascota.TabIndex = 21;
+            // 
+            // txtComentario
+            // 
+            this.txtComentario.Location = new System.Drawing.Point(6, 38);
+            this.txtComentario.Name = "txtComentario";
+            this.txtComentario.Size = new System.Drawing.Size(346, 81);
+            this.txtComentario.TabIndex = 17;
+            this.txtComentario.Text = "";
+            // 
             // FrmABMTurno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 348);
+            this.ClientSize = new System.Drawing.Size(395, 374);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grpTurno);
             this.Controls.Add(this.grpMascota);
@@ -272,7 +268,6 @@
             this.grpMascota.ResumeLayout(false);
             this.grpMascota.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPeso)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtIdMascota)).EndInit();
             this.grpTurno.ResumeLayout(false);
             this.grpTurno.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -284,7 +279,6 @@
 
         private System.Windows.Forms.GroupBox grpMascota;
         private System.Windows.Forms.TextBox txtNombreMascota;
-        private System.Windows.Forms.NumericUpDown txtIdMascota;
         private System.Windows.Forms.Label lblNombreCliente;
         private System.Windows.Forms.Label lblIdMascota;
         private System.Windows.Forms.NumericUpDown txtPeso;
@@ -295,10 +289,11 @@
         private System.Windows.Forms.DateTimePicker dtFecha;
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Label lblComentario;
-        private System.Windows.Forms.TextBox txtComentario;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.DateTimePicker dtHora;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox txtIdMascota;
+        private System.Windows.Forms.RichTextBox txtComentario;
     }
 }

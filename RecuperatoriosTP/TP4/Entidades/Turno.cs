@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Turno : IEntidad
+    public class Turno : IEntidad<long>
     {
         private long id;
         private long mascotaId;

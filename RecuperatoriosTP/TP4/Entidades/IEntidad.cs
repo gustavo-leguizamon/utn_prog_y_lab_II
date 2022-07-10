@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public interface IEntidad
+    public interface IEntidad<TID>
     {
-        long Id { get; set; }
+        TID Id { get; set; }
     }
 }

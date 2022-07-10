@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Entidades
 {
-    public class Cliente : IEntidad, IActivable
+    public class Cliente : IEntidad<long>, IActivable
     {
         private long id;
         private long dni;

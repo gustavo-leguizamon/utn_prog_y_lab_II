@@ -44,6 +44,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTurnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRegistrarVisita = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -121,6 +122,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnRegistrarVisita);
             this.groupBox2.Controls.Add(this.btnCargarTurno);
             this.groupBox2.Controls.Add(this.btnVerMascota);
             this.groupBox2.Controls.Add(this.btnEliminarMascota);
@@ -225,6 +227,17 @@
             this.mnuTurnosToolStripMenuItem.Text = "Turnos";
             this.mnuTurnosToolStripMenuItem.Click += new System.EventHandler(this.mnuTurnosToolStripMenuItem_Click);
             // 
+            // btnRegistrarVisita
+            // 
+            this.btnRegistrarVisita.Enabled = false;
+            this.btnRegistrarVisita.Location = new System.Drawing.Point(262, 167);
+            this.btnRegistrarVisita.Name = "btnRegistrarVisita";
+            this.btnRegistrarVisita.Size = new System.Drawing.Size(100, 23);
+            this.btnRegistrarVisita.TabIndex = 8;
+            this.btnRegistrarVisita.Text = "Registrar visita";
+            this.btnRegistrarVisita.UseVisualStyleBackColor = true;
+            this.btnRegistrarVisita.Click += new System.EventHandler(this.btnRegistrarVisita_Click);
+            // 
             // FrmMain2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -266,5 +279,6 @@
         private System.Windows.Forms.ToolStripMenuItem archivosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuTurnosToolStripMenuItem;
         private System.Windows.Forms.Button btnCargarTurno;
+        private System.Windows.Forms.Button btnRegistrarVisita;
     }
 }

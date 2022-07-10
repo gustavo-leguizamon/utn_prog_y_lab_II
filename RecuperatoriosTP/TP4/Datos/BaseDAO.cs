@@ -13,7 +13,7 @@ namespace Datos
     /// <typeparam name="TID">Tipo de dato del ID de la tabla</typeparam>
     /// <typeparam name="E">Tipo de dato de la entidad</typeparam>
     public abstract class BaseDAO<TID, E>
-        where E : class, IEntidad
+        where E : class, IEntidad<TID>
     {
         protected static string ConnectionString;
 

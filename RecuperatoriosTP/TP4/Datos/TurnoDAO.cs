@@ -186,21 +186,30 @@ namespace Datos
             return new Turno(id, mascotaId, fecha, comentario);
         }
 
-        public List<InformacionTurno> ObtenerListadoDeTurnos()
+        public List<InformacionTurno> ObtenerListadoDeTurnos(EstadoTurno estadoTurno)
         {
             List<InformacionTurno> list = new List<InformacionTurno>();
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
 
+                short? estadoTurnoId = estadoTurno?.Id;
+                //string where = string.Empty;
+                //if (estadoTurnoId.HasValue && estadoTurnoId.Value > 0)
+                //{
+                //    where = "AND T.EstadoTurnoId = @estado";
+                //}
+
                 string query = @"SELECT 
                                 T.Id AS 'NroTurno', T.Fecha, T.Comentario, ET.Id AS 'EstadoTurnoId',
                                 ET.Descripcion AS 'Estado', C.Dni, C.Apellido + ' ' + C.Nombre AS 'Cliente', M.Nombre AS 'Mascota'
                                 FROM Turnos T JOIN Mascotas     M  ON T.MascotaId = M.Id
                                               JOIN EstadosTurno ET ON T.EstadoTurnoId = ET.Id
-			                                  JOIN Clientes     C  ON M.ClienteId = C.Id";
+			                                  JOIN Clientes     C  ON M.ClienteId = C.Id
+                                WHERE (@estado IS NULL OR @estado = 0 OR T.EstadoTurnoId = @estado)";
 
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("estado", estadoTurnoId);
 
                 SqlDataReader reader = command.ExecuteReader();
                 long nroTurno;

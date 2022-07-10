@@ -267,6 +267,20 @@ namespace Vista
                 ManejarExcepcion(ex);
             }
         }
+        
+        private void btnRegistrarVisita_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Mascota mascota = MascotaSeleccionada();
+                Form form = new FrmRegistroVisita(mascota);
+                form.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
+        }
 
         #endregion
 
@@ -297,6 +311,10 @@ namespace Vista
                 exception is ArgumentException)
             {
                 MessageBox.Show(exception.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (exception is NotImplementedException)
+            {
+                MessageBox.Show("Hay partes sin implementar de la aplicación", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -362,6 +380,7 @@ namespace Vista
             this.btnEliminarMascota.Enabled = habilitar;
             this.btnVerMascota.Enabled = habilitar;
             this.btnCargarTurno.Enabled = habilitar;
+            this.btnRegistrarVisita.Enabled = habilitar;
         }
 
         private void BuscarMascotas(Cliente cliente)

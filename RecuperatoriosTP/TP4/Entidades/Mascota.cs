@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Mascota : IEntidad, IActivable
+    public class Mascota : IEntidad<long>, IActivable
     {
         private long id;
         private long clienteId;

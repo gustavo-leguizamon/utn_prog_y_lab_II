@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class EstadoTurno : IEntidad
+    public class EstadoTurno : IEntidad<short>
     {
         public enum eEstadoTurno
         {
@@ -15,10 +15,10 @@ namespace Entidades
             Cancelado = 3,
         }
 
-        private long id;
+        private short id;
         private string descripcion;
         
-        public long Id
+        public short Id
         {
             get { return id; }
             set { id = value; }
@@ -28,6 +28,17 @@ namespace Entidades
         {
             get { return descripcion; }
             set { descripcion = value; }
+        }
+
+        public EstadoTurno(short id, string descripcion)
+        {
+            this.id = id;
+            this.descripcion = descripcion;
+        }
+
+        public override string ToString()
+        {
+            return this.descripcion;
         }
     }
 }

@@ -52,7 +52,7 @@ namespace Vista
 
         #endregion
 
-        #region ListBox Clientes
+        #region ListBox
 
         private void lstClientes_Click(object sender, EventArgs e)
         {
@@ -60,6 +60,7 @@ namespace Vista
             {
                 Cliente cliente = ClienteSeleccionado();
                 this.btnNuevaMascota.Enabled = true;
+                ColocarTextoBotonEliminacion(this.btnEliminarCliente, cliente);
                 HabilitarControlesCliente(true);
                 BuscarMascotas(cliente);
             }
@@ -85,10 +86,30 @@ namespace Vista
             //    HabilitarControlesMascota(false);
             //}
         }
+
         private void lstClientes_DoubleClick(object sender, EventArgs e)
         {
             VerDatosCliente(eFrmABM.Ver);
         }
+
+        private void lstMascotas_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Mascota mascota = MascotaSeleccionada();
+                ColocarTextoBotonEliminacion(this.btnEliminarMascota, mascota);
+                HabilitarControlesMascota(true);
+            }
+            catch (ElementoNoSeleccionadoException)
+            {
+                HabilitarControlesMascota(false);
+            }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
+        }
+
 
         private void lstBox_MarcarActivos(object sender, DrawItemEventArgs e)
         {
@@ -135,38 +156,6 @@ namespace Vista
             {
 
             }
-        }
-
-        #endregion
-
-        #region ListBox Mascotas
-
-        private void lstMascotas_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                MascotaSeleccionada();
-                HabilitarControlesMascota(true);
-            }
-            catch (ElementoNoSeleccionadoException)
-            {
-                HabilitarControlesMascota(false);
-            }
-            catch (Exception ex)
-            {
-                //MessageBox.Show($"Error inesperado. {ex.Message} - {ex.StackTrace}");
-                ManejarExcepcion(ex);
-            }
-
-            //Mascota mascota = this.lstMascotas.SelectedItem as Mascota;
-            //if (mascota is not null)
-            //{
-            //    HabilitarControlesMascota(true);
-            //}
-            //else
-            //{
-            //    HabilitarControlesMascota(false);
-            //}
         }
 
         #endregion
@@ -441,6 +430,18 @@ namespace Vista
             }
             mascota.Cliente = ClienteSeleccionado();
             return mascota;
+        }
+
+        private void ColocarTextoBotonEliminacion(Button button, IActivable activable)
+        {
+            if (activable.Activo)
+            {
+                button.Text = "Eliminar";
+            }
+            else
+            {
+                button.Text = "Reactivar";
+            }
         }
 
         #endregion

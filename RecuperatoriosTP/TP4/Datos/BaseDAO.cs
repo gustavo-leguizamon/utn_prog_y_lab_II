@@ -210,7 +210,7 @@ namespace Datos
             {
                 connection.Open();
 
-                string query = $"UPDATE FROM {Tabla} SET Activo = @activo WHERE Id = @id";
+                string query = $"UPDATE {Tabla} SET Activo = @activo WHERE Id = @id";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("id", entidad.Id);

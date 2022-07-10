@@ -87,6 +87,7 @@ namespace Vista
             this.txtDni.Enabled = editarDatos;
             this.txtDireccion.Enabled = editarDatos;
             this.dtFechaNacimiento.Enabled = editarDatos;
+            this.chkActivo.Enabled = editarDatos;
             if (this.eFrmABM == eFrmABM.Crear)
             {
                 this.btnAceptar.Text = "Registrar";

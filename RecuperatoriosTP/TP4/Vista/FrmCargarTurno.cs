@@ -109,11 +109,11 @@ namespace Vista
         {
             if (SeCompletaronTodosLosCampos())
             {
-                Turno turno = new Turno((long)txtIdMascota.Value, dtFecha.Value, txtComentario.Text);
-                this.turnoDAO.Guardar(turno);
-                this.DialogResult = DialogResult.OK;
-                ReiniciarCampos();
-                this.Close();
+                //Turno turno = new Turno((long)txtIdMascota.Value, dtFecha.Value, txtComentario.Text);
+                //this.turnoDAO.Guardar(turno);
+                //this.DialogResult = DialogResult.OK;
+                //ReiniciarCampos();
+                //this.Close();
             }
             else
             {

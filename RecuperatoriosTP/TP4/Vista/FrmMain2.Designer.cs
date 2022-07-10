@@ -35,6 +35,7 @@
             this.btnNuevoCliente = new System.Windows.Forms.Button();
             this.lstClientes = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnRegistrarVisita = new System.Windows.Forms.Button();
             this.btnCargarTurno = new System.Windows.Forms.Button();
             this.btnVerMascota = new System.Windows.Forms.Button();
             this.btnEliminarMascota = new System.Windows.Forms.Button();
@@ -44,10 +45,13 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTurnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnRegistrarVisita = new System.Windows.Forms.Button();
+            this.lblHoraRestante = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.rtbProximoTurno = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -135,6 +139,17 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Mascotas";
+            // 
+            // btnRegistrarVisita
+            // 
+            this.btnRegistrarVisita.Enabled = false;
+            this.btnRegistrarVisita.Location = new System.Drawing.Point(262, 167);
+            this.btnRegistrarVisita.Name = "btnRegistrarVisita";
+            this.btnRegistrarVisita.Size = new System.Drawing.Size(100, 23);
+            this.btnRegistrarVisita.TabIndex = 8;
+            this.btnRegistrarVisita.Text = "Registrar visita";
+            this.btnRegistrarVisita.UseVisualStyleBackColor = true;
+            this.btnRegistrarVisita.Click += new System.EventHandler(this.btnRegistrarVisita_Click);
             // 
             // btnCargarTurno
             // 
@@ -227,22 +242,40 @@
             this.mnuTurnosToolStripMenuItem.Text = "Turnos";
             this.mnuTurnosToolStripMenuItem.Click += new System.EventHandler(this.mnuTurnosToolStripMenuItem_Click);
             // 
-            // btnRegistrarVisita
+            // lblHoraRestante
             // 
-            this.btnRegistrarVisita.Enabled = false;
-            this.btnRegistrarVisita.Location = new System.Drawing.Point(262, 167);
-            this.btnRegistrarVisita.Name = "btnRegistrarVisita";
-            this.btnRegistrarVisita.Size = new System.Drawing.Size(100, 23);
-            this.btnRegistrarVisita.TabIndex = 8;
-            this.btnRegistrarVisita.Text = "Registrar visita";
-            this.btnRegistrarVisita.UseVisualStyleBackColor = true;
-            this.btnRegistrarVisita.Click += new System.EventHandler(this.btnRegistrarVisita_Click);
+            this.lblHoraRestante.AutoSize = true;
+            this.lblHoraRestante.Location = new System.Drawing.Point(6, 19);
+            this.lblHoraRestante.Name = "lblHoraRestante";
+            this.lblHoraRestante.Size = new System.Drawing.Size(91, 15);
+            this.lblHoraRestante.TabIndex = 3;
+            this.lblHoraRestante.Text = "lblHoraRestante";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.rtbProximoTurno);
+            this.groupBox3.Controls.Add(this.lblHoraRestante);
+            this.groupBox3.Location = new System.Drawing.Point(12, 344);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(781, 120);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            // 
+            // rtbProximoTurno
+            // 
+            this.rtbProximoTurno.Enabled = false;
+            this.rtbProximoTurno.Location = new System.Drawing.Point(6, 38);
+            this.rtbProximoTurno.Name = "rtbProximoTurno";
+            this.rtbProximoTurno.Size = new System.Drawing.Size(362, 75);
+            this.rtbProximoTurno.TabIndex = 4;
+            this.rtbProximoTurno.Text = "";
             // 
             // FrmMain2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(805, 450);
+            this.ClientSize = new System.Drawing.Size(805, 469);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
@@ -256,6 +289,8 @@
             this.groupBox2.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,5 +315,8 @@
         private System.Windows.Forms.ToolStripMenuItem mnuTurnosToolStripMenuItem;
         private System.Windows.Forms.Button btnCargarTurno;
         private System.Windows.Forms.Button btnRegistrarVisita;
+        private System.Windows.Forms.Label lblHoraRestante;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RichTextBox rtbProximoTurno;
     }
 }

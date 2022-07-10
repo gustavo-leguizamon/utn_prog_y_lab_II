@@ -1,4 +1,5 @@
-﻿using Entidades;
+﻿using Datos.Exceptions;
+using Entidades;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -90,6 +91,14 @@ namespace Datos
                 {
                     turno.Mascota = new MascotaDAO().LeerPorId(turno.MascotaId);
                 }
+                if (incluirRelaciones.Contains(typeof(Cliente)))
+                {
+                    if (turno.Mascota is null)
+                    {
+                        turno.Mascota = new MascotaDAO().LeerPorId(turno.MascotaId);
+                    }
+                    turno.Mascota.Cliente = new ClienteDAO().LeerPorId(turno.Mascota.ClienteId);
+                }
             }
 
             return turnos;
@@ -180,10 +189,11 @@ namespace Datos
         {
             long id = Convert.ToInt64(reader["Id"].ToString());
             long mascotaId = Convert.ToInt64(reader["MascotaId"].ToString());
+            short estadoTurnoId = Convert.ToInt16(reader["EstadoTurnoId"].ToString());
             DateTime fecha = Convert.ToDateTime(reader["Fecha"].ToString());
             string comentario = reader["Comentario"].ToString();
 
-            return new Turno(id, mascotaId, fecha, comentario);
+            return new Turno(id, estadoTurnoId, mascotaId, fecha, comentario);
         }
 
         public List<InformacionTurno> ObtenerListadoDeTurnos(EstadoTurno estadoTurno)
@@ -251,6 +261,23 @@ namespace Datos
             }
 
             InvocarActualizacionDatos();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NoHayMasTurnosException">Lanzada cuando no hay más turnos en adelante</exception>
+        public ProximoTurno ProximoTurno()
+        {
+            DateTime fechaActual = DateTime.Now;
+            List<Turno> vigentes = Leer(turno => turno.EstadoTurnoId == (short)EstadoTurno.eEstadoTurno.Vigente && turno.Fecha >= fechaActual, new Type[] { typeof(Mascota), typeof(Cliente) });
+            if (!vigentes.Any())
+            {
+                throw new NoHayMasTurnosException("No hay próximos turnos");
+            }
+            Turno turno = vigentes.OrderBy(turno => turno.Fecha).ToList().First();
+            return new ProximoTurno(turno.Id, turno.Fecha, turno.Mascota.Cliente.NombreCompleto, turno.Mascota.Nombre);
         }
     }
 }

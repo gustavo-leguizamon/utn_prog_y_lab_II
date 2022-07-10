@@ -167,7 +167,7 @@ namespace Vista
         {
             if (SeCompletaronTodosLosCampos())
             {
-                Turno turno = new Turno(Convert.ToInt64(txtIdMascota.Text), dtFecha.Value, txtComentario.Text);
+                Turno turno = new Turno((short)EstadoTurno.eEstadoTurno.Vigente, Convert.ToInt64(txtIdMascota.Text), dtFecha.Value, txtComentario.Text);
                 if (this.eFrmABM == eFrmABM.Crear)
                 {
                     this.turnoDAO.Guardar(turno);

@@ -114,6 +114,11 @@ namespace Datos
             return Leer().Where(filtro).ToList();
         }
 
+        public virtual List<E> Leer(Func<E, bool> filtro, Type[] incluirRelaciones)
+        {
+            return Leer(incluirRelaciones).Where(filtro).ToList();
+        }
+
         /// <summary>
         /// Devuelve todas la entidades almacenadas en la BD, ademas le agregas las tablas relacionadas que se especifiquen
         /// </summary>

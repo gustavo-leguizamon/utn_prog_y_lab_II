@@ -10,7 +10,7 @@ namespace Entidades
     {
         private long id;
         private long mascotaId;
-        private long estadoTurnoId;
+        private short estadoTurnoId;
         private DateTime fecha;
         private string comentario;
 
@@ -28,7 +28,7 @@ namespace Entidades
             set { mascotaId = value; }
         }
 
-        public long EstadoTurnoId
+        public short EstadoTurnoId
         {
             get { return estadoTurnoId; }
             set { estadoTurnoId = value; }
@@ -62,22 +62,23 @@ namespace Entidades
             this.mascota = mascota;
         }
 
-        public Turno(long id, long idMascota, DateTime fecha, string comentario)
+        public Turno(long id, short estadoTurnoId, long idMascota, DateTime fecha, string comentario)
         {
             this.id = id;
+            this.estadoTurnoId = estadoTurnoId;
             this.mascotaId = idMascota;
             this.fecha = fecha;
             this.comentario = comentario;
         }
 
-        public Turno(long id, Mascota mascota, DateTime fecha, string comentario)
-            : this(id, mascota.Id, fecha, comentario)
+        public Turno(long id, short estadoTurnoId, Mascota mascota, DateTime fecha, string comentario)
+            : this(id, estadoTurnoId, mascota.Id, fecha, comentario)
         {
             this.mascota = mascota;
         }
 
-        public Turno(long idMascota, DateTime fecha, string comentario)
-            : this(0, idMascota, fecha, comentario)
+        public Turno(short estadoTurnoId, long idMascota, DateTime fecha, string comentario)
+            : this(0, estadoTurnoId, idMascota, fecha, comentario)
         {
 
         }

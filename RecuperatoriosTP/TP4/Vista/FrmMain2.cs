@@ -1,5 +1,7 @@
 ﻿using Datos;
+using Datos.Exceptions;
 using Entidades;
+using Logica;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +21,9 @@ namespace Vista
         private MascotaDAO mascotaDAO;
         private TurnoDAO turnoDAO;
 
+        private Temporizador temporizadorRestante;
+        private ProximoTurno proximoTurno;
+
         public FrmMain2()
         {
             InitializeComponent();
@@ -26,6 +31,8 @@ namespace Vista
             this.clienteDAO = new ClienteDAO();
             this.mascotaDAO = new MascotaDAO();
             this.turnoDAO = new TurnoDAO();
+
+            this.temporizadorRestante = new Temporizador(1000);
         }
 
         #region Eventos
@@ -37,9 +44,13 @@ namespace Vista
             this.clienteDAO.OnNuevosDatos += BuscarClientes;
             //this.mascotaDAO.OnNuevosDatos += ActualizarDatosMascotas;
             //this.turnoDAO.OnNuevosDatos += ActualizarDatosTurnos;
+            this.temporizadorRestante.OnTimerCompleto += AsignarHoraRestante;
+            //this.temporizadorRestante.OnTimerCompleto += BuscarProximoTurno;
+            this.temporizadorRestante.Comenzar();
 
             BuscarClientes();
             //ActualizarDatosMascotas();
+            //BuscarProximoTurno();
         }
 
         private void FrmMain2_FormClosing(object sender, FormClosingEventArgs e)
@@ -316,9 +327,66 @@ namespace Vista
             {
                 MessageBox.Show("Hay partes sin implementar de la aplicación", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            else if (exception is NoHayMasTurnosException)
+            {
+
+            }
             else
             {
                 MessageBox.Show($"Error inesperado. {exception.Message} - {exception.StackTrace}");
+            }
+        }
+
+        private void AsignarHoraRestante()
+        {
+            if (this.lblHoraRestante.InvokeRequired)
+            {
+                Action delegadoAsignarHora = AsignarHoraRestante;
+                this.lblHoraRestante.Invoke(delegadoAsignarHora);
+            }
+            else
+            {
+                string horaRestante;
+                if (this.proximoTurno is null)
+                {
+                    horaRestante = "No hay ningún turno próximo";
+                    BuscarProximoTurno();
+                }
+                else
+                {
+                    double segundosRestantes = this.proximoTurno.Fecha.Subtract(DateTime.Now).TotalSeconds;
+                    if (segundosRestantes > 0)
+                    {
+                        horaRestante = this.proximoTurno.Fecha.Subtract(DateTime.Now).ToString("d' Días 'h' Horas 'm' Minutos 's' Segundos'");
+                        if (string.IsNullOrWhiteSpace(this.rtbProximoTurno.Text))
+                        {
+                            this.rtbProximoTurno.Text = this.proximoTurno.ToString();
+                        }
+                    }
+                    else
+                    {
+                        horaRestante = string.Empty;
+                        this.rtbProximoTurno.Text = string.Empty;
+                        BuscarProximoTurno();
+                    }
+                }
+                this.lblHoraRestante.Text = horaRestante;
+            }
+        }
+
+        private void BuscarProximoTurno()
+        {
+            try
+            {
+                this.proximoTurno = this.turnoDAO.ProximoTurno();
+            }
+            catch (NoHayMasTurnosException)
+            {
+                this.proximoTurno = null;
+            }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
             }
         }
 

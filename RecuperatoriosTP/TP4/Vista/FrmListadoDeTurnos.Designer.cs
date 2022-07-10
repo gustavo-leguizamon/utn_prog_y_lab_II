@@ -30,9 +30,9 @@
         {
             this.cmbEstadoTurno = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblEstadoTurno = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dtgTurnos = new System.Windows.Forms.DataGridView();
-            this.lblEstadoTurno = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgTurnos)).BeginInit();
@@ -59,6 +59,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
             // 
+            // lblEstadoTurno
+            // 
+            this.lblEstadoTurno.AutoSize = true;
+            this.lblEstadoTurno.Location = new System.Drawing.Point(6, 22);
+            this.lblEstadoTurno.Name = "lblEstadoTurno";
+            this.lblEstadoTurno.Size = new System.Drawing.Size(42, 15);
+            this.lblEstadoTurno.TabIndex = 2;
+            this.lblEstadoTurno.Text = "Estado";
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dtgTurnos);
@@ -78,15 +87,8 @@
             this.dtgTurnos.RowTemplate.Height = 25;
             this.dtgTurnos.Size = new System.Drawing.Size(812, 298);
             this.dtgTurnos.TabIndex = 1;
-            // 
-            // lblEstadoTurno
-            // 
-            this.lblEstadoTurno.AutoSize = true;
-            this.lblEstadoTurno.Location = new System.Drawing.Point(6, 22);
-            this.lblEstadoTurno.Name = "lblEstadoTurno";
-            this.lblEstadoTurno.Size = new System.Drawing.Size(42, 15);
-            this.lblEstadoTurno.TabIndex = 2;
-            this.lblEstadoTurno.Text = "Estado";
+            this.dtgTurnos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgTurnos_CellClick);
+            this.dtgTurnos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgTurnos_CellDoubleClick);
             // 
             // FrmListadoDeTurnos
             // 

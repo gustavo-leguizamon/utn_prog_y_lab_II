@@ -67,7 +67,7 @@ namespace Vista
 
         private bool SeCompletaronTodosLosCampos()
         {
-            return this.txtNombre.Text.Trim().Length > 0 &&
+            return !string.IsNullOrWhiteSpace(this.txtNombre.Text) &&
                    this.txtPeso.Value > 0;
 
         }

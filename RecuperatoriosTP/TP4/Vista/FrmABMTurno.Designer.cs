@@ -43,7 +43,7 @@
             this.lblFecha = new System.Windows.Forms.Label();
             this.lblComentario = new System.Windows.Forms.Label();
             this.txtComentario = new System.Windows.Forms.TextBox();
-            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.grpMascota.SuspendLayout();
@@ -222,16 +222,16 @@
             this.txtComentario.Size = new System.Drawing.Size(341, 23);
             this.txtComentario.TabIndex = 11;
             // 
-            // btnAgregar
+            // btnAceptar
             // 
-            this.btnAgregar.Enabled = false;
-            this.btnAgregar.Location = new System.Drawing.Point(229, 13);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(77, 23);
-            this.btnAgregar.TabIndex = 13;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            this.btnAceptar.Enabled = false;
+            this.btnAceptar.Location = new System.Drawing.Point(229, 13);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(77, 23);
+            this.btnAceptar.TabIndex = 13;
+            this.btnAceptar.Text = "Agregar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // btnCancelar
             // 
@@ -246,7 +246,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnCancelar);
-            this.groupBox1.Controls.Add(this.btnAgregar);
+            this.groupBox1.Controls.Add(this.btnAceptar);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox1.Location = new System.Drawing.Point(0, 306);
             this.groupBox1.Name = "groupBox1";
@@ -296,7 +296,7 @@
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Label lblComentario;
         private System.Windows.Forms.TextBox txtComentario;
-        private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.DateTimePicker dtHora;
         private System.Windows.Forms.GroupBox groupBox1;

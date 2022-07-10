@@ -35,6 +35,7 @@
             this.btnNuevoCliente = new System.Windows.Forms.Button();
             this.lstClientes = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnCargarTurno = new System.Windows.Forms.Button();
             this.btnVerMascota = new System.Windows.Forms.Button();
             this.btnEliminarMascota = new System.Windows.Forms.Button();
             this.btnEditarMascota = new System.Windows.Forms.Button();
@@ -43,7 +44,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTurnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnCargarTurno = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -108,6 +108,7 @@
             // 
             // lstClientes
             // 
+            this.lstClientes.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.lstClientes.FormattingEnabled = true;
             this.lstClientes.ItemHeight = 15;
             this.lstClientes.Location = new System.Drawing.Point(6, 22);
@@ -115,6 +116,7 @@
             this.lstClientes.Size = new System.Drawing.Size(250, 274);
             this.lstClientes.TabIndex = 0;
             this.lstClientes.Click += new System.EventHandler(this.lstClientes_Click);
+            this.lstClientes.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lstBox_MarcarActivos);
             this.lstClientes.DoubleClick += new System.EventHandler(this.lstClientes_DoubleClick);
             // 
             // groupBox2
@@ -131,6 +133,17 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Mascotas";
+            // 
+            // btnCargarTurno
+            // 
+            this.btnCargarTurno.Enabled = false;
+            this.btnCargarTurno.Location = new System.Drawing.Point(262, 138);
+            this.btnCargarTurno.Name = "btnCargarTurno";
+            this.btnCargarTurno.Size = new System.Drawing.Size(100, 23);
+            this.btnCargarTurno.TabIndex = 7;
+            this.btnCargarTurno.Text = "Cargar turno";
+            this.btnCargarTurno.UseVisualStyleBackColor = true;
+            this.btnCargarTurno.Click += new System.EventHandler(this.btnCargarTurno_Click);
             // 
             // btnVerMascota
             // 
@@ -178,6 +191,7 @@
             // 
             // lstMascotas
             // 
+            this.lstMascotas.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.lstMascotas.FormattingEnabled = true;
             this.lstMascotas.ItemHeight = 15;
             this.lstMascotas.Location = new System.Drawing.Point(6, 22);
@@ -185,6 +199,7 @@
             this.lstMascotas.Size = new System.Drawing.Size(250, 274);
             this.lstMascotas.TabIndex = 1;
             this.lstMascotas.Click += new System.EventHandler(this.lstMascotas_Click);
+            this.lstMascotas.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lstBox_MarcarActivos);
             // 
             // menuStrip1
             // 
@@ -209,17 +224,6 @@
             this.mnuTurnosToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.mnuTurnosToolStripMenuItem.Text = "Turnos";
             this.mnuTurnosToolStripMenuItem.Click += new System.EventHandler(this.mnuTurnosToolStripMenuItem_Click);
-            // 
-            // btnCargarTurno
-            // 
-            this.btnCargarTurno.Enabled = false;
-            this.btnCargarTurno.Location = new System.Drawing.Point(262, 138);
-            this.btnCargarTurno.Name = "btnCargarTurno";
-            this.btnCargarTurno.Size = new System.Drawing.Size(100, 23);
-            this.btnCargarTurno.TabIndex = 7;
-            this.btnCargarTurno.Text = "Cargar turno";
-            this.btnCargarTurno.UseVisualStyleBackColor = true;
-            this.btnCargarTurno.Click += new System.EventHandler(this.btnCargarTurno_Click);
             // 
             // FrmMain2
             // 

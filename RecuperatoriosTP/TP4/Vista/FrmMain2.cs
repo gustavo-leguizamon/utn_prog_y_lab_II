@@ -34,11 +34,11 @@ namespace Vista
 
         private void FrmMain2_Load(object sender, EventArgs e)
         {
-            this.clienteDAO.OnNuevosDatos += ActualizarDatosClientes;
+            this.clienteDAO.OnNuevosDatos += BuscarClientes;
             //this.mascotaDAO.OnNuevosDatos += ActualizarDatosMascotas;
             //this.turnoDAO.OnNuevosDatos += ActualizarDatosTurnos;
 
-            ActualizarDatosClientes();
+            BuscarClientes();
             //ActualizarDatosMascotas();
         }
 
@@ -88,6 +88,53 @@ namespace Vista
         private void lstClientes_DoubleClick(object sender, EventArgs e)
         {
             VerDatosCliente(eFrmABM.Ver);
+        }
+
+        private void lstBox_MarcarActivos(object sender, DrawItemEventArgs e)
+        {
+            //IActivable item = this.lstClientes.Items[e.Index] as IActivable;
+            //if (item != null)
+            //{
+            //    Color color = Color.Black;
+            //    if (!item.Activo)
+            //    {
+            //        color = Color.Red;
+            //    }
+            //    e.Graphics.DrawString(
+            //        item.ToString(),
+            //        this.lstClientes.Font,
+            //        new SolidBrush(color),
+            //        e.Bounds.X, // Use e.Bounds on these two lines.
+            //        e.Bounds.Y
+            //    );
+            //}
+            //else
+            //{
+            //    // The item isn't a MyListBoxItem, do something about it
+            //}
+
+
+            try
+            {
+                e.DrawBackground();
+                Brush myBrush = Brushes.Black;
+
+                //int sayi = Convert.ToInt32(((ListBox)sender).Items[e.Index].ToString());
+                IActivable activable = ((ListBox)sender).Items[e.Index] as IActivable;
+                if (activable is not null && !activable.Activo)
+                {
+                    myBrush = Brushes.Red;
+                }
+
+                e.Graphics.DrawString(((ListBox)sender).Items[e.Index].ToString(),
+                e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
+
+                e.DrawFocusRectangle();
+            }
+            catch
+            {
+
+            }
         }
 
         #endregion
@@ -260,7 +307,7 @@ namespace Vista
             }
         }
 
-        private void ActualizarDatosClientes()
+        private void BuscarClientes()
         {
             List<Cliente> clientes = this.clienteDAO.Leer();
             //this.lstClientes.Items.Clear();
@@ -269,6 +316,30 @@ namespace Vista
             this.lstClientes.Update();
             this.lstClientes.Refresh();
             HabilitarControlesCliente(false);
+        }
+
+        private void MarcarInactivos(ListBox.ObjectCollection objectCollection)
+        {
+            for (int i = 0; i < objectCollection.Count; i++)
+            {
+                if (!(objectCollection[i] as IActivable).Activo)
+                {
+                    //objectCollection[i].
+                }
+            }
+
+            foreach (object item in objectCollection)
+            {
+                IActivable activable = item as IActivable;
+                if (activable is null)
+                {
+
+                }
+                else
+                {
+
+                }
+            }
         }
 
         //private void ActualizarDatosMascotas()

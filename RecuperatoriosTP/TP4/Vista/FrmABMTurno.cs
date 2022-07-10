@@ -16,22 +16,22 @@ namespace Vista
     {
         //private MascotaDAO mascotaDAO;
         private eFrmABM eFrmABM;
-        private Mascota mascota;
+        private Turno turno;
         private TurnoDAO turnoDAO;
 
         public FrmABMTurno(TurnoDAO turnoDAO, Mascota mascota)
-           : this(turnoDAO, eFrmABM.Crear, mascota)
+           : this(turnoDAO, eFrmABM.Crear, new Turno(mascota))
         {
         }
 
-        public FrmABMTurno(TurnoDAO turnoDAO, eFrmABM eFrmABM, Mascota mascota)
+        public FrmABMTurno(TurnoDAO turnoDAO, eFrmABM eFrmABM, Turno turno)
         {
             InitializeComponent();
 
             this.turnoDAO = turnoDAO;
             //this.clienteDAO = new ClienteDAO();
             this.eFrmABM = eFrmABM;
-            this.mascota = mascota;
+            this.turno = turno;
         }
 
         //public FrmABMTurno(TurnoDAO turnoDAO)
@@ -73,19 +73,24 @@ namespace Vista
 
         private void ColocarDatos()
         {
-            if (this.mascota is not null)
+            if (this.turno is not null)
             {
-                this.txtNombreMascota.Text = mascota.Nombre;
-                this.txtPeso.Value = (decimal)mascota.Peso;
-                this.dtFechaNacimiento.Value = mascota.FechaNacimiento;
-                //this.grpTurno.Enabled = true;
-                this.btnAgregar.Enabled = true;
+                this.txtComentario.Text = this.turno.Comentario;
+                if (turno.Id > 0)
+                {
+                    this.txtNombreMascota.Text = this.turno.Mascota.Nombre;
+                    this.txtPeso.Value = (decimal)this.turno.Mascota.Peso;
+                    this.dtFechaNacimiento.Value = this.turno.Mascota.FechaNacimiento;
+                    //this.grpTurno.Enabled = true;
+                    this.btnAceptar.Enabled = true;
+                }
             }
         }
 
         private bool SeRealizaronCambios()
         {
-            return !string.IsNullOrWhiteSpace(this.txtComentario.Text);
+            return (this.eFrmABM == eFrmABM.Crear && (!string.IsNullOrWhiteSpace(this.txtComentario.Text))) ||
+                   (this.eFrmABM == eFrmABM.Editar && (this.txtComentario.Text.Trim() != this.turno.Comentario.Trim()));
         }
 
         private bool SeCompletaronTodosLosCampos()
@@ -130,12 +135,19 @@ namespace Vista
             this.Close();
         }
 
-        private void btnAgregar_Click(object sender, EventArgs e)
+        private void btnAceptar_Click(object sender, EventArgs e)
         {
             if (SeCompletaronTodosLosCampos())
             {
                 Turno turno = new Turno((long)txtIdMascota.Value, dtFecha.Value, txtComentario.Text);
-                this.turnoDAO.Guardar(turno);
+                if (this.eFrmABM == eFrmABM.Crear)
+                {
+                    this.turnoDAO.Guardar(turno);
+                }
+                else if (this.eFrmABM == eFrmABM.Editar)
+                {
+                    this.turnoDAO.Modificar(turno);
+                }
                 this.DialogResult = DialogResult.OK;
                 ReiniciarCampos();
                 this.Close();

@@ -57,6 +57,11 @@ namespace Entidades
 
         }
 
+        public Turno(Mascota mascota)
+        {
+            this.mascota = mascota;
+        }
+
         public Turno(long id, long idMascota, DateTime fecha, string comentario)
         {
             this.id = id;

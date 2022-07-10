@@ -100,7 +100,7 @@ namespace Vista
 
         private void lstClientes_DoubleClick(object sender, EventArgs e)
         {
-            VerDatosCliente(eFrmABM.Ver);
+            DatosCliente(eFrmABM.Ver);
         }
 
         private void lstMascotas_Click(object sender, EventArgs e)
@@ -110,6 +110,8 @@ namespace Vista
                 Mascota mascota = MascotaSeleccionada();
                 ColocarTextoBotonEliminacion(this.btnEliminarMascota, mascota);
                 HabilitarControlesMascota(true);
+                HabilitarBoton(this.btnCargarTurno, mascota);
+                HabilitarBoton(this.btnRegistrarVisita, mascota);
             }
             catch (ElementoNoSeleccionadoException)
             {
@@ -121,6 +123,10 @@ namespace Vista
             }
         }
 
+        private void lstMascotas_DoubleClick(object sender, EventArgs e)
+        {
+            DatosMascota(eFrmABM.Ver);
+        }
 
         private void lstBox_MarcarActivos(object sender, DrawItemEventArgs e)
         {
@@ -175,12 +181,12 @@ namespace Vista
 
         private void btnVerCliente_Click(object sender, EventArgs e)
         {
-            VerDatosCliente(eFrmABM.Ver);
+            DatosCliente(eFrmABM.Ver);
         }
 
         private void btnEditarCliente_Click(object sender, EventArgs e)
         {
-            VerDatosCliente(eFrmABM.Editar);
+            DatosCliente(eFrmABM.Editar);
         }
 
         private void btnEliminarCliente_Click(object sender, EventArgs e)
@@ -220,12 +226,12 @@ namespace Vista
 
         private void btnVerMascota_Click(object sender, EventArgs e)
         {
-            VerDatosMascota(eFrmABM.Ver);
+            DatosMascota(eFrmABM.Ver);
         }
 
         private void btnEditarMascota_Click(object sender, EventArgs e)
         {
-            VerDatosMascota(eFrmABM.Editar);
+            DatosMascota(eFrmABM.Editar);
         }
 
         private void btnEliminarMascota_Click(object sender, EventArgs e)
@@ -488,7 +494,7 @@ namespace Vista
         //    dtgResultados.Refresh();
         //}
 
-        private void VerDatosCliente(eFrmABM eFrmABM)
+        private void DatosCliente(eFrmABM eFrmABM)
         {
             try
             {
@@ -511,7 +517,7 @@ namespace Vista
             return cliente;
         }
 
-        private void VerDatosMascota(eFrmABM eFrmABM)
+        private void DatosMascota(eFrmABM eFrmABM)
         {
             try
             {
@@ -538,6 +544,11 @@ namespace Vista
         private void ColocarTextoBotonEliminacion(Button button, IActivable activable)
         {
             button.Text = activable.Activo ? "Dar de baja" : "Reactivar";
+        }
+
+        private void HabilitarBoton(Button button, IActivable activable)
+        {
+            button.Enabled = activable.Activo;
         }
 
         #endregion

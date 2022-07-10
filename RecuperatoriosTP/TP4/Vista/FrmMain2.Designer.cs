@@ -217,6 +217,7 @@
             this.lstMascotas.TabIndex = 1;
             this.lstMascotas.Click += new System.EventHandler(this.lstMascotas_Click);
             this.lstMascotas.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lstBox_MarcarActivos);
+            this.lstMascotas.DoubleClick += new System.EventHandler(this.lstMascotas_DoubleClick);
             // 
             // menuStrip1
             // 

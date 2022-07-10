@@ -88,6 +88,32 @@ namespace Vista
             }
         }
 
+        private void ManejarControles()
+        {
+            bool editarDatos = this.eFrmABM != eFrmABM.Ver;
+            //this.txtNombre.Enabled = editarDatos;
+            //this.txtPeso.Enabled = editarDatos;
+            ////this.txtDni.Enabled = editarDatos;
+            //this.dtFechaNacimiento.Enabled = editarDatos;
+            //this.chkActivo.Enabled = editarDatos;
+            if (this.eFrmABM == eFrmABM.Crear)
+            {
+                this.Text = "Agregar nuevo turno";
+                this.btnAceptar.Text = "Agregar";
+            }
+            else if (this.eFrmABM == eFrmABM.Editar)
+            {
+                this.Text = "Modificar datos del turno";
+                this.btnAceptar.Text = "Modificar";
+            }
+            else
+            {
+                this.Text = "Ver datos del turno";
+                this.btnAceptar.Visible = false;
+                this.btnCancelar.Text = "Aceptar";
+            }
+        }
+
         private bool SeRealizaronCambios()
         {
             return (this.eFrmABM == eFrmABM.Crear && (!string.IsNullOrWhiteSpace(this.txtComentario.Text))) ||
@@ -117,6 +143,7 @@ namespace Vista
             dtFecha.MinDate = DateTime.Today;
             dtFecha.Value = DateTime.Today;
             ColocarDatos();
+            ManejarControles();
         }
 
         private void FrmCargarTurno_FormClosing(object sender, FormClosingEventArgs e)

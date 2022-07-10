@@ -125,14 +125,17 @@ namespace Vista
             this.chkActivo.Enabled = editarDatos;
             if (this.eFrmABM == eFrmABM.Crear)
             {
+                this.Text = "Agregar nueva mascota";
                 this.btnAceptar.Text = "Agregar";
             }
             else if (this.eFrmABM == eFrmABM.Editar)
             {
+                this.Text = "Modificar datos de mascota";
                 this.btnAceptar.Text = "Modificar";
             }
             else
             {
+                this.Text = "Ver datos de mascota";
                 this.btnAceptar.Visible = false;
                 this.btnCancelar.Text = "Aceptar";
             }

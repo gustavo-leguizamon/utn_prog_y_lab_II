@@ -93,14 +93,17 @@ namespace Vista
             this.chkActivo.Enabled = editarDatos;
             if (this.eFrmABM == eFrmABM.Crear)
             {
+                this.Text = "Cargar nuevo cliente";
                 this.btnAceptar.Text = "Registrar";
             }
             else if (this.eFrmABM == eFrmABM.Editar)
             {
+                this.Text = "Modificar datos de cliente";
                 this.btnAceptar.Text = "Modificar";
             }
             else
             {
+                this.Text = "Ver datos de cliente";
                 this.btnAceptar.Visible = false;
                 this.btnCancelar.Text = "Aceptar";
             }

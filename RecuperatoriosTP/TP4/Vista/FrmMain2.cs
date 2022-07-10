@@ -177,9 +177,19 @@ namespace Vista
             try
             {
                 Cliente cliente = ClienteSeleccionado();
-                if (MessageBox.Show($"Dar de baja al cliente: {cliente.NombreCompleto}?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                string mensaje;
+                if (cliente.Activo)
                 {
-                    this.clienteDAO.EliminarLogico(cliente);
+                    mensaje = $"Dar de baja al cliente: {cliente.NombreCompleto}?";
+                }
+                else
+                {
+                    mensaje = $"Reactivar al cliente: {cliente.NombreCompleto}?";
+                }
+
+                if (MessageBox.Show(mensaje, "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    this.clienteDAO.Activacion(cliente, !cliente.Activo);
                 }
             }
             catch (Exception ex)
@@ -200,7 +210,6 @@ namespace Vista
             }
             catch (Exception ex)
             {
-                //MessageBox.Show($"Error inesperado. {ex.Message} - {ex.StackTrace}");
                 ManejarExcepcion(ex);
             }
         }
@@ -220,9 +229,19 @@ namespace Vista
             try
             {
                 Mascota mascota = MascotaSeleccionada();
-                if (MessageBox.Show($"Dar de baja la mascota {mascota.Nombre} del cliente {mascota.Cliente.NombreCompleto}?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                string mensaje;
+                if (mascota.Activo)
                 {
-                    this.mascotaDAO.EliminarLogico(mascota);
+                    mensaje = $"Dar de baja la mascota {mascota.Nombre} del cliente {mascota.Cliente.NombreCompleto}?";
+                }
+                else
+                {
+                    mensaje = $"Reactivar la mascota {mascota.Nombre} del cliente {mascota.Cliente.NombreCompleto}?";
+                }
+
+                if (MessageBox.Show(mensaje, "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    this.mascotaDAO.Activacion(mascota, !mascota.Activo);
                 }
             }
             catch (Exception ex)
@@ -241,13 +260,8 @@ namespace Vista
                     MessageBox.Show("Se agregó la mascota!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            //catch (ElementoNoSeleccionadoException)
-            //{
-            //    MessageBox.Show("Debe seleccionar un cliente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //}
             catch (Exception ex)
             {
-                //MessageBox.Show($"Error inesperado. {ex.Message} - {ex.StackTrace}");
                 ManejarExcepcion(ex);
             }
         }
@@ -307,29 +321,29 @@ namespace Vista
             HabilitarControlesCliente(false);
         }
 
-        private void MarcarInactivos(ListBox.ObjectCollection objectCollection)
-        {
-            for (int i = 0; i < objectCollection.Count; i++)
-            {
-                if (!(objectCollection[i] as IActivable).Activo)
-                {
-                    //objectCollection[i].
-                }
-            }
+        //private void MarcarInactivos(ListBox.ObjectCollection objectCollection)
+        //{
+        //    for (int i = 0; i < objectCollection.Count; i++)
+        //    {
+        //        if (!(objectCollection[i] as IActivable).Activo)
+        //        {
+        //            //objectCollection[i].
+        //        }
+        //    }
 
-            foreach (object item in objectCollection)
-            {
-                IActivable activable = item as IActivable;
-                if (activable is null)
-                {
+        //    foreach (object item in objectCollection)
+        //    {
+        //        IActivable activable = item as IActivable;
+        //        if (activable is null)
+        //        {
 
-                }
-                else
-                {
+        //        }
+        //        else
+        //        {
 
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
 
         //private void ActualizarDatosMascotas()
         //{
@@ -382,13 +396,8 @@ namespace Vista
                 Form form = new FrmABMCliente(this.clienteDAO, eFrmABM, ClienteSeleccionado());
                 form.ShowDialog();
             }
-            //catch (ElementoNoSeleccionadoException)
-            //{
-            //    MessageBox.Show("Debe seleccionar un cliente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //}
             catch (Exception ex)
             {
-                //MessageBox.Show($"Error inesperado. {ex.Message} - {ex.StackTrace}");
                 ManejarExcepcion(ex);
             }
         }
@@ -410,13 +419,8 @@ namespace Vista
                 Form form = new FrmABMMascota(this.mascotaDAO, eFrmABM, MascotaSeleccionada());
                 form.ShowDialog();
             }
-            //catch (ElementoNoSeleccionadoException)
-            //{
-            //    MessageBox.Show("Debe seleccionar una mascota", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //}
             catch (Exception ex)
             {
-                //MessageBox.Show($"Error inesperado. {ex.Message} - {ex.StackTrace}");
                 ManejarExcepcion(ex);
             }
         }
@@ -434,14 +438,7 @@ namespace Vista
 
         private void ColocarTextoBotonEliminacion(Button button, IActivable activable)
         {
-            if (activable.Activo)
-            {
-                button.Text = "Eliminar";
-            }
-            else
-            {
-                button.Text = "Reactivar";
-            }
+            button.Text = activable.Activo ? "Dar de baja" : "Reactivar";
         }
 
         #endregion

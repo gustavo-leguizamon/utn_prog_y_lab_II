@@ -195,11 +195,12 @@ namespace Datos
         }
 
         /// <summary>
-        /// Elimina logicamente una entidad de la BD
+        /// Elimina o activa logicamente una entidad de la BD
         /// </summary>
         /// <param name="entidad"></param>
+        /// <param name="activo">True para activar la entidad, o false para desactivarla</param>
         /// <exception cref="ArgumentException">Lanzada cuando la entidad no es del tipo IActivable para realizar una baja logica</exception>
-        public void EliminarLogico(E entidad)
+        public void Activacion(E entidad, bool activo)
         {
             if (entidad is not IActivable)
             {
@@ -214,7 +215,7 @@ namespace Datos
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("id", entidad.Id);
-                command.Parameters.AddWithValue("activo", false);
+                command.Parameters.AddWithValue("activo", activo);
                 command.ExecuteNonQuery();
             }
 

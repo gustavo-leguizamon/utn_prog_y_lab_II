@@ -19,6 +19,7 @@ namespace Vista
         private ClienteDAO clienteDAO;
         private eFrmABM eFrmABM;
         private Cliente cliente;
+        private bool edicionFinalizada;
 
         public FrmABMCliente(ClienteDAO clienteDAO)
             : this(clienteDAO, eFrmABM.Crear, null)
@@ -32,6 +33,7 @@ namespace Vista
             this.clienteDAO = clienteDAO;
             this.eFrmABM = eFrmABM;
             this.cliente = cliente;
+            this.edicionFinalizada = false;
         }
 
         #region Metodos
@@ -42,7 +44,8 @@ namespace Vista
                                                       !string.IsNullOrWhiteSpace(this.txtApellido.Text) ||
                                                       !string.IsNullOrWhiteSpace(this.txtDireccion.Text) ||
                                                       this.txtDni.Value > 0)) ||
-                   (this.eFrmABM == eFrmABM.Editar && (this.txtNombre.Text.Trim() != this.cliente.Nombre.Trim() ||
+                   (this.eFrmABM == eFrmABM.Editar && !this.edicionFinalizada && 
+                                                     (this.txtNombre.Text.Trim() != this.cliente.Nombre.Trim() ||
                                                        this.txtApellido.Text.Trim() != this.cliente.Apellido.Trim() ||
                                                        this.txtDireccion.Text.Trim() != this.cliente.Direccion.Trim() ||
                                                        this.txtDni.Value != this.cliente.Dni ||
@@ -155,7 +158,7 @@ namespace Vista
                 {
                     if (EsDniUnico())
                     {
-                        Cliente cliente = new Cliente((long)this.txtDni.Value, this.txtNombre.Text, this.txtApellido.Text, this.dtFechaNacimiento.Value, this.txtDireccion.Text, this.chkActivo.Checked);
+                        Cliente cliente = new Cliente(this.cliente.Id, (long)this.txtDni.Value, this.txtNombre.Text, this.txtApellido.Text, this.dtFechaNacimiento.Value, this.txtDireccion.Text, this.chkActivo.Checked);
                         if (this.eFrmABM == eFrmABM.Crear)
                         {
                             this.clienteDAO.Guardar(cliente);
@@ -163,6 +166,7 @@ namespace Vista
                         else if (this.eFrmABM == eFrmABM.Editar)
                         {
                             this.clienteDAO.Modificar(cliente);
+                            this.edicionFinalizada = true;
                         }
                     }
                     else

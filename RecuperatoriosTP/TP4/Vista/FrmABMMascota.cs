@@ -19,6 +19,9 @@ namespace Vista
         private eFrmABM eFrmABM;
         private Mascota mascota;
         private MascotaDAO mascotaDAO;
+
+        private BusquedaMascota busquedaMascota;
+
         //private ClienteDAO clienteDAO;
         private bool edicionFinalizada;
 
@@ -32,6 +35,9 @@ namespace Vista
             InitializeComponent();
 
             this.mascotaDAO = mascotaDAO;
+
+            this.busquedaMascota = new BusquedaMascota();
+
             //this.clienteDAO = new ClienteDAO();
             this.eFrmABM = eFrmABM;
             this.mascota = mascota;
@@ -79,7 +85,13 @@ namespace Vista
         private bool ValidaMascotaUnica()
         {
             //return !new BusquedaMascota(this.cliente.Mascotas).Existe(new Mascota(this.cliente.Dni, this.txtNombre.Text, (float)this.txtPeso.Value, this.dtFechaNacimiento.Value));
-            return true;
+            return !this.busquedaMascota.Existe(ConstruirMascota());
+            
+        }
+
+        private Mascota ConstruirMascota()
+        {
+            return new Mascota(this.mascota.Id, this.mascota.Cliente.Id, this.txtNombre.Text, (float)this.txtPeso.Value, this.dtFechaNacimiento.Value, this.chkActivo.Checked);
         }
 
         //private bool EsDniUnico()
@@ -200,7 +212,7 @@ namespace Vista
                 {
                     if (ValidaMascotaUnica())
                     {
-                        Mascota mascota = new Mascota(this.mascota.Id, this.mascota.Cliente.Id, this.txtNombre.Text, (float)this.txtPeso.Value, this.dtFechaNacimiento.Value, this.chkActivo.Checked);
+                        Mascota mascota = ConstruirMascota();
                         if (this.eFrmABM == eFrmABM.Crear)
                         {
                             this.mascotaDAO.Guardar(mascota);
@@ -210,14 +222,14 @@ namespace Vista
                             this.mascotaDAO.Modificar(mascota);
                             this.edicionFinalizada = true;
                         }
+                        this.DialogResult = DialogResult.OK;
+                        ReiniciarCampos();
+                        this.Close();
                     }
                     else
                     {
                         MessageBox.Show("Debe indicar una mascota diferente ya que el cliente ya la registró.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
-                    this.DialogResult = DialogResult.OK;
-                    ReiniciarCampos();
-                    this.Close();
                 }
                 else
                 {

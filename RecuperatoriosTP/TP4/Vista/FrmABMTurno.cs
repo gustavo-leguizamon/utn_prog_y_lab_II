@@ -18,6 +18,7 @@ namespace Vista
         private eFrmABM eFrmABM;
         private Turno turno;
         private TurnoDAO turnoDAO;
+        private bool edicionFinalizada;
 
         public FrmABMTurno(TurnoDAO turnoDAO, Mascota mascota)
            : this(turnoDAO, eFrmABM.Crear, new Turno(mascota))
@@ -32,6 +33,7 @@ namespace Vista
             //this.clienteDAO = new ClienteDAO();
             this.eFrmABM = eFrmABM;
             this.turno = turno;
+            this.edicionFinalizada = false;
         }
 
         //public FrmABMTurno(TurnoDAO turnoDAO)
@@ -117,13 +119,12 @@ namespace Vista
         private bool SeRealizaronCambios()
         {
             return (this.eFrmABM == eFrmABM.Crear && (!string.IsNullOrWhiteSpace(this.txtComentario.Text))) ||
-                   (this.eFrmABM == eFrmABM.Editar && (this.txtComentario.Text.Trim() != this.turno.Comentario.Trim()));
+                   (this.eFrmABM == eFrmABM.Editar && !this.edicionFinalizada && (this.txtComentario.Text.Trim() != this.turno.Comentario.Trim()));
         }
 
         private bool SeCompletaronTodosLosCampos()
         {
             return !string.IsNullOrWhiteSpace(this.txtComentario.Text);
-
         }
 
         private void ReiniciarCampos()
@@ -167,7 +168,7 @@ namespace Vista
         {
             if (SeCompletaronTodosLosCampos())
             {
-                Turno turno = new Turno((short)EstadoTurno.eEstadoTurno.Vigente, Convert.ToInt64(txtIdMascota.Text), dtFecha.Value, txtComentario.Text);
+                Turno turno = new Turno(this.turno.Id, (short)EstadoTurno.eEstadoTurno.Vigente, Convert.ToInt64(txtIdMascota.Text), dtFecha.Value, txtComentario.Text);
                 if (this.eFrmABM == eFrmABM.Crear)
                 {
                     this.turnoDAO.Guardar(turno);
@@ -175,6 +176,7 @@ namespace Vista
                 else if (this.eFrmABM == eFrmABM.Editar)
                 {
                     this.turnoDAO.Modificar(turno);
+                    this.edicionFinalizada = true;
                 }
                 this.DialogResult = DialogResult.OK;
                 ReiniciarCampos();

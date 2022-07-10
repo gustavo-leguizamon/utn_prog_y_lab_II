@@ -53,7 +53,7 @@ namespace Vista
 
         private bool SeRealizaronCambios()
         {
-            return (this.eFrmABM == eFrmABM.Crear && (this.txtNombre.Text.Trim().Length > 0 ||
+            return (this.eFrmABM == eFrmABM.Crear && (!string.IsNullOrWhiteSpace(this.txtNombre.Text) ||
                                                       this.txtPeso.Value > 0)) ||
                    (this.eFrmABM == eFrmABM.Editar && (this.txtNombre.Text.Trim() != this.mascota.Nombre.Trim() ||
                                                        (float)this.txtPeso.Value != this.mascota.Peso));
@@ -148,6 +148,7 @@ namespace Vista
                     this.txtNombre.Text = mascota.Nombre;
                     this.txtPeso.Value = (decimal)mascota.Peso;
                     this.dtFechaNacimiento.Value = mascota.FechaNacimiento;
+                    this.chkActivo.Checked = mascota.Activo;
                 }
             }
         }
@@ -190,7 +191,7 @@ namespace Vista
                 {
                     if (ValidaMascotaUnica())
                     {
-                        Mascota mascota = new Mascota(this.mascota.Cliente.Id, this.txtNombre.Text, (float)this.txtPeso.Value, this.dtFechaNacimiento.Value);
+                        Mascota mascota = new Mascota(this.mascota.Cliente.Id, this.txtNombre.Text, (float)this.txtPeso.Value, this.dtFechaNacimiento.Value, this.chkActivo.Checked);
                         if (this.eFrmABM == eFrmABM.Crear)
                         {
                             this.mascotaDAO.Guardar(mascota);

@@ -43,6 +43,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTurnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnCargarTurno = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -118,6 +119,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnCargarTurno);
             this.groupBox2.Controls.Add(this.btnVerMascota);
             this.groupBox2.Controls.Add(this.btnEliminarMascota);
             this.groupBox2.Controls.Add(this.btnEditarMascota);
@@ -208,6 +210,17 @@
             this.mnuTurnosToolStripMenuItem.Text = "Turnos";
             this.mnuTurnosToolStripMenuItem.Click += new System.EventHandler(this.mnuTurnosToolStripMenuItem_Click);
             // 
+            // btnCargarTurno
+            // 
+            this.btnCargarTurno.Enabled = false;
+            this.btnCargarTurno.Location = new System.Drawing.Point(262, 138);
+            this.btnCargarTurno.Name = "btnCargarTurno";
+            this.btnCargarTurno.Size = new System.Drawing.Size(100, 23);
+            this.btnCargarTurno.TabIndex = 7;
+            this.btnCargarTurno.Text = "Cargar turno";
+            this.btnCargarTurno.UseVisualStyleBackColor = true;
+            this.btnCargarTurno.Click += new System.EventHandler(this.btnCargarTurno_Click);
+            // 
             // FrmMain2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -248,5 +261,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem archivosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuTurnosToolStripMenuItem;
+        private System.Windows.Forms.Button btnCargarTurno;
     }
 }

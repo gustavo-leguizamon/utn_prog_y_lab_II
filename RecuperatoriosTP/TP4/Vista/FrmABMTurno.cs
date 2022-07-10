@@ -83,6 +83,22 @@ namespace Vista
             }
         }
 
+        private bool SeRealizaronCambios()
+        {
+            return !string.IsNullOrWhiteSpace(this.txtComentario.Text);
+        }
+
+        private bool SeCompletaronTodosLosCampos()
+        {
+            return !string.IsNullOrWhiteSpace(this.txtComentario.Text);
+
+        }
+
+        private void ReiniciarCampos()
+        {
+            this.txtComentario.Text = string.Empty;
+        }
+
         #endregion
 
         #region Eventos
@@ -91,9 +107,10 @@ namespace Vista
 
         private void FrmCargarTurno_Load(object sender, EventArgs e)
         {
-            dtFecha.MinDate = DateTime.Today;
             dtFecha.MaxDate = DateTime.Today.AddMonths(6);
+            dtFecha.MinDate = DateTime.Today;
             dtFecha.Value = DateTime.Today;
+            ColocarDatos();
         }
 
         private void FrmCargarTurno_FormClosing(object sender, FormClosingEventArgs e)
@@ -106,25 +123,7 @@ namespace Vista
 
         #endregion
 
-        #endregion
-
-        private bool SeRealizaronCambios()
-        {
-            return this.txtComentario.Text.Trim().Length > 0;
-
-        }
-
-        private bool SeCompletaronTodosLosCampos()
-        {
-            return this.txtComentario.Text.Trim().Length > 0;
-
-        }
-
-        private void ReiniciarCampos()
-        {
-            this.txtComentario.Text = string.Empty;
-        }
-
+        #region Botones
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -146,5 +145,12 @@ namespace Vista
                 MessageBox.Show("Debe indicar todos los datos", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        #endregion
+
+        #endregion
+
+
+
     }
 }

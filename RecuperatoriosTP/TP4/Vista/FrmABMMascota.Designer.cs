@@ -43,6 +43,7 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkActivo = new System.Windows.Forms.CheckBox();
             this.grpCliente.SuspendLayout();
             this.grpMascota.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPeso)).BeginInit();
@@ -98,6 +99,7 @@
             // 
             // grpMascota
             // 
+            this.grpMascota.Controls.Add(this.chkActivo);
             this.grpMascota.Controls.Add(this.txtPeso);
             this.grpMascota.Controls.Add(this.dtFechaNacimiento);
             this.grpMascota.Controls.Add(this.lblFechaNacimiento);
@@ -132,11 +134,13 @@
             // 
             // dtFechaNacimiento
             // 
+            this.dtFechaNacimiento.CustomFormat = "dd/MM/yyyy";
+            this.dtFechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtFechaNacimiento.Location = new System.Drawing.Point(11, 94);
             this.dtFechaNacimiento.MaxDate = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
             this.dtFechaNacimiento.MinDate = new System.DateTime(1800, 1, 1, 0, 0, 0, 0);
             this.dtFechaNacimiento.Name = "dtFechaNacimiento";
-            this.dtFechaNacimiento.Size = new System.Drawing.Size(200, 23);
+            this.dtFechaNacimiento.Size = new System.Drawing.Size(101, 23);
             this.dtFechaNacimiento.TabIndex = 15;
             this.dtFechaNacimiento.Value = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
             // 
@@ -209,6 +213,16 @@
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             // 
+            // chkActivo
+            // 
+            this.chkActivo.AutoSize = true;
+            this.chkActivo.Location = new System.Drawing.Point(128, 94);
+            this.chkActivo.Name = "chkActivo";
+            this.chkActivo.Size = new System.Drawing.Size(60, 19);
+            this.chkActivo.TabIndex = 17;
+            this.chkActivo.Text = "Activo";
+            this.chkActivo.UseVisualStyleBackColor = true;
+            // 
             // FrmABMMascota
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -252,5 +266,6 @@
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtDni;
+        private System.Windows.Forms.CheckBox chkActivo;
     }
 }

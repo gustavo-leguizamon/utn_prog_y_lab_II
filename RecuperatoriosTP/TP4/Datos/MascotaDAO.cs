@@ -161,20 +161,21 @@ namespace Datos
 
         protected override SqlCommand CrearCommandInsert(Mascota entidad)
         {
-            string query = $"INSERT INTO {Tabla} (DniCliente, Nombre, Peso, FechaNacimiento) VALUES(@dni, @nombre, @peso, @fecha)";
+            string query = $"INSERT INTO {Tabla} (DniCliente, Nombre, Peso, FechaNacimiento, Activo) VALUES(@dni, @nombre, @peso, @fecha, @activo)";
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("dni", entidad.ClienteId);
             command.Parameters.AddWithValue("nombre", entidad.Nombre);
             command.Parameters.AddWithValue("peso", entidad.Peso);
             command.Parameters.AddWithValue("fecha", entidad.FechaNacimiento);
+            command.Parameters.AddWithValue("activo", entidad.Activo);
 
             return command;
         }
 
         protected override SqlCommand CrearCommandUpdate(Mascota entidad)
         {
-            string query = $"UPDATE {Tabla} SET ClienteId, @cliente, Nombre = @nombre, Peso = @peso, FechaNacimiento = @nacimiento WHERE Id = @id";
+            string query = $"UPDATE {Tabla} SET ClienteId, @cliente, Nombre = @nombre, Peso = @peso, FechaNacimiento = @nacimiento, Activo = @activo WHERE Id = @id";
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("id", entidad.Id);
@@ -182,6 +183,7 @@ namespace Datos
             command.Parameters.AddWithValue("nombre", entidad.Nombre);
             command.Parameters.AddWithValue("peso", entidad.Peso);
             command.Parameters.AddWithValue("nacimiento", entidad.FechaNacimiento);
+            command.Parameters.AddWithValue("activo", entidad.Activo);
 
             return command;
         }
@@ -193,8 +195,9 @@ namespace Datos
             string nombre = reader["Nombre"].ToString();
             float peso = Convert.ToSingle(reader["Peso"].ToString());
             DateTime fecha = Convert.ToDateTime(reader["FechaNacimiento"].ToString());
+            bool activo = Convert.ToBoolean(reader["Activo"]);
 
-            return new Mascota(id, clienteId, nombre, peso, fecha);
+            return new Mascota(id, clienteId, nombre, peso, fecha, activo);
         }
     }
 }

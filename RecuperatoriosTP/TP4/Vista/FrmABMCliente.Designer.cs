@@ -41,6 +41,7 @@
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.lblDireccion = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkActivo = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.txtDni)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -65,7 +66,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(250, 125);
+            this.label1.Location = new System.Drawing.Point(148, 125);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(117, 15);
             this.label1.TabIndex = 2;
@@ -75,9 +76,9 @@
             // 
             this.dtFechaNacimiento.CustomFormat = "dd/MM/yyyy";
             this.dtFechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFechaNacimiento.Location = new System.Drawing.Point(250, 143);
+            this.dtFechaNacimiento.Location = new System.Drawing.Point(148, 143);
             this.dtFechaNacimiento.Name = "dtFechaNacimiento";
-            this.dtFechaNacimiento.Size = new System.Drawing.Size(200, 23);
+            this.dtFechaNacimiento.Size = new System.Drawing.Size(117, 23);
             this.dtFechaNacimiento.TabIndex = 3;
             // 
             // lblDni
@@ -165,11 +166,22 @@
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             // 
+            // chkActivo
+            // 
+            this.chkActivo.AutoSize = true;
+            this.chkActivo.Location = new System.Drawing.Point(284, 143);
+            this.chkActivo.Name = "chkActivo";
+            this.chkActivo.Size = new System.Drawing.Size(60, 19);
+            this.chkActivo.TabIndex = 14;
+            this.chkActivo.Text = "Activo";
+            this.chkActivo.UseVisualStyleBackColor = true;
+            // 
             // FrmABMCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(469, 219);
+            this.Controls.Add(this.chkActivo);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtDireccion);
             this.Controls.Add(this.lblDireccion);
@@ -211,5 +223,6 @@
         private System.Windows.Forms.TextBox txtDireccion;
         private System.Windows.Forms.Label lblDireccion;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox chkActivo;
     }
 }

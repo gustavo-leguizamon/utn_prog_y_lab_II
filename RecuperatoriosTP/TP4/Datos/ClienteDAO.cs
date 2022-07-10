@@ -175,7 +175,7 @@ namespace Datos
 
         protected override SqlCommand CrearCommandInsert(Cliente entidad)
         {
-            string query = $"INSERT INTO {Tabla} (Dni, Nombre, Apellido, FechaNacimiento, Direccion) VALUES(@dni, @nombre, @apellido, @fecha, @direccion)";
+            string query = $"INSERT INTO {Tabla} (Dni, Nombre, Apellido, FechaNacimiento, Direccion, Activo) VALUES(@dni, @nombre, @apellido, @fecha, @direccion, @activo)";
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("dni", entidad.Dni);
@@ -183,13 +183,14 @@ namespace Datos
             command.Parameters.AddWithValue("apellido", entidad.Apellido);
             command.Parameters.AddWithValue("fecha", entidad.FechaNacimiento);
             command.Parameters.AddWithValue("direccion", entidad.Direccion);
+            command.Parameters.AddWithValue("activo", entidad.Activo);
 
             return command;
         }
 
         protected override SqlCommand CrearCommandUpdate(Cliente entidad)
         {
-            string query = $"UPDATE {Tabla} SET Dni = @dni, Nombre = @nombre, Apellido = @apellido, FechaNacimiento = @nacimiento, Direccion = @direccion WHERE Id = @id";
+            string query = $"UPDATE {Tabla} SET Dni = @dni, Nombre = @nombre, Apellido = @apellido, FechaNacimiento = @nacimiento, Direccion = @direccion, Activo = @activo WHERE Id = @id";
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("id", entidad.Id);
@@ -198,6 +199,7 @@ namespace Datos
             command.Parameters.AddWithValue("apellido", entidad.Apellido);
             command.Parameters.AddWithValue("nacimiento", entidad.FechaNacimiento);
             command.Parameters.AddWithValue("direccion", entidad.Direccion);
+            command.Parameters.AddWithValue("activo", entidad.Activo);
 
             return command;
         }
@@ -210,7 +212,8 @@ namespace Datos
             string apellido = reader["Apellido"].ToString();
             DateTime fecha = Convert.ToDateTime(reader["FechaNacimiento"].ToString());
             string direccion = reader["Direccion"].ToString();
-            return new Cliente(id, dni, nombre, apellido, fecha, direccion);
+            bool activo = Convert.ToBoolean(reader["Activo"]);
+            return new Cliente(id, dni, nombre, apellido, fecha, direccion, activo);
         }
     }
 }

@@ -74,7 +74,7 @@ namespace Entidades
             Mascotas = new List<Mascota>();
         }
 
-        public Cliente(long id, long dni, string nombre, string apellido, DateTime nacimiento, string direccion)
+        public Cliente(long id, long dni, string nombre, string apellido, DateTime nacimiento, string direccion, bool activo)
             : this()
         {
             this.id = id;
@@ -83,15 +83,16 @@ namespace Entidades
             this.apellido = apellido;
             this.direccion = direccion;
             this.fechaNacimiento = nacimiento;
+            this.activo = activo;
         }
 
-        public Cliente(long dni, string nombre, string apellido, DateTime nacimiento, string direccion)
-            : this(0, dni, nombre, apellido, nacimiento, direccion)
+        public Cliente(long dni, string nombre, string apellido, DateTime nacimiento, string direccion, bool activo)
+            : this(0, dni, nombre, apellido, nacimiento, direccion, activo)
         {
         }
 
-        public Cliente(long id, long dni, string nombre, string apellido, DateTime nacimiento, string direccion, List<Mascota> mascotas)
-            : this(id, dni, nombre, apellido, nacimiento, direccion)
+        public Cliente(long id, long dni, string nombre, string apellido, DateTime nacimiento, string direccion, bool activo, List<Mascota> mascotas)
+            : this(id, dni, nombre, apellido, nacimiento, direccion, activo)
         {
             this.Mascotas = mascotas;
         }

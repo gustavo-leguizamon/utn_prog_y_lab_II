@@ -74,7 +74,7 @@ namespace Entidades
             this.cliente = cliente;
         }
 
-        public Mascota(long id, long clienteId, string nombre, float peso, DateTime nacimiento)
+        public Mascota(long id, long clienteId, string nombre, float peso, DateTime nacimiento, bool activo)
             : this()
         {
             this.id = id;
@@ -82,10 +82,11 @@ namespace Entidades
             this.nombre = nombre;
             this.peso = peso;
             this.fechaNacimiento = nacimiento;
+            this.activo = activo;
         }
 
-        public Mascota(long clienteId, string nombre, float peso, DateTime nacimiento)
-            : this(0, clienteId, nombre, peso, nacimiento)
+        public Mascota(long clienteId, string nombre, float peso, DateTime nacimiento, bool activo)
+            : this(0, clienteId, nombre, peso, nacimiento, activo)
         {
         }
 

@@ -10,6 +10,7 @@ namespace Entidades
     {
         private long id;
         private long mascotaId;
+        private long estadoTurnoId;
         private DateTime fecha;
         private string comentario;
 
@@ -25,6 +26,12 @@ namespace Entidades
         {
             get { return mascotaId; }
             set { mascotaId = value; }
+        }
+
+        public long EstadoTurnoId
+        {
+            get { return estadoTurnoId; }
+            set { estadoTurnoId = value; }
         }
 
         public DateTime Fecha

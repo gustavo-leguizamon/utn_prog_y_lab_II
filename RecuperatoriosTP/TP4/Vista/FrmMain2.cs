@@ -216,6 +216,22 @@ namespace Vista
             }
         }
 
+        private void btnCargarTurno_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Form form = new FrmABMTurno(turnoDAO, MascotaSeleccionada());
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("Se generó correctamente el turno!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
+        }
+
         #endregion
 
         #region Menu
@@ -277,6 +293,7 @@ namespace Vista
             this.btnEditarMascota.Enabled = habilitar;
             this.btnEliminarMascota.Enabled = habilitar;
             this.btnVerMascota.Enabled = habilitar;
+            this.btnCargarTurno.Enabled = habilitar;
         }
 
         private void BuscarMascotas(Cliente cliente)
@@ -347,11 +364,11 @@ namespace Vista
         private Mascota MascotaSeleccionada()
         {
             Mascota mascota = this.lstMascotas.SelectedItem as Mascota;
-            mascota.Cliente = ClienteSeleccionado();
             if (mascota is null)
             {
                 throw new ElementoNoSeleccionadoException("Debe seleccionar una mascota");
             }
+            mascota.Cliente = ClienteSeleccionado();
             return mascota;
         }
 

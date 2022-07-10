@@ -38,10 +38,10 @@ namespace Vista
 
         private bool SeRealizaronCambios()
         {
-            return (this.eFrmABM == eFrmABM.Crear && (this.txtNombre.Text.Trim().Length > 0 ||
-                                                       this.txtApellido.Text.Trim().Length > 0 ||
-                                                       this.txtDireccion.Text.Trim().Length > 0 ||
-                                                       this.txtDni.Value > 0)) ||
+            return (this.eFrmABM == eFrmABM.Crear && (!string.IsNullOrWhiteSpace(this.txtNombre.Text) ||
+                                                      !string.IsNullOrWhiteSpace(this.txtApellido.Text) ||
+                                                      !string.IsNullOrWhiteSpace(this.txtDireccion.Text) ||
+                                                      this.txtDni.Value > 0)) ||
                    (this.eFrmABM == eFrmABM.Editar && (this.txtNombre.Text.Trim() != this.cliente.Nombre.Trim() ||
                                                        this.txtApellido.Text.Trim() != this.cliente.Apellido.Trim() ||
                                                        this.txtDireccion.Text.Trim() != this.cliente.Direccion.Trim() ||
@@ -60,9 +60,9 @@ namespace Vista
 
         private bool SeCompletaronTodosLosCampos()
         {
-            return this.txtNombre.Text.Trim().Length > 0 &&
-                   this.txtApellido.Text.Trim().Length > 0 &&
-                   this.txtDireccion.Text.Trim().Length > 0 &&
+            return !string.IsNullOrWhiteSpace(this.txtNombre.Text) &&
+                   !string.IsNullOrWhiteSpace(this.txtApellido.Text) &&
+                   !string.IsNullOrWhiteSpace(this.txtDireccion.Text) &&
                    this.txtDni.Value > 0;
 
         }
@@ -111,6 +111,7 @@ namespace Vista
                 this.txtDni.Value = cliente.Dni;
                 this.txtDireccion.Text = cliente.Direccion;
                 this.dtFechaNacimiento.Value = cliente.FechaNacimiento;
+                this.chkActivo.Checked = cliente.Activo;
             }
 
         }
@@ -153,7 +154,7 @@ namespace Vista
                 {
                     if (EsDniUnico())
                     {
-                        Cliente cliente = new Cliente((long)this.txtDni.Value, this.txtNombre.Text, this.txtApellido.Text, this.dtFechaNacimiento.Value, this.txtDireccion.Text);
+                        Cliente cliente = new Cliente((long)this.txtDni.Value, this.txtNombre.Text, this.txtApellido.Text, this.dtFechaNacimiento.Value, this.txtDireccion.Text, this.chkActivo.Checked);
                         if (this.eFrmABM == eFrmABM.Crear)
                         {
                             this.clienteDAO.Guardar(cliente);

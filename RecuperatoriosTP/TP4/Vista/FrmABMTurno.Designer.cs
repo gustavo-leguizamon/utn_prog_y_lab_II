@@ -38,17 +38,19 @@
             this.lblNombreCliente = new System.Windows.Forms.Label();
             this.lblIdMascota = new System.Windows.Forms.Label();
             this.grpTurno = new System.Windows.Forms.GroupBox();
+            this.dtHora = new System.Windows.Forms.DateTimePicker();
             this.dtFecha = new System.Windows.Forms.DateTimePicker();
             this.lblFecha = new System.Windows.Forms.Label();
             this.lblComentario = new System.Windows.Forms.Label();
             this.txtComentario = new System.Windows.Forms.TextBox();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.dtHora = new System.Windows.Forms.DateTimePicker();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.grpMascota.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPeso)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIdMascota)).BeginInit();
             this.grpTurno.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpMascota
@@ -169,6 +171,18 @@
             this.grpTurno.TabStop = false;
             this.grpTurno.Text = "Turno";
             // 
+            // dtHora
+            // 
+            this.dtHora.CustomFormat = "HH:mm";
+            this.dtHora.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtHora.Location = new System.Drawing.Point(117, 94);
+            this.dtHora.MaxDate = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
+            this.dtHora.MinDate = new System.DateTime(1800, 1, 1, 0, 0, 0, 0);
+            this.dtHora.Name = "dtHora";
+            this.dtHora.Size = new System.Drawing.Size(53, 23);
+            this.dtHora.TabIndex = 16;
+            this.dtHora.Value = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
+            // 
             // dtFecha
             // 
             this.dtFecha.CustomFormat = "dd/MM/yyyy";
@@ -211,9 +225,9 @@
             // btnAgregar
             // 
             this.btnAgregar.Enabled = false;
-            this.btnAgregar.Location = new System.Drawing.Point(34, 312);
+            this.btnAgregar.Location = new System.Drawing.Point(229, 13);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(143, 23);
+            this.btnAgregar.Size = new System.Drawing.Size(77, 23);
             this.btnAgregar.TabIndex = 13;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -221,39 +235,38 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(216, 312);
+            this.btnCancelar.Location = new System.Drawing.Point(312, 13);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(143, 23);
+            this.btnCancelar.Size = new System.Drawing.Size(77, 23);
             this.btnCancelar.TabIndex = 14;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // dtHora
+            // groupBox1
             // 
-            this.dtHora.CustomFormat = "HH:mm";
-            this.dtHora.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtHora.Location = new System.Drawing.Point(117, 94);
-            this.dtHora.MaxDate = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
-            this.dtHora.MinDate = new System.DateTime(1800, 1, 1, 0, 0, 0, 0);
-            this.dtHora.Name = "dtHora";
-            this.dtHora.Size = new System.Drawing.Size(53, 23);
-            this.dtHora.TabIndex = 16;
-            this.dtHora.Value = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
+            this.groupBox1.Controls.Add(this.btnCancelar);
+            this.groupBox1.Controls.Add(this.btnAgregar);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox1.Location = new System.Drawing.Point(0, 306);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(395, 42);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
             // 
             // FrmABMTurno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 342);
+            this.ClientSize = new System.Drawing.Size(395, 348);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grpTurno);
-            this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.grpMascota);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmABMTurno";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Carga de turno";
             this.Load += new System.EventHandler(this.FrmCargarTurno_Load);
             this.grpMascota.ResumeLayout(false);
@@ -262,6 +275,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtIdMascota)).EndInit();
             this.grpTurno.ResumeLayout(false);
             this.grpTurno.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -285,5 +299,6 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.DateTimePicker dtHora;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

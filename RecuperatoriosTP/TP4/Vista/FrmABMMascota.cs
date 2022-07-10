@@ -66,7 +66,8 @@ namespace Vista
                    (this.eFrmABM == eFrmABM.Editar && !this.edicionFinalizada && 
                                                       (this.txtNombre.Text.Trim() != this.mascota.Nombre.Trim() ||
                                                        (float)this.txtPeso.Value != this.mascota.Peso ||
-                                                       this.dtFechaNacimiento.Value != this.mascota.FechaNacimiento));
+                                                       this.dtFechaNacimiento.Value != this.mascota.FechaNacimiento ||
+                                                       this.chkActivo.Checked != this.mascota.Activo));
         }
 
         private void ReiniciarCampos()

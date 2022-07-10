@@ -51,8 +51,17 @@ namespace Logica
 
         public bool Existe(Mascota mascota)
         {
-            List<Mascota> mascotas = this.mascotaDAO.Leer();
-            return mascotas.Any(m => m.ClienteId == mascota.ClienteId && m.Nombre == mascota.Nombre && m.FechaNacimiento == mascota.FechaNacimiento);
+            bool existe;
+            List<Mascota> mascotas = this.mascotaDAO.Leer(m => m.ClienteId == mascota.ClienteId);
+            if (mascota.Id > 0)
+            {
+                existe = mascotas.Any(m => m.Id != mascota.Id && m.ClienteId == mascota.ClienteId && m.Nombre == mascota.Nombre && m.FechaNacimiento == mascota.FechaNacimiento);
+            }
+            else
+            {
+                existe = mascotas.Any(m => m.ClienteId == mascota.ClienteId && m.Nombre == mascota.Nombre && m.FechaNacimiento == mascota.FechaNacimiento);
+            }
+            return existe;
         }
     }
 }

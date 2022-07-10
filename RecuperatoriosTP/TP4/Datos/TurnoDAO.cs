@@ -162,25 +162,27 @@ namespace Datos
 
         protected override SqlCommand CrearCommandInsert(Turno entidad)
         {
-            string query = $"INSERT INTO {Tabla} (IdMascota, Fecha, Comentario) VALUES(@idMascota, @fecha, @comentario)";
+            string query = $"INSERT INTO {Tabla} (MascotaId, Fecha, Comentario, EstadoTurnoId) VALUES(@idMascota, @fecha, @comentario, @estado)";
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("idMascota", entidad.MascotaId);
             command.Parameters.AddWithValue("fecha", entidad.Fecha);
             command.Parameters.AddWithValue("comentario", entidad.Comentario);
+            command.Parameters.AddWithValue("estado", (short)EstadoTurno.eEstadoTurno.Vigente);
 
             return command;
         }
 
         protected override SqlCommand CrearCommandUpdate(Turno entidad)
         {
-            string query = $"UPDATE {Tabla} SET MascotaId = @idMascota, Fecha = @fecha, Comentario = @comentario WHERE Id = @id";
+            string query = $"UPDATE {Tabla} SET MascotaId = @idMascota, Fecha = @fecha, Comentario = @comentario, EstadoTurnoId = @estado WHERE Id = @id";
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("id", entidad.Id);
             command.Parameters.AddWithValue("idMascota", entidad.MascotaId);
             command.Parameters.AddWithValue("fecha", entidad.Fecha);
             command.Parameters.AddWithValue("comentario", entidad.Comentario);
+            command.Parameters.AddWithValue("estado", entidad.EstadoTurnoId);
 
             return command;
         }

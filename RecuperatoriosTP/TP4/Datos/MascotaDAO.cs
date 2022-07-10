@@ -161,10 +161,10 @@ namespace Datos
 
         protected override SqlCommand CrearCommandInsert(Mascota entidad)
         {
-            string query = $"INSERT INTO {Tabla} (DniCliente, Nombre, Peso, FechaNacimiento, Activo) VALUES(@dni, @nombre, @peso, @fecha, @activo)";
+            string query = $"INSERT INTO {Tabla} (ClienteId, Nombre, Peso, FechaNacimiento, Activo) VALUES(@clienteId, @nombre, @peso, @fecha, @activo)";
 
             SqlCommand command = new SqlCommand(query);
-            command.Parameters.AddWithValue("dni", entidad.ClienteId);
+            command.Parameters.AddWithValue("clienteId", entidad.ClienteId);
             command.Parameters.AddWithValue("nombre", entidad.Nombre);
             command.Parameters.AddWithValue("peso", entidad.Peso);
             command.Parameters.AddWithValue("fecha", entidad.FechaNacimiento);

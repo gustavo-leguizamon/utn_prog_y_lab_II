@@ -42,7 +42,7 @@ namespace Vista
         private void FrmMain2_Load(object sender, EventArgs e)
         {
             this.clienteDAO.OnNuevosDatos += BuscarClientes;
-            //this.mascotaDAO.OnNuevosDatos += ActualizarDatosMascotas;
+            this.mascotaDAO.OnNuevosDatos += ActualizarMascotas;
             //this.turnoDAO.OnNuevosDatos += ActualizarDatosTurnos;
             this.temporizadorRestante.OnTimerCompleto += AsignarHoraRestante;
             //this.temporizadorRestante.OnTimerCompleto += BuscarProximoTurno;
@@ -460,6 +460,24 @@ namespace Vista
             this.lstMascotas.Update();
             this.lstMascotas.Refresh();
             HabilitarControlesMascota(false);
+        }
+
+        private void ActualizarMascotas()
+        {
+            try
+            {
+                Cliente cliente = ClienteSeleccionado();
+                BuscarMascotas(cliente);
+            }
+            catch (ElementoNoSeleccionadoException)
+            {
+                HabilitarControlesCliente(false);
+                HabilitarControlesMascota(false);
+            }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
         }
 
         //private void ActualizarDatosTurnos()

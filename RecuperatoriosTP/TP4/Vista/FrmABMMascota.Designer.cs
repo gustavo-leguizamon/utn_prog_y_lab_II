@@ -34,6 +34,7 @@
             this.lblNombreCliente = new System.Windows.Forms.Label();
             this.lblDniCliente = new System.Windows.Forms.Label();
             this.grpMascota = new System.Windows.Forms.GroupBox();
+            this.chkActivo = new System.Windows.Forms.CheckBox();
             this.txtPeso = new System.Windows.Forms.NumericUpDown();
             this.dtFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
@@ -43,7 +44,6 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chkActivo = new System.Windows.Forms.CheckBox();
             this.grpCliente.SuspendLayout();
             this.grpMascota.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPeso)).BeginInit();
@@ -56,6 +56,7 @@
             this.grpCliente.Controls.Add(this.txtNombreCliente);
             this.grpCliente.Controls.Add(this.lblNombreCliente);
             this.grpCliente.Controls.Add(this.lblDniCliente);
+            this.grpCliente.Enabled = false;
             this.grpCliente.Location = new System.Drawing.Point(12, 12);
             this.grpCliente.Name = "grpCliente";
             this.grpCliente.Size = new System.Drawing.Size(371, 100);
@@ -106,13 +107,22 @@
             this.grpMascota.Controls.Add(this.lblPeso);
             this.grpMascota.Controls.Add(this.lblNombre);
             this.grpMascota.Controls.Add(this.txtNombre);
-            this.grpMascota.Enabled = false;
             this.grpMascota.Location = new System.Drawing.Point(12, 118);
             this.grpMascota.Name = "grpMascota";
             this.grpMascota.Size = new System.Drawing.Size(371, 133);
             this.grpMascota.TabIndex = 12;
             this.grpMascota.TabStop = false;
             this.grpMascota.Text = "Mascota";
+            // 
+            // chkActivo
+            // 
+            this.chkActivo.AutoSize = true;
+            this.chkActivo.Location = new System.Drawing.Point(128, 94);
+            this.chkActivo.Name = "chkActivo";
+            this.chkActivo.Size = new System.Drawing.Size(60, 19);
+            this.chkActivo.TabIndex = 17;
+            this.chkActivo.Text = "Activo";
+            this.chkActivo.UseVisualStyleBackColor = true;
             // 
             // txtPeso
             // 
@@ -179,7 +189,6 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(200, 23);
             this.txtNombre.TabIndex = 11;
-            this.txtNombre.Text = "5";
             // 
             // btnCancelar
             // 
@@ -212,16 +221,6 @@
             this.groupBox1.Size = new System.Drawing.Size(395, 42);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
-            // 
-            // chkActivo
-            // 
-            this.chkActivo.AutoSize = true;
-            this.chkActivo.Location = new System.Drawing.Point(128, 94);
-            this.chkActivo.Name = "chkActivo";
-            this.chkActivo.Size = new System.Drawing.Size(60, 19);
-            this.chkActivo.TabIndex = 17;
-            this.chkActivo.Text = "Activo";
-            this.chkActivo.UseVisualStyleBackColor = true;
             // 
             // FrmABMMascota
             // 

@@ -20,6 +20,7 @@ namespace Vista
         private Mascota mascota;
         private MascotaDAO mascotaDAO;
         //private ClienteDAO clienteDAO;
+        private bool edicionFinalizada;
 
         public FrmABMMascota(MascotaDAO mascotaDAO, Cliente cliente)
             : this(mascotaDAO, eFrmABM.Crear, new Mascota(cliente))
@@ -34,6 +35,7 @@ namespace Vista
             //this.clienteDAO = new ClienteDAO();
             this.eFrmABM = eFrmABM;
             this.mascota = mascota;
+            this.edicionFinalizada = false;
         }
 
 
@@ -55,8 +57,10 @@ namespace Vista
         {
             return (this.eFrmABM == eFrmABM.Crear && (!string.IsNullOrWhiteSpace(this.txtNombre.Text) ||
                                                       this.txtPeso.Value > 0)) ||
-                   (this.eFrmABM == eFrmABM.Editar && (this.txtNombre.Text.Trim() != this.mascota.Nombre.Trim() ||
-                                                       (float)this.txtPeso.Value != this.mascota.Peso));
+                   (this.eFrmABM == eFrmABM.Editar && !this.edicionFinalizada && 
+                                                      (this.txtNombre.Text.Trim() != this.mascota.Nombre.Trim() ||
+                                                       (float)this.txtPeso.Value != this.mascota.Peso ||
+                                                       this.dtFechaNacimiento.Value != this.mascota.FechaNacimiento));
         }
 
         private void ReiniciarCampos()
@@ -166,6 +170,7 @@ namespace Vista
         private void FrmCargaMascota_Load(object sender, EventArgs e)
         {
             this.dtFechaNacimiento.MaxDate = DateTime.Now;
+            this.dtFechaNacimiento.Value = DateTime.Today;
             ColocarDatos();
             ManejarControles();
         }
@@ -195,7 +200,7 @@ namespace Vista
                 {
                     if (ValidaMascotaUnica())
                     {
-                        Mascota mascota = new Mascota(this.mascota.Cliente.Id, this.txtNombre.Text, (float)this.txtPeso.Value, this.dtFechaNacimiento.Value, this.chkActivo.Checked);
+                        Mascota mascota = new Mascota(this.mascota.Id, this.mascota.Cliente.Id, this.txtNombre.Text, (float)this.txtPeso.Value, this.dtFechaNacimiento.Value, this.chkActivo.Checked);
                         if (this.eFrmABM == eFrmABM.Crear)
                         {
                             this.mascotaDAO.Guardar(mascota);
@@ -203,6 +208,7 @@ namespace Vista
                         else if (this.eFrmABM == eFrmABM.Editar)
                         {
                             this.mascotaDAO.Modificar(mascota);
+                            this.edicionFinalizada = true;
                         }
                     }
                     else

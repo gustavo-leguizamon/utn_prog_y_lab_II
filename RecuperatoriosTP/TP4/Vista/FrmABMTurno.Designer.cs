@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.grpMascota = new System.Windows.Forms.GroupBox();
+            this.txtIdMascota = new System.Windows.Forms.TextBox();
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
             this.dtFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.txtPeso = new System.Windows.Forms.NumericUpDown();
@@ -37,6 +38,7 @@
             this.lblNombreCliente = new System.Windows.Forms.Label();
             this.lblIdMascota = new System.Windows.Forms.Label();
             this.grpTurno = new System.Windows.Forms.GroupBox();
+            this.txtComentario = new System.Windows.Forms.RichTextBox();
             this.dtHora = new System.Windows.Forms.DateTimePicker();
             this.dtFecha = new System.Windows.Forms.DateTimePicker();
             this.lblFecha = new System.Windows.Forms.Label();
@@ -44,8 +46,6 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtIdMascota = new System.Windows.Forms.TextBox();
-            this.txtComentario = new System.Windows.Forms.RichTextBox();
             this.grpMascota.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPeso)).BeginInit();
             this.grpTurno.SuspendLayout();
@@ -62,12 +62,21 @@
             this.grpMascota.Controls.Add(this.txtNombreMascota);
             this.grpMascota.Controls.Add(this.lblNombreCliente);
             this.grpMascota.Controls.Add(this.lblIdMascota);
+            this.grpMascota.Enabled = false;
             this.grpMascota.Location = new System.Drawing.Point(12, 12);
             this.grpMascota.Name = "grpMascota";
             this.grpMascota.Size = new System.Drawing.Size(371, 119);
             this.grpMascota.TabIndex = 12;
             this.grpMascota.TabStop = false;
             this.grpMascota.Text = "Mascota";
+            // 
+            // txtIdMascota
+            // 
+            this.txtIdMascota.Enabled = false;
+            this.txtIdMascota.Location = new System.Drawing.Point(11, 36);
+            this.txtIdMascota.Name = "txtIdMascota";
+            this.txtIdMascota.Size = new System.Drawing.Size(100, 23);
+            this.txtIdMascota.TabIndex = 21;
             // 
             // lblFechaNacimiento
             // 
@@ -152,7 +161,6 @@
             this.grpTurno.Controls.Add(this.dtFecha);
             this.grpTurno.Controls.Add(this.lblFecha);
             this.grpTurno.Controls.Add(this.lblComentario);
-            this.grpTurno.Enabled = false;
             this.grpTurno.Location = new System.Drawing.Point(12, 153);
             this.grpTurno.Name = "grpTurno";
             this.grpTurno.Size = new System.Drawing.Size(371, 173);
@@ -160,15 +168,24 @@
             this.grpTurno.TabStop = false;
             this.grpTurno.Text = "Turno";
             // 
+            // txtComentario
+            // 
+            this.txtComentario.Location = new System.Drawing.Point(6, 38);
+            this.txtComentario.Name = "txtComentario";
+            this.txtComentario.Size = new System.Drawing.Size(346, 81);
+            this.txtComentario.TabIndex = 17;
+            this.txtComentario.Text = "";
+            // 
             // dtHora
             // 
             this.dtHora.CustomFormat = "HH:mm";
-            this.dtHora.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtHora.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dtHora.Location = new System.Drawing.Point(112, 140);
             this.dtHora.MaxDate = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
             this.dtHora.MinDate = new System.DateTime(1800, 1, 1, 0, 0, 0, 0);
             this.dtHora.Name = "dtHora";
-            this.dtHora.Size = new System.Drawing.Size(53, 23);
+            this.dtHora.ShowUpDown = true;
+            this.dtHora.Size = new System.Drawing.Size(91, 23);
             this.dtHora.TabIndex = 16;
             this.dtHora.Value = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
             // 
@@ -233,22 +250,6 @@
             this.groupBox1.Size = new System.Drawing.Size(395, 42);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
-            // 
-            // txtIdMascota
-            // 
-            this.txtIdMascota.Enabled = false;
-            this.txtIdMascota.Location = new System.Drawing.Point(11, 36);
-            this.txtIdMascota.Name = "txtIdMascota";
-            this.txtIdMascota.Size = new System.Drawing.Size(100, 23);
-            this.txtIdMascota.TabIndex = 21;
-            // 
-            // txtComentario
-            // 
-            this.txtComentario.Location = new System.Drawing.Point(6, 38);
-            this.txtComentario.Name = "txtComentario";
-            this.txtComentario.Size = new System.Drawing.Size(346, 81);
-            this.txtComentario.TabIndex = 17;
-            this.txtComentario.Text = "";
             // 
             // FrmABMTurno
             // 

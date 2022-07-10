@@ -175,7 +175,7 @@ namespace Datos
 
         protected override SqlCommand CrearCommandUpdate(Mascota entidad)
         {
-            string query = $"UPDATE {Tabla} SET ClienteId, @cliente, Nombre = @nombre, Peso = @peso, FechaNacimiento = @nacimiento, Activo = @activo WHERE Id = @id";
+            string query = $"UPDATE {Tabla} SET ClienteId = @cliente, Nombre = @nombre, Peso = @peso, FechaNacimiento = @nacimiento, Activo = @activo WHERE Id = @id";
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("id", entidad.Id);

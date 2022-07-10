@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Logica
 {
-    public interface IBusqueda<T, ID>
+    public interface IBusqueda<T>
     {
-        T Buscar(ID id);
-        bool Existe(ID id);
+        //T Buscar(ID id);
+        //bool Existe(ID id);
+
+        bool Existe(T entidad);
     }
 }

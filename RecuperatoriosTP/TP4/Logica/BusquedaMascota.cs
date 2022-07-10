@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Logica
 {
-    public class BusquedaMascota// : IBusqueda<Mascota, long>
+    public class BusquedaMascota : IBusqueda<Mascota>// : IBusqueda<Mascota, long>
     {
         //private List<Mascota> mascotas;
         private MascotaDAO mascotaDAO;

@@ -10,6 +10,7 @@ namespace Entidades
     {
         private long id;
         private long clienteId;
+        private TipoMascota.eTipoMascota tipoMascota;
         private string nombre;
         private float peso;
         private DateTime fechaNacimiento;
@@ -27,6 +28,12 @@ namespace Entidades
         {
             get { return clienteId; }
             set { clienteId = value; }
+        }
+
+        public TipoMascota.eTipoMascota TipoMascota
+        {
+            get { return tipoMascota; }
+            set { tipoMascota = value; }
         }
 
         public string Nombre
@@ -74,25 +81,26 @@ namespace Entidades
             this.cliente = cliente;
         }
 
-        public Mascota(long id, long clienteId, string nombre, float peso, DateTime nacimiento, bool activo)
+        public Mascota(long id, long clienteId, TipoMascota.eTipoMascota tipoMascota, string nombre, float peso, DateTime nacimiento, bool activo)
             : this()
         {
             this.id = id;
             this.clienteId = clienteId;
+            this.tipoMascota = tipoMascota;
             this.nombre = nombre;
             this.peso = peso;
             this.fechaNacimiento = nacimiento;
             this.activo = activo;
         }
 
-        public Mascota(long clienteId, string nombre, float peso, DateTime nacimiento, bool activo)
-            : this(0, clienteId, nombre, peso, nacimiento, activo)
+        public Mascota(long clienteId, TipoMascota.eTipoMascota tipoMascota, string nombre, float peso, DateTime nacimiento, bool activo)
+            : this(0, clienteId, tipoMascota, nombre, peso, nacimiento, activo)
         {
         }
 
         public override string ToString()
         {
-            return String.Format("#{0,-8} - {1}", this.id, this.nombre);
+            return String.Format("#{0,-8} - {1} - {2}", this.id, Enum.GetName(this.tipoMascota).ToUpper(), this.nombre);
         }
 
         #region Operators

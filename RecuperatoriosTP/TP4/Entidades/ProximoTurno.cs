@@ -14,6 +14,7 @@ namespace Entidades
         private Tiempo horaFin;
         private string cliente;
         private string mascota;
+        private string tipoMascota;
 
         public long NroTurno
         {
@@ -52,14 +53,25 @@ namespace Entidades
         }
 
 
-        public ProximoTurno(long turnoId, DateTime fecha, string horaInicio, string horaFin, string cliente, string mascota)
+        //public ProximoTurno(long turnoId, DateTime fecha, string horaInicio, string horaFin, string cliente, string mascota)
+        //{
+        //    this.nroTurno = turnoId;
+        //    this.fecha = fecha;
+        //    this.horaInicio = new Tiempo(horaInicio);
+        //    this.horaFin = new Tiempo(horaFin);
+        //    this.cliente = cliente;
+        //    this.mascota = mascota;
+        //}
+
+        public ProximoTurno(Turno turno)
         {
-            this.nroTurno = turnoId;
-            this.fecha = fecha;
-            this.horaInicio = new Tiempo(horaInicio);
-            this.horaFin = new Tiempo(horaFin);
-            this.cliente = cliente;
-            this.mascota = mascota;
+            this.nroTurno = turno.Id;
+            this.fecha = turno.Fecha;
+            this.horaInicio = new Tiempo(turno.HoraInicio);
+            this.horaFin = new Tiempo(turno.HoraFin);
+            this.cliente = turno.Mascota.Cliente.NombreCompleto;
+            this.mascota = turno.Mascota.Nombre;
+            this.tipoMascota = Enum.GetName(turno.Mascota.TipoMascota);
         }
 
         public override string ToString()
@@ -68,7 +80,7 @@ namespace Entidades
             sb.AppendLine($"#Turno: {this.nroTurno}");
             sb.AppendLine($"Fecha: {this.Fecha.ToString("dd/MM/yyyy")} {this.horaInicio}-{this.horaFin}");
             sb.AppendLine($"Cliente: {this.cliente}");
-            sb.AppendLine($"Mascota: {this.mascota}");
+            sb.AppendLine($"Mascota: {this.mascota} ({this.tipoMascota})");
 
             return sb.ToString();
         }

@@ -112,6 +112,7 @@ namespace Vista
                 this.txtNombreMascota.Text = this.turno.Mascota.Nombre;
                 this.txtPeso.Value = (decimal)this.turno.Mascota.Peso;
                 this.txtFechaNacimiento.Text = this.turno.Mascota.FechaNacimiento.ToString("dd/MM/yyyy");
+                this.txtTipoMascota.Text = Enum.GetName(this.turno.Mascota.TipoMascota);
                 if (turno.Id > 0)
                 {
                     this.txtComentario.Text = this.turno.Comentario;
@@ -149,8 +150,13 @@ namespace Vista
 
         private bool SeRealizaronCambios()
         {
-            return (this.eFrmABM == eFrmABM.Crear && (!string.IsNullOrWhiteSpace(this.txtComentario.Text))) ||
-                   (this.eFrmABM == eFrmABM.Editar && !this.edicionFinalizada && (this.txtComentario.Text.Trim() != this.turno.Comentario.Trim()));
+            return (this.eFrmABM == eFrmABM.Crear && (!string.IsNullOrWhiteSpace(this.txtComentario.Text) ||
+                                                      this.cmbHoraDesde.SelectedItem is not null ||
+                                                      this.cmbHoraHasta.SelectedItem is not null)) ||
+                   (this.eFrmABM == eFrmABM.Editar && !this.edicionFinalizada && 
+                                                      (this.txtComentario.Text.Trim() != this.turno.Comentario.Trim() ||
+                                                       (this.cmbHoraDesde.SelectedItem is not null && ((Tiempo)this.cmbHoraDesde.SelectedItem) != new Tiempo(this.turno.HoraInicio)) ||
+                                                       (this.cmbHoraHasta.SelectedItem is not null && ((Tiempo)this.cmbHoraHasta.SelectedItem) != new Tiempo(this.turno.HoraFin))));
         }
 
         private bool SeCompletaronTodosLosCampos()
@@ -163,6 +169,8 @@ namespace Vista
         private void ReiniciarCampos()
         {
             this.txtComentario.Text = string.Empty;
+            this.cmbHoraDesde.SelectedItem = null;
+            this.cmbHoraHasta.SelectedItem = null;
         }
 
         //private void BuscarTurnosDisponibles(DateTime fecha)
@@ -200,7 +208,7 @@ namespace Vista
 
         #region Form
 
-        private void FrmCargarTurno_Load(object sender, EventArgs e)
+        private void FrmABMTurno_Load(object sender, EventArgs e)
         {
             dtFechaTurno.MaxDate = DateTime.Today.AddMonths(6);
             dtFechaTurno.MinDate = DateTime.Today;
@@ -211,7 +219,7 @@ namespace Vista
             ManejarControles();
         }
 
-        private void FrmCargarTurno_FormClosing(object sender, FormClosingEventArgs e)
+        private void FrmABMTurno_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (this.eFrmABM != eFrmABM.Ver && SeRealizaronCambios() && MessageBox.Show("Se perderan los cambios realizados ¿Desea salir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {

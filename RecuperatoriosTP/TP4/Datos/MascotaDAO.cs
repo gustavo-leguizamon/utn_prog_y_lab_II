@@ -161,10 +161,11 @@ namespace Datos
 
         protected override SqlCommand CrearCommandInsert(Mascota entidad)
         {
-            string query = $"INSERT INTO {Tabla} (ClienteId, Nombre, Peso, FechaNacimiento, Activo) VALUES(@clienteId, @nombre, @peso, @fecha, @activo)";
+            string query = $"INSERT INTO {Tabla} (ClienteId, TipoMascotaId, Nombre, Peso, FechaNacimiento, Activo) VALUES(@clienteId, @tipoId, @nombre, @peso, @fecha, @activo)";
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("clienteId", entidad.ClienteId);
+            command.Parameters.AddWithValue("tipoId", (short)entidad.TipoMascota);
             command.Parameters.AddWithValue("nombre", entidad.Nombre);
             command.Parameters.AddWithValue("peso", entidad.Peso);
             command.Parameters.AddWithValue("fecha", entidad.FechaNacimiento);
@@ -175,11 +176,12 @@ namespace Datos
 
         protected override SqlCommand CrearCommandUpdate(Mascota entidad)
         {
-            string query = $"UPDATE {Tabla} SET ClienteId = @cliente, Nombre = @nombre, Peso = @peso, FechaNacimiento = @nacimiento, Activo = @activo WHERE Id = @id";
+            string query = $"UPDATE {Tabla} SET ClienteId = @cliente, TipoMascotaId = @tipoId, Nombre = @nombre, Peso = @peso, FechaNacimiento = @nacimiento, Activo = @activo WHERE Id = @id";
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("id", entidad.Id);
             command.Parameters.AddWithValue("cliente", entidad.ClienteId);
+            command.Parameters.AddWithValue("tipoId", (short)entidad.TipoMascota);
             command.Parameters.AddWithValue("nombre", entidad.Nombre);
             command.Parameters.AddWithValue("peso", entidad.Peso);
             command.Parameters.AddWithValue("nacimiento", entidad.FechaNacimiento);
@@ -192,12 +194,13 @@ namespace Datos
         {
             long id = Convert.ToInt64(reader["Id"].ToString());
             long clienteId = Convert.ToInt64(reader["ClienteId"].ToString());
+            short tipoMascotaId = Convert.ToInt16(reader["TipoMascotaId"].ToString());
             string nombre = reader["Nombre"].ToString();
             float peso = Convert.ToSingle(reader["Peso"].ToString());
             DateTime fecha = Convert.ToDateTime(reader["FechaNacimiento"].ToString());
             bool activo = Convert.ToBoolean(reader["Activo"]);
 
-            return new Mascota(id, clienteId, nombre, peso, fecha, activo);
+            return new Mascota(id, clienteId, (TipoMascota.eTipoMascota)tipoMascotaId, nombre, peso, fecha, activo);
         }
     }
 }

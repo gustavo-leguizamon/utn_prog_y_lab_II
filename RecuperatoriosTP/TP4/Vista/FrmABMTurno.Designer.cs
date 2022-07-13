@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.grpMascota = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtTipoMascota = new System.Windows.Forms.TextBox();
             this.txtFechaNacimiento = new System.Windows.Forms.TextBox();
             this.txtIdMascota = new System.Windows.Forms.TextBox();
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
@@ -57,6 +59,8 @@
             // 
             // grpMascota
             // 
+            this.grpMascota.Controls.Add(this.label3);
+            this.grpMascota.Controls.Add(this.txtTipoMascota);
             this.grpMascota.Controls.Add(this.txtFechaNacimiento);
             this.grpMascota.Controls.Add(this.txtIdMascota);
             this.grpMascota.Controls.Add(this.lblFechaNacimiento);
@@ -72,6 +76,23 @@
             this.grpMascota.TabIndex = 12;
             this.grpMascota.TabStop = false;
             this.grpMascota.Text = "Mascota";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(251, 72);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(30, 15);
+            this.label3.TabIndex = 24;
+            this.label3.Text = "Tipo";
+            // 
+            // txtTipoMascota
+            // 
+            this.txtTipoMascota.Enabled = false;
+            this.txtTipoMascota.Location = new System.Drawing.Point(251, 90);
+            this.txtTipoMascota.Name = "txtTipoMascota";
+            this.txtTipoMascota.Size = new System.Drawing.Size(101, 23);
+            this.txtTipoMascota.TabIndex = 23;
             // 
             // txtFechaNacimiento
             // 
@@ -131,7 +152,7 @@
             this.txtNombreMascota.Enabled = false;
             this.txtNombreMascota.Location = new System.Drawing.Point(11, 90);
             this.txtNombreMascota.Name = "txtNombreMascota";
-            this.txtNombreMascota.Size = new System.Drawing.Size(341, 23);
+            this.txtNombreMascota.Size = new System.Drawing.Size(226, 23);
             this.txtNombreMascota.TabIndex = 14;
             // 
             // lblNombreCliente
@@ -292,7 +313,8 @@
             this.Name = "FrmABMTurno";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Carga de turno";
-            this.Load += new System.EventHandler(this.FrmCargarTurno_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmABMTurno_FormClosing);
+            this.Load += new System.EventHandler(this.FrmABMTurno_Load);
             this.grpMascota.ResumeLayout(false);
             this.grpMascota.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPeso)).EndInit();
@@ -326,5 +348,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbHoraHasta;
         private System.Windows.Forms.ComboBox cmbHoraDesde;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtTipoMascota;
     }
 }

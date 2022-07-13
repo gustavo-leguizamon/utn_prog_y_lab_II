@@ -92,7 +92,7 @@ namespace Vista
 
         private Mascota ConstruirMascota()
         {
-            return new Mascota(this.mascota.Id, this.mascota.Cliente.Id, this.txtNombre.Text, (float)this.txtPeso.Value, this.dtFechaNacimiento.Value, this.chkActivo.Checked);
+            return new Mascota(this.mascota.Id, this.mascota.Cliente.Id, (TipoMascota.eTipoMascota)this.cmbTipoMascota.SelectedItem, this.txtNombre.Text, (float)this.txtPeso.Value, this.dtFechaNacimiento.Value, this.chkActivo.Checked);
         }
 
         //private bool EsDniUnico()
@@ -140,6 +140,7 @@ namespace Vista
             //this.txtDni.Enabled = editarDatos;
             this.dtFechaNacimiento.Enabled = editarDatos;
             this.chkActivo.Enabled = editarDatos;
+            this.cmbTipoMascota.Enabled = editarDatos;
             if (this.eFrmABM == eFrmABM.Crear)
             {
                 this.Text = "Agregar nueva mascota";
@@ -156,6 +157,8 @@ namespace Vista
                 this.btnAceptar.Visible = false;
                 this.btnCancelar.Text = "Aceptar";
             }
+
+            this.cmbTipoMascota.DataSource = Enum.GetValues<TipoMascota.eTipoMascota>();
         }
 
         private void ColocarDatos()

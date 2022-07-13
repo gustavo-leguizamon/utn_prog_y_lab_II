@@ -44,6 +44,8 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbTipoMascota = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.grpCliente.SuspendLayout();
             this.grpMascota.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPeso)).BeginInit();
@@ -100,6 +102,8 @@
             // 
             // grpMascota
             // 
+            this.grpMascota.Controls.Add(this.label1);
+            this.grpMascota.Controls.Add(this.cmbTipoMascota);
             this.grpMascota.Controls.Add(this.chkActivo);
             this.grpMascota.Controls.Add(this.txtPeso);
             this.grpMascota.Controls.Add(this.dtFechaNacimiento);
@@ -117,7 +121,7 @@
             // chkActivo
             // 
             this.chkActivo.AutoSize = true;
-            this.chkActivo.Location = new System.Drawing.Point(128, 94);
+            this.chkActivo.Location = new System.Drawing.Point(229, 94);
             this.chkActivo.Name = "chkActivo";
             this.chkActivo.Size = new System.Drawing.Size(60, 19);
             this.chkActivo.TabIndex = 17;
@@ -132,7 +136,7 @@
             0,
             0,
             131072});
-            this.txtPeso.Location = new System.Drawing.Point(232, 40);
+            this.txtPeso.Location = new System.Drawing.Point(133, 94);
             this.txtPeso.Maximum = new decimal(new int[] {
             500,
             0,
@@ -166,7 +170,7 @@
             // lblPeso
             // 
             this.lblPeso.AutoSize = true;
-            this.lblPeso.Location = new System.Drawing.Point(232, 22);
+            this.lblPeso.Location = new System.Drawing.Point(133, 76);
             this.lblPeso.Name = "lblPeso";
             this.lblPeso.Size = new System.Drawing.Size(57, 15);
             this.lblPeso.TabIndex = 13;
@@ -222,6 +226,24 @@
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             // 
+            // cmbTipoMascota
+            // 
+            this.cmbTipoMascota.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTipoMascota.FormattingEnabled = true;
+            this.cmbTipoMascota.Location = new System.Drawing.Point(217, 40);
+            this.cmbTipoMascota.Name = "cmbTipoMascota";
+            this.cmbTipoMascota.Size = new System.Drawing.Size(121, 23);
+            this.cmbTipoMascota.TabIndex = 18;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(217, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(30, 15);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Tipo";
+            // 
             // FrmABMMascota
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -266,5 +288,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtDni;
         private System.Windows.Forms.CheckBox chkActivo;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbTipoMascota;
     }
 }

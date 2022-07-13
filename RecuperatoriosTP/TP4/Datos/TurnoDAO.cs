@@ -285,7 +285,8 @@ namespace Datos
                 throw new NoHayMasTurnosException("No hay próximos turnos");
             }
             Turno turno = vigentes.OrderBy(turno => turno.Fecha).ToList().First();
-            return new ProximoTurno(turno.Id, turno.Fecha, turno.HoraInicio, turno.HoraFin, turno.Mascota.Cliente.NombreCompleto, turno.Mascota.Nombre);
+            //return new ProximoTurno(turno.Id, turno.Fecha, turno.HoraInicio, turno.HoraFin, turno.Mascota.Cliente.NombreCompleto, turno.Mascota.Nombre);
+            return new ProximoTurno(turno);
         }
 
         public List<Tiempo> ObtenerHorariosDisponibles(DateTime fecha, out List<Tiempo> horariosNoDisponibles)

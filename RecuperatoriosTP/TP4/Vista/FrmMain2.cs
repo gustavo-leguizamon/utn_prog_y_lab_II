@@ -45,6 +45,7 @@ namespace Vista
             this.mascotaDAO.OnNuevosDatos += ActualizarMascotas;
             //this.turnoDAO.OnNuevosDatos += ActualizarDatosTurnos;
             this.temporizadorRestante.OnTimerCompleto += AsignarHoraRestante;
+            this.temporizadorRestante.OnTimerReiniciar += ReiniciarHoraRestante;
             //this.temporizadorRestante.OnTimerCompleto += BuscarProximoTurno;
             this.temporizadorRestante.Comenzar();
 
@@ -276,6 +277,7 @@ namespace Vista
                 Form form = new FrmABMTurno(turnoDAO, MascotaSeleccionada());
                 if (form.ShowDialog() == DialogResult.OK)
                 {
+                    this.temporizadorRestante.Reiniciar();
                     MessageBox.Show("Se generó correctamente el turno!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -378,6 +380,29 @@ namespace Vista
                 }
                 this.lblHoraRestante.Text = horaRestante;
             }
+        }
+
+        private void ReiniciarHoraRestante()
+        {
+            if (this.lblHoraRestante.InvokeRequired)
+            {
+                Action delegadoReiniciarHora = ReiniciarHoraRestante;
+                this.lblHoraRestante.Invoke(delegadoReiniciarHora);
+            }
+            else
+            {
+                this.rtbProximoTurno.Text = String.Empty;
+                BuscarProximoTurno();
+            }
+            //if (this.InvokeRequired)
+            //{
+            //    Action delegadoReiniciarHora = ReiniciarHoraRestante;
+            //    this.Invoke(delegadoReiniciarHora);
+            //}
+            //else
+            //{
+            //    BuscarProximoTurno();
+            //}
         }
 
         private void BuscarProximoTurno()

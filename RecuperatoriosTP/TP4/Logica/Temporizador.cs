@@ -12,6 +12,7 @@ namespace Logica
         public delegate void DelegateTimerHandler();
 
         public event DelegateTimerHandler OnTimerCompleto;
+        public event DelegateTimerHandler OnTimerReiniciar;
 
         private CancellationTokenSource cancellationTokenSource;
         private CancellationToken cancellationToken;
@@ -64,11 +65,22 @@ namespace Logica
             }
         }
 
+        public void Reiniciar()
+        {
+            Detener();
+            Comenzar();
+            if (OnTimerReiniciar is not null)
+            {
+                OnTimerReiniciar.Invoke();
+            }
+        }
+
         public void Detener()
         {
             if (hilo is not null && !hilo.IsCompleted)
             {
                 cancellationTokenSource.Cancel();
+                hilo = null;
             }
         }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Tiempo
+    public class Tiempo : IComparable
     {
         private int hora;
         private int minuto;
@@ -109,6 +109,16 @@ namespace Entidades
         public override string ToString()
         {
             return $"{this.hora.ToString().PadLeft(2, '0')}:{this.minuto.ToString().PadLeft(2, '0')}:{this.segundo.ToString().PadLeft(2, '0')}";
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (this > (Tiempo)obj)
+                return 1;
+            else if (this < (Tiempo)obj)
+                return -1;
+            else
+                return 0;
         }
 
         //public string HoraCorta()

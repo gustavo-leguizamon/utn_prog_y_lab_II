@@ -152,7 +152,7 @@ namespace Vista
             }
             else
             {
-                this.Text = "Ver datos de mascota";
+                this.Text = "Datos de mascota";
                 this.btnAceptar.Visible = false;
                 this.btnCancelar.Text = "Aceptar";
             }

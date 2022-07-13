@@ -73,6 +73,7 @@ namespace Entidades
 
         public Turno(Mascota mascota)
         {
+            this.mascotaId = mascota.Id;
             this.mascota = mascota;
         }
 

@@ -10,7 +10,7 @@ using Utilidades;
 
 namespace Logica
 {
-    public class BuscadorDeTurnos
+    public class BuscadorDeHorarios
     {
         private static TurnoDAO turnoDAO;
 
@@ -29,13 +29,13 @@ namespace Logica
             get { return fecha; }
         }
 
-        static BuscadorDeTurnos()
+        static BuscadorDeHorarios()
         {
-            BuscadorDeTurnos.turnoDAO = new TurnoDAO();
+            BuscadorDeHorarios.turnoDAO = new TurnoDAO();
         }
 
         //public BuscadorDeTurnos(DateTime fecha, DelegadoBusquedaFinalizadaHandler delegadoBusquedaFinalizada)
-        public BuscadorDeTurnos()
+        public BuscadorDeHorarios()
         {
             //this.fecha = fecha;
             //this.busquedaFinalizada = delegadoBusquedaFinalizada;
@@ -65,7 +65,7 @@ namespace Logica
         {
             //System.Threading.Thread.Sleep(10000);
             List<Tiempo> horariosNoDisponibles;
-            List<Tiempo> horarios = BuscadorDeTurnos.turnoDAO.ObtenerHorariosDisponibles(this.fecha, out horariosNoDisponibles);
+            List<Tiempo> horarios = BuscadorDeHorarios.turnoDAO.ObtenerHorariosDisponibles(this.fecha, out horariosNoDisponibles);
             if (OnBusquedaFinalizada is not null)
             {
                 OnBusquedaFinalizada.Invoke(horarios, horariosNoDisponibles);

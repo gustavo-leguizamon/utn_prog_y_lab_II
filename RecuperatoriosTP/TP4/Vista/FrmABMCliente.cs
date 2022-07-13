@@ -103,7 +103,7 @@ namespace Vista
             }
             else
             {
-                this.Text = "Ver datos de cliente";
+                this.Text = "Datos de cliente";
                 this.btnAceptar.Visible = false;
                 this.btnCancelar.Text = "Aceptar";
             }

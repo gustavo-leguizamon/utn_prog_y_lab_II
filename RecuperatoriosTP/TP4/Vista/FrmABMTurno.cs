@@ -23,7 +23,7 @@ namespace Vista
         private TurnoDAO turnoDAO;
         private bool edicionFinalizada;
 
-        private BuscadorDeTurnos buscadorDeTurnos;
+        private BuscadorDeHorarios buscadorDeTurnos;
         private List<Tiempo> horariosDisponibles;
         private List<Tiempo> horariosOcupados;
 
@@ -42,7 +42,7 @@ namespace Vista
             this.turno = turno;
             this.edicionFinalizada = false;
 
-            this.buscadorDeTurnos = new BuscadorDeTurnos();
+            this.buscadorDeTurnos = new BuscadorDeHorarios();
             this.buscadorDeTurnos.OnBusquedaFinalizada += ColocarHorariosDisponibles;
         }
 
@@ -155,7 +155,9 @@ namespace Vista
 
         private bool SeCompletaronTodosLosCampos()
         {
-            return !string.IsNullOrWhiteSpace(this.txtComentario.Text);
+            return !string.IsNullOrWhiteSpace(this.txtComentario.Text) && 
+                   this.cmbHoraDesde.SelectedItem is not null &&
+                   this.cmbHoraHasta.SelectedItem is not null;
         }
 
         private void ReiniciarCampos()
@@ -179,7 +181,7 @@ namespace Vista
             {
                 //BuscadorDeTurnos.DelegadoBusquedaFinalizada delegadoBusquedaFinaliza = new BuscadorDeTurnos.DelegadoBusquedaFinalizada(ColocarHorariosDisponibles);
                 //this.cmbHoraDesde.Invoke(delegadoBusquedaFinaliza, new object[] { horarios });
-                BuscadorDeTurnos.DelegadoBusquedaFinalizadaHandler delegadoBusquedaFinaliza = ColocarHorariosDisponibles;
+                BuscadorDeHorarios.DelegadoBusquedaFinalizadaHandler delegadoBusquedaFinaliza = ColocarHorariosDisponibles;
                 this.cmbHoraDesde.Invoke(delegadoBusquedaFinaliza, new object[] { horarios, horariosNoDisponibles });
             }
             else

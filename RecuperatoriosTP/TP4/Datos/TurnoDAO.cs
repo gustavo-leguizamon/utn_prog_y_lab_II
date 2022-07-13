@@ -304,7 +304,7 @@ namespace Datos
 
                     do
                     {
-                        horariosOcupados.Add(new Tiempo(turno.HoraInicio));
+                        horariosOcupados.Add(new Tiempo(fechaDesde.ToString("HH:mm:ss")));
                         fechaDesde = fechaDesde.AddMinutes(30);
                     } 
                     while (fechaDesde < fechaHasta);

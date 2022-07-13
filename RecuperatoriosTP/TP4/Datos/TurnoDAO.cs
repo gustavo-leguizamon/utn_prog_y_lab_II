@@ -320,7 +320,7 @@ namespace Datos
             {
                 if (horarioDelDia.Minute >= 30)
                 {
-                    horarioDelDia = new DateTime(horarioDelDia.Year, horarioDelDia.Month, horarioDelDia.Day, horarioDelDia.Hour + 1, 0, 0);
+                    horarioDelDia = new DateTime(horarioDelDia.Year, horarioDelDia.Month, horarioDelDia.Day, horarioDelDia.Hour == 23 ? 0 : horarioDelDia.Hour + 1, 0, 0);
                 }
                 else
                 {

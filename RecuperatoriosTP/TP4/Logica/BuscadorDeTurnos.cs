@@ -27,11 +27,6 @@ namespace Logica
         public DateTime Fecha 
         { 
             get { return fecha; }
-            //set 
-            //{ 
-            //    fecha = value;
-            //    BuscarHorarios();
-            //}
         }
 
         static BuscadorDeTurnos()
@@ -68,7 +63,7 @@ namespace Logica
 
         private void BuscarListadoDisponibles()
         {
-            System.Threading.Thread.Sleep(10000);
+            //System.Threading.Thread.Sleep(10000);
             List<Tiempo> horarios = BuscadorDeTurnos.turnoDAO.ObtenerHorariosDisponibles(this.fecha);
             if (OnBusquedaFinalizada is not null)
             {

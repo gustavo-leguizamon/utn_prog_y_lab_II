@@ -66,7 +66,7 @@ namespace Entidades
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"#Turno: {this.nroTurno}");
-            sb.AppendLine($"Fecha: {this.Fecha.ToString("dd/MM/yyyy")} {this.horaInicio.HoraCorta()}-{this.horaFin.HoraCorta()}");
+            sb.AppendLine($"Fecha: {this.Fecha.ToString("dd/MM/yyyy")} {this.horaInicio}-{this.horaFin}");
             sb.AppendLine($"Cliente: {this.cliente}");
             sb.AppendLine($"Mascota: {this.mascota}");
 

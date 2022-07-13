@@ -45,12 +45,14 @@ namespace Entidades
             }
         }
 
+
         public Tiempo(int hora, int minuto, int segundo)
         {
-            this.hora = hora;
-            this.minuto = minuto;
-            this.segundo = segundo;
+            this.Hora = hora;
+            this.Minuto = minuto;
+            this.Segundo = segundo;
         }
+
 
         /// <summary>
         /// Inicializa el objeto con un string en formato hh:mm:ss
@@ -86,6 +88,19 @@ namespace Entidades
             return !(t1 == t2);
         }
 
+        public static bool operator >(Tiempo t1, Tiempo t2)
+        {
+            return t1 != t2 &&
+                   (t1.Hora > t2.Hora ||
+                    (t1.Hora == t2.Hora && t1.Minuto > t2.Minuto) ||
+                    (t1.Hora == t2.Hora && t1.Minuto == t2.Minuto && t1.Segundo > t2.Segundo));
+        }
+
+        public static bool operator <(Tiempo t1, Tiempo t2)
+        {
+            return !(t1 > t2);
+        }
+
         #endregion
 
 
@@ -96,9 +111,9 @@ namespace Entidades
             return $"{this.hora.ToString().PadLeft(2, '0')}:{this.minuto.ToString().PadLeft(2, '0')}:{this.segundo.ToString().PadLeft(2, '0')}";
         }
 
-        public string HoraCorta()
-        {
-            return $"{this.hora.ToString().PadLeft(2, '0')}:{this.minuto.ToString().PadLeft(2, '0')}";
-        }
+        //public string HoraCorta()
+        //{
+        //    return $"{this.hora.ToString().PadLeft(2, '0')}:{this.minuto.ToString().PadLeft(2, '0')}";
+        //}
     }
 }

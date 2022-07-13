@@ -270,17 +270,21 @@ namespace Vista
             try
             {
                 this.cmbHoraHasta.Items.Clear();
+                this.cmbHoraHasta.Enabled = false;
 
-                List<string> horariosDisponibles = new List<string>();
-                foreach (string hora in this.cmbHoraDesde.Items)
+                List<Tiempo> horariosDisponibles = new List<Tiempo>();
+                foreach (Tiempo hora in this.cmbHoraDesde.Items)
                 {
-                    //if (hora > this.cmbHoraDesde.SelectedValue.ToString())
-                    //{
-
-                    //}
+                    if (hora > (Tiempo)this.cmbHoraDesde.SelectedItem)
+                    {
+                        this.cmbHoraHasta.Items.Add(hora);
+                    }
                 }
 
-                //this.cmbHoraHasta.Items.AddRange();
+                if (this.cmbHoraHasta.Items.Count > 0)
+                {
+                    this.cmbHoraHasta.Enabled = true;
+                }
             }
             catch (Exception ex)
             {

@@ -117,6 +117,7 @@ namespace Vista
         {
             List<EstadoTurno> estados = this.estadoTurnoDAO.Leer();
             //this.cmbEstadoTurno.DataSource = estados;
+            this.cmbEstadoTurno.Items.Clear();
             this.cmbEstadoTurno.Items.Insert(0, new EstadoTurno(0, "Todos"));
             this.cmbEstadoTurno.Items.AddRange(estados.ToArray());
             this.cmbEstadoTurno.SelectedIndex = 0;

@@ -162,11 +162,13 @@ namespace Datos
 
         protected override SqlCommand CrearCommandInsert(Turno entidad)
         {
-            string query = $"INSERT INTO {Tabla} (MascotaId, Fecha, Comentario, EstadoTurnoId) VALUES(@idMascota, @fecha, @comentario, @estado)";
+            string query = $"INSERT INTO {Tabla} (MascotaId, Fecha, HoraInicio, HoraFin, Comentario, EstadoTurnoId) VALUES(@idMascota, @fecha, @horaInicio, @horaFin, @comentario, @estado)";
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("idMascota", entidad.MascotaId);
             command.Parameters.AddWithValue("fecha", entidad.Fecha);
+            command.Parameters.AddWithValue("horaInicio", entidad.HoraInicio);
+            command.Parameters.AddWithValue("horaFin", entidad.HoraFin);
             command.Parameters.AddWithValue("comentario", entidad.Comentario);
             command.Parameters.AddWithValue("estado", (short)EstadoTurno.eEstadoTurno.Vigente);
 
@@ -175,12 +177,14 @@ namespace Datos
 
         protected override SqlCommand CrearCommandUpdate(Turno entidad)
         {
-            string query = $"UPDATE {Tabla} SET MascotaId = @idMascota, Fecha = @fecha, Comentario = @comentario, EstadoTurnoId = @estado WHERE Id = @id";
+            string query = $"UPDATE {Tabla} SET MascotaId = @idMascota, Fecha = @fecha, HoraInicio = @horaInicio, HoraFin = @horaFin, Comentario = @comentario, EstadoTurnoId = @estado WHERE Id = @id";
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("id", entidad.Id);
             command.Parameters.AddWithValue("idMascota", entidad.MascotaId);
             command.Parameters.AddWithValue("fecha", entidad.Fecha);
+            command.Parameters.AddWithValue("horaInicio", entidad.HoraInicio);
+            command.Parameters.AddWithValue("horaFin", entidad.HoraFin);
             command.Parameters.AddWithValue("comentario", entidad.Comentario);
             command.Parameters.AddWithValue("estado", entidad.EstadoTurnoId);
 
@@ -193,9 +197,11 @@ namespace Datos
             long mascotaId = Convert.ToInt64(reader["MascotaId"].ToString());
             short estadoTurnoId = Convert.ToInt16(reader["EstadoTurnoId"].ToString());
             DateTime fecha = Convert.ToDateTime(reader["Fecha"].ToString());
+            string horaInicio = reader["HoraInicio"].ToString();
+            string horaFin = reader["HoraFin"].ToString();
             string comentario = reader["Comentario"].ToString();
 
-            return new Turno(id, estadoTurnoId, mascotaId, fecha, comentario);
+            return new Turno(id, estadoTurnoId, mascotaId, fecha, horaInicio, horaFin, comentario);
         }
 
         public List<InformacionTurno> ObtenerListadoDeTurnos(EstadoTurno estadoTurno)
@@ -279,7 +285,61 @@ namespace Datos
                 throw new NoHayMasTurnosException("No hay próximos turnos");
             }
             Turno turno = vigentes.OrderBy(turno => turno.Fecha).ToList().First();
-            return new ProximoTurno(turno.Id, turno.Fecha, turno.Mascota.Cliente.NombreCompleto, turno.Mascota.Nombre);
+            return new ProximoTurno(turno.Id, turno.Fecha, turno.HoraInicio, turno.HoraFin, turno.Mascota.Cliente.NombreCompleto, turno.Mascota.Nombre);
+        }
+
+        public List<Tiempo> ObtenerHorariosDisponibles(DateTime fecha)
+        {
+            List<Tiempo> horariosDisponibles = new List<Tiempo>();
+            List<Tiempo> horariosOcupados = new List<Tiempo>();
+            List<Turno> turnosDelDia = Leer(turno => turno.Fecha == fecha.Date);
+            if (turnosDelDia.Any())
+            {
+                foreach (Turno turno in turnosDelDia.OrderBy(t => t.HoraInicio))
+                {
+                    Tiempo horaInicio = new Tiempo(turno.HoraInicio);
+                    DateTime fechaDesde = new DateTime(turno.Fecha.Year, turno.Fecha.Month, turno.Fecha.Day, horaInicio.Hora, horaInicio.Minuto, 0);
+                    Tiempo horaFin = new Tiempo(turno.HoraFin);
+                    DateTime fechaHasta = new DateTime(turno.Fecha.Year, turno.Fecha.Month, turno.Fecha.Day, horaFin.Hora, horaFin.Minuto, 0);
+
+                    do
+                    {
+                        horariosOcupados.Add(new Tiempo(turno.HoraInicio));
+                        fechaDesde = fechaDesde.AddMinutes(30);
+                    } 
+                    while (fechaDesde < fechaHasta);
+                }
+            }
+
+            Tiempo horario;
+            DateTime horarioDelDia = DateTime.Now;
+            if (fecha.Date > horarioDelDia.Date)
+                horarioDelDia = fecha;
+            DateTime proximoDia = horarioDelDia.AddDays(1).Date;
+            if (horarioDelDia.Date == DateTime.Today)
+            {
+                if (horarioDelDia.Minute >= 30)
+                {
+                    horarioDelDia = new DateTime(horarioDelDia.Year, horarioDelDia.Month, horarioDelDia.Day, horarioDelDia.Hour + 1, 0, 0);
+                }
+                else
+                {
+                    horarioDelDia = new DateTime(horarioDelDia.Year, horarioDelDia.Month, horarioDelDia.Day, horarioDelDia.Hour, 30, 0);
+                }
+            }
+
+            do
+            {
+                horario = new Tiempo(horarioDelDia.ToString("HH:mm:ss"));
+                if (!horariosOcupados.Any(ocupado => ocupado == horario))
+                {
+                    horariosDisponibles.Add(horario);
+                }
+                horarioDelDia = horarioDelDia.AddMinutes(30);
+            }
+            while (horarioDelDia < proximoDia);
+
+            return horariosDisponibles;
         }
     }
 }

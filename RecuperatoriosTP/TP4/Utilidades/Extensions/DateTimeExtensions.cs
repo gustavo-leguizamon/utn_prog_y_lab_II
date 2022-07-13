@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logica.Extensions
+namespace Utilidades.Extensions
 {
     public static class DateTimeExtensions
     {

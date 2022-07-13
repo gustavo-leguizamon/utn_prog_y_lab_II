@@ -29,18 +29,21 @@
         private void InitializeComponent()
         {
             this.grpMascota = new System.Windows.Forms.GroupBox();
+            this.txtFechaNacimiento = new System.Windows.Forms.TextBox();
             this.txtIdMascota = new System.Windows.Forms.TextBox();
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
-            this.dtFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.txtPeso = new System.Windows.Forms.NumericUpDown();
             this.lblPeso = new System.Windows.Forms.Label();
             this.txtNombreMascota = new System.Windows.Forms.TextBox();
             this.lblNombreCliente = new System.Windows.Forms.Label();
             this.lblIdMascota = new System.Windows.Forms.Label();
             this.grpTurno = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbHoraHasta = new System.Windows.Forms.ComboBox();
+            this.cmbHoraDesde = new System.Windows.Forms.ComboBox();
             this.txtComentario = new System.Windows.Forms.RichTextBox();
-            this.dtHora = new System.Windows.Forms.DateTimePicker();
-            this.dtFecha = new System.Windows.Forms.DateTimePicker();
+            this.dtFechaTurno = new System.Windows.Forms.DateTimePicker();
             this.lblFecha = new System.Windows.Forms.Label();
             this.lblComentario = new System.Windows.Forms.Label();
             this.btnAceptar = new System.Windows.Forms.Button();
@@ -54,9 +57,9 @@
             // 
             // grpMascota
             // 
+            this.grpMascota.Controls.Add(this.txtFechaNacimiento);
             this.grpMascota.Controls.Add(this.txtIdMascota);
             this.grpMascota.Controls.Add(this.lblFechaNacimiento);
-            this.grpMascota.Controls.Add(this.dtFechaNacimiento);
             this.grpMascota.Controls.Add(this.txtPeso);
             this.grpMascota.Controls.Add(this.lblPeso);
             this.grpMascota.Controls.Add(this.txtNombreMascota);
@@ -69,6 +72,14 @@
             this.grpMascota.TabIndex = 12;
             this.grpMascota.TabStop = false;
             this.grpMascota.Text = "Mascota";
+            // 
+            // txtFechaNacimiento
+            // 
+            this.txtFechaNacimiento.Enabled = false;
+            this.txtFechaNacimiento.Location = new System.Drawing.Point(251, 37);
+            this.txtFechaNacimiento.Name = "txtFechaNacimiento";
+            this.txtFechaNacimiento.Size = new System.Drawing.Size(101, 23);
+            this.txtFechaNacimiento.TabIndex = 22;
             // 
             // txtIdMascota
             // 
@@ -86,19 +97,6 @@
             this.lblFechaNacimiento.Size = new System.Drawing.Size(101, 15);
             this.lblFechaNacimiento.TabIndex = 20;
             this.lblFechaNacimiento.Text = "Fecha nacimiento";
-            // 
-            // dtFechaNacimiento
-            // 
-            this.dtFechaNacimiento.CustomFormat = "dd/MM/yyyy";
-            this.dtFechaNacimiento.Enabled = false;
-            this.dtFechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFechaNacimiento.Location = new System.Drawing.Point(251, 37);
-            this.dtFechaNacimiento.MaxDate = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
-            this.dtFechaNacimiento.MinDate = new System.DateTime(1800, 1, 1, 0, 0, 0, 0);
-            this.dtFechaNacimiento.Name = "dtFechaNacimiento";
-            this.dtFechaNacimiento.Size = new System.Drawing.Size(101, 23);
-            this.dtFechaNacimiento.TabIndex = 19;
-            this.dtFechaNacimiento.Value = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
             // 
             // txtPeso
             // 
@@ -156,9 +154,12 @@
             // 
             // grpTurno
             // 
+            this.grpTurno.Controls.Add(this.label2);
+            this.grpTurno.Controls.Add(this.label1);
+            this.grpTurno.Controls.Add(this.cmbHoraHasta);
+            this.grpTurno.Controls.Add(this.cmbHoraDesde);
             this.grpTurno.Controls.Add(this.txtComentario);
-            this.grpTurno.Controls.Add(this.dtHora);
-            this.grpTurno.Controls.Add(this.dtFecha);
+            this.grpTurno.Controls.Add(this.dtFechaTurno);
             this.grpTurno.Controls.Add(this.lblFecha);
             this.grpTurno.Controls.Add(this.lblComentario);
             this.grpTurno.Location = new System.Drawing.Point(12, 153);
@@ -168,6 +169,45 @@
             this.grpTurno.TabStop = false;
             this.grpTurno.Text = "Turno";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(193, 122);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(64, 15);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Hora hasta";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(112, 122);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 15);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Hora desde";
+            // 
+            // cmbHoraHasta
+            // 
+            this.cmbHoraHasta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHoraHasta.Enabled = false;
+            this.cmbHoraHasta.FormattingEnabled = true;
+            this.cmbHoraHasta.Location = new System.Drawing.Point(193, 140);
+            this.cmbHoraHasta.Name = "cmbHoraHasta";
+            this.cmbHoraHasta.Size = new System.Drawing.Size(63, 23);
+            this.cmbHoraHasta.TabIndex = 19;
+            // 
+            // cmbHoraDesde
+            // 
+            this.cmbHoraDesde.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHoraDesde.Enabled = false;
+            this.cmbHoraDesde.FormattingEnabled = true;
+            this.cmbHoraDesde.Location = new System.Drawing.Point(112, 140);
+            this.cmbHoraDesde.Name = "cmbHoraDesde";
+            this.cmbHoraDesde.Size = new System.Drawing.Size(63, 23);
+            this.cmbHoraDesde.TabIndex = 18;
+            this.cmbHoraDesde.SelectedIndexChanged += new System.EventHandler(this.cmbHoraDesde_SelectedIndexChanged);
+            // 
             // txtComentario
             // 
             this.txtComentario.Location = new System.Drawing.Point(6, 38);
@@ -176,30 +216,18 @@
             this.txtComentario.TabIndex = 17;
             this.txtComentario.Text = "";
             // 
-            // dtHora
+            // dtFechaTurno
             // 
-            this.dtHora.CustomFormat = "HH:mm";
-            this.dtHora.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtHora.Location = new System.Drawing.Point(112, 140);
-            this.dtHora.MaxDate = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
-            this.dtHora.MinDate = new System.DateTime(1800, 1, 1, 0, 0, 0, 0);
-            this.dtHora.Name = "dtHora";
-            this.dtHora.ShowUpDown = true;
-            this.dtHora.Size = new System.Drawing.Size(91, 23);
-            this.dtHora.TabIndex = 16;
-            this.dtHora.Value = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
-            // 
-            // dtFecha
-            // 
-            this.dtFecha.CustomFormat = "dd/MM/yyyy";
-            this.dtFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFecha.Location = new System.Drawing.Point(6, 140);
-            this.dtFecha.MaxDate = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
-            this.dtFecha.MinDate = new System.DateTime(1800, 1, 1, 0, 0, 0, 0);
-            this.dtFecha.Name = "dtFecha";
-            this.dtFecha.Size = new System.Drawing.Size(100, 23);
-            this.dtFecha.TabIndex = 15;
-            this.dtFecha.Value = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
+            this.dtFechaTurno.CustomFormat = "dd/MM/yyyy";
+            this.dtFechaTurno.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtFechaTurno.Location = new System.Drawing.Point(6, 140);
+            this.dtFechaTurno.MaxDate = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
+            this.dtFechaTurno.MinDate = new System.DateTime(1800, 1, 1, 0, 0, 0, 0);
+            this.dtFechaTurno.Name = "dtFechaTurno";
+            this.dtFechaTurno.Size = new System.Drawing.Size(100, 23);
+            this.dtFechaTurno.TabIndex = 15;
+            this.dtFechaTurno.Value = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
+            this.dtFechaTurno.ValueChanged += new System.EventHandler(this.dtFechaTurno_ValueChanged);
             // 
             // lblFecha
             // 
@@ -221,7 +249,6 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Enabled = false;
             this.btnAceptar.Location = new System.Drawing.Point(229, 13);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(77, 23);
@@ -284,17 +311,20 @@
         private System.Windows.Forms.Label lblIdMascota;
         private System.Windows.Forms.NumericUpDown txtPeso;
         private System.Windows.Forms.Label lblPeso;
-        private System.Windows.Forms.DateTimePicker dtFechaNacimiento;
         private System.Windows.Forms.Label lblFechaNacimiento;
         private System.Windows.Forms.GroupBox grpTurno;
-        private System.Windows.Forms.DateTimePicker dtFecha;
+        private System.Windows.Forms.DateTimePicker dtFechaTurno;
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Label lblComentario;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.DateTimePicker dtHora;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtIdMascota;
         private System.Windows.Forms.RichTextBox txtComentario;
+        private System.Windows.Forms.TextBox txtFechaNacimiento;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbHoraHasta;
+        private System.Windows.Forms.ComboBox cmbHoraDesde;
     }
 }

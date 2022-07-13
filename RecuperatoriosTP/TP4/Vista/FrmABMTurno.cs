@@ -1,5 +1,7 @@
 ﻿using Datos;
+using Datos.Exceptions;
 using Entidades;
+using Logica;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Vista.Exceptions;
 
 namespace Vista
 {
@@ -19,6 +22,8 @@ namespace Vista
         private Turno turno;
         private TurnoDAO turnoDAO;
         private bool edicionFinalizada;
+
+        private BuscadorDeTurnos buscadorDeTurnos;
 
         public FrmABMTurno(TurnoDAO turnoDAO, Mascota mascota)
            : this(turnoDAO, eFrmABM.Crear, new Turno(mascota))
@@ -34,6 +39,9 @@ namespace Vista
             this.eFrmABM = eFrmABM;
             this.turno = turno;
             this.edicionFinalizada = false;
+
+            this.buscadorDeTurnos = new BuscadorDeTurnos();
+            this.buscadorDeTurnos.OnBusquedaFinalizada += ColocarHorariosDisponibles;
         }
 
         //public FrmABMTurno(TurnoDAO turnoDAO)
@@ -73,6 +81,27 @@ namespace Vista
 
         #region Metodos
 
+        private void ManejarExcepcion(Exception exception)
+        {
+            if (exception is ElementoNoSeleccionadoException ||
+                exception is ArgumentException)
+            {
+                MessageBox.Show(exception.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (exception is NotImplementedException)
+            {
+                MessageBox.Show("Hay partes sin implementar de la aplicación", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (exception is NoHayMasTurnosException)
+            {
+
+            }
+            else
+            {
+                MessageBox.Show($"Error inesperado. {exception.Message} - {exception.StackTrace}");
+            }
+        }
+
         private void ColocarDatos()
         {
             if (this.turno is not null)
@@ -80,7 +109,7 @@ namespace Vista
                 this.txtIdMascota.Text = this.turno.MascotaId.ToString();
                 this.txtNombreMascota.Text = this.turno.Mascota.Nombre;
                 this.txtPeso.Value = (decimal)this.turno.Mascota.Peso;
-                this.dtFechaNacimiento.Value = this.turno.Mascota.FechaNacimiento;
+                this.txtFechaNacimiento.Text = this.turno.Mascota.FechaNacimiento.ToString("dd/MM/yyyy");
                 if (turno.Id > 0)
                 {
                     this.txtComentario.Text = this.turno.Comentario;
@@ -92,7 +121,7 @@ namespace Vista
 
         private void ManejarControles()
         {
-            bool editarDatos = this.eFrmABM != eFrmABM.Ver;
+            //bool editarDatos = this.eFrmABM != eFrmABM.Ver;
             //this.txtNombre.Enabled = editarDatos;
             //this.txtPeso.Enabled = editarDatos;
             ////this.txtDni.Enabled = editarDatos;
@@ -132,6 +161,33 @@ namespace Vista
             this.txtComentario.Text = string.Empty;
         }
 
+        //private void BuscarTurnosDisponibles(DateTime fecha)
+        //{
+        //    //this.buscadorDeTurnos = new BuscadorDeTurnos(fecha, ColocarHorariosDisponibles);
+        //    //this.buscadorDeTurnos.BuscarHorarios();
+
+        //    this.buscadorDeTurnos = new BuscadorDeTurnos(fecha);
+        //    this.buscadorDeTurnos.OnBusquedaFinalizada += ColocarHorariosDisponibles;
+        //    this.buscadorDeTurnos.BuscarHorarios();
+        //}
+
+        private void ColocarHorariosDisponibles(List<Tiempo> horarios)
+        {
+            if (this.cmbHoraDesde.InvokeRequired)
+            {
+                //BuscadorDeTurnos.DelegadoBusquedaFinalizada delegadoBusquedaFinaliza = new BuscadorDeTurnos.DelegadoBusquedaFinalizada(ColocarHorariosDisponibles);
+                //this.cmbHoraDesde.Invoke(delegadoBusquedaFinaliza, new object[] { horarios });
+                BuscadorDeTurnos.DelegadoBusquedaFinalizadaHandler delegadoBusquedaFinaliza = ColocarHorariosDisponibles;
+                this.cmbHoraDesde.Invoke(delegadoBusquedaFinaliza, new object[] { horarios });
+            }
+            else
+            {
+                this.cmbHoraDesde.Items.Clear();
+                this.cmbHoraDesde.Items.AddRange(horarios.ToArray());
+                this.cmbHoraDesde.Enabled = true;
+            }
+        }
+
         #endregion
 
         #region Eventos
@@ -140,9 +196,11 @@ namespace Vista
 
         private void FrmCargarTurno_Load(object sender, EventArgs e)
         {
-            dtFecha.MaxDate = DateTime.Today.AddMonths(6);
-            dtFecha.MinDate = DateTime.Today;
-            dtFecha.Value = DateTime.Today;
+            dtFechaTurno.MaxDate = DateTime.Today.AddMonths(6);
+            dtFechaTurno.MinDate = DateTime.Today;
+            dtFechaTurno.Value = DateTime.Today;
+            //BuscarTurnosDisponibles(DateTime.Today);
+            this.buscadorDeTurnos.BuscarHorarios(DateTime.Today);
             ColocarDatos();
             ManejarControles();
         }
@@ -168,7 +226,7 @@ namespace Vista
         {
             if (SeCompletaronTodosLosCampos())
             {
-                Turno turno = new Turno(this.turno.Id, (short)EstadoTurno.eEstadoTurno.Vigente, Convert.ToInt64(txtIdMascota.Text), dtFecha.Value, txtComentario.Text);
+                Turno turno = new Turno(this.turno.Id, (short)EstadoTurno.eEstadoTurno.Vigente, Convert.ToInt64(txtIdMascota.Text), dtFechaTurno.Value, this.cmbHoraDesde.Text, this.cmbHoraHasta.Text, txtComentario.Text);
                 if (this.eFrmABM == eFrmABM.Crear)
                 {
                     this.turnoDAO.Guardar(turno);
@@ -188,11 +246,70 @@ namespace Vista
             }
         }
 
+
+
+        #endregion
+
+        #region ComboBox
+
+        //private void cmbHoraDesde_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        //List<string> horariosDisponibles = this.turnoDAO.ObtenerHorariosDisponibles(this.dtFechaTurno.Value);
+        //        //this.cmbHoraDesde.DataSource = horariosDisponibles;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ManejarExcepcion(ex);
+        //    }
+        //}
+
+        private void cmbHoraDesde_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                this.cmbHoraHasta.Items.Clear();
+
+                List<string> horariosDisponibles = new List<string>();
+                foreach (string hora in this.cmbHoraDesde.Items)
+                {
+                    //if (hora > this.cmbHoraDesde.SelectedValue.ToString())
+                    //{
+
+                    //}
+                }
+
+                //this.cmbHoraHasta.Items.AddRange();
+            }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
+        }
+
+        #endregion
+
+        #region DatetimePicker
+
+        private void dtFechaTurno_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.buscadorDeTurnos is not null)
+            {
+                this.buscadorDeTurnos.CancelarBusqueda();
+            }
+
+            //BuscarTurnosDisponibles(dtFechaTurno.Value);
+            this.buscadorDeTurnos.BuscarHorarios(dtFechaTurno.Value);
+            this.cmbHoraDesde.Enabled = false;
+            this.cmbHoraDesde.Items.Clear();
+            this.cmbHoraHasta.Enabled = false;
+            this.cmbHoraHasta.Items.Clear();
+        }
+
         #endregion
 
         #endregion
-
-
 
     }
 }

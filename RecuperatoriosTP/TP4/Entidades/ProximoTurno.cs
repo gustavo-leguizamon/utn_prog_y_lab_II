@@ -10,6 +10,8 @@ namespace Entidades
     {
         private long nroTurno;
         private DateTime fecha;
+        private Tiempo horaInicio;
+        private Tiempo horaFin;
         private string cliente;
         private string mascota;
 
@@ -25,6 +27,18 @@ namespace Entidades
             set { fecha = value; }
         }
 
+        public Tiempo HoraInicio
+        {
+            get { return horaInicio; }
+            set { horaInicio = value; }
+        }
+
+        public Tiempo HoraFin
+        {
+            get { return horaFin; }
+            set { horaFin = value; }
+        }
+
         public string Cliente
         {
             get { return cliente; }
@@ -38,10 +52,12 @@ namespace Entidades
         }
 
 
-        public ProximoTurno(long turnoId, DateTime fecha, string cliente, string mascota)
+        public ProximoTurno(long turnoId, DateTime fecha, string horaInicio, string horaFin, string cliente, string mascota)
         {
             this.nroTurno = turnoId;
             this.fecha = fecha;
+            this.horaInicio = new Tiempo(horaInicio);
+            this.horaFin = new Tiempo(horaFin);
             this.cliente = cliente;
             this.mascota = mascota;
         }
@@ -50,7 +66,7 @@ namespace Entidades
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"#Turno: {this.nroTurno}");
-            sb.AppendLine($"Fecha: {this.Fecha.ToString("dd/MM/yyyy HH:mm")}");
+            sb.AppendLine($"Fecha: {this.Fecha.ToString("dd/MM/yyyy")} {this.horaInicio.HoraCorta()}-{this.horaFin.HoraCorta()}");
             sb.AppendLine($"Cliente: {this.cliente}");
             sb.AppendLine($"Mascota: {this.mascota}");
 

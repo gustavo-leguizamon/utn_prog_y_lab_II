@@ -24,6 +24,8 @@ namespace Vista
         private bool edicionFinalizada;
 
         private BuscadorDeTurnos buscadorDeTurnos;
+        private List<Tiempo> horariosDisponibles;
+        private List<Tiempo> horariosOcupados;
 
         public FrmABMTurno(TurnoDAO turnoDAO, Mascota mascota)
            : this(turnoDAO, eFrmABM.Crear, new Turno(mascota))
@@ -171,19 +173,21 @@ namespace Vista
         //    this.buscadorDeTurnos.BuscarHorarios();
         //}
 
-        private void ColocarHorariosDisponibles(List<Tiempo> horarios)
+        private void ColocarHorariosDisponibles(List<Tiempo> horarios, List<Tiempo> horariosNoDisponibles)
         {
             if (this.cmbHoraDesde.InvokeRequired)
             {
                 //BuscadorDeTurnos.DelegadoBusquedaFinalizada delegadoBusquedaFinaliza = new BuscadorDeTurnos.DelegadoBusquedaFinalizada(ColocarHorariosDisponibles);
                 //this.cmbHoraDesde.Invoke(delegadoBusquedaFinaliza, new object[] { horarios });
                 BuscadorDeTurnos.DelegadoBusquedaFinalizadaHandler delegadoBusquedaFinaliza = ColocarHorariosDisponibles;
-                this.cmbHoraDesde.Invoke(delegadoBusquedaFinaliza, new object[] { horarios });
+                this.cmbHoraDesde.Invoke(delegadoBusquedaFinaliza, new object[] { horarios, horariosNoDisponibles });
             }
             else
             {
+                this.horariosDisponibles = horarios;
+                this.horariosOcupados = horariosNoDisponibles;
                 this.cmbHoraDesde.Items.Clear();
-                this.cmbHoraDesde.Items.AddRange(horarios.ToArray());
+                this.cmbHoraDesde.Items.AddRange(this.horariosDisponibles.Take(this.horariosDisponibles.Count - 1).ToArray());
                 this.cmbHoraDesde.Enabled = true;
             }
         }
@@ -251,20 +255,7 @@ namespace Vista
         #endregion
 
         #region ComboBox
-
-        //private void cmbHoraDesde_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        //List<string> horariosDisponibles = this.turnoDAO.ObtenerHorariosDisponibles(this.dtFechaTurno.Value);
-        //        //this.cmbHoraDesde.DataSource = horariosDisponibles;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ManejarExcepcion(ex);
-        //    }
-        //}
-
+            
         private void cmbHoraDesde_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -272,12 +263,35 @@ namespace Vista
                 this.cmbHoraHasta.Items.Clear();
                 this.cmbHoraHasta.Enabled = false;
 
-                List<Tiempo> horariosDisponibles = new List<Tiempo>();
-                foreach (Tiempo hora in this.cmbHoraDesde.Items)
+                IEnumerable<Tiempo> noDisponiblesSuperiorAlSeleccionado = this.horariosOcupados.Where(h => (Tiempo)this.cmbHoraDesde.SelectedItem < h);
+                Tiempo proximoNoDisponible = noDisponiblesSuperiorAlSeleccionado?.OrderBy(h => h).FirstOrDefault();
+                foreach (Tiempo horario in this.horariosDisponibles)
                 {
-                    if (hora > (Tiempo)this.cmbHoraDesde.SelectedItem)
+                    //if (horario > (Tiempo)this.cmbHoraDesde.SelectedItem)
+                    //{
+                    //    //IEnumerable<Tiempo> noDisponiblesSuperiorAlSeleccionado = this.horariosOcupados.Where(h => (Tiempo)this.cmbHoraDesde.SelectedItem < h && h < horario);
+                    //    if (noDisponiblesSuperiorAlSeleccionado.Any())
+                    //    {
+                    //        Tiempo proximoNoDisponible = noDisponiblesSuperiorAlSeleccionado.OrderBy(h => h).First();
+                    //        this.cmbHoraHasta.Items.Add(proximoNoDisponible);
+                    //        break;
+                    //    }
+                    //    else
+                    //    {
+                    //        this.cmbHoraHasta.Items.Add(horario);
+                    //    }
+                    //}
+                    if (horario > (Tiempo)this.cmbHoraDesde.SelectedItem)
                     {
-                        this.cmbHoraHasta.Items.Add(hora);
+                        if (proximoNoDisponible is not null && horario > proximoNoDisponible)
+                        {
+                            this.cmbHoraHasta.Items.Add(proximoNoDisponible);
+                            break;
+                        }
+                        else
+                        {
+                            this.cmbHoraHasta.Items.Add(horario);
+                        }
                     }
                 }
 

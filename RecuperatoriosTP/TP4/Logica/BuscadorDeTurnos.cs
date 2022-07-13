@@ -14,7 +14,7 @@ namespace Logica
     {
         private static TurnoDAO turnoDAO;
 
-        public delegate void DelegadoBusquedaFinalizadaHandler(List<Tiempo> horarios);
+        public delegate void DelegadoBusquedaFinalizadaHandler(List<Tiempo> horariosDisponibles, List<Tiempo> horariosNoDisponibles);
 
         public event DelegadoBusquedaFinalizadaHandler OnBusquedaFinalizada;
 
@@ -64,10 +64,11 @@ namespace Logica
         private void BuscarListadoDisponibles()
         {
             //System.Threading.Thread.Sleep(10000);
-            List<Tiempo> horarios = BuscadorDeTurnos.turnoDAO.ObtenerHorariosDisponibles(this.fecha);
+            List<Tiempo> horariosNoDisponibles;
+            List<Tiempo> horarios = BuscadorDeTurnos.turnoDAO.ObtenerHorariosDisponibles(this.fecha, out horariosNoDisponibles);
             if (OnBusquedaFinalizada is not null)
             {
-                OnBusquedaFinalizada.Invoke(horarios);
+                OnBusquedaFinalizada.Invoke(horarios, horariosNoDisponibles);
             }
             //this.busquedaFinalizada.Invoke(horarios);
         }

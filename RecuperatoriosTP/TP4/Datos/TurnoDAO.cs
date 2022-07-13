@@ -288,7 +288,7 @@ namespace Datos
             return new ProximoTurno(turno.Id, turno.Fecha, turno.HoraInicio, turno.HoraFin, turno.Mascota.Cliente.NombreCompleto, turno.Mascota.Nombre);
         }
 
-        public List<Tiempo> ObtenerHorariosDisponibles(DateTime fecha)
+        public List<Tiempo> ObtenerHorariosDisponibles(DateTime fecha, out List<Tiempo> horariosNoDisponibles)
         {
             List<Tiempo> horariosDisponibles = new List<Tiempo>();
             List<Tiempo> horariosOcupados = new List<Tiempo>();
@@ -338,6 +338,8 @@ namespace Datos
                 horarioDelDia = horarioDelDia.AddMinutes(30);
             }
             while (horarioDelDia < proximoDia);
+
+            horariosNoDisponibles = horariosOcupados;
 
             return horariosDisponibles;
         }

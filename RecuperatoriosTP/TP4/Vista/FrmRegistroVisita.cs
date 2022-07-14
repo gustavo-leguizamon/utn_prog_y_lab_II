@@ -17,7 +17,7 @@ namespace Vista
     public partial class FrmRegistroVisita : Form
     {
         private Mascota mascota;
-        private VisitaDAO visitaDAO;
+        private AtencionDAO visitaDAO;
         private bool operacionFinalizada;
 
         public FrmRegistroVisita(Mascota mascota)
@@ -25,7 +25,7 @@ namespace Vista
             InitializeComponent();
 
             this.mascota = mascota;
-            this.visitaDAO = new VisitaDAO();
+            this.visitaDAO = new AtencionDAO();
             this.operacionFinalizada = false;
         }
 
@@ -118,7 +118,7 @@ namespace Vista
                 Tiempo salida = new Tiempo(this.dtHoraSalida.Value.GetHora());
                 llegada.Segundo = 0;
                 salida.Segundo = 0;
-                Visita visita = new Visita(this.mascota.Id, this.dtFechaVisita.Value, llegada, salida, (float)this.txtPesoActual.Value, this.rtbObservaciones.Text);
+                Atencion visita = new Atencion(this.mascota.Id, this.dtFechaVisita.Value, llegada, salida, (float)this.txtPesoActual.Value, this.rtbObservaciones.Text);
                 this.visitaDAO.Guardar(visita);
                 this.DialogResult = DialogResult.OK;
                 this.operacionFinalizada = true;

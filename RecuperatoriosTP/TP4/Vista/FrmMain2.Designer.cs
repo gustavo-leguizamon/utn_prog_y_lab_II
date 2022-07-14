@@ -45,6 +45,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTurnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuVisitasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblHoraRestante = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.rtbProximoTurno = new System.Windows.Forms.RichTextBox();
@@ -223,7 +224,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivosToolStripMenuItem,
-            this.mnuTurnosToolStripMenuItem});
+            this.mnuTurnosToolStripMenuItem,
+            this.mnuVisitasToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(805, 24);
@@ -242,6 +244,13 @@
             this.mnuTurnosToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.mnuTurnosToolStripMenuItem.Text = "Turnos";
             this.mnuTurnosToolStripMenuItem.Click += new System.EventHandler(this.mnuTurnosToolStripMenuItem_Click);
+            // 
+            // mnuVisitasToolStripMenuItem
+            // 
+            this.mnuVisitasToolStripMenuItem.Name = "mnuVisitasToolStripMenuItem";
+            this.mnuVisitasToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+            this.mnuVisitasToolStripMenuItem.Text = "Atenciones";
+            this.mnuVisitasToolStripMenuItem.Click += new System.EventHandler(this.mnuAtencionesToolStripMenuItem_Click);
             // 
             // lblHoraRestante
             // 
@@ -320,5 +329,6 @@
         private System.Windows.Forms.Label lblHoraRestante;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RichTextBox rtbProximoTurno;
+        private System.Windows.Forms.ToolStripMenuItem mnuVisitasToolStripMenuItem;
     }
 }

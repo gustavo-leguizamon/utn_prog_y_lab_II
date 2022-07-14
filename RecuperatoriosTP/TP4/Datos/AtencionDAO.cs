@@ -1,0 +1,112 @@
+﻿using Entidades;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Utilidades.Extensions;
+
+namespace Datos
+{
+    public class AtencionDAO : BaseDAO<long, Atencion>
+    {
+        protected override string Tabla => "Visitas";
+
+        public override List<Atencion> Leer(Type[] incluirRelaciones)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Atencion LeerPorId(long id, Type[] incluirRelaciones)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override SqlCommand CrearCommandInsert(Atencion entidad)
+        {
+            string query = $"INSERT INTO {Tabla} (MascotaId, Llegada, Salida, PesoActual, Observacion) VALUES(@idMascota, @llegada, @salida, @pesoActual, @observacion)";
+
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("idMascota", entidad.MascotaId);
+            command.Parameters.AddWithValue("llegada", entidad.Llegada);
+            command.Parameters.AddWithValue("salida", entidad.Salida);
+            command.Parameters.AddWithValue("pesoActual", entidad.PesoActual);
+            command.Parameters.AddWithValue("observacion", entidad.Observacion);
+
+            return command;
+        }
+
+        protected override SqlCommand CrearCommandUpdate(Atencion entidad)
+        {
+            string query = $"UPDATE {Tabla} SET MascotaId = @idMascota, Llegada = @llegada, Salida = @salida, PesoActual = @pesoActual, Observacion = @observacion WHERE Id = @id";
+
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("id", entidad.Id);
+            command.Parameters.AddWithValue("idMascota", entidad.MascotaId);
+            command.Parameters.AddWithValue("llegada", entidad.Llegada);
+            command.Parameters.AddWithValue("salida", entidad.Salida);
+            command.Parameters.AddWithValue("pesoActual", entidad.PesoActual);
+            command.Parameters.AddWithValue("observacion", entidad.Observacion);
+
+            return command;
+        }
+
+        protected override Atencion ParseResultado(SqlDataReader reader)
+        {
+            long id = Convert.ToInt64(reader["Id"].ToString());
+            long mascotaId = Convert.ToInt64(reader["MascotaId"].ToString());
+            DateTime llegada = Convert.ToDateTime(reader["Llegada"].ToString());
+            DateTime salida = Convert.ToDateTime(reader["Salida"].ToString());
+            float pesoActual = Convert.ToSingle(reader["PesoActual"].ToString());
+            string observacion = reader["Observacion"].ToString();
+
+            return new Atencion(id, mascotaId, llegada, salida, pesoActual, observacion);
+        }
+
+        public List<InformacionDeAtencion> ObtenerRegistroDeAtenciones(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            List<InformacionDeAtencion> list = new List<InformacionDeAtencion>();
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = @"SELECT
+                                C.Apellido + ' ' + C.Nombre AS 'Cliente', C.Dni,
+                                M.Nombre AS 'Mascota', T.Tipo AS 'TipoMascota', A.Observacion,
+                                A.Llegada, A.Salida
+                                FROM Atenciones A JOIN Mascotas M ON A.MascotaId = M.Id
+                                                  JOIN Clientes C ON M.ClienteId = C.Id
+				                                  JOIN TiposMascota T ON M.TipoMascotaId = T.Id
+                                WHERE A.Llegada BETWEEN @fechaDesde AND @fecaHasta";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("fechaDesde", fechaDesde.Date);
+                command.Parameters.AddWithValue("fecaHasta", fechaHasta.Date.AddDays(1).AddSeconds(-1));
+
+                SqlDataReader reader = command.ExecuteReader();
+                string cliente;
+                long dni;
+                string mascota;
+                string tipoMascota;
+                string observacion;
+                DateTime llegada;
+                DateTime salida;
+                while (reader.Read())
+                {
+                    cliente = reader["Cliente"].ToString();
+                    dni = Convert.ToInt64(reader["Dni"].ToString());
+                    mascota = reader["Mascota"].ToString();
+                    tipoMascota = reader["TipoMascota"].ToString();
+                    observacion = reader["Observacion"].ToString();
+                    llegada = Convert.ToDateTime(reader["Llegada"].ToString());
+                    salida = Convert.ToDateTime(reader["Salida"].ToString());
+
+                    list.Add(new InformacionDeAtencion(cliente, dni, mascota, tipoMascota, observacion, llegada, salida));
+                }
+            }
+
+            return list;
+        }
+    }
+}

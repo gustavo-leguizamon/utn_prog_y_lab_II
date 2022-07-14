@@ -318,6 +318,19 @@ namespace Vista
             }
         }
 
+        private void mnuAtencionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Form form = new FrmRegistroAtenciones();
+                form.ShowDialog();
+            }
+            catch(Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
+        }
+
         #endregion
 
         #endregion

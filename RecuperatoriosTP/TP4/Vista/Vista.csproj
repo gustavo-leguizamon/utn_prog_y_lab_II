@@ -18,6 +18,9 @@
     <Compile Update="FrmABMTurno.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FrmRegistroAtenciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utilidades.Extensions;
 
 namespace Datos
 {
@@ -305,7 +306,7 @@ namespace Datos
 
                     do
                     {
-                        horariosOcupados.Add(new Tiempo(fechaDesde.ToString("HH:mm:ss")));
+                        horariosOcupados.Add(new Tiempo(fechaDesde.GetHora()));
                         fechaDesde = fechaDesde.AddMinutes(30);
                     } 
                     while (fechaDesde < fechaHasta);
@@ -331,7 +332,7 @@ namespace Datos
 
             do
             {
-                horario = new Tiempo(horarioDelDia.ToString("HH:mm:ss"));
+                horario = new Tiempo(horarioDelDia.GetHora());
                 if (!horariosOcupados.Any(ocupado => ocupado == horario))
                 {
                     horariosDisponibles.Add(horario);

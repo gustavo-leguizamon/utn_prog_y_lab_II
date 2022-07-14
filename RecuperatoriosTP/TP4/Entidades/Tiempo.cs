@@ -101,6 +101,16 @@ namespace Entidades
             return !(t1 > t2);
         }
 
+        public static bool operator >=(Tiempo t1, Tiempo t2)
+        {
+            return t1 > t2 || t1 == t2;
+        }
+
+        public static bool operator <=(Tiempo t1, Tiempo t2)
+        {
+            return t1 < t2 || t1 == t2;
+        }
+
         #endregion
 
 

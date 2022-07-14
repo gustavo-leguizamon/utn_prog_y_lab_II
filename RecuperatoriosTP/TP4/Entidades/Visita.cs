@@ -65,10 +65,10 @@ namespace Entidades
             this.observacion = observacion;
         }
 
-        public Visita(long mascotaId, DateTime llegada, DateTime salida, float pesoActual, string observacion)
-            : this(0, mascotaId, llegada, salida, pesoActual, observacion)
-        {
 
+        public Visita(long mascotaId, DateTime fecha, Tiempo llegada, Tiempo salida, float pesoActual, string observacion)
+            : this(0, mascotaId, fecha.Date.AddHours(llegada.Hora).AddMinutes(llegada.Minuto).AddSeconds(llegada.Segundo), fecha.Date.AddHours(salida.Hora).AddMinutes(salida.Minuto).AddSeconds(salida.Segundo), pesoActual, observacion)
+        {
         }
     }
 }

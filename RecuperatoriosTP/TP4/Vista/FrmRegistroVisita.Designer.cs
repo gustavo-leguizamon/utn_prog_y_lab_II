@@ -31,19 +31,19 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.rtbObservaciones = new System.Windows.Forms.RichTextBox();
+            this.txtPesoActual = new System.Windows.Forms.NumericUpDown();
+            this.dtHoraLLegada = new System.Windows.Forms.DateTimePicker();
+            this.dtHoraSalida = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.dtFechaVisita = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPesoActual)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -66,6 +66,7 @@
             this.btnAceptar.TabIndex = 11;
             this.btnAceptar.Text = "Guardar";
             this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // btnCancelar
             // 
@@ -76,52 +77,53 @@
             this.btnCancelar.TabIndex = 12;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // richTextBox1
+            // rtbObservaciones
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(18, 86);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(344, 96);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
+            this.rtbObservaciones.Location = new System.Drawing.Point(18, 86);
+            this.rtbObservaciones.Name = "rtbObservaciones";
+            this.rtbObservaciones.Size = new System.Drawing.Size(344, 96);
+            this.rtbObservaciones.TabIndex = 1;
+            this.rtbObservaciones.Text = "";
             // 
-            // numericUpDown1
+            // txtPesoActual
             // 
-            this.numericUpDown1.DecimalPlaces = 2;
-            this.numericUpDown1.Increment = new decimal(new int[] {
+            this.txtPesoActual.DecimalPlaces = 2;
+            this.txtPesoActual.Increment = new decimal(new int[] {
             1,
             0,
             0,
             131072});
-            this.numericUpDown1.Location = new System.Drawing.Point(295, 27);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.txtPesoActual.Location = new System.Drawing.Point(295, 27);
+            this.txtPesoActual.Maximum = new decimal(new int[] {
             200,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(67, 23);
-            this.numericUpDown1.TabIndex = 2;
+            this.txtPesoActual.Name = "txtPesoActual";
+            this.txtPesoActual.Size = new System.Drawing.Size(67, 23);
+            this.txtPesoActual.TabIndex = 2;
             // 
-            // dateTimePicker1
+            // dtHoraLLegada
             // 
-            this.dateTimePicker1.CustomFormat = "HH:mm";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(131, 27);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.ShowUpDown = true;
-            this.dateTimePicker1.Size = new System.Drawing.Size(62, 23);
-            this.dateTimePicker1.TabIndex = 3;
+            this.dtHoraLLegada.CustomFormat = "HH:mm";
+            this.dtHoraLLegada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtHoraLLegada.Location = new System.Drawing.Point(131, 27);
+            this.dtHoraLLegada.Name = "dtHoraLLegada";
+            this.dtHoraLLegada.ShowUpDown = true;
+            this.dtHoraLLegada.Size = new System.Drawing.Size(62, 23);
+            this.dtHoraLLegada.TabIndex = 3;
             // 
-            // dateTimePicker2
+            // dtHoraSalida
             // 
-            this.dateTimePicker2.CustomFormat = "HH:mm";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(209, 27);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.ShowUpDown = true;
-            this.dateTimePicker2.Size = new System.Drawing.Size(62, 23);
-            this.dateTimePicker2.TabIndex = 4;
+            this.dtHoraSalida.CustomFormat = "HH:mm";
+            this.dtHoraSalida.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtHoraSalida.Location = new System.Drawing.Point(209, 27);
+            this.dtHoraSalida.Name = "dtHoraSalida";
+            this.dtHoraSalida.ShowUpDown = true;
+            this.dtHoraSalida.Size = new System.Drawing.Size(62, 23);
+            this.dtHoraSalida.TabIndex = 4;
             // 
             // label1
             // 
@@ -167,14 +169,14 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "Observaciones";
             // 
-            // dateTimePicker3
+            // dtFechaVisita
             // 
-            this.dateTimePicker3.CustomFormat = "dd/MM/yyyy";
-            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker3.Location = new System.Drawing.Point(18, 27);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(96, 23);
-            this.dateTimePicker3.TabIndex = 10;
+            this.dtFechaVisita.CustomFormat = "dd/MM/yyyy";
+            this.dtFechaVisita.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtFechaVisita.Location = new System.Drawing.Point(18, 27);
+            this.dtFechaVisita.Name = "dtFechaVisita";
+            this.dtFechaVisita.Size = new System.Drawing.Size(96, 23);
+            this.dtFechaVisita.TabIndex = 10;
             // 
             // label6
             // 
@@ -191,16 +193,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(375, 227);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.dateTimePicker3);
+            this.Controls.Add(this.dtFechaVisita);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.dtHoraSalida);
+            this.Controls.Add(this.dtHoraLLegada);
+            this.Controls.Add(this.txtPesoActual);
+            this.Controls.Add(this.rtbObservaciones);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -208,8 +210,10 @@
             this.Name = "FrmRegistroVisita";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro de visita";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmRegistroVisita_FormClosing);
+            this.Load += new System.EventHandler(this.FrmRegistroVisita_Load);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPesoActual)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,16 +224,16 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.RichTextBox rtbObservaciones;
+        private System.Windows.Forms.NumericUpDown txtPesoActual;
+        private System.Windows.Forms.DateTimePicker dtHoraLLegada;
+        private System.Windows.Forms.DateTimePicker dtHoraSalida;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.DateTimePicker dtFechaVisita;
         private System.Windows.Forms.Label label6;
     }
 }

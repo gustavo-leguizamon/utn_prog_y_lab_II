@@ -19,5 +19,10 @@ namespace Utilidades.Extensions
         {
             return datetime == null ? message : datetime.Value.ToString(format);
         }
+
+        public static string GetHora(this DateTime dateTime)
+        {
+            return dateTime.ToString("HH:mm:ss");
+        }
     }
 }

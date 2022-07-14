@@ -21,7 +21,7 @@ namespace Vista
         private eFrmABM eFrmABM;
         private Turno turno;
         private TurnoDAO turnoDAO;
-        private bool edicionFinalizada;
+        private bool operacionFinalizada;
 
         private BuscadorDeHorarios buscadorDeTurnos;
         private List<Tiempo> horariosDisponibles;
@@ -40,7 +40,7 @@ namespace Vista
             //this.clienteDAO = new ClienteDAO();
             this.eFrmABM = eFrmABM;
             this.turno = turno;
-            this.edicionFinalizada = false;
+            this.operacionFinalizada = false;
 
             this.buscadorDeTurnos = new BuscadorDeHorarios();
             this.buscadorDeTurnos.OnBusquedaFinalizada += ColocarHorariosDisponibles;
@@ -86,7 +86,8 @@ namespace Vista
         private void ManejarExcepcion(Exception exception)
         {
             if (exception is ElementoNoSeleccionadoException ||
-                exception is ArgumentException)
+                exception is ArgumentException ||
+                exception is ValidacionException)
             {
                 MessageBox.Show(exception.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -153,25 +154,28 @@ namespace Vista
             return (this.eFrmABM == eFrmABM.Crear && (!string.IsNullOrWhiteSpace(this.txtComentario.Text) ||
                                                       this.cmbHoraDesde.SelectedItem is not null ||
                                                       this.cmbHoraHasta.SelectedItem is not null)) ||
-                   (this.eFrmABM == eFrmABM.Editar && !this.edicionFinalizada && 
+                   (this.eFrmABM == eFrmABM.Editar && !this.operacionFinalizada && 
                                                       (this.txtComentario.Text.Trim() != this.turno.Comentario.Trim() ||
                                                        (this.cmbHoraDesde.SelectedItem is not null && ((Tiempo)this.cmbHoraDesde.SelectedItem) != new Tiempo(this.turno.HoraInicio)) ||
                                                        (this.cmbHoraHasta.SelectedItem is not null && ((Tiempo)this.cmbHoraHasta.SelectedItem) != new Tiempo(this.turno.HoraFin))));
         }
 
-        private bool SeCompletaronTodosLosCampos()
+        private void SeCompletaronTodosLosCampos()
         {
-            return !string.IsNullOrWhiteSpace(this.txtComentario.Text) && 
-                   this.cmbHoraDesde.SelectedItem is not null &&
-                   this.cmbHoraHasta.SelectedItem is not null;
+            if (string.IsNullOrWhiteSpace(this.txtComentario.Text) ||
+                this.cmbHoraDesde.SelectedItem is null ||
+                this.cmbHoraHasta.SelectedItem is null)
+            {
+                throw new ValidacionException("Debe indicar todos los datos");
+            }
         }
 
-        private void ReiniciarCampos()
-        {
-            this.txtComentario.Text = string.Empty;
-            this.cmbHoraDesde.SelectedItem = null;
-            this.cmbHoraHasta.SelectedItem = null;
-        }
+        //private void ReiniciarCampos()
+        //{
+        //    this.txtComentario.Text = string.Empty;
+        //    this.cmbHoraDesde.SelectedItem = null;
+        //    this.cmbHoraHasta.SelectedItem = null;
+        //}
 
         //private void BuscarTurnosDisponibles(DateTime fecha)
         //{
@@ -221,7 +225,10 @@ namespace Vista
 
         private void FrmABMTurno_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (this.eFrmABM != eFrmABM.Ver && SeRealizaronCambios() && MessageBox.Show("Se perderan los cambios realizados ¿Desea salir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (this.eFrmABM != eFrmABM.Ver && 
+                !this.operacionFinalizada &&
+                SeRealizaronCambios() && 
+                MessageBox.Show("Se perderan los cambios realizados ¿Desea salir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 e.Cancel = true;
             }
@@ -238,8 +245,9 @@ namespace Vista
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (SeCompletaronTodosLosCampos())
+            try
             {
+                SeCompletaronTodosLosCampos();
                 Turno turno = new Turno(this.turno.Id, (short)EstadoTurno.eEstadoTurno.Vigente, Convert.ToInt64(txtIdMascota.Text), dtFechaTurno.Value, this.cmbHoraDesde.Text, this.cmbHoraHasta.Text, txtComentario.Text);
                 if (this.eFrmABM == eFrmABM.Crear)
                 {
@@ -248,15 +256,14 @@ namespace Vista
                 else if (this.eFrmABM == eFrmABM.Editar)
                 {
                     this.turnoDAO.Modificar(turno);
-                    this.edicionFinalizada = true;
                 }
                 this.DialogResult = DialogResult.OK;
-                ReiniciarCampos();
+                this.operacionFinalizada = true;
                 this.Close();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Debe indicar todos los datos", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ManejarExcepcion(ex);
             }
         }
 

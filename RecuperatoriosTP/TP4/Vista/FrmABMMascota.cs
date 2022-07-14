@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Vista.Exceptions;
 
 namespace Vista
 {
@@ -23,7 +24,8 @@ namespace Vista
         private BusquedaMascota busquedaMascota;
 
         //private ClienteDAO clienteDAO;
-        private bool edicionFinalizada;
+        //private bool edicionFinalizada;
+        private bool operacionFinalizada;
 
         public FrmABMMascota(MascotaDAO mascotaDAO, Cliente cliente)
             : this(mascotaDAO, eFrmABM.Crear, new Mascota(cliente))
@@ -41,7 +43,7 @@ namespace Vista
             //this.clienteDAO = new ClienteDAO();
             this.eFrmABM = eFrmABM;
             this.mascota = mascota;
-            this.edicionFinalizada = false;
+            this.operacionFinalizada = false;
         }
 
 
@@ -63,30 +65,35 @@ namespace Vista
         {
             return (this.eFrmABM == eFrmABM.Crear && (!string.IsNullOrWhiteSpace(this.txtNombre.Text) ||
                                                       this.txtPeso.Value > 0)) ||
-                   (this.eFrmABM == eFrmABM.Editar && !this.edicionFinalizada && 
+                   (this.eFrmABM == eFrmABM.Editar && !this.operacionFinalizada && 
                                                       (this.txtNombre.Text.Trim() != this.mascota.Nombre.Trim() ||
                                                        (float)this.txtPeso.Value != this.mascota.Peso ||
                                                        this.dtFechaNacimiento.Value != this.mascota.FechaNacimiento ||
                                                        this.chkActivo.Checked != this.mascota.Activo));
         }
 
-        private void ReiniciarCampos()
+        //private void ReiniciarCampos()
+        //{
+        //    this.txtNombre.Text = string.Empty;
+        //    this.txtPeso.Value = 0;
+        //}
+
+        private void SeCompletaronTodosLosCampos()
         {
-            this.txtNombre.Text = string.Empty;
-            this.txtPeso.Value = 0;
+            if (string.IsNullOrWhiteSpace(this.txtNombre.Text) ||
+                this.txtPeso.Value == 0)
+            {
+                throw new ValidacionException("Debe indicar todos los datos");
+            }
         }
 
-        private bool SeCompletaronTodosLosCampos()
-        {
-            return !string.IsNullOrWhiteSpace(this.txtNombre.Text) &&
-                   this.txtPeso.Value > 0;
-
-        }
-
-        private bool ValidaMascotaUnica()
+        private void ValidaMascotaUnica()
         {
             //return !new BusquedaMascota(this.cliente.Mascotas).Existe(new Mascota(this.cliente.Dni, this.txtNombre.Text, (float)this.txtPeso.Value, this.dtFechaNacimiento.Value));
-            return !this.busquedaMascota.Existe(ConstruirMascota());
+            if (this.busquedaMascota.Existe(ConstruirMascota()))
+            {
+                throw new ValidacionException("Debe indicar una mascota diferente ya que el cliente ya la registró.");
+            }
             
         }
 
@@ -193,7 +200,10 @@ namespace Vista
 
         private void FrmCargaMascota_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (this.eFrmABM != eFrmABM.Ver && SeRealizaronCambios() && MessageBox.Show("Se perderan los cambios realizados ¿Desea salir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (this.eFrmABM != eFrmABM.Ver && 
+                !this.operacionFinalizada &&
+                SeRealizaronCambios() && 
+                MessageBox.Show("Se perderan los cambios realizados ¿Desea salir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 e.Cancel = true;
             }
@@ -210,35 +220,29 @@ namespace Vista
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (this.eFrmABM != eFrmABM.Ver)
+            try
             {
-                if (SeCompletaronTodosLosCampos())
+                if (this.eFrmABM != eFrmABM.Ver)
                 {
-                    if (ValidaMascotaUnica())
+                    SeCompletaronTodosLosCampos();
+                    ValidaMascotaUnica();
+                    Mascota mascota = ConstruirMascota();
+                    if (this.eFrmABM == eFrmABM.Crear)
                     {
-                        Mascota mascota = ConstruirMascota();
-                        if (this.eFrmABM == eFrmABM.Crear)
-                        {
-                            this.mascotaDAO.Guardar(mascota);
-                        }
-                        else if (this.eFrmABM == eFrmABM.Editar)
-                        {
-                            this.mascotaDAO.Modificar(mascota);
-                            this.edicionFinalizada = true;
-                        }
-                        this.DialogResult = DialogResult.OK;
-                        ReiniciarCampos();
-                        this.Close();
+                        this.mascotaDAO.Guardar(mascota);
                     }
-                    else
+                    else if (this.eFrmABM == eFrmABM.Editar)
                     {
-                        MessageBox.Show("Debe indicar una mascota diferente ya que el cliente ya la registró.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        this.mascotaDAO.Modificar(mascota);
                     }
+                    this.DialogResult = DialogResult.OK;
+                    this.operacionFinalizada = true;
+                    this.Close();
                 }
-                else
-                {
-                    MessageBox.Show("Debe indicar todos los datos", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+            }
+            catch (ValidacionException ex)
+            {
+                MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

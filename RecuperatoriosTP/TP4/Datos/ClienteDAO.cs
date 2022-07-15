@@ -92,21 +92,33 @@ namespace Datos
             {
                 MascotaDAO mascotaDAO = new MascotaDAO();
                 TurnoDAO turnoDAO = new TurnoDAO();
+                AtencionDAO atencionDAO = new AtencionDAO();
                 foreach (Cliente cliente in clientes)
                 {
                     if (incluirRelaciones.Contains(typeof(Mascota)))
                     {
-                        cliente.Mascotas = mascotaDAO.Leer(x => x.ClienteId == cliente.Dni);
+                        cliente.Mascotas = mascotaDAO.Leer(x => x.ClienteId == cliente.Id);
                     }
                     if (incluirRelaciones.Contains(typeof(Turno)))
                     {
                         if (cliente.Mascotas is null || cliente.Mascotas.Count == 0)
                         {
-                            cliente.Mascotas = mascotaDAO.Leer(x => x.ClienteId == cliente.Dni);
+                            cliente.Mascotas = mascotaDAO.Leer(x => x.ClienteId == cliente.Id);
                         }
                         foreach (Mascota mascota in cliente.Mascotas)
                         {
                             mascota.Turnos = turnoDAO.Leer(x => x.MascotaId == mascota.Id);
+                        }
+                    }
+                    if (incluirRelaciones.Contains(typeof(Atencion)))
+                    {
+                        if (cliente.Mascotas is null || cliente.Mascotas.Count == 0)
+                        {
+                            cliente.Mascotas = mascotaDAO.Leer(x => x.ClienteId == cliente.Id);
+                        }
+                        foreach (Mascota mascota in cliente.Mascotas)
+                        {
+                            mascota.Atenciones = atencionDAO.Leer(x => x.MascotaId == mascota.Id);
                         }
                     }
                 }

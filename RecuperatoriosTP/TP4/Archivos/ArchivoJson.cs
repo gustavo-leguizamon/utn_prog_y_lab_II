@@ -20,8 +20,15 @@ namespace Archivos
         /// <param name="contenido"></param>
         public void Guardar(string ruta, T contenido)
         {
-            string jsonString = JsonSerializer.Serialize(contenido);
-            File.WriteAllText(ruta, jsonString);
+            try
+            {
+                string jsonString = JsonSerializer.Serialize(contenido);
+                File.WriteAllText(ruta, jsonString);
+            }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
         }
 
         /// <summary>
@@ -31,10 +38,19 @@ namespace Archivos
         /// <returns></returns>
         public T Leer(string ruta)
         {
-            ValidarSiExisteArchivo(ruta);
-            ValidarExtension(ruta);
-            string jsonString = File.ReadAllText(ruta);
-            return JsonSerializer.Deserialize<T>(jsonString);
+            T result = null;
+            try
+            {
+                ValidarSiExisteArchivo(ruta);
+                ValidarExtension(ruta);
+                string jsonString = File.ReadAllText(ruta);
+                result = JsonSerializer.Deserialize<T>(jsonString);
+            }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
+            return result;
         }
     }
 }

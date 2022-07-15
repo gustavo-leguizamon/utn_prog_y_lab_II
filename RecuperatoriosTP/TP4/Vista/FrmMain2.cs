@@ -1,4 +1,5 @@
-﻿using Datos;
+﻿using Archivos;
+using Datos;
 using Datos.Exceptions;
 using Entidades;
 using Logica;
@@ -331,6 +332,53 @@ namespace Vista
             }
         }
 
+        private void mnuExportarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    SaveFileDialog saveFileDialog = new SaveFileDialog()
+                    {
+                        Filter = "Archivos JSON (.json)|*.json|Archivos XML (.xml)|*.xml",
+                    };
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        IArchivo<List<Cliente>> archivo = ManejadorArchivo.ObtenerArchivo<List<Cliente>>(saveFileDialog.FileName);
+                        List<Cliente> clientes = this.clienteDAO.Leer(new Type[] { typeof(Mascota), typeof(Turno), typeof(Atencion) });
+                        archivo.Guardar(saveFileDialog.FileName, clientes);
+                        //try
+                        //{
+                        //    archivoXml.ValidarExtension(saveFileDialog.FileName);
+                        //    archivoXml.Guardar(saveFileDialog.FileName, clientes);
+                        //}
+                        //catch (ExtensionIncorrectaException)
+                        //{
+                        //    archivoJson.Guardar(saveFileDialog.FileName, clientes);
+                        //}
+
+                        MessageBox.Show($"Se realizó la exportación de {clientes.Count} clientes", "Exportación completa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (ArchivoException)
+                {
+                    throw;
+                }
+                catch (Exception ex)
+                {
+                    throw new ArchivoException("No se pudo exportar los datos.", ex);
+                }
+            }
+            //catch (UnauthorizedAccessException)
+            //{
+            //    MessageBox.Show($"No tiene permisos para guardar el archivo en esa carpeta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
+        }
+
         #endregion
 
         #endregion
@@ -351,6 +399,10 @@ namespace Vista
             else if (exception is NoHayMasTurnosException)
             {
 
+            }
+            else if (exception is ArchivoException)
+            {
+                MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {

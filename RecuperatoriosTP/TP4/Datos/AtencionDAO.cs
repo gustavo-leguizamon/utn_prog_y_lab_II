@@ -11,7 +11,7 @@ namespace Datos
 {
     public class AtencionDAO : BaseDAO<long, Atencion>
     {
-        protected override string Tabla => "Visitas";
+        protected override string Tabla => "Atenciones";
 
         public override List<Atencion> Leer(Type[] incluirRelaciones)
         {

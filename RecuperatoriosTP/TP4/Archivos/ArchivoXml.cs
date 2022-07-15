@@ -20,10 +20,17 @@ namespace Archivos
         /// <param name="contenido"></param>
         public void Guardar(string ruta, T contenido)
         {
-            using (StreamWriter streamWriter = new StreamWriter(ruta))
+            try
             {
-                XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-                xmlSerializer.Serialize(streamWriter, contenido);
+                using (StreamWriter streamWriter = new StreamWriter(ruta))
+                {
+                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
+                    xmlSerializer.Serialize(streamWriter, contenido);
+                }
+            }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
             }
         }
 
@@ -34,13 +41,22 @@ namespace Archivos
         /// <returns></returns>
         public T Leer(string ruta)
         {
-            ValidarSiExisteArchivo(ruta);
-            ValidarExtension(ruta);
-            using (StreamReader streamReader = new StreamReader(ruta))
+            T result = null;
+            try
             {
-                XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-                return xmlSerializer.Deserialize(streamReader) as T;
+                ValidarSiExisteArchivo(ruta);
+                ValidarExtension(ruta);
+                using (StreamReader streamReader = new StreamReader(ruta))
+                {
+                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
+                    return xmlSerializer.Deserialize(streamReader) as T;
+                }
             }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
+            return result;
         }
     }
 }

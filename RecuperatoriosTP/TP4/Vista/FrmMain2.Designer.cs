@@ -49,6 +49,8 @@
             this.lblHoraRestante = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.rtbProximoTurno = new System.Windows.Forms.RichTextBox();
+            this.mnuImportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuExportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -234,6 +236,9 @@
             // 
             // archivosToolStripMenuItem
             // 
+            this.archivosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuImportarToolStripMenuItem,
+            this.mnuExportarToolStripMenuItem});
             this.archivosToolStripMenuItem.Name = "archivosToolStripMenuItem";
             this.archivosToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.archivosToolStripMenuItem.Text = "Archivos";
@@ -280,6 +285,19 @@
             this.rtbProximoTurno.Size = new System.Drawing.Size(362, 75);
             this.rtbProximoTurno.TabIndex = 4;
             this.rtbProximoTurno.Text = "";
+            // 
+            // mnuImportarToolStripMenuItem
+            // 
+            this.mnuImportarToolStripMenuItem.Name = "mnuImportarToolStripMenuItem";
+            this.mnuImportarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mnuImportarToolStripMenuItem.Text = "Importar";
+            // 
+            // mnuExportarToolStripMenuItem
+            // 
+            this.mnuExportarToolStripMenuItem.Name = "mnuExportarToolStripMenuItem";
+            this.mnuExportarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mnuExportarToolStripMenuItem.Text = "Exportar";
+            this.mnuExportarToolStripMenuItem.Click += new System.EventHandler(this.mnuExportarToolStripMenuItem_Click);
             // 
             // FrmMain2
             // 
@@ -330,5 +348,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RichTextBox rtbProximoTurno;
         private System.Windows.Forms.ToolStripMenuItem mnuVisitasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuImportarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuExportarToolStripMenuItem;
     }
 }

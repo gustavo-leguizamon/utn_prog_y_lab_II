@@ -54,6 +54,10 @@ namespace Entidades
             set { observacion = value; }
         }
 
+        public Atencion()
+        {
+
+        }
 
         public Atencion(long id, long mascotaId, DateTime llegada, DateTime salida, float pesoActual, string observacion)
         {

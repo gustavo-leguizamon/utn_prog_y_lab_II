@@ -163,9 +163,13 @@ namespace Datos
 
         protected override SqlCommand CrearCommandInsert(Turno entidad)
         {
-            string query = $"INSERT INTO {Tabla} (MascotaId, Fecha, HoraInicio, HoraFin, Comentario, EstadoTurnoId) VALUES(@idMascota, @fecha, @horaInicio, @horaFin, @comentario, @estado)";
+            StringBuilder query = new StringBuilder();
+            query.AppendLine($"INSERT INTO {Tabla} (MascotaId, Fecha, HoraInicio, HoraFin, Comentario, EstadoTurnoId)");
+            query.AppendLine("VALUES(@idMascota, @fecha, @horaInicio, @horaFin, @comentario, @estado)");
+            query.AppendLine("SELECT CAST(@@IDENTITY AS BIGINT)");
+            //string query = $"INSERT INTO {Tabla} (MascotaId, Fecha, HoraInicio, HoraFin, Comentario, EstadoTurnoId) VALUES(@idMascota, @fecha, @horaInicio, @horaFin, @comentario, @estado)";
 
-            SqlCommand command = new SqlCommand(query);
+            SqlCommand command = new SqlCommand(query.ToString());
             command.Parameters.AddWithValue("idMascota", entidad.MascotaId);
             command.Parameters.AddWithValue("fecha", entidad.Fecha);
             command.Parameters.AddWithValue("horaInicio", entidad.HoraInicio);
@@ -178,9 +182,18 @@ namespace Datos
 
         protected override SqlCommand CrearCommandUpdate(Turno entidad)
         {
-            string query = $"UPDATE {Tabla} SET MascotaId = @idMascota, Fecha = @fecha, HoraInicio = @horaInicio, HoraFin = @horaFin, Comentario = @comentario, EstadoTurnoId = @estado WHERE Id = @id";
+            StringBuilder query = new StringBuilder();
+            query.AppendLine($"UPDATE {Tabla} SET");
+            query.AppendLine("MascotaId = @idMascota,");
+            query.AppendLine("Fecha = @fecha,");
+            query.AppendLine("HoraInicio = @horaInicio,");
+            query.AppendLine("HoraFin = @horaFin,");
+            query.AppendLine("Comentario = @comentario,");
+            query.AppendLine("EstadoTurnoId = @estado");
+            query.AppendLine("WHERE Id = @id");
+            //string query = $"UPDATE {Tabla} SET MascotaId = @idMascota, Fecha = @fecha, HoraInicio = @horaInicio, HoraFin = @horaFin, Comentario = @comentario, EstadoTurnoId = @estado WHERE Id = @id";
 
-            SqlCommand command = new SqlCommand(query);
+            SqlCommand command = new SqlCommand(query.ToString());
             command.Parameters.AddWithValue("id", entidad.Id);
             command.Parameters.AddWithValue("idMascota", entidad.MascotaId);
             command.Parameters.AddWithValue("fecha", entidad.Fecha);

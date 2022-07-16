@@ -21,6 +21,7 @@ namespace Vista
         private ClienteDAO clienteDAO;
         private MascotaDAO mascotaDAO;
         private TurnoDAO turnoDAO;
+        private AtencionDAO atencionDAO;
 
         private Temporizador temporizadorRestante;
         private ProximoTurno proximoTurno;
@@ -44,7 +45,7 @@ namespace Vista
         {
             this.clienteDAO.OnNuevosDatos += BuscarClientes;
             this.mascotaDAO.OnNuevosDatos += ActualizarMascotas;
-            //this.turnoDAO.OnNuevosDatos += ActualizarDatosTurnos;
+            this.turnoDAO.OnNuevosDatos += ReiniciarTemporizador;
             this.temporizadorRestante.OnTimerCompleto += AsignarHoraRestante;
             this.temporizadorRestante.OnTimerReiniciar += ReiniciarHoraRestante;
             //this.temporizadorRestante.OnTimerCompleto += BuscarProximoTurno;
@@ -278,7 +279,7 @@ namespace Vista
                 Form form = new FrmABMTurno(turnoDAO, MascotaSeleccionada());
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    this.temporizadorRestante.Reiniciar();
+                    ReiniciarTemporizador();
                     MessageBox.Show("Se generó correctamente el turno!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -373,6 +374,109 @@ namespace Vista
             //{
             //    MessageBox.Show($"No tiene permisos para guardar el archivo en esa carpeta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             //}
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
+        }
+
+
+        private void mnuImportarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    OpenFileDialog openFileDialog = new OpenFileDialog()
+                    {
+                        Filter = "Archivos JSON (.json)|*.json|Archivos XML (.xml)|*.xml",
+                    };
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        //List<Cliente> clientes = null;
+                        ////try
+                        ////{
+                        ////    archivoXml.ValidarExtension(openFileDialog.FileName);
+                        ////    clientes = archivoXml.Leer(openFileDialog.FileName);
+                        ////}
+                        ////catch (ExtensionIncorrectaException)
+                        ////{
+                        ////    clientes = archivoJson.Leer(openFileDialog.FileName);
+                        ////}
+                        IArchivo<List<Cliente>> archivo = ManejadorArchivo.ObtenerArchivo<List<Cliente>>(openFileDialog.FileName);
+                        List<Cliente> clientes = archivo.Leer(openFileDialog.FileName);
+
+                        this.clienteDAO.Guardar(clientes, true);
+
+                        //List<Cliente> clientesGuardar = new List<Cliente>();
+                        //List<Mascota> mascotasGuardar = new List<Mascota>();
+                        //List<Atencion> atencionesGuardar = new List<Atencion>();
+                        //List<Turno> turnosGuardar = new List<Turno>();
+
+                        //foreach (Cliente cliente in clientes)
+                        //{
+                        //    foreach (Mascota mascota in cliente.Mascotas)
+                        //    {
+                        //        foreach (Turno turno in mascota.Turnos)
+                        //        {
+                        //            try
+                        //            {
+                        //                this.turnoDAO.Existe(turno.Id);
+                        //            }
+                        //            catch (EntidadInexistenteException)
+                        //            {
+                        //                turnosGuardar.Add(turno);
+                        //            }
+                        //        }
+
+                        //        foreach (Atencion atencion in mascota.Atenciones)
+                        //        {
+                        //            try
+                        //            {
+                        //                this.turnoDAO.Existe(atencion.Id);
+                        //            }
+                        //            catch (EntidadInexistenteException)
+                        //            {
+                        //                atencionesGuardar.Add(atencion);
+                        //            }
+                        //        }
+
+                        //        try
+                        //        {
+                        //            this.mascotaDAO.Existe(mascota.Id);
+                        //        }
+                        //        catch (EntidadInexistenteException)
+                        //        {
+                        //            mascotasGuardar.Add(mascota);
+                        //        }
+                        //    }
+
+                        //    try
+                        //    {
+                        //        this.clienteDAO.Existe(cliente.Dni);
+                        //    }
+                        //    catch (EntidadInexistenteException)
+                        //    {
+                        //        clientesGuardar.Add(cliente);
+                        //    }
+                        //}
+
+                        //this.clienteDAO.Guardar(clientesGuardar);
+                        //this.mascotaDAO.Guardar(mascotasGuardar);
+                        //this.turnoDAO.Guardar(turnosGuardar);
+                        //this.atencionDAO.Guardar(atencionesGuardar);
+                        MessageBox.Show($"Se realizó la importación de {clientes.Count} clientes", "Importación completa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (ArchivoException)
+                {
+                    throw;
+                }
+                catch (Exception ex)
+                {
+                    throw new ArchivoException($"No se pudo importar los datos. Revise el archivo seleccionado.", ex);
+                }
+            }
             catch (Exception ex)
             {
                 ManejarExcepcion(ex);
@@ -639,6 +743,11 @@ namespace Vista
         private void HabilitarBoton(Button button, IActivable activable)
         {
             button.Enabled = activable.Activo;
+        }
+
+        private void ReiniciarTemporizador()
+        {
+            this.temporizadorRestante.Reiniciar();
         }
 
         #endregion

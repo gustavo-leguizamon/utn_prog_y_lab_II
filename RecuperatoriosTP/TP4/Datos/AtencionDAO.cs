@@ -25,9 +25,13 @@ namespace Datos
 
         protected override SqlCommand CrearCommandInsert(Atencion entidad)
         {
-            string query = $"INSERT INTO {Tabla} (MascotaId, Llegada, Salida, PesoActual, Observacion) VALUES(@idMascota, @llegada, @salida, @pesoActual, @observacion)";
+            StringBuilder query = new StringBuilder();
+            query.AppendLine($"INSERT INTO {Tabla} (MascotaId, Llegada, Salida, PesoActual, Observacion)");
+            query.AppendLine("VALUES (@idMascota, @llegada, @salida, @pesoActual, @observacion)");
+            query.AppendLine("SELECT CAST(@@IDENTITY AS BIGINT)");
+            //string query = $"INSERT INTO {Tabla} (MascotaId, Llegada, Salida, PesoActual, Observacion) VALUES(@idMascota, @llegada, @salida, @pesoActual, @observacion)";
 
-            SqlCommand command = new SqlCommand(query);
+            SqlCommand command = new SqlCommand(query.ToString());
             command.Parameters.AddWithValue("idMascota", entidad.MascotaId);
             command.Parameters.AddWithValue("llegada", entidad.Llegada);
             command.Parameters.AddWithValue("salida", entidad.Salida);
@@ -39,9 +43,17 @@ namespace Datos
 
         protected override SqlCommand CrearCommandUpdate(Atencion entidad)
         {
-            string query = $"UPDATE {Tabla} SET MascotaId = @idMascota, Llegada = @llegada, Salida = @salida, PesoActual = @pesoActual, Observacion = @observacion WHERE Id = @id";
+            StringBuilder query = new StringBuilder();
+            query.AppendLine($"UPDATE {Tabla} SET");
+            query.AppendLine("MascotaId = @idMascota,");
+            query.AppendLine("Llegada = @llegada,");
+            query.AppendLine("Salida = @salida,");
+            query.AppendLine("PesoActual = @pesoActual,");
+            query.AppendLine("Observacion = @observacion");
+            query.AppendLine("WHERE Id = @id");
+            //string query = $"UPDATE {Tabla} SET MascotaId = @idMascota, Llegada = @llegada, Salida = @salida, PesoActual = @pesoActual, Observacion = @observacion WHERE Id = @id";
 
-            SqlCommand command = new SqlCommand(query);
+            SqlCommand command = new SqlCommand(query.ToString());
             command.Parameters.AddWithValue("id", entidad.Id);
             command.Parameters.AddWithValue("idMascota", entidad.MascotaId);
             command.Parameters.AddWithValue("llegada", entidad.Llegada);

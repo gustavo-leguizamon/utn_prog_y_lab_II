@@ -161,9 +161,13 @@ namespace Datos
 
         protected override SqlCommand CrearCommandInsert(Mascota entidad)
         {
-            string query = $"INSERT INTO {Tabla} (ClienteId, TipoMascotaId, Nombre, Peso, FechaNacimiento, Activo) VALUES(@clienteId, @tipoId, @nombre, @peso, @fecha, @activo)";
+            StringBuilder query = new StringBuilder();
+            query.AppendLine($"INSERT INTO {Tabla} (ClienteId, TipoMascotaId, Nombre, Peso, FechaNacimiento, Activo)");
+            query.AppendLine("VALUES(@clienteId, @tipoId, @nombre, @peso, @fecha, @activo)");
+            query.AppendLine("SELECT CAST(@@IDENTITY AS BIGINT)");
+            //string query = $"INSERT INTO {Tabla} (ClienteId, TipoMascotaId, Nombre, Peso, FechaNacimiento, Activo) VALUES(@clienteId, @tipoId, @nombre, @peso, @fecha, @activo)";
 
-            SqlCommand command = new SqlCommand(query);
+            SqlCommand command = new SqlCommand(query.ToString());
             command.Parameters.AddWithValue("clienteId", entidad.ClienteId);
             command.Parameters.AddWithValue("tipoId", (short)entidad.TipoMascota);
             command.Parameters.AddWithValue("nombre", entidad.Nombre);
@@ -176,9 +180,18 @@ namespace Datos
 
         protected override SqlCommand CrearCommandUpdate(Mascota entidad)
         {
-            string query = $"UPDATE {Tabla} SET ClienteId = @cliente, TipoMascotaId = @tipoId, Nombre = @nombre, Peso = @peso, FechaNacimiento = @nacimiento, Activo = @activo WHERE Id = @id";
+            StringBuilder query = new StringBuilder();
+            query.AppendLine($"UPDATE {Tabla} SET");
+            query.AppendLine("ClienteId = @cliente,");
+            query.AppendLine("TipoMascotaId = @tipoId,");
+            query.AppendLine("Nombre = @nombre,");
+            query.AppendLine("Peso = @peso,");
+            query.AppendLine("FechaNacimiento = @nacimiento,");
+            query.AppendLine("Activo = @activo");
+            query.AppendLine("WHERE Id = @id");
+            //string query = $"UPDATE {Tabla} SET ClienteId = @cliente, TipoMascotaId = @tipoId, Nombre = @nombre, Peso = @peso, FechaNacimiento = @nacimiento, Activo = @activo WHERE Id = @id";
 
-            SqlCommand command = new SqlCommand(query);
+            SqlCommand command = new SqlCommand(query.ToString());
             command.Parameters.AddWithValue("id", entidad.Id);
             command.Parameters.AddWithValue("cliente", entidad.ClienteId);
             command.Parameters.AddWithValue("tipoId", (short)entidad.TipoMascota);

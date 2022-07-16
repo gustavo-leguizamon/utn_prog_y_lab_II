@@ -187,9 +187,12 @@ namespace Datos
 
         protected override SqlCommand CrearCommandInsert(Cliente entidad)
         {
-            string query = $"INSERT INTO {Tabla} (Dni, Nombre, Apellido, FechaNacimiento, Direccion, Activo) VALUES(@dni, @nombre, @apellido, @fecha, @direccion, @activo)";
+            StringBuilder query = new StringBuilder();
+            query.AppendLine($"INSERT INTO {Tabla} (Dni, Nombre, Apellido, FechaNacimiento, Direccion, Activo)");
+            query.AppendLine("VALUES(@dni, @nombre, @apellido, @fecha, @direccion, @activo)");
+            query.AppendLine("SELECT CAST(@@IDENTITY AS BIGINT)");
 
-            SqlCommand command = new SqlCommand(query);
+            SqlCommand command = new SqlCommand(query.ToString());
             command.Parameters.AddWithValue("dni", entidad.Dni);
             command.Parameters.AddWithValue("nombre", entidad.Nombre);
             command.Parameters.AddWithValue("apellido", entidad.Apellido);
@@ -202,9 +205,18 @@ namespace Datos
 
         protected override SqlCommand CrearCommandUpdate(Cliente entidad)
         {
-            string query = $"UPDATE {Tabla} SET Dni = @dni, Nombre = @nombre, Apellido = @apellido, FechaNacimiento = @nacimiento, Direccion = @direccion, Activo = @activo WHERE Id = @id";
+            StringBuilder query = new StringBuilder();
+            query.AppendLine($"UPDATE {Tabla} SET");
+            query.AppendLine("Dni = @dni,");
+            query.AppendLine("Nombre = @nombre,");
+            query.AppendLine("Apellido = @apellido,");
+            query.AppendLine("FechaNacimiento = @nacimiento,");
+            query.AppendLine("Direccion = @direccion,");
+            query.AppendLine("Activo = @activo");
+            query.AppendLine("WHERE Id = @id");
+            //string query = $"UPDATE {Tabla} SET Dni = @dni, Nombre = @nombre, Apellido = @apellido, FechaNacimiento = @nacimiento, Direccion = @direccion, Activo = @activo WHERE Id = @id";
 
-            SqlCommand command = new SqlCommand(query);
+            SqlCommand command = new SqlCommand(query.ToString());
             command.Parameters.AddWithValue("id", entidad.Id);
             command.Parameters.AddWithValue("dni", entidad.Dni);
             command.Parameters.AddWithValue("nombre", entidad.Nombre);
@@ -226,6 +238,32 @@ namespace Datos
             string direccion = reader["Direccion"].ToString();
             bool activo = Convert.ToBoolean(reader["Activo"]);
             return new Cliente(id, dni, nombre, apellido, fecha, direccion, activo);
+        }
+
+        public override void Guardar(Cliente entidad, bool incluirRelaciones)
+        {
+            Guardar(entidad);
+            if (incluirRelaciones)
+            {
+                MascotaDAO mascotaDAO = new MascotaDAO();
+                TurnoDAO turnoDAO = new TurnoDAO();
+                AtencionDAO atencionDAO = new AtencionDAO();
+                foreach (Mascota mascota in entidad.Mascotas)
+                {
+                    mascota.ClienteId = entidad.Id;
+                    mascotaDAO.Guardar(mascota);
+                    foreach(Turno turno in mascota.Turnos)
+                    {
+                        turno.MascotaId = mascota.Id;
+                        turnoDAO.Guardar(turno);
+                    }
+                    foreach (Atencion atencion in mascota.Atenciones)
+                    {
+                        atencion.MascotaId = mascota.Id;
+                        atencionDAO.Guardar(atencion);
+                    }
+                }
+            }
         }
     }
 }

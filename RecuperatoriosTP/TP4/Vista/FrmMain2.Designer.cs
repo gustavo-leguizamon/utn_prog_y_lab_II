@@ -44,13 +44,13 @@
             this.lstMascotas = new System.Windows.Forms.ListBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuImportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuExportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTurnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuVisitasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblHoraRestante = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.rtbProximoTurno = new System.Windows.Forms.RichTextBox();
-            this.mnuImportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuExportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -243,6 +243,20 @@
             this.archivosToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.archivosToolStripMenuItem.Text = "Archivos";
             // 
+            // mnuImportarToolStripMenuItem
+            // 
+            this.mnuImportarToolStripMenuItem.Name = "mnuImportarToolStripMenuItem";
+            this.mnuImportarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mnuImportarToolStripMenuItem.Text = "Importar clientes";
+            this.mnuImportarToolStripMenuItem.Click += new System.EventHandler(this.mnuImportarToolStripMenuItem_Click);
+            // 
+            // mnuExportarToolStripMenuItem
+            // 
+            this.mnuExportarToolStripMenuItem.Name = "mnuExportarToolStripMenuItem";
+            this.mnuExportarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mnuExportarToolStripMenuItem.Text = "Exportar clientes";
+            this.mnuExportarToolStripMenuItem.Click += new System.EventHandler(this.mnuExportarToolStripMenuItem_Click);
+            // 
             // mnuTurnosToolStripMenuItem
             // 
             this.mnuTurnosToolStripMenuItem.Name = "mnuTurnosToolStripMenuItem";
@@ -285,19 +299,6 @@
             this.rtbProximoTurno.Size = new System.Drawing.Size(362, 75);
             this.rtbProximoTurno.TabIndex = 4;
             this.rtbProximoTurno.Text = "";
-            // 
-            // mnuImportarToolStripMenuItem
-            // 
-            this.mnuImportarToolStripMenuItem.Name = "mnuImportarToolStripMenuItem";
-            this.mnuImportarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.mnuImportarToolStripMenuItem.Text = "Importar";
-            // 
-            // mnuExportarToolStripMenuItem
-            // 
-            this.mnuExportarToolStripMenuItem.Name = "mnuExportarToolStripMenuItem";
-            this.mnuExportarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.mnuExportarToolStripMenuItem.Text = "Exportar";
-            this.mnuExportarToolStripMenuItem.Click += new System.EventHandler(this.mnuExportarToolStripMenuItem_Click);
             // 
             // FrmMain2
             // 

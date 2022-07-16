@@ -51,7 +51,7 @@ namespace Datos
 
                 SqlCommand command = CrearCommandInsert(entidad);
                 command.Connection = connection;
-                command.ExecuteNonQuery();
+                entidad.Id = (TID)command.ExecuteScalar();
             }
 
             InvocarActualizacionDatos();
@@ -66,6 +66,20 @@ namespace Datos
             foreach (E entidad in entidades)
             {
                 Guardar(entidad);
+            }
+        }
+
+
+        public virtual void Guardar(E entidad, bool incluirRelaciones)
+        {
+
+        }
+
+        public virtual void Guardar(List<E> entidades, bool incluirRelaciones)
+        {
+            foreach (E entidad in entidades)
+            {
+                Guardar(entidad, incluirRelaciones);
             }
         }
 

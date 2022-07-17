@@ -17,7 +17,6 @@ namespace Vista
 {
     public partial class FrmABMTurno : Form
     {
-        //private MascotaDAO mascotaDAO;
         private eFrmABM eFrmABM;
         private Turno turno;
         private TurnoDAO turnoDAO;
@@ -37,7 +36,6 @@ namespace Vista
             InitializeComponent();
 
             this.turnoDAO = turnoDAO;
-            //this.clienteDAO = new ClienteDAO();
             this.eFrmABM = eFrmABM;
             this.turno = turno;
             this.operacionFinalizada = false;
@@ -46,43 +44,12 @@ namespace Vista
             this.buscadorDeTurnos.OnBusquedaFinalizada += ColocarHorariosDisponibles;
         }
 
-        //public FrmABMTurno(TurnoDAO turnoDAO)
-        //{
-        //    InitializeComponent();
-
-        //    this.mascotaDAO = new MascotaDAO();
-        //    this.turnoDAO = turnoDAO;
-        //}
-
-        //private void EstablecerMascota()
-        //{
-        //    try
-        //    {
-        //        Mascota mascota = this.mascotaDAO.LeerPorId((long)txtIdMascota.Value);
-        //        this.txtNombreMascota.Text = mascota.Nombre;
-        //        txtPeso.Value = (decimal)mascota.Peso;
-        //        dtFechaNacimiento.Value = mascota.FechaNacimiento;
-        //        this.grpTurno.Enabled = true;
-        //        this.btnAgregar.Enabled = true;
-        //    }
-        //    catch (EntidadInexistenteException ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //        this.grpMascota.Enabled = false;
-        //        this.btnAgregar.Enabled = false;
-        //        this.txtNombreMascota.Text = string.Empty;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        this.grpMascota.Enabled = false;
-        //        this.btnAgregar.Enabled = false;
-        //        this.txtNombreMascota.Text = string.Empty;
-        //    }
-        //}
-
-
         #region Metodos
 
+        /// <summary>
+        /// Maneja las excepciones ocurridas en el formulario
+        /// </summary>
+        /// <param name="exception">Excepcion que ocurrio</param>
         private void ManejarExcepcion(Exception exception)
         {
             if (exception is ElementoNoSeleccionadoException ||
@@ -105,6 +72,10 @@ namespace Vista
             }
         }
 
+
+        /// <summary>
+        /// Coloca los datos de un turno si se brinda el mismo
+        /// </summary>
         private void ColocarDatos()
         {
             if (this.turno is not null)
@@ -117,20 +88,17 @@ namespace Vista
                 if (turno.Id > 0)
                 {
                     this.txtComentario.Text = this.turno.Comentario;
-                    //this.grpTurno.Enabled = true;
                     this.btnAceptar.Enabled = true;
                 }
             }
         }
 
-        private void ManejarControles()
+
+        /// <summary>
+        /// Establece las configuraciones iniciales de los controles
+        /// </summary>
+        private void ConfigurarControles()
         {
-            //bool editarDatos = this.eFrmABM != eFrmABM.Ver;
-            //this.txtNombre.Enabled = editarDatos;
-            //this.txtPeso.Enabled = editarDatos;
-            ////this.txtDni.Enabled = editarDatos;
-            //this.dtFechaNacimiento.Enabled = editarDatos;
-            //this.chkActivo.Enabled = editarDatos;
             if (this.eFrmABM == eFrmABM.Crear)
             {
                 this.Text = "Agregar nuevo turno";
@@ -149,6 +117,11 @@ namespace Vista
             }
         }
 
+
+        /// <summary>
+        /// Indica si se realizaron cambios en los campos
+        /// </summary>
+        /// <returns>True si hay cambios, false caso contrario</returns>
         private bool SeRealizaronCambios()
         {
             return (this.eFrmABM == eFrmABM.Crear && (!string.IsNullOrWhiteSpace(this.txtComentario.Text) ||
@@ -160,6 +133,10 @@ namespace Vista
                                                        (this.cmbHoraHasta.SelectedItem is not null && ((Tiempo)this.cmbHoraHasta.SelectedItem) != new Tiempo(this.turno.HoraFin))));
         }
 
+        /// <summary>
+        /// Valida si se completaron todos los campos obligatorios en el formulario
+        /// </summary>
+        /// <exception cref="ValidacionException">Lanzada cuando no se completaron todos los campos obligatorios</exception>
         private void SeCompletaronTodosLosCampos()
         {
             if (string.IsNullOrWhiteSpace(this.txtComentario.Text) ||
@@ -170,29 +147,15 @@ namespace Vista
             }
         }
 
-        //private void ReiniciarCampos()
-        //{
-        //    this.txtComentario.Text = string.Empty;
-        //    this.cmbHoraDesde.SelectedItem = null;
-        //    this.cmbHoraHasta.SelectedItem = null;
-        //}
-
-        //private void BuscarTurnosDisponibles(DateTime fecha)
-        //{
-        //    //this.buscadorDeTurnos = new BuscadorDeTurnos(fecha, ColocarHorariosDisponibles);
-        //    //this.buscadorDeTurnos.BuscarHorarios();
-
-        //    this.buscadorDeTurnos = new BuscadorDeTurnos(fecha);
-        //    this.buscadorDeTurnos.OnBusquedaFinalizada += ColocarHorariosDisponibles;
-        //    this.buscadorDeTurnos.BuscarHorarios();
-        //}
-
+        /// <summary>
+        /// Coloca el listado de horarios disponibles y no disponibles para solicitar turnos
+        /// </summary>
+        /// <param name="horarios">Horarios disponibles</param>
+        /// <param name="horariosNoDisponibles">Horarios no disponibles</param>
         private void ColocarHorariosDisponibles(List<Tiempo> horarios, List<Tiempo> horariosNoDisponibles)
         {
             if (this.cmbHoraDesde.InvokeRequired)
             {
-                //BuscadorDeTurnos.DelegadoBusquedaFinalizada delegadoBusquedaFinaliza = new BuscadorDeTurnos.DelegadoBusquedaFinalizada(ColocarHorariosDisponibles);
-                //this.cmbHoraDesde.Invoke(delegadoBusquedaFinaliza, new object[] { horarios });
                 BuscadorDeHorarios.DelegadoBusquedaFinalizadaHandler delegadoBusquedaFinaliza = ColocarHorariosDisponibles;
                 this.cmbHoraDesde.Invoke(delegadoBusquedaFinaliza, new object[] { horarios, horariosNoDisponibles });
             }
@@ -217,10 +180,9 @@ namespace Vista
             dtFechaTurno.MaxDate = DateTime.Today.AddMonths(6);
             dtFechaTurno.MinDate = DateTime.Today;
             dtFechaTurno.Value = DateTime.Today;
-            //BuscarTurnosDisponibles(DateTime.Today);
             this.buscadorDeTurnos.BuscarHorarios(DateTime.Today);
             ColocarDatos();
-            ManejarControles();
+            ConfigurarControles();
         }
 
         private void FrmABMTurno_FormClosing(object sender, FormClosingEventArgs e)
@@ -284,20 +246,6 @@ namespace Vista
                 Tiempo proximoNoDisponible = noDisponiblesSuperiorAlSeleccionado?.OrderBy(h => h).FirstOrDefault();
                 foreach (Tiempo horario in this.horariosDisponibles)
                 {
-                    //if (horario > (Tiempo)this.cmbHoraDesde.SelectedItem)
-                    //{
-                    //    //IEnumerable<Tiempo> noDisponiblesSuperiorAlSeleccionado = this.horariosOcupados.Where(h => (Tiempo)this.cmbHoraDesde.SelectedItem < h && h < horario);
-                    //    if (noDisponiblesSuperiorAlSeleccionado.Any())
-                    //    {
-                    //        Tiempo proximoNoDisponible = noDisponiblesSuperiorAlSeleccionado.OrderBy(h => h).First();
-                    //        this.cmbHoraHasta.Items.Add(proximoNoDisponible);
-                    //        break;
-                    //    }
-                    //    else
-                    //    {
-                    //        this.cmbHoraHasta.Items.Add(horario);
-                    //    }
-                    //}
                     if (horario > (Tiempo)this.cmbHoraDesde.SelectedItem)
                     {
                         if (proximoNoDisponible is not null && horario > proximoNoDisponible)
@@ -334,7 +282,6 @@ namespace Vista
                 this.buscadorDeTurnos.CancelarBusqueda();
             }
 
-            //BuscarTurnosDisponibles(dtFechaTurno.Value);
             this.buscadorDeTurnos.BuscarHorarios(dtFechaTurno.Value);
             this.cmbHoraDesde.Enabled = false;
             this.cmbHoraDesde.Items.Clear();

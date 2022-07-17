@@ -28,6 +28,10 @@ namespace Vista
 
         #region Metodos
 
+        /// <summary>
+        /// Maneja las excepciones ocurridas en el formulario
+        /// </summary>
+        /// <param name="exception">Excepcion que ocurrio</param>
         private void ManejarExcepcion(Exception exception)
         {
             if (exception is ElementoNoSeleccionadoException ||
@@ -46,7 +50,11 @@ namespace Vista
             }
         }
 
-
+        /// <summary>
+        /// Busca el registro de las atenciones realizadas en un rango de fechas
+        /// </summary>
+        /// <param name="fechaDesde">Fecha inicial</param>
+        /// <param name="fechaHasta">Fecha final</param>
         private void BuscarAtenciones(DateTime fechaDesde, DateTime fechaHasta)
         {
             List<InformacionDeAtencion> listadoAtenciones = this.visitaDAO.ObtenerRegistroDeAtenciones(fechaDesde, fechaHasta);
@@ -55,6 +63,10 @@ namespace Vista
             this.dtgAtenciones.Refresh();
         }
 
+        /// <summary>
+        /// Valida que el rango de fechas se correcto
+        /// </summary>
+        /// <exception cref="ValidacionException">Lanzada cuando la fecha inicial sea mayor que la final</exception>
         private void ValidarFechas()
         {
             if (this.dtFechaDesde.Value > this.dtFechaHasta.Value)

@@ -16,17 +16,16 @@ using Vista.Exceptions;
 
 namespace Vista
 {
-    public partial class FrmMain2 : Form
+    public partial class FrmMainVeterinaria : Form
     {
         private ClienteDAO clienteDAO;
         private MascotaDAO mascotaDAO;
         private TurnoDAO turnoDAO;
-        private AtencionDAO atencionDAO;
 
         private Temporizador temporizadorRestante;
         private ProximoTurno proximoTurno;
 
-        public FrmMain2()
+        public FrmMainVeterinaria()
         {
             InitializeComponent();
 
@@ -41,22 +40,19 @@ namespace Vista
 
         #region Form
 
-        private void FrmMain2_Load(object sender, EventArgs e)
+        private void FrmMainVeterinaria_Load(object sender, EventArgs e)
         {
             this.clienteDAO.OnNuevosDatos += BuscarClientes;
             this.mascotaDAO.OnNuevosDatos += ActualizarMascotas;
             this.turnoDAO.OnNuevosDatos += ReiniciarTemporizador;
             this.temporizadorRestante.OnTimerCompleto += AsignarHoraRestante;
             this.temporizadorRestante.OnTimerReiniciar += ReiniciarHoraRestante;
-            //this.temporizadorRestante.OnTimerCompleto += BuscarProximoTurno;
             this.temporizadorRestante.Comenzar();
 
             BuscarClientes();
-            //ActualizarDatosMascotas();
-            //BuscarProximoTurno();
         }
 
-        private void FrmMain2_FormClosing(object sender, FormClosingEventArgs e)
+        private void FrmMainVeterinaria_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("¿Desea salir?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Hand) == DialogResult.No)
             {
@@ -87,23 +83,18 @@ namespace Vista
             {
                 ManejarExcepcion(ex);
             }
-            //Cliente cliente = this.lstClientes.SelectedItem as Cliente;
-            //if (cliente is not null)
-            //{
-            //    this.btnNuevaMascota.Enabled = true;
-            //    HabilitarControlesCliente(true);
-            //    BuscarMascotas(cliente);
-            //}
-            //else
-            //{
-            //    HabilitarControlesCliente(false);
-            //    HabilitarControlesMascota(false);
-            //}
         }
 
         private void lstClientes_DoubleClick(object sender, EventArgs e)
         {
-            DatosCliente(eFrmABM.Ver);
+            try
+            {
+                DatosCliente(eFrmABM.Ver);
+            }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
         }
 
         private void lstMascotas_Click(object sender, EventArgs e)
@@ -128,39 +119,23 @@ namespace Vista
 
         private void lstMascotas_DoubleClick(object sender, EventArgs e)
         {
-            DatosMascota(eFrmABM.Ver);
+            try
+            {
+                DatosMascota(eFrmABM.Ver);
+            }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
         }
 
         private void lstBox_MarcarActivos(object sender, DrawItemEventArgs e)
         {
-            //IActivable item = this.lstClientes.Items[e.Index] as IActivable;
-            //if (item != null)
-            //{
-            //    Color color = Color.Black;
-            //    if (!item.Activo)
-            //    {
-            //        color = Color.Red;
-            //    }
-            //    e.Graphics.DrawString(
-            //        item.ToString(),
-            //        this.lstClientes.Font,
-            //        new SolidBrush(color),
-            //        e.Bounds.X, // Use e.Bounds on these two lines.
-            //        e.Bounds.Y
-            //    );
-            //}
-            //else
-            //{
-            //    // The item isn't a MyListBoxItem, do something about it
-            //}
-
-
             try
             {
                 e.DrawBackground();
                 Brush myBrush = Brushes.Black;
 
-                //int sayi = Convert.ToInt32(((ListBox)sender).Items[e.Index].ToString());
                 IActivable activable = ((ListBox)sender).Items[e.Index] as IActivable;
                 if (activable is not null && !activable.Activo)
                 {
@@ -184,12 +159,26 @@ namespace Vista
 
         private void btnVerCliente_Click(object sender, EventArgs e)
         {
-            DatosCliente(eFrmABM.Ver);
+            try
+            {
+                DatosCliente(eFrmABM.Ver);
+            }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
         }
 
         private void btnEditarCliente_Click(object sender, EventArgs e)
         {
-            DatosCliente(eFrmABM.Editar);
+            try
+            {
+                DatosCliente(eFrmABM.Editar);
+            }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
         }
 
         private void btnEliminarCliente_Click(object sender, EventArgs e)
@@ -229,12 +218,26 @@ namespace Vista
 
         private void btnVerMascota_Click(object sender, EventArgs e)
         {
-            DatosMascota(eFrmABM.Ver);
+            try
+            {
+                DatosMascota(eFrmABM.Ver);
+            }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
         }
 
         private void btnEditarMascota_Click(object sender, EventArgs e)
         {
-            DatosMascota(eFrmABM.Editar);
+            try
+            {
+                DatosMascota(eFrmABM.Editar);
+            }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
         }
 
         private void btnEliminarMascota_Click(object sender, EventArgs e)
@@ -348,15 +351,6 @@ namespace Vista
                         IArchivo<List<Cliente>> archivo = ManejadorArchivo.ObtenerArchivo<List<Cliente>>(saveFileDialog.FileName);
                         List<Cliente> clientes = this.clienteDAO.Leer(new Type[] { typeof(Mascota), typeof(Turno), typeof(Atencion) });
                         archivo.Guardar(saveFileDialog.FileName, clientes);
-                        //try
-                        //{
-                        //    archivoXml.ValidarExtension(saveFileDialog.FileName);
-                        //    archivoXml.Guardar(saveFileDialog.FileName, clientes);
-                        //}
-                        //catch (ExtensionIncorrectaException)
-                        //{
-                        //    archivoJson.Guardar(saveFileDialog.FileName, clientes);
-                        //}
 
                         MessageBox.Show($"Se realizó la exportación de {clientes.Count} clientes", "Exportación completa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -370,10 +364,6 @@ namespace Vista
                     throw new ArchivoException("No se pudo exportar los datos.", ex);
                 }
             }
-            //catch (UnauthorizedAccessException)
-            //{
-            //    MessageBox.Show($"No tiene permisos para guardar el archivo en esa carpeta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
             catch (Exception ex)
             {
                 ManejarExcepcion(ex);
@@ -393,78 +383,11 @@ namespace Vista
                     };
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        //List<Cliente> clientes = null;
-                        ////try
-                        ////{
-                        ////    archivoXml.ValidarExtension(openFileDialog.FileName);
-                        ////    clientes = archivoXml.Leer(openFileDialog.FileName);
-                        ////}
-                        ////catch (ExtensionIncorrectaException)
-                        ////{
-                        ////    clientes = archivoJson.Leer(openFileDialog.FileName);
-                        ////}
                         IArchivo<List<Cliente>> archivo = ManejadorArchivo.ObtenerArchivo<List<Cliente>>(openFileDialog.FileName);
                         List<Cliente> clientes = archivo.Leer(openFileDialog.FileName);
 
                         this.clienteDAO.Guardar(clientes, true);
 
-                        //List<Cliente> clientesGuardar = new List<Cliente>();
-                        //List<Mascota> mascotasGuardar = new List<Mascota>();
-                        //List<Atencion> atencionesGuardar = new List<Atencion>();
-                        //List<Turno> turnosGuardar = new List<Turno>();
-
-                        //foreach (Cliente cliente in clientes)
-                        //{
-                        //    foreach (Mascota mascota in cliente.Mascotas)
-                        //    {
-                        //        foreach (Turno turno in mascota.Turnos)
-                        //        {
-                        //            try
-                        //            {
-                        //                this.turnoDAO.Existe(turno.Id);
-                        //            }
-                        //            catch (EntidadInexistenteException)
-                        //            {
-                        //                turnosGuardar.Add(turno);
-                        //            }
-                        //        }
-
-                        //        foreach (Atencion atencion in mascota.Atenciones)
-                        //        {
-                        //            try
-                        //            {
-                        //                this.turnoDAO.Existe(atencion.Id);
-                        //            }
-                        //            catch (EntidadInexistenteException)
-                        //            {
-                        //                atencionesGuardar.Add(atencion);
-                        //            }
-                        //        }
-
-                        //        try
-                        //        {
-                        //            this.mascotaDAO.Existe(mascota.Id);
-                        //        }
-                        //        catch (EntidadInexistenteException)
-                        //        {
-                        //            mascotasGuardar.Add(mascota);
-                        //        }
-                        //    }
-
-                        //    try
-                        //    {
-                        //        this.clienteDAO.Existe(cliente.Dni);
-                        //    }
-                        //    catch (EntidadInexistenteException)
-                        //    {
-                        //        clientesGuardar.Add(cliente);
-                        //    }
-                        //}
-
-                        //this.clienteDAO.Guardar(clientesGuardar);
-                        //this.mascotaDAO.Guardar(mascotasGuardar);
-                        //this.turnoDAO.Guardar(turnosGuardar);
-                        //this.atencionDAO.Guardar(atencionesGuardar);
                         MessageBox.Show($"Se realizó la importación de {clientes.Count} clientes", "Importación completa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
@@ -489,6 +412,10 @@ namespace Vista
 
         #region Metodos
 
+        /// <summary>
+        /// Maneja las excepciones ocurridas en el formulario
+        /// </summary>
+        /// <param name="exception">Excepcion que ocurrio</param>
         private void ManejarExcepcion(Exception exception)
         {
             if (exception is ElementoNoSeleccionadoException ||
@@ -514,6 +441,9 @@ namespace Vista
             }
         }
 
+        /// <summary>
+        /// Actualiza la cuenta regresiva del reloj con el proximo turno
+        /// </summary>
         private void AsignarHoraRestante()
         {
             if (this.lblHoraRestante.InvokeRequired)
@@ -551,6 +481,9 @@ namespace Vista
             }
         }
 
+        /// <summary>
+        /// Reinicia el temporizador con la cuenta reegresiva del proximo turno
+        /// </summary>
         private void ReiniciarHoraRestante()
         {
             if (this.lblHoraRestante.InvokeRequired)
@@ -563,17 +496,11 @@ namespace Vista
                 this.rtbProximoTurno.Text = String.Empty;
                 BuscarProximoTurno();
             }
-            //if (this.InvokeRequired)
-            //{
-            //    Action delegadoReiniciarHora = ReiniciarHoraRestante;
-            //    this.Invoke(delegadoReiniciarHora);
-            //}
-            //else
-            //{
-            //    BuscarProximoTurno();
-            //}
         }
 
+        /// <summary>
+        /// Busca el turno mas proximo a la fecha actual
+        /// </summary>
         private void BuscarProximoTurno()
         {
             try
@@ -590,10 +517,12 @@ namespace Vista
             }
         }
 
+        /// <summary>
+        /// Busca todos los clientes del sistema
+        /// </summary>
         private void BuscarClientes()
         {
             List<Cliente> clientes = this.clienteDAO.Leer();
-            //this.lstClientes.Items.Clear();
             this.lstClientes.DataSource = clientes;
             this.lstClientes.SelectedItem = null;
             this.lstClientes.Update();
@@ -601,39 +530,10 @@ namespace Vista
             HabilitarControlesCliente(false);
         }
 
-        //private void MarcarInactivos(ListBox.ObjectCollection objectCollection)
-        //{
-        //    for (int i = 0; i < objectCollection.Count; i++)
-        //    {
-        //        if (!(objectCollection[i] as IActivable).Activo)
-        //        {
-        //            //objectCollection[i].
-        //        }
-        //    }
-
-        //    foreach (object item in objectCollection)
-        //    {
-        //        IActivable activable = item as IActivable;
-        //        if (activable is null)
-        //        {
-
-        //        }
-        //        else
-        //        {
-
-        //        }
-        //    }
-        //}
-
-        //private void ActualizarDatosMascotas()
-        //{
-        //    List<Mascota> mascotas = this.mascotaDAO.Leer(new Type[] { typeof(Cliente) });
-        //    this.lstMascotas.Items.Clear();
-        //    this.lstMascotas.DataSource = mascotas;
-        //    this.lstMascotas.Update();
-        //    this.lstMascotas.Refresh();
-        //}
-
+        /// <summary>
+        /// Habilita los controles de ABM de clientes
+        /// </summary>
+        /// <param name="habilitar">True si habilita los controles, false si los deshabilita</param>
         private void HabilitarControlesCliente(bool habilitar)
         {
             this.btnEditarCliente.Enabled = habilitar;
@@ -641,9 +541,12 @@ namespace Vista
             this.btnVerCliente.Enabled = habilitar;
         }
 
+        /// <summary>
+        /// Habilita los controles de ABM de mascotas
+        /// </summary>
+        /// <param name="habilitar">True si habilita los controles, false si los deshabilita</param>
         private void HabilitarControlesMascota(bool habilitar)
         {
-            //this.btnNuevaMascota.Enabled = habilitar;
             this.btnEditarMascota.Enabled = habilitar;
             this.btnEliminarMascota.Enabled = habilitar;
             this.btnVerMascota.Enabled = habilitar;
@@ -651,10 +554,13 @@ namespace Vista
             this.btnRegistrarVisita.Enabled = habilitar;
         }
 
+        /// <summary>
+        /// Busca todas las mascotas de un cliente
+        /// </summary>
+        /// <param name="cliente">Cliente a buscar</param>
         private void BuscarMascotas(Cliente cliente)
         {
             List<Mascota> mascotas = this.mascotaDAO.Leer(mascota => mascota.ClienteId == cliente.Id);
-            //this.lstMascotas.Items.Clear();
             this.lstMascotas.DataSource = mascotas;
             this.lstMascotas.SelectedItem = null;
             this.lstMascotas.Update();
@@ -662,6 +568,9 @@ namespace Vista
             HabilitarControlesMascota(false);
         }
 
+        /// <summary>
+        /// Actualiza los datos de las mascotas del cliente seleccionado
+        /// </summary>
         private void ActualizarMascotas()
         {
             try
@@ -680,14 +589,10 @@ namespace Vista
             }
         }
 
-        //private void ActualizarDatosTurnos()
-        //{
-        //    List<Turno> turnos = this.turnoDAO.Leer(new Type[] { typeof(Mascota) });
-        //    dtgResultados.DataSource = TurnoMapper.Map(turnos);
-        //    dtgResultados.Update();
-        //    dtgResultados.Refresh();
-        //}
-
+        /// <summary>
+        /// Muestra el formulario de ABM de clientes
+        /// </summary>
+        /// <param name="eFrmABM">Tipo de ABM</param>
         private void DatosCliente(eFrmABM eFrmABM)
         {
             try
@@ -701,6 +606,11 @@ namespace Vista
             }
         }
 
+        /// <summary>
+        /// Obtiene el cliente seleccionado del listado en pantalla
+        /// </summary>
+        /// <returns>Objeto cliente</returns>
+        /// <exception cref="ElementoNoSeleccionadoException">Lanzada cuando se llama sin tener un cliente seleccionado</exception>
         private Cliente ClienteSeleccionado()
         {
             Cliente cliente = this.lstClientes.SelectedItem as Cliente;
@@ -711,6 +621,10 @@ namespace Vista
             return cliente;
         }
 
+        /// <summary>
+        /// Muestra el formulario de ABM de mascotas
+        /// </summary>
+        /// <param name="eFrmABM">Tipo de ABM</param>
         private void DatosMascota(eFrmABM eFrmABM)
         {
             try
@@ -724,6 +638,11 @@ namespace Vista
             }
         }
 
+        /// <summary>
+        /// Obtiene la mascota seleccionada del listado en pantalla
+        /// </summary>
+        /// <returns>Objeto mascota</returns>
+        /// <exception cref="ElementoNoSeleccionadoException">Lanzada cuando se llama sin tener una mascota seleccionada</exception>
         private Mascota MascotaSeleccionada()
         {
             Mascota mascota = this.lstMascotas.SelectedItem as Mascota;
@@ -735,16 +654,29 @@ namespace Vista
             return mascota;
         }
 
+        /// <summary>
+        /// Coloca el texto a un boton segun la entidad activable
+        /// </summary>
+        /// <param name="button">Boton sobre el cual se va a cambiar el texto</param>
+        /// <param name="activable">Entidad activable</param>
         private void ColocarTextoBotonEliminacion(Button button, IActivable activable)
         {
             button.Text = activable.Activo ? "Dar de baja" : "Reactivar";
         }
 
+        /// <summary>
+        /// Habilita un boton segun la entidad activable
+        /// </summary>
+        /// <param name="button">Boton que se va a activar o desactivar</param>
+        /// <param name="activable">Entidad activable</param>
         private void HabilitarBoton(Button button, IActivable activable)
         {
             button.Enabled = activable.Activo;
         }
 
+        /// <summary>
+        /// Reinicia el temporizador de cuenta regresiva
+        /// </summary>
         private void ReiniciarTemporizador()
         {
             this.temporizadorRestante.Reiniciar();

@@ -16,15 +16,12 @@ namespace Vista
 {
     public partial class FrmABMMascota : Form
     {
-        //private Cliente cliente;
         private eFrmABM eFrmABM;
         private Mascota mascota;
         private MascotaDAO mascotaDAO;
 
         private BusquedaMascota busquedaMascota;
 
-        //private ClienteDAO clienteDAO;
-        //private bool edicionFinalizada;
         private bool operacionFinalizada;
 
         public FrmABMMascota(MascotaDAO mascotaDAO, Cliente cliente)
@@ -40,7 +37,6 @@ namespace Vista
 
             this.busquedaMascota = new BusquedaMascota();
 
-            //this.clienteDAO = new ClienteDAO();
             this.eFrmABM = eFrmABM;
             this.mascota = mascota;
             this.operacionFinalizada = false;
@@ -61,6 +57,32 @@ namespace Vista
 
         #region Metodos
 
+        /// <summary>
+        /// Maneja las excepciones ocurridas en el formulario
+        /// </summary>
+        /// <param name="exception">Excepcion que ocurrio</param>
+        private void ManejarExcepcion(Exception exception)
+        {
+            if (exception is ElementoNoSeleccionadoException ||
+                exception is ArgumentException ||
+                exception is ValidacionException)
+            {
+                MessageBox.Show(exception.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (exception is NotImplementedException)
+            {
+                MessageBox.Show("Hay partes sin implementar de la aplicación", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show($"Error inesperado. {exception.Message} - {exception.StackTrace}");
+            }
+        }
+
+        /// <summary>
+        /// Indica si se realizaron cambios en los campos
+        /// </summary>
+        /// <returns>True si hay cambios, false caso contrario</returns>
         private bool SeRealizaronCambios()
         {
             return (this.eFrmABM == eFrmABM.Crear && (!string.IsNullOrWhiteSpace(this.txtNombre.Text) ||
@@ -72,12 +94,11 @@ namespace Vista
                                                        this.chkActivo.Checked != this.mascota.Activo));
         }
 
-        //private void ReiniciarCampos()
-        //{
-        //    this.txtNombre.Text = string.Empty;
-        //    this.txtPeso.Value = 0;
-        //}
 
+        /// <summary>
+        /// Valida si se completaron todos los campos obligatorios en el formulario
+        /// </summary>
+        /// <exception cref="ValidacionException">Lanzada cuando no se completaron todos los campos obligatorios</exception>
         private void SeCompletaronTodosLosCampos()
         {
             if (string.IsNullOrWhiteSpace(this.txtNombre.Text) ||
@@ -87,9 +108,12 @@ namespace Vista
             }
         }
 
+        /// <summary>
+        /// Valida si una mascota es unica para el cliente
+        /// </summary>
+        /// <exception cref="ValidacionException">Lanzada cuando la mascota ya fue cargada para el cliente</exception>
         private void ValidaMascotaUnica()
         {
-            //return !new BusquedaMascota(this.cliente.Mascotas).Existe(new Mascota(this.cliente.Dni, this.txtNombre.Text, (float)this.txtPeso.Value, this.dtFechaNacimiento.Value));
             if (this.busquedaMascota.Existe(ConstruirMascota()))
             {
                 throw new ValidacionException("Debe indicar una mascota diferente ya que el cliente ya la registró.");
@@ -97,54 +121,24 @@ namespace Vista
             
         }
 
+        /// <summary>
+        /// Contruye el objeto Mascota a partir de los datos del formulatio
+        /// </summary>
+        /// <returns>Objeto mascota</returns>
         private Mascota ConstruirMascota()
         {
             return new Mascota(this.mascota.Id, this.mascota.Cliente.Id, (TipoMascota.eTipoMascota)this.cmbTipoMascota.SelectedItem, this.txtNombre.Text, (float)this.txtPeso.Value, this.dtFechaNacimiento.Value, this.chkActivo.Checked);
         }
 
-        //private bool EsDniUnico()
-        //{
-        //    try
-        //    {
-        //        return !this.clienteDAO.Existe((long)this.txtDni.Value);
-        //    }
-        //    catch (EntidadInexistenteException)
-        //    {
-        //        return true;
-        //    }
-        //}
 
-
-        //private void EstablecerCliente()
-        //{
-        //    try
-        //    {
-        //        //this.cliente = this.clienteDAO.LeerPorId((long)txtDni.Value, new Type[] { typeof(Mascota) });
-        //        this.txtNombreCliente.Text = $"{this.mascota.Cliente.Nombre} {this.mascota.Cliente.Apellido}";
-        //        this.grpMascota.Enabled = true;
-        //        this.btnAceptar.Enabled = true;
-        //    }
-        //    catch (EntidadInexistenteException ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //        this.grpMascota.Enabled = false;
-        //        this.btnAceptar.Enabled = false;
-        //        this.txtNombreCliente.Text = string.Empty;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        this.grpMascota.Enabled = false;
-        //        this.btnAceptar.Enabled = false;
-        //        this.txtNombreCliente.Text = string.Empty;
-        //    }
-        //}
-
-        private void ManejarControles()
+        /// <summary>
+        /// Establece las configuraciones iniciales de los controles
+        /// </summary>
+        private void ConfigurarControles()
         {
             bool editarDatos = this.eFrmABM != eFrmABM.Ver;
             this.txtNombre.Enabled = editarDatos;
             this.txtPeso.Enabled = editarDatos;
-            //this.txtDni.Enabled = editarDatos;
             this.dtFechaNacimiento.Enabled = editarDatos;
             this.chkActivo.Enabled = editarDatos;
             this.cmbTipoMascota.Enabled = editarDatos;
@@ -168,6 +162,9 @@ namespace Vista
             this.cmbTipoMascota.DataSource = Enum.GetValues<TipoMascota.eTipoMascota>();
         }
 
+        /// <summary>
+        /// Coloca los datos de una mascota si se brinda la misma
+        /// </summary>
         private void ColocarDatos()
         {
             if (this.mascota is not null)
@@ -195,7 +192,7 @@ namespace Vista
             this.dtFechaNacimiento.MaxDate = DateTime.Now;
             this.dtFechaNacimiento.Value = DateTime.Today;
             ColocarDatos();
-            ManejarControles();
+            ConfigurarControles();
         }
 
         private void FrmCargaMascota_FormClosing(object sender, FormClosingEventArgs e)
@@ -240,30 +237,11 @@ namespace Vista
                     this.Close();
                 }
             }
-            catch (ValidacionException ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ManejarExcepcion(ex);
             }
         }
-
-        #endregion
-
-        #region TextBox
-
-        //private void txtDni_ValueChanged(object sender, EventArgs e)
-        //{
-        //    EstablecerCliente();
-        //}
-
-        //private void txtDni_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Enter)
-        //    {
-        //        this.txtDni.ValueChanged -= txtDni_ValueChanged;
-        //        EstablecerCliente();
-        //        this.txtDni.ValueChanged += txtDni_ValueChanged;
-        //    }
-        //}
 
         #endregion
 

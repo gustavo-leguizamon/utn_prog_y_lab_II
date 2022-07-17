@@ -28,6 +28,10 @@ namespace Vista
 
         #region Metodos
 
+        /// <summary>
+        /// Maneja las excepciones ocurridas en el formulario
+        /// </summary>
+        /// <param name="exception">Excepcion que ocurrio</param>
         private void ManejarExcepcion(Exception exception)
         {
             if (exception is ElementoNoSeleccionadoException ||
@@ -45,12 +49,18 @@ namespace Vista
             }
         }
 
-
+        /// <summary>
+        /// Busca todos los tunos generados
+        /// </summary>
         private void BuscarTurnos()
         {
             BuscarTurnos(null);
         }
 
+        /// <summary>
+        /// Busca todos los turnos en un estado especifico
+        /// </summary>
+        /// <param name="estado">Estado con el que deben estar los turnos buscados</param>
         private void BuscarTurnos(EstadoTurno estado)
         {
             List<InformacionTurno> listadoDeTurnos = this.turnoDAO.ObtenerListadoDeTurnos(estado);
@@ -78,6 +88,9 @@ namespace Vista
             this.dtgTurnos.Refresh();
         }
 
+        /// <summary>
+        /// Marca los turnos segun su estado
+        /// </summary>
         private void MarcarFilas()
         {
             foreach (DataGridViewRow row in this.dtgTurnos.Rows)
@@ -93,6 +106,10 @@ namespace Vista
             }
         }
 
+        /// <summary>
+        /// Cancela un turno
+        /// </summary>
+        /// <param name="turnoId">ID del turno</param>
         private void CancelarTurno(long turnoId)
         {
             if (MessageBox.Show("Desea cancelar el turno?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -101,6 +118,10 @@ namespace Vista
             }
         }
 
+        /// <summary>
+        /// Reprograma un turno vigente
+        /// </summary>
+        /// <param name="turnoId">ID del turno</param>
         private void ReprogramarTurno(long turnoId)
         {
             Turno turno = this.turnoDAO.LeerPorId(turnoId, new Type[] { typeof(Mascota) });
@@ -108,21 +129,33 @@ namespace Vista
             form.ShowDialog();
         }
 
+        /// <summary>
+        /// Obtiene el ID del turno en una fila del DataGrid
+        /// </summary>
+        /// <param name="rowIndex">Indice de la fila</param>
+        /// <returns>ID del turno</returns>
         private long ObtenerTurnoId(int rowIndex)
         {
             return Convert.ToInt64(this.dtgTurnos.Rows[rowIndex].Cells["TurnoId"].Value);
         }
 
+        /// <summary>
+        /// Coloca todos los estados de turnos posibles
+        /// </summary>
         private void ColocarItemsEstadoTurno()
         {
             List<EstadoTurno> estados = this.estadoTurnoDAO.Leer();
-            //this.cmbEstadoTurno.DataSource = estados;
             this.cmbEstadoTurno.Items.Clear();
             this.cmbEstadoTurno.Items.Insert(0, new EstadoTurno(0, "Todos"));
             this.cmbEstadoTurno.Items.AddRange(estados.ToArray());
             this.cmbEstadoTurno.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Obtiene el estado del turno seleccionado
+        /// </summary>
+        /// <returns>Estado seleccionado</returns>
+        /// <exception cref="ElementoNoSeleccionadoException">Lanzada cuando se llema sin haber seleccionado un turno</exception>
         private EstadoTurno EstadoSeleccionado()
         {
             EstadoTurno estado = this.cmbEstadoTurno.SelectedItem as EstadoTurno;
@@ -159,19 +192,33 @@ namespace Vista
 
         private void dtgTurnos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 7) //Cancelar
+            try
             {
-                CancelarTurno(ObtenerTurnoId(e.RowIndex));
+                if (e.ColumnIndex == 7) //Cancelar
+                {
+                    CancelarTurno(ObtenerTurnoId(e.RowIndex));
+                }
+                else if (e.ColumnIndex == 8) //Reprogramar
+                {
+                    ReprogramarTurno(ObtenerTurnoId(e.RowIndex));
+                }
             }
-            else if (e.ColumnIndex == 8) //Reprogramar
+            catch (Exception ex)
             {
-                ReprogramarTurno(ObtenerTurnoId(e.RowIndex));
+                ManejarExcepcion(ex);
             }
         }
 
         private void dtgTurnos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            ReprogramarTurno(ObtenerTurnoId(e.RowIndex));
+            try
+            {
+                ReprogramarTurno(ObtenerTurnoId(e.RowIndex));
+            }
+            catch (Exception ex)
+            {
+                ManejarExcepcion(ex);
+            }
         }
 
         #endregion

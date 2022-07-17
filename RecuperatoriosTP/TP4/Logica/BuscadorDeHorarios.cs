@@ -10,19 +10,29 @@ using Utilidades;
 
 namespace Logica
 {
+    /// <summary>
+    /// Permite buscar horarios de turnos en hilo separado
+    /// </summary>
     public class BuscadorDeHorarios
     {
         private static TurnoDAO turnoDAO;
 
+        /// <summary>
+        /// Delegado para recibir los horarios de un dia
+        /// </summary>
+        /// <param name="horariosDisponibles">Listado de horarios disponibles</param>
+        /// <param name="horariosNoDisponibles">Listado de horarios no disponibles</param>
         public delegate void DelegadoBusquedaFinalizadaHandler(List<Tiempo> horariosDisponibles, List<Tiempo> horariosNoDisponibles);
 
+        /// <summary>
+        /// Evento encargado de notificar cuando la busqueda finalice
+        /// </summary>
         public event DelegadoBusquedaFinalizadaHandler OnBusquedaFinalizada;
 
         private CancellationTokenSource cancellationTokenSource;
         private CancellationToken cancellationToken;
         private Task hilo;
         private DateTime fecha;
-        //private DelegadoBusquedaFinalizadaHandler busquedaFinalizada;
 
         public DateTime Fecha 
         { 
@@ -34,13 +44,14 @@ namespace Logica
             BuscadorDeHorarios.turnoDAO = new TurnoDAO();
         }
 
-        //public BuscadorDeTurnos(DateTime fecha, DelegadoBusquedaFinalizadaHandler delegadoBusquedaFinalizada)
         public BuscadorDeHorarios()
         {
-            //this.fecha = fecha;
-            //this.busquedaFinalizada = delegadoBusquedaFinalizada;
         }
 
+        /// <summary>
+        /// Inicia la busqueda de horarios
+        /// </summary>
+        /// <param name="fecha">Fecha a buscar horarios</param>
         public void BuscarHorarios(DateTime fecha)
         {
             this.fecha = fecha;
@@ -50,9 +61,11 @@ namespace Logica
                 this.cancellationToken = this.cancellationTokenSource.Token;
                 hilo = Task.Run(BuscarListadoDisponibles, this.cancellationToken);
             }
-            //return Task.Run(BuscarListadoDisponibles);
         }
 
+        /// <summary>
+        /// Cancela la busqueda de horarios
+        /// </summary>
         public void CancelarBusqueda()
         {
             if (hilo is not null && !this.hilo.IsCompleted)
@@ -61,16 +74,17 @@ namespace Logica
             }
         }
 
+        /// <summary>
+        /// Busca los horarios y notifica cuando finaliza
+        /// </summary>
         private void BuscarListadoDisponibles()
         {
-            //System.Threading.Thread.Sleep(10000);
             List<Tiempo> horariosNoDisponibles;
             List<Tiempo> horarios = BuscadorDeHorarios.turnoDAO.ObtenerHorariosDisponibles(this.fecha, out horariosNoDisponibles);
             if (OnBusquedaFinalizada is not null)
             {
                 OnBusquedaFinalizada.Invoke(horarios, horariosNoDisponibles);
             }
-            //this.busquedaFinalizada.Invoke(horarios);
         }
     }
 }

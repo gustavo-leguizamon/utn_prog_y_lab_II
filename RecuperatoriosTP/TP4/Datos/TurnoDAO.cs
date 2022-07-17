@@ -14,75 +14,6 @@ namespace Datos
     {
         protected override string Tabla => "Turnos";
 
-        //public delegate void DelegadoActualizacionDatosHandler();
-
-        //public event DelegadoActualizacionDatosHandler OnNuevosDatos;
-
-        //public override void Eliminar(long id)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-
-        //        string query = $"DELETE FROM {Tabla} WHERE Id = @id";
-
-        //        SqlCommand command = new SqlCommand(query, connection);
-        //        command.Parameters.AddWithValue("id", id);
-        //        command.ExecuteNonQuery();
-        //    }
-
-        //    if (OnNuevosDatos is not null)
-        //    {
-        //        OnNuevosDatos.Invoke();
-        //    }
-        //}
-
-        //public override void Guardar(Turno entidad)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-
-        //        string query = $"INSERT INTO {Tabla} (IdMascota, Fecha, Comentario) VALUES(@idMascota, @fecha, @comentario)";
-
-        //        SqlCommand command = new SqlCommand(query, connection);
-        //        command.Parameters.AddWithValue("idMascota", entidad.MascotaId);
-        //        command.Parameters.AddWithValue("fecha", entidad.Fecha);
-        //        command.Parameters.AddWithValue("comentario", entidad.Comentario);
-        //        command.ExecuteNonQuery();
-        //    }
-
-        //    if (OnNuevosDatos is not null)
-        //    {
-        //        OnNuevosDatos.Invoke();
-        //    }
-        //}
-
-        //public override List<Turno> Leer()
-        //{
-        //    List<Turno> list = new List<Turno>();
-        //    using (SqlConnection connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-
-        //        string query = "SELECT * FROM Turnos";
-
-        //        SqlCommand command = new SqlCommand(query, connection);
-
-        //        SqlDataReader reader = command.ExecuteReader();
-        //        while (reader.Read())
-        //        {
-        //            long id = Convert.ToInt64(reader["Id"].ToString());
-        //            long idMascota = Convert.ToInt64(reader["IdMascota"].ToString());
-        //            DateTime fecha = Convert.ToDateTime(reader["Fecha"].ToString());
-        //            string comentario = reader["Comentario"].ToString();
-        //            list.Add(new Turno(id, idMascota, fecha, comentario));
-        //        }
-        //    }
-
-        //    return list;
-        //}
-
         public override List<Turno> Leer(Type[] incluirRelaciones)
         {
             List<Turno> turnos = Leer();
@@ -105,30 +36,6 @@ namespace Datos
             return turnos;
         }
 
-        //public override Turno LeerPorId(long id)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-
-        //        string query = $"SELECT * FROM {Tabla} WHERE Id = @id";
-
-        //        SqlCommand command = new SqlCommand(query, connection);
-        //        command.Parameters.AddWithValue("id", id);
-
-        //        SqlDataReader reader = command.ExecuteReader();
-        //        while (reader.Read())
-        //        {
-        //            long idMascota = Convert.ToInt64(reader["IdMascota"].ToString());
-        //            DateTime fecha = Convert.ToDateTime(reader["Fecha"].ToString());
-        //            string comentario = reader["Comentario"].ToString();
-        //            return new Turno(id, idMascota, fecha, comentario);
-        //        }
-        //    }
-
-        //    throw new EntidadInexistenteException($"No existe turno con id: {id}");
-        //}
-
         public override Turno LeerPorId(long id, Type[] incluirRelaciones)
         {
             Turno turno = LeerPorId(id);
@@ -139,35 +46,12 @@ namespace Datos
             return turno;
         }
 
-        //public override void Modificar(Turno entidad)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-
-        //        string query = $"UPDATE {Tabla} SET IdMascota = @idMascota, Fecha = @fecha, Comentario = @comentario WHERE Id = @id";
-
-        //        SqlCommand command = new SqlCommand(query, connection);
-        //        command.Parameters.AddWithValue("id", entidad.Id);
-        //        command.Parameters.AddWithValue("idMascota", entidad.MascotaId);
-        //        command.Parameters.AddWithValue("fecha", entidad.Fecha);
-        //        command.Parameters.AddWithValue("comentario", entidad.Comentario);
-        //        command.ExecuteNonQuery();
-        //    }
-
-        //    if (OnNuevosDatos is not null)
-        //    {
-        //        OnNuevosDatos.Invoke();
-        //    }
-        //}
-
         protected override SqlCommand CrearCommandInsert(Turno entidad)
         {
             StringBuilder query = new StringBuilder();
             query.AppendLine($"INSERT INTO {Tabla} (MascotaId, Fecha, HoraInicio, HoraFin, Comentario, EstadoTurnoId)");
             query.AppendLine("VALUES(@idMascota, @fecha, @horaInicio, @horaFin, @comentario, @estado)");
             query.AppendLine("SELECT CAST(@@IDENTITY AS BIGINT)");
-            //string query = $"INSERT INTO {Tabla} (MascotaId, Fecha, HoraInicio, HoraFin, Comentario, EstadoTurnoId) VALUES(@idMascota, @fecha, @horaInicio, @horaFin, @comentario, @estado)";
 
             SqlCommand command = new SqlCommand(query.ToString());
             command.Parameters.AddWithValue("idMascota", entidad.MascotaId);
@@ -191,7 +75,6 @@ namespace Datos
             query.AppendLine("Comentario = @comentario,");
             query.AppendLine("EstadoTurnoId = @estado");
             query.AppendLine("WHERE Id = @id");
-            //string query = $"UPDATE {Tabla} SET MascotaId = @idMascota, Fecha = @fecha, HoraInicio = @horaInicio, HoraFin = @horaFin, Comentario = @comentario, EstadoTurnoId = @estado WHERE Id = @id";
 
             SqlCommand command = new SqlCommand(query.ToString());
             command.Parameters.AddWithValue("id", entidad.Id);
@@ -218,6 +101,11 @@ namespace Datos
             return new Turno(id, estadoTurnoId, mascotaId, fecha, horaInicio, horaFin, comentario);
         }
 
+        /// <summary>
+        /// Busca los turnos que coincidan con el estado pasado por parametro, o si no se especifica un estado, busca todos los turnos de la base de datos
+        /// </summary>
+        /// <param name="estadoTurno">Estado del turno</param>
+        /// <returns>Listado de turnos que coincidan con el estado</returns>
         public List<InformacionTurno> ObtenerListadoDeTurnos(EstadoTurno estadoTurno)
         {
             List<InformacionTurno> list = new List<InformacionTurno>();
@@ -268,6 +156,11 @@ namespace Datos
             return list;
         }
 
+        /// <summary>
+        /// Cambia el estado de un turno
+        /// </summary>
+        /// <param name="turnoId">ID del turno</param>
+        /// <param name="estadoTurno">Nuevo estado a colocar</param>
         public void CambiarEstado(long turnoId, EstadoTurno.eEstadoTurno estadoTurno)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -286,9 +179,9 @@ namespace Datos
         }
 
         /// <summary>
-        /// 
+        /// Busca el proximo turno mas cercano a la fecha actual
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Objeto con informacion del proximo turno</returns>
         /// <exception cref="NoHayMasTurnosException">Lanzada cuando no hay más turnos en adelante</exception>
         public ProximoTurno ProximoTurno()
         {
@@ -299,15 +192,20 @@ namespace Datos
                 throw new NoHayMasTurnosException("No hay próximos turnos");
             }
             Turno turno = vigentes.OrderBy(turno => turno.Fecha).ToList().First();
-            //return new ProximoTurno(turno.Id, turno.Fecha, turno.HoraInicio, turno.HoraFin, turno.Mascota.Cliente.NombreCompleto, turno.Mascota.Nombre);
             return new ProximoTurno(turno);
         }
 
+        /// <summary>
+        /// Busca entre los turnos ya otorgados, los horarios disponibles para nuevos turnos
+        /// </summary>
+        /// <param name="fecha"></param>
+        /// <param name="horariosNoDisponibles"></param>
+        /// <returns></returns>
         public List<Tiempo> ObtenerHorariosDisponibles(DateTime fecha, out List<Tiempo> horariosNoDisponibles)
         {
             List<Tiempo> horariosDisponibles = new List<Tiempo>();
             List<Tiempo> horariosOcupados = new List<Tiempo>();
-            List<Turno> turnosDelDia = Leer(turno => turno.Fecha == fecha.Date);
+            List<Turno> turnosDelDia = Leer(turno => turno.Fecha == fecha.Date && turno.EstadoTurnoId != (short)EstadoTurno.eEstadoTurno.Cancelado);
             if (turnosDelDia.Any())
             {
                 foreach (Turno turno in turnosDelDia.OrderBy(t => t.HoraInicio))

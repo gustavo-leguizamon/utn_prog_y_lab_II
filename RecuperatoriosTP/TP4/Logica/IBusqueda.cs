@@ -8,9 +8,6 @@ namespace Logica
 {
     public interface IBusqueda<T>
     {
-        //T Buscar(ID id);
-        //bool Existe(ID id);
-
         bool Existe(T entidad);
     }
 }

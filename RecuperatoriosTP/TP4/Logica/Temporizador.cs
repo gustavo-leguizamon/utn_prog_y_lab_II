@@ -7,11 +7,24 @@ using System.Threading.Tasks;
 
 namespace Logica
 {
+    /// <summary>
+    /// Simula un reloj que se ejecuta cada cierto intervalo de tiempo
+    /// </summary>
     public class Temporizador
     {
+        /// <summary>
+        /// Delegado para manejar el reloj
+        /// </summary>
         public delegate void DelegateTimerHandler();
 
+        /// <summary>
+        /// Evento que notifica cuando el intervalo configurado se completa
+        /// </summary>
         public event DelegateTimerHandler OnTimerCompleto;
+
+        /// <summary>
+        /// Evento que notifica cuando el temporizador se reinicia
+        /// </summary>
         public event DelegateTimerHandler OnTimerReiniciar;
 
         private CancellationTokenSource cancellationTokenSource;
@@ -19,6 +32,9 @@ namespace Logica
         private Task hilo;
         private int intervalo;
 
+        /// <summary>
+        /// Indica si el hilo del temporizador se encuentra activo
+        /// </summary>
         public bool EstaActivo
         {
             get
@@ -29,13 +45,23 @@ namespace Logica
                     hilo.Status == TaskStatus.WaitingForActivation);
             }
         }
-        public int Interval { get { return intervalo; } set { intervalo = value; } }
+
+        /// <summary>
+        /// Indica el intervalo utilizado
+        /// </summary>
+        public int Interval 
+        { 
+            get { return intervalo; } 
+        }
 
         public Temporizador(int intervalo)
         {
             this.intervalo = intervalo;
         }
 
+        /// <summary>
+        /// Detiene la ejecucion del temporizador cada intervalo configurado
+        /// </summary>
         private void Ejecutar()
         {
             do
@@ -49,6 +75,9 @@ namespace Logica
             } while (!cancellationToken.IsCancellationRequested);
         }
 
+        /// <summary>
+        /// Inicia el temporizador
+        /// </summary>
         public void Comenzar()
         {
             if (hilo is null || hilo.IsCompleted)
@@ -65,6 +94,9 @@ namespace Logica
             }
         }
 
+        /// <summary>
+        /// Reinicia el temporizador
+        /// </summary>
         public void Reiniciar()
         {
             Detener();
@@ -75,6 +107,9 @@ namespace Logica
             }
         }
 
+        /// <summary>
+        /// Detiene el temporizador
+        /// </summary>
         public void Detener()
         {
             if (hilo is not null && !hilo.IsCompleted)

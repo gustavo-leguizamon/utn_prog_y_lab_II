@@ -12,6 +12,10 @@ namespace Entidades
         private int minuto;
         private int segundo;
 
+        /// <summary>
+        /// Parte hora del tiempo
+        /// </summary>
+        /// <exception cref="HorarioInvalidoException">Lanzada cuando el valor provisto no cumple con las condiciones validas</exception>
         public int Hora
         {
             get { return hora; }
@@ -19,10 +23,14 @@ namespace Entidades
             {
                 if (hora < 0 || hora > 23)
                     throw new HorarioInvalidoException("El valor de hora debe estar entre 0 y 23");
-                hora = value; 
+                hora = value;
             }
         }
 
+        /// <summary>
+        /// Parte minutos del tiempo
+        /// </summary>
+        /// <exception cref="HorarioInvalidoException">Lanzada cuando el valor provisto no cumple con las condiciones validas</exception>
         public int Minuto
         {
             get { return minuto; }
@@ -34,6 +42,10 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Parte segundos del tiempo
+        /// </summary>
+        /// <exception cref="HorarioInvalidoException">Lanzada cuando el valor provisto no cumple con las condiciones validas</exception>
         public int Segundo
         {
             get { return segundo; }
@@ -54,10 +66,12 @@ namespace Entidades
         }
 
 
+
         /// <summary>
         /// Inicializa el objeto con un string en formato hh:mm:ss
         /// </summary>
         /// <param name="hora">Hora en formato hh:mm:ss</param>
+        /// <exception cref="HorarioInvalidoException">Lanzada cuando alguna parte del tiempo no cumple con las condiciones necesarias</exception>
         public Tiempo(string hora)
         {
             string[] partes = hora.Split(':');
@@ -130,10 +144,5 @@ namespace Entidades
             else
                 return 0;
         }
-
-        //public string HoraCorta()
-        //{
-        //    return $"{this.hora.ToString().PadLeft(2, '0')}:{this.minuto.ToString().PadLeft(2, '0')}";
-        //}
     }
 }

@@ -29,7 +29,6 @@ namespace Datos
             query.AppendLine($"INSERT INTO {Tabla} (MascotaId, Llegada, Salida, PesoActual, Observacion)");
             query.AppendLine("VALUES (@idMascota, @llegada, @salida, @pesoActual, @observacion)");
             query.AppendLine("SELECT CAST(@@IDENTITY AS BIGINT)");
-            //string query = $"INSERT INTO {Tabla} (MascotaId, Llegada, Salida, PesoActual, Observacion) VALUES(@idMascota, @llegada, @salida, @pesoActual, @observacion)";
 
             SqlCommand command = new SqlCommand(query.ToString());
             command.Parameters.AddWithValue("idMascota", entidad.MascotaId);
@@ -51,7 +50,6 @@ namespace Datos
             query.AppendLine("PesoActual = @pesoActual,");
             query.AppendLine("Observacion = @observacion");
             query.AppendLine("WHERE Id = @id");
-            //string query = $"UPDATE {Tabla} SET MascotaId = @idMascota, Llegada = @llegada, Salida = @salida, PesoActual = @pesoActual, Observacion = @observacion WHERE Id = @id";
 
             SqlCommand command = new SqlCommand(query.ToString());
             command.Parameters.AddWithValue("id", entidad.Id);
@@ -76,6 +74,12 @@ namespace Datos
             return new Atencion(id, mascotaId, llegada, salida, pesoActual, observacion);
         }
 
+        /// <summary>
+        /// Buscar el registro de las atenciones realizadas a la mascotas en un rango de fechas
+        /// </summary>
+        /// <param name="fechaDesde">Fecha de inicio</param>
+        /// <param name="fechaHasta">Fecha de fin</param>
+        /// <returns>Listado de los registros de atenciones dentro del rango de fechas</returns>
         public List<InformacionDeAtencion> ObtenerRegistroDeAtenciones(DateTime fechaDesde, DateTime fechaHasta)
         {
             List<InformacionDeAtencion> list = new List<InformacionDeAtencion>();

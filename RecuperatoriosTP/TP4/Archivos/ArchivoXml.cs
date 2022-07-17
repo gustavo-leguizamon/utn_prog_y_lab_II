@@ -13,11 +13,6 @@ namespace Archivos
     {
         protected override string Extension => ".xml";
 
-        /// <summary>
-        /// Serializa un objeto y lo almacena en un archivo en formato xml
-        /// </summary>
-        /// <param name="ruta"></param>
-        /// <param name="contenido"></param>
         public void Guardar(string ruta, T contenido)
         {
             try
@@ -34,11 +29,6 @@ namespace Archivos
             }
         }
 
-        /// <summary>
-        /// Deserializa un archivo xml en el objeto T especificado
-        /// </summary>
-        /// <param name="ruta"></param>
-        /// <returns></returns>
         public T Leer(string ruta)
         {
             T result = null;

@@ -11,7 +11,6 @@ namespace Entidades
         private long id;
         private long clienteId;
         private short tipoMascotaId;
-        //private TipoMascota.eTipoMascota tipoMascota;
         private string nombre;
         private float peso;
         private DateTime fechaNacimiento;

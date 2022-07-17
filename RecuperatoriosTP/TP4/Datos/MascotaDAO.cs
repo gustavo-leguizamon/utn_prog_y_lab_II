@@ -12,77 +12,6 @@ namespace Datos
     {
         protected override string Tabla => "Mascotas";
 
-        //public delegate void DelegadoActualizacionDatosHandler();
-
-        //public event DelegadoActualizacionDatosHandler OnNuevosDatos;
-
-        //public override void Eliminar(long id)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-
-        //        string query = $"DELETE FROM {Tabla} WHERE Id = @id";
-
-        //        SqlCommand command = new SqlCommand(query, connection);
-        //        command.Parameters.AddWithValue("id", id);
-        //        command.ExecuteNonQuery();
-        //    }
-
-        //    if (OnNuevosDatos is not null)
-        //    {
-        //        OnNuevosDatos.Invoke();
-        //    }
-        //}
-
-        //public override void Guardar(Mascota entidad)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-
-        //        string query = $"INSERT INTO {Tabla} (DniCliente, Nombre, Peso, FechaNacimiento) VALUES(@dni, @nombre, @peso, @fecha)";
-
-        //        SqlCommand command = new SqlCommand(query, connection);
-        //        command.Parameters.AddWithValue("dni", entidad.ClienteId);
-        //        command.Parameters.AddWithValue("nombre", entidad.Nombre);
-        //        command.Parameters.AddWithValue("peso", entidad.Peso);
-        //        command.Parameters.AddWithValue("fecha", entidad.FechaNacimiento);
-        //        command.ExecuteNonQuery();
-        //    }
-
-        //    if (OnNuevosDatos is not null)
-        //    {
-        //        OnNuevosDatos.Invoke();
-        //    }
-        //}
-
-        //public override List<Mascota> Leer()
-        //{
-        //    List<Mascota> list = new List<Mascota>();
-        //    using (SqlConnection connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-
-        //        string query = "SELECT * FROM Mascotas";
-
-        //        SqlCommand command = new SqlCommand(query, connection);
-
-        //        SqlDataReader reader = command.ExecuteReader();
-        //        while (reader.Read())
-        //        {
-        //            long id = Convert.ToInt64(reader["Id"].ToString());
-        //            long dni = Convert.ToInt64(reader["DniCliente"].ToString());
-        //            string nombre = reader["Nombre"].ToString();
-        //            float peso = Convert.ToSingle(reader["Peso"].ToString());
-        //            DateTime fecha = Convert.ToDateTime(reader["FechaNacimiento"].ToString());
-        //            list.Add(new Mascota(id, dni, nombre, peso, fecha));
-        //        }
-        //    }
-
-        //    return list;
-        //}
-
         public override List<Mascota> Leer(Type[] incluirRelaciones)
         {
             List<Mascota> mascotas = Leer();
@@ -101,31 +30,6 @@ namespace Datos
             return mascotas;
         }
 
-        //public override Mascota LeerPorId(long id)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-
-        //        string query = $"SELECT * FROM {Tabla} WHERE Id = @id";
-
-        //        SqlCommand command = new SqlCommand(query, connection);
-        //        command.Parameters.AddWithValue("id", id);
-
-        //        SqlDataReader reader = command.ExecuteReader();
-        //        while (reader.Read())
-        //        {
-        //            long dni = Convert.ToInt64(reader["DniCliente"].ToString());
-        //            string nombre = reader["Nombre"].ToString();
-        //            float peso = Convert.ToSingle(reader["Peso"].ToString());
-        //            DateTime fecha = Convert.ToDateTime(reader["FechaNacimiento"].ToString());
-        //            return new Mascota(id, dni, nombre, peso, fecha);
-        //        }
-        //    }
-
-        //    throw new EntidadInexistenteException($"No existe mascota con id: {id}");
-        //}
-
         public override Mascota LeerPorId(long id, Type[] incluirRelaciones)
         {
             Mascota mascota = LeerPorId(id);
@@ -136,36 +40,12 @@ namespace Datos
             return mascota;
         }
 
-        //public override void Modificar(Mascota entidad)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-
-        //        string query = $"UPDATE {Tabla} SET DniCliente, @cliente, Nombre = @nombre, Peso = @peso, FechaNacimiento = @nacimiento WHERE Id = @id";
-
-        //        SqlCommand command = new SqlCommand(query, connection);
-        //        command.Parameters.AddWithValue("id", entidad.Id);
-        //        command.Parameters.AddWithValue("cliente", entidad.ClienteId);
-        //        command.Parameters.AddWithValue("nombre", entidad.Nombre);
-        //        command.Parameters.AddWithValue("peso", entidad.Peso);
-        //        command.Parameters.AddWithValue("nacimiento", entidad.FechaNacimiento);
-        //        command.ExecuteNonQuery();
-        //    }
-
-        //    if (OnNuevosDatos is not null)
-        //    {
-        //        OnNuevosDatos.Invoke();
-        //    }
-        //}
-
         protected override SqlCommand CrearCommandInsert(Mascota entidad)
         {
             StringBuilder query = new StringBuilder();
             query.AppendLine($"INSERT INTO {Tabla} (ClienteId, TipoMascotaId, Nombre, Peso, FechaNacimiento, Activo)");
             query.AppendLine("VALUES(@clienteId, @tipoId, @nombre, @peso, @fecha, @activo)");
             query.AppendLine("SELECT CAST(@@IDENTITY AS BIGINT)");
-            //string query = $"INSERT INTO {Tabla} (ClienteId, TipoMascotaId, Nombre, Peso, FechaNacimiento, Activo) VALUES(@clienteId, @tipoId, @nombre, @peso, @fecha, @activo)";
 
             SqlCommand command = new SqlCommand(query.ToString());
             command.Parameters.AddWithValue("clienteId", entidad.ClienteId);
@@ -189,7 +69,6 @@ namespace Datos
             query.AppendLine("FechaNacimiento = @nacimiento,");
             query.AppendLine("Activo = @activo");
             query.AppendLine("WHERE Id = @id");
-            //string query = $"UPDATE {Tabla} SET ClienteId = @cliente, TipoMascotaId = @tipoId, Nombre = @nombre, Peso = @peso, FechaNacimiento = @nacimiento, Activo = @activo WHERE Id = @id";
 
             SqlCommand command = new SqlCommand(query.ToString());
             command.Parameters.AddWithValue("id", entidad.Id);

@@ -39,6 +39,32 @@ namespace Vista
 
         #region Metodos
 
+        /// <summary>
+        /// Maneja las excepciones ocurridas en el formulario
+        /// </summary>
+        /// <param name="exception">Excepcion que ocurrio</param>
+        private void ManejarExcepcion(Exception exception)
+        {
+            if (exception is ElementoNoSeleccionadoException ||
+                exception is ArgumentException ||
+                exception is ValidacionException)
+            {
+                MessageBox.Show(exception.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (exception is NotImplementedException)
+            {
+                MessageBox.Show("Hay partes sin implementar de la aplicación", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show($"Error inesperado. {exception.Message} - {exception.StackTrace}");
+            }
+        }
+
+        /// <summary>
+        /// Indica si se realizaron cambios en los campos
+        /// </summary>
+        /// <returns>True si hay cambios, false caso contrario</returns>
         private bool SeRealizaronCambios()
         {
             return (this.eFrmABM == eFrmABM.Crear && (!string.IsNullOrWhiteSpace(this.txtNombre.Text) ||
@@ -54,14 +80,10 @@ namespace Vista
 
         }
 
-        //private void ReiniciarCampos()
-        //{
-        //    this.txtNombre.Text = string.Empty;
-        //    this.txtApellido.Text = string.Empty;
-        //    this.txtDireccion.Text = string.Empty;
-        //    this.txtDni.Value = 0;
-        //}
-
+        /// <summary>
+        /// Valida si se completaron todos los campos obligatorios en el formulario
+        /// </summary>
+        /// <exception cref="ValidacionException">Lanzada cuando no se completaron todos los campos obligatorios</exception>
         private void SeCompletaronTodosLosCampos()
         {
             if (string.IsNullOrWhiteSpace(this.txtNombre.Text) ||
@@ -73,6 +95,10 @@ namespace Vista
             }
         }
 
+        /// <summary>
+        /// Valida si el dni de la persona es unico
+        /// </summary>
+        /// <exception cref="ValidacionException">Lanzada cuando ya existe una persona cargada con el mismo deni</exception>
         private void EsDniUnico()
         {
             try
@@ -88,7 +114,10 @@ namespace Vista
             }
         }
 
-        private void ManejarControles()
+        /// <summary>
+        /// Establece las configuraciones iniciales de los controles
+        /// </summary>
+        private void ConfigurarControles()
         {
             bool editarDatos = this.eFrmABM != eFrmABM.Ver;
             this.txtApellido.Enabled = editarDatos;
@@ -115,6 +144,9 @@ namespace Vista
             }
         }
 
+        /// <summary>
+        /// Coloca los datos de un cliente se se brinda el mismo
+        /// </summary>
         private void ColocarDatos()
         {
             if (this.cliente is not null)
@@ -139,7 +171,7 @@ namespace Vista
         {
             this.dtFechaNacimiento.MaxDate = DateTime.Now.AddYears(-18);
             ColocarDatos();
-            ManejarControles();
+            ConfigurarControles();
         }
 
         private void FrmABMCliente_FormClosing(object sender, FormClosingEventArgs e)
@@ -184,9 +216,9 @@ namespace Vista
                     this.Close();
                 }
             }
-            catch (ValidacionException ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ManejarExcepcion(ex);
             }
         }
 

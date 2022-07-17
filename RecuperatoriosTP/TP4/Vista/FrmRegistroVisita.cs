@@ -32,6 +32,10 @@ namespace Vista
 
         #region Metodos
 
+        /// <summary>
+        /// Maneja las excepciones ocurridas en el formulario
+        /// </summary>
+        /// <param name="exception">Excepcion que ocurrio</param>
         private void ManejarExcepcion(Exception exception)
         {
             if (exception is ArgumentException ||
@@ -49,6 +53,10 @@ namespace Vista
             }
         }
 
+        /// <summary>
+        /// Indica si se realizaron cambios en los campos
+        /// </summary>
+        /// <returns>True si hay cambios, false caso contrario</returns>
         private bool SeRealizaronCambios()
         {
             return this.txtPesoActual.Value > 0 ||
@@ -56,6 +64,10 @@ namespace Vista
         }
 
 
+        /// <summary>
+        /// Valida si se completaron todos los campos obligatorios en el formulario
+        /// </summary>
+        /// <exception cref="ValidacionException">Lanzada cuando no se completaron todos los campos obligatorios</exception>
         private void SeCompletaronTodosLosCampos()
         {
             if (this.txtPesoActual.Value == 0 ||
@@ -65,6 +77,10 @@ namespace Vista
             }
         }
 
+        /// <summary>
+        /// Valida que los horarios sean correctos
+        /// </summary>
+        /// <exception cref="ValidacionException">Lanzada cuando el horario de llegada es mayor o igual al de salida</exception>
         private void ValidarHorarios()
         {
             if (new Tiempo(this.dtHoraLLegada.Value.GetHora()) >= new Tiempo(this.dtHoraSalida.Value.GetHora()))
@@ -104,10 +120,6 @@ namespace Vista
             this.Close();
         }
 
-        #endregion
-
-        #endregion
-
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             try
@@ -129,6 +141,11 @@ namespace Vista
                 ManejarExcepcion(ex);
             }
         }
+
+        #endregion
+
+        #endregion
+
 
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Vista
 {
-    partial class FrmMain2
+    partial class FrmMainVeterinaria
     {
         /// <summary>
         /// Required designer variable.
@@ -313,8 +313,8 @@
             this.Name = "FrmMain2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Veterinaria";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain2_FormClosing);
-            this.Load += new System.EventHandler(this.FrmMain2_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMainVeterinaria_FormClosing);
+            this.Load += new System.EventHandler(this.FrmMainVeterinaria_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);

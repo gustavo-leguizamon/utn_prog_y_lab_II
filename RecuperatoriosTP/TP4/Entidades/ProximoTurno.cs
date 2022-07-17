@@ -52,17 +52,6 @@ namespace Entidades
             set { mascota = value; }
         }
 
-
-        //public ProximoTurno(long turnoId, DateTime fecha, string horaInicio, string horaFin, string cliente, string mascota)
-        //{
-        //    this.nroTurno = turnoId;
-        //    this.fecha = fecha;
-        //    this.horaInicio = new Tiempo(horaInicio);
-        //    this.horaFin = new Tiempo(horaFin);
-        //    this.cliente = cliente;
-        //    this.mascota = mascota;
-        //}
-
         public ProximoTurno(Turno turno)
         {
             this.nroTurno = turno.Id;

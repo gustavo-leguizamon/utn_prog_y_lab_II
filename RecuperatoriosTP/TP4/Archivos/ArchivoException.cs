@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace Archivos
 {
+    /// <summary>
+    /// Excepcion para utilizar en manejo de archivos
+    /// 
+    /// CLASE 10 - Excepciones
+    /// 
+    /// </summary>
     public class ArchivoException : Exception
     {
         public ArchivoException(string mensaje)

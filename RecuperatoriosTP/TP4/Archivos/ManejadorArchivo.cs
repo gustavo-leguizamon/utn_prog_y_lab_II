@@ -11,6 +11,11 @@ namespace Archivos
     {
         /// <summary>
         /// Determina la clase encargada de manejar el tipo de archivos que se pasa por parametro
+        /// 
+        /// CLASE 10 - Excepciones
+        /// CLASE 12 - Tipos genericos
+        /// CLASE 13 - Interfaces
+        /// 
         /// </summary>
         /// <typeparam name="T">Clase con la cual se va a utilizar el archivo</typeparam>
         /// <param name="ruta">Ruta del archivo en el disco</param>

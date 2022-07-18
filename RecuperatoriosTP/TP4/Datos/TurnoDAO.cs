@@ -10,6 +10,12 @@ using Utilidades.Extensions;
 
 namespace Datos
 {
+    /// <summary>
+    /// Clase encargada de administrar entidades de tipo Turno
+    /// 
+    /// CLASE 12 - Tipos genericos
+    /// 
+    /// </summary>
     public class TurnoDAO : BaseDAO<long, Turno>
     {
         protected override string Tabla => "Turnos";
@@ -114,11 +120,6 @@ namespace Datos
                 connection.Open();
 
                 short? estadoTurnoId = estadoTurno?.Id;
-                //string where = string.Empty;
-                //if (estadoTurnoId.HasValue && estadoTurnoId.Value > 0)
-                //{
-                //    where = "AND T.EstadoTurnoId = @estado";
-                //}
 
                 string query = @"SELECT 
                                 T.Id AS 'NroTurno', T.Fecha, T.Comentario, ET.Id AS 'EstadoTurnoId',
@@ -180,6 +181,10 @@ namespace Datos
 
         /// <summary>
         /// Busca el proximo turno mas cercano a la fecha actual
+        /// 
+        /// CLASE 10 - Excepciones
+        /// CLASE 17 - Delegados y expresiones lambda
+        /// 
         /// </summary>
         /// <returns>Objeto con informacion del proximo turno</returns>
         /// <exception cref="NoHayMasTurnosException">Lanzada cuando no hay más turnos en adelante</exception>
@@ -197,6 +202,9 @@ namespace Datos
 
         /// <summary>
         /// Busca entre los turnos ya otorgados, los horarios disponibles para nuevos turnos
+        /// 
+        /// CLASE 17 - Delegados y expresiones lambda
+        /// 
         /// </summary>
         /// <param name="fecha"></param>
         /// <param name="horariosNoDisponibles"></param>
@@ -217,7 +225,7 @@ namespace Datos
 
                     do
                     {
-                        horariosOcupados.Add(new Tiempo(fechaDesde.GetHora()));
+                        horariosOcupados.Add(new Tiempo(fechaDesde.GetHora())); //CLASE 20 - Metodos de extension
                         fechaDesde = fechaDesde.AddMinutes(30);
                     } 
                     while (fechaDesde < fechaHasta);
@@ -243,7 +251,7 @@ namespace Datos
 
             do
             {
-                horario = new Tiempo(horarioDelDia.GetHora());
+                horario = new Tiempo(horarioDelDia.GetHora()); //CLASE 20 - Metodos de extension
                 if (!horariosOcupados.Any(ocupado => ocupado == horario))
                 {
                     horariosDisponibles.Add(horario);

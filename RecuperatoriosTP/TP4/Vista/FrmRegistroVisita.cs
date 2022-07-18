@@ -34,6 +34,9 @@ namespace Vista
 
         /// <summary>
         /// Maneja las excepciones ocurridas en el formulario
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <param name="exception">Excepcion que ocurrio</param>
         private void ManejarExcepcion(Exception exception)
@@ -66,6 +69,9 @@ namespace Vista
 
         /// <summary>
         /// Valida si se completaron todos los campos obligatorios en el formulario
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <exception cref="ValidacionException">Lanzada cuando no se completaron todos los campos obligatorios</exception>
         private void SeCompletaronTodosLosCampos()
@@ -79,6 +85,10 @@ namespace Vista
 
         /// <summary>
         /// Valida que los horarios sean correctos
+        /// 
+        /// CLASE 10 - Excepciones
+        /// CLASE 20 - Metodos de extension
+        /// 
         /// </summary>
         /// <exception cref="ValidacionException">Lanzada cuando el horario de llegada es mayor o igual al de salida</exception>
         private void ValidarHorarios()
@@ -126,8 +136,8 @@ namespace Vista
             {
                 SeCompletaronTodosLosCampos();
                 ValidarHorarios();
-                Tiempo llegada = new Tiempo(this.dtHoraLLegada.Value.GetHora());
-                Tiempo salida = new Tiempo(this.dtHoraSalida.Value.GetHora());
+                Tiempo llegada = new Tiempo(this.dtHoraLLegada.Value.GetHora()); //CLASE 20 - Metodos de extension
+                Tiempo salida = new Tiempo(this.dtHoraSalida.Value.GetHora()); //CLASE 20 - Metodos de extension
                 llegada.Segundo = 0;
                 salida.Segundo = 0;
                 Atencion visita = new Atencion(this.mascota.Id, this.dtFechaVisita.Value, llegada, salida, (float)this.txtPesoActual.Value, this.rtbObservaciones.Text);

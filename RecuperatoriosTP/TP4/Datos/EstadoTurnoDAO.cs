@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
+    /// <summary>
+    /// Clase encargada de administrar entidades de tipo EstadoTurno
+    /// 
+    /// CLASE 12 - Tipos genericos
+    /// 
+    /// </summary>
     public class EstadoTurnoDAO : BaseDAO<short, EstadoTurno>
     {
         protected override string Tabla => "EstadosTurno";

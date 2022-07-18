@@ -41,6 +41,9 @@ namespace Vista
 
         /// <summary>
         /// Maneja las excepciones ocurridas en el formulario
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <param name="exception">Excepcion que ocurrio</param>
         private void ManejarExcepcion(Exception exception)
@@ -82,6 +85,9 @@ namespace Vista
 
         /// <summary>
         /// Valida si se completaron todos los campos obligatorios en el formulario
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <exception cref="ValidacionException">Lanzada cuando no se completaron todos los campos obligatorios</exception>
         private void SeCompletaronTodosLosCampos()
@@ -97,6 +103,9 @@ namespace Vista
 
         /// <summary>
         /// Valida si el dni de la persona es unico
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <exception cref="ValidacionException">Lanzada cuando ya existe una persona cargada con el mismo deni</exception>
         private void EsDniUnico()

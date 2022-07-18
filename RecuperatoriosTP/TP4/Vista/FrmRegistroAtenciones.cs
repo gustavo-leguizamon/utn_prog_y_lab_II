@@ -30,6 +30,9 @@ namespace Vista
 
         /// <summary>
         /// Maneja las excepciones ocurridas en el formulario
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <param name="exception">Excepcion que ocurrio</param>
         private void ManejarExcepcion(Exception exception)
@@ -65,6 +68,9 @@ namespace Vista
 
         /// <summary>
         /// Valida que el rango de fechas se correcto
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <exception cref="ValidacionException">Lanzada cuando la fecha inicial sea mayor que la final</exception>
         private void ValidarFechas()

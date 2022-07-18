@@ -9,6 +9,11 @@ namespace Datos
 {
     /// <summary>
     /// Clase base para conectar con la base de datos
+    /// 
+    /// CLASE 12 - Tipos genericos
+    /// CLASE 13 - Interfaces
+    /// CLASE 15-16 - Base de datos
+    /// 
     /// </summary>
     /// <typeparam name="TID">Tipo de dato del ID de la tabla</typeparam>
     /// <typeparam name="E">Tipo de dato de la entidad</typeparam>
@@ -20,6 +25,12 @@ namespace Datos
         /// </summary>
         protected static string ConnectionString;
 
+        /// <summary>
+        /// Delegado para informar la actualizacion de datos
+        /// 
+        /// CLASE 17 - Delegados y expresiones lambda
+        /// 
+        /// </summary>
         public delegate void DelegadoActualizacionDatosHandler();
 
         /// <summary>
@@ -169,6 +180,9 @@ namespace Datos
 
         /// <summary>
         /// Devuelve todas la entidades almacenadas en la base de datos que cumplan con la condicion especificada
+        /// 
+        /// CLASE 17 - Delegados y expresiones lambda
+        /// 
         /// </summary>
         /// <param name="filtro">Condicion que deben cumplir las entidades</param>
         /// <returns>Listado de objetos de la entidad E que cumplen con la condicion obtenidos de la base de datos </returns>
@@ -179,6 +193,9 @@ namespace Datos
 
         /// <summary>
         /// Devuelve todas la entidades almacenadas en la base de datos que cumplan con la condicion especificada incluyendo sus relaciones
+        /// 
+        /// CLASE 17 - Delegados y expresiones lambda
+        /// 
         /// </summary>
         /// <param name="filtro">Condicion que deben cumplir las entidades</param>
         /// <param name="incluirRelaciones">Listado de los tipos de los objetos que tienen relacion</param>
@@ -191,6 +208,9 @@ namespace Datos
 
         /// <summary>
         /// Devuelve una entidad que coincida con el ID especificado
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <param name="id">Valor del id buscado</param>
         /// <returns>Entidad que tenga el ID</returns>
@@ -264,6 +284,9 @@ namespace Datos
 
         /// <summary>
         /// Elimina o activa logicamente una entidad de la BD
+        /// 
+        /// CLASE 13 - Interfaces
+        /// 
         /// </summary>
         /// <param name="entidad">Entidad sobre la que se va a operar</param>
         /// <param name="activo">True para activar la entidad, o false para desactivarla</param>

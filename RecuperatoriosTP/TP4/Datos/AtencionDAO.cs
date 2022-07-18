@@ -9,6 +9,12 @@ using Utilidades.Extensions;
 
 namespace Datos
 {
+    /// <summary>
+    /// Clase encargada de administrar entidades de tipo Atencion
+    /// 
+    /// CLASE 12 - Tipos genericos
+    /// 
+    /// </summary>
     public class AtencionDAO : BaseDAO<long, Atencion>
     {
         protected override string Tabla => "Atenciones";

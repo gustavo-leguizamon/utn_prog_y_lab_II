@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
+    /// <summary>
+    /// Clase encargada de administrar entidades de tipo Cliente
+    /// 
+    /// CLASE 12 - Tipos genericos
+    /// 
+    /// </summary>
     public class ClienteDAO : BaseDAO<long, Cliente>
     {
         protected override string Tabla => "Clientes";
@@ -20,6 +26,8 @@ namespace Datos
                 MascotaDAO mascotaDAO = new MascotaDAO();
                 TurnoDAO turnoDAO = new TurnoDAO();
                 AtencionDAO atencionDAO = new AtencionDAO();
+
+                //CLASE 17 - Delegados y expresiones lambda
                 foreach (Cliente cliente in clientes)
                 {
                     if (incluirRelaciones.Contains(typeof(Mascota)))
@@ -60,6 +68,7 @@ namespace Datos
             Cliente cliente = LeerPorId(id);
             if (incluirRelaciones.Contains(typeof(Mascota)))
             {
+                //CLASE 17 - Delegados y expresiones lambda
                 cliente.Mascotas = new MascotaDAO().Leer(x => x.ClienteId == cliente.Id);
             }
             return cliente;

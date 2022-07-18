@@ -11,6 +11,10 @@ namespace Logica
 {
     /// <summary>
     /// Permite realizar la busqueda de mascotas
+    /// 
+    /// CLASE 12 - Tipos genericos
+    /// CLASE 13 - Interfaces
+    /// 
     /// </summary>
     public class BusquedaMascota : IBusqueda<Mascota>
     {
@@ -23,6 +27,9 @@ namespace Logica
 
         /// <summary>
         /// Determina si una mascata ya existe
+        /// 
+        /// CLASE 17 - Delegados y expresiones lambda
+        /// 
         /// </summary>
         /// <param name="mascota">Mascota a evaluar</param>
         /// <returns>True si existe, false caso contrario</returns>

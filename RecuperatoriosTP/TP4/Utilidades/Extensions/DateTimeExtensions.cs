@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace Utilidades.Extensions
 {
+    /// <summary>
+    /// Clase con metodos extension de a clase DateTime
+    /// 
+    /// CLASE 20 - Metodos de extension
+    /// 
+    /// </summary>
     public static class DateTimeExtensions
     {
         /// <summary>

@@ -3,6 +3,13 @@ using System.Collections.Generic;
 
 namespace Entidades
 {
+    /// <summary>
+    /// Clase que representa una entidad de tipo Cliente
+    /// 
+    /// CLASE 12 - Tipos genericos
+    /// CLASE 13 - Interfaces
+    /// 
+    /// </summary>
     public class Cliente : IEntidad<long>, IActivable
     {
         private long id;

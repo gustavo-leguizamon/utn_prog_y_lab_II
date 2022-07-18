@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
+    /// <summary>
+    /// Clase que representa una entidad de tipo Mascota
+    /// 
+    /// CLASE 12 - Tipos genericos
+    /// CLASE 13 - Interfaces
+    /// 
+    /// </summary>
     public class Mascota : IEntidad<long>, IActivable
     {
         private long id;

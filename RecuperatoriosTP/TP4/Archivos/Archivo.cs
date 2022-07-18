@@ -12,6 +12,9 @@ namespace Archivos
 
         /// <summary>
         /// Cheque si la extension de un archivo corresponde al tipo de archivo que se esté trabajando
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <param name="ruta">Ruta del archivo en el disco</param>
         /// <exception cref="ArchivoException">Lanzada si el archivo no es de la extension correcta</exception>
@@ -23,6 +26,9 @@ namespace Archivos
 
         /// <summary>
         /// Verifica si existe el archivo en el disco
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <param name="ruta">Ruta del archivo en el disco</param>
         /// <exception cref="ArchivoException">Lanzada cuando no existe el archivo</exception>
@@ -34,6 +40,9 @@ namespace Archivos
 
         /// <summary>
         /// Manejar las excepciones producidas al operar con los archivos
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <param name="exception">Excepcion producida originalmente</param>
         /// <exception cref="ArchivoException">Lanzada como excepcion propia luego de manejar la original</exception>

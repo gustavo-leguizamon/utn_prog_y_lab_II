@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
+    /// <summary>
+    /// Clase encargada de administrar entidades de tipo Mascota
+    /// 
+    /// CLASE 12 - Tipos genericos
+    /// 
+    /// </summary>
     public class MascotaDAO : BaseDAO<long, Mascota>
     {
         protected override string Tabla => "Mascotas";
@@ -23,6 +29,7 @@ namespace Datos
                 }
                 if (incluirRelaciones.Contains(typeof(Turno)))
                 {
+                    //CLASE 17 - Delegados y expresiones lambda
                     mascota.Turnos = new TurnoDAO().Leer(x => x.MascotaId == mascota.Id);
                 }
             }
@@ -35,6 +42,7 @@ namespace Datos
             Mascota mascota = LeerPorId(id);
             if (incluirRelaciones.Contains(typeof(Turno)))
             {
+                //CLASE 17 - Delegados y expresiones lambda
                 mascota.Turnos = new TurnoDAO().Leer(x => x.MascotaId == mascota.Id);
             }
             return mascota;

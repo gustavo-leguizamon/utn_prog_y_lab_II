@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace Datos.Exceptions
 {
+    /// <summary>
+    /// Excepcion para manejar cuando no hay mas turnos en la base de datos
+    /// 
+    /// CLASE 10 - Excepciones
+    /// 
+    /// </summary>
     public class NoHayMasTurnosException : Exception
     {
         public NoHayMasTurnosException(string mensaje)

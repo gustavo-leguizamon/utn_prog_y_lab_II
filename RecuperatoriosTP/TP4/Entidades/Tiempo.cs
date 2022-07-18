@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidades.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,9 @@ namespace Entidades
 
         /// <summary>
         /// Parte hora del tiempo
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <exception cref="HorarioInvalidoException">Lanzada cuando el valor provisto no cumple con las condiciones validas</exception>
         public int Hora
@@ -29,6 +33,9 @@ namespace Entidades
 
         /// <summary>
         /// Parte minutos del tiempo
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <exception cref="HorarioInvalidoException">Lanzada cuando el valor provisto no cumple con las condiciones validas</exception>
         public int Minuto
@@ -44,6 +51,9 @@ namespace Entidades
 
         /// <summary>
         /// Parte segundos del tiempo
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <exception cref="HorarioInvalidoException">Lanzada cuando el valor provisto no cumple con las condiciones validas</exception>
         public int Segundo
@@ -69,6 +79,9 @@ namespace Entidades
 
         /// <summary>
         /// Inicializa el objeto con un string en formato hh:mm:ss
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <param name="hora">Hora en formato hh:mm:ss</param>
         /// <exception cref="HorarioInvalidoException">Lanzada cuando alguna parte del tiempo no cumple con las condiciones necesarias</exception>

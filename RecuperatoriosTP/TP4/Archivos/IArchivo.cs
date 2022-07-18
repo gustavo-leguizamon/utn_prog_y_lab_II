@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace Archivos
 {
+    /// <summary>
+    /// Interface para manejar archivos
+    /// 
+    /// CLASE 12 - Tipos genericos
+    /// CLASE 13 - Interfaces
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IArchivo<T>
     {
         /// <summary>

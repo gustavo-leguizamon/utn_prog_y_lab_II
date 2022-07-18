@@ -8,6 +8,14 @@ using System.Threading.Tasks;
 
 namespace Archivos
 {
+    /// <summary>
+    /// Clase encargada de manejar archivos de extension .json
+    /// 
+    /// CLASE 12 - Tipos genericos
+    /// CLASE 13 - Interfaces
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class ArchivoJson<T> : Archivo, IArchivo<T>
       where T : class
     {

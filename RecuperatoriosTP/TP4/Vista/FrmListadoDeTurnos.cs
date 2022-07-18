@@ -153,6 +153,9 @@ namespace Vista
 
         /// <summary>
         /// Obtiene el estado del turno seleccionado
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <returns>Estado seleccionado</returns>
         /// <exception cref="ElementoNoSeleccionadoException">Lanzada cuando se llema sin haber seleccionado un turno</exception>

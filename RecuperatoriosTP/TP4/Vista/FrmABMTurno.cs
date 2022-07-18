@@ -41,13 +41,16 @@ namespace Vista
             this.operacionFinalizada = false;
 
             this.buscadorDeTurnos = new BuscadorDeHorarios();
-            this.buscadorDeTurnos.OnBusquedaFinalizada += ColocarHorariosDisponibles;
+            this.buscadorDeTurnos.OnBusquedaFinalizada += ColocarHorariosDisponibles; //CLASE 19 - Eventos
         }
 
         #region Metodos
 
         /// <summary>
         /// Maneja las excepciones ocurridas en el formulario
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <param name="exception">Excepcion que ocurrio</param>
         private void ManejarExcepcion(Exception exception)
@@ -135,6 +138,9 @@ namespace Vista
 
         /// <summary>
         /// Valida si se completaron todos los campos obligatorios en el formulario
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <exception cref="ValidacionException">Lanzada cuando no se completaron todos los campos obligatorios</exception>
         private void SeCompletaronTodosLosCampos()

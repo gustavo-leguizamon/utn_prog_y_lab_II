@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
+    /// <summary>
+    /// Clase que representa una entidad de tipo TipoMascota
+    /// 
+    /// CLASE 12 - Tipos genericos
+    /// CLASE 13 - Interfaces
+    /// 
+    /// </summary>
     public class TipoMascota : IEntidad<short>
     {
         public enum eTipoMascota

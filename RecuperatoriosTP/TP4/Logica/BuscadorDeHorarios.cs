@@ -12,6 +12,9 @@ namespace Logica
 {
     /// <summary>
     /// Permite buscar horarios de turnos en hilo separado
+    /// 
+    /// CLASE 18 - Hilos
+    /// 
     /// </summary>
     public class BuscadorDeHorarios
     {
@@ -19,6 +22,9 @@ namespace Logica
 
         /// <summary>
         /// Delegado para recibir los horarios de un dia
+        /// 
+        /// CLASE 17 - Delegados y expresiones lambda
+        /// 
         /// </summary>
         /// <param name="horariosDisponibles">Listado de horarios disponibles</param>
         /// <param name="horariosNoDisponibles">Listado de horarios no disponibles</param>
@@ -26,6 +32,9 @@ namespace Logica
 
         /// <summary>
         /// Evento encargado de notificar cuando la busqueda finalice
+        /// 
+        /// CLASE 19 - Eventos
+        /// 
         /// </summary>
         public event DelegadoBusquedaFinalizadaHandler OnBusquedaFinalizada;
 
@@ -76,6 +85,9 @@ namespace Logica
 
         /// <summary>
         /// Busca los horarios y notifica cuando finaliza
+        /// 
+        /// CLASE 19 - Eventos
+        /// 
         /// </summary>
         private void BuscarListadoDisponibles()
         {

@@ -9,21 +9,33 @@ namespace Logica
 {
     /// <summary>
     /// Simula un reloj que se ejecuta cada cierto intervalo de tiempo
+    /// 
+    /// CLASE 18 - Hilos
+    /// 
     /// </summary>
     public class Temporizador
     {
         /// <summary>
         /// Delegado para manejar el reloj
+        /// 
+        /// CLASE 17 - Delegados y expresiones lambda
+        /// 
         /// </summary>
         public delegate void DelegateTimerHandler();
 
         /// <summary>
         /// Evento que notifica cuando el intervalo configurado se completa
+        /// 
+        /// CLASE 19 - Eventos
+        /// 
         /// </summary>
         public event DelegateTimerHandler OnTimerCompleto;
 
         /// <summary>
         /// Evento que notifica cuando el temporizador se reinicia
+        /// 
+        /// CLASE 19 - Eventos
+        /// 
         /// </summary>
         public event DelegateTimerHandler OnTimerReiniciar;
 
@@ -61,6 +73,9 @@ namespace Logica
 
         /// <summary>
         /// Detiene la ejecucion del temporizador cada intervalo configurado
+        /// 
+        /// CLASE 19 - Eventos
+        /// 
         /// </summary>
         private void Ejecutar()
         {
@@ -96,6 +111,9 @@ namespace Logica
 
         /// <summary>
         /// Reinicia el temporizador
+        /// 
+        /// CLASE 19 - Eventos
+        /// 
         /// </summary>
         public void Reiniciar()
         {

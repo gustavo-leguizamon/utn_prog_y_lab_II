@@ -42,6 +42,8 @@ namespace Vista
 
         private void FrmMainVeterinaria_Load(object sender, EventArgs e)
         {
+
+            //CLASE 19 - Eventos
             this.clienteDAO.OnNuevosDatos += BuscarClientes;
             this.mascotaDAO.OnNuevosDatos += ActualizarMascotas;
             this.turnoDAO.OnNuevosDatos += ReiniciarTemporizador;
@@ -129,6 +131,14 @@ namespace Vista
             }
         }
 
+        /// <summary>
+        /// Marca las entidades activas o no de un ListBox
+        /// 
+        /// CLASE 13 - Interfaces
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lstBox_MarcarActivos(object sender, DrawItemEventArgs e)
         {
             try
@@ -336,6 +346,18 @@ namespace Vista
             }
         }
 
+        /// <summary>
+        /// Maneja el evento al exportar clientes
+        /// 
+        /// CLASE 10 - Excepciones
+        /// CLASE 12 - Tipos genericos
+        /// CLASE 13 - Interfaces
+        /// CLASE 14 - Archivos y serializacion
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="ArchivoException"></exception>
         private void mnuExportarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -370,7 +392,18 @@ namespace Vista
             }
         }
 
-
+        /// <summary>
+        /// Maneja el evento al importar clientes
+        /// 
+        /// CLASE 10 - Excepciones
+        /// CLASE 12 - Tipos genericos
+        /// CLASE 13 - Interfaces
+        /// CLASE 14 - Archivos y serializacion
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="ArchivoException"></exception>
         private void mnuImportarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -414,6 +447,9 @@ namespace Vista
 
         /// <summary>
         /// Maneja las excepciones ocurridas en el formulario
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <param name="exception">Excepcion que ocurrio</param>
         private void ManejarExcepcion(Exception exception)
@@ -500,6 +536,9 @@ namespace Vista
 
         /// <summary>
         /// Busca el turno mas proximo a la fecha actual
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         private void BuscarProximoTurno()
         {
@@ -608,6 +647,9 @@ namespace Vista
 
         /// <summary>
         /// Obtiene el cliente seleccionado del listado en pantalla
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <returns>Objeto cliente</returns>
         /// <exception cref="ElementoNoSeleccionadoException">Lanzada cuando se llama sin tener un cliente seleccionado</exception>
@@ -640,6 +682,9 @@ namespace Vista
 
         /// <summary>
         /// Obtiene la mascota seleccionada del listado en pantalla
+        /// 
+        /// CLASE 10 - Excepciones
+        /// 
         /// </summary>
         /// <returns>Objeto mascota</returns>
         /// <exception cref="ElementoNoSeleccionadoException">Lanzada cuando se llama sin tener una mascota seleccionada</exception>
@@ -656,6 +701,9 @@ namespace Vista
 
         /// <summary>
         /// Coloca el texto a un boton segun la entidad activable
+        /// 
+        /// CLASE 13 - Interfaces
+        /// 
         /// </summary>
         /// <param name="button">Boton sobre el cual se va a cambiar el texto</param>
         /// <param name="activable">Entidad activable</param>
@@ -666,6 +714,9 @@ namespace Vista
 
         /// <summary>
         /// Habilita un boton segun la entidad activable
+        /// 
+        /// CLASE 13 - Interfaces
+        /// 
         /// </summary>
         /// <param name="button">Boton que se va a activar o desactivar</param>
         /// <param name="activable">Entidad activable</param>

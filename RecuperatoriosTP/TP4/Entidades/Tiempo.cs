@@ -25,7 +25,7 @@ namespace Entidades
             get { return hora; }
             set 
             {
-                if (hora < 0 || hora > 23)
+                if (value < 0 || value > 23)
                     throw new HorarioInvalidoException("El valor de hora debe estar entre 0 y 23");
                 hora = value;
             }
@@ -43,7 +43,7 @@ namespace Entidades
             get { return minuto; }
             set 
             {
-                if (minuto < 0 || minuto > 59)
+                if (value < 0 || value > 59)
                     throw new HorarioInvalidoException("El valor de minutos debe estar entre 0 y 59");
                 minuto = value; 
             }
@@ -61,7 +61,7 @@ namespace Entidades
             get { return segundo; }
             set 
             {
-                if (segundo < 0 || segundo > 59)
+                if (value < 0 || value > 59)
                     throw new HorarioInvalidoException("El valor de segundos debe estar entre 0 y 59");
                 segundo = value; 
             }

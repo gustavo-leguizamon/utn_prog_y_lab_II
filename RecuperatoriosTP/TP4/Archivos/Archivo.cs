@@ -10,6 +10,7 @@ namespace Archivos
         /// </summary>
         protected abstract string Extension { get; }
 
+
         /// <summary>
         /// Cheque si la extension de un archivo corresponde al tipo de archivo que se esté trabajando
         /// 
@@ -17,11 +18,13 @@ namespace Archivos
         /// 
         /// </summary>
         /// <param name="ruta">Ruta del archivo en el disco</param>
+        /// <returns>True si valida la extension</returns>
         /// <exception cref="ArchivoException">Lanzada si el archivo no es de la extension correcta</exception>
-        public void ValidarExtension(string ruta)
+        public bool ValidarExtension(string ruta)
         {
             if (Path.GetExtension(ruta) != Extension)
                 throw new ArchivoException($"El archivo no tiene la extensión {Extension}.");
+            return true;
         }
 
         /// <summary>
@@ -31,11 +34,13 @@ namespace Archivos
         /// 
         /// </summary>
         /// <param name="ruta">Ruta del archivo en el disco</param>
+        /// <returns>True si existe</returns>
         /// <exception cref="ArchivoException">Lanzada cuando no existe el archivo</exception>
-        public void ValidarSiExisteArchivo(string ruta)
+        public bool ValidarSiExisteArchivo(string ruta)
         {
             if (!File.Exists(ruta))
                 throw new ArchivoException($"No se encontró el archivo: {ruta}");
+            return true;
         }
 
         /// <summary>

@@ -92,6 +92,7 @@ namespace Vista
                                                       this.txtPeso.Value > 0)) ||
                    (this.eFrmABM == eFrmABM.Editar && !this.operacionFinalizada && 
                                                       (this.txtNombre.Text.Trim() != this.mascota.Nombre.Trim() ||
+                                                       ((TipoMascota.eTipoMascota)this.cmbTipoMascota.SelectedValue) != this.mascota.TipoMascota ||
                                                        (float)this.txtPeso.Value != this.mascota.Peso ||
                                                        this.dtFechaNacimiento.Value != this.mascota.FechaNacimiento ||
                                                        this.chkActivo.Checked != this.mascota.Activo));

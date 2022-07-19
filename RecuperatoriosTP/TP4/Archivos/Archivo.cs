@@ -73,7 +73,7 @@ namespace Archivos
             }
             else
             {
-                mensaje = "Error no esperado";
+                mensaje = "Revise el formato del archivo";
             }
             throw new ArchivoException(mensaje, exception);
         }

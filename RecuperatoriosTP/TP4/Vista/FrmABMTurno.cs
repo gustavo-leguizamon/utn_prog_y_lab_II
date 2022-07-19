@@ -175,6 +175,16 @@ namespace Vista
             }
         }
 
+        private void BuscarHorarios()
+        {
+            if (this.buscadorDeTurnos is not null)
+            {
+                this.buscadorDeTurnos.CancelarBusqueda();
+            }
+
+            this.buscadorDeTurnos.BuscarHorarios(dtFechaTurno.Value);
+        }
+
         #endregion
 
         #region Eventos
@@ -216,13 +226,15 @@ namespace Vista
             try
             {
                 SeCompletaronTodosLosCampos();
-                Turno turno = new Turno(this.turno.Id, (short)EstadoTurno.eEstadoTurno.Vigente, Convert.ToInt64(txtIdMascota.Text), dtFechaTurno.Value, this.cmbHoraDesde.Text, this.cmbHoraHasta.Text, txtComentario.Text);
+                Turno turno;
                 if (this.eFrmABM == eFrmABM.Crear)
                 {
+                    turno = new Turno((short)EstadoTurno.eEstadoTurno.Vigente, Convert.ToInt64(txtIdMascota.Text), dtFechaTurno.Value, this.cmbHoraDesde.Text, this.cmbHoraHasta.Text, txtComentario.Text);
                     this.turnoDAO.Guardar(turno);
                 }
                 else if (this.eFrmABM == eFrmABM.Editar)
                 {
+                    turno = new Turno(this.turno.Id, (short)EstadoTurno.eEstadoTurno.Vigente, Convert.ToInt64(txtIdMascota.Text), dtFechaTurno.Value, this.cmbHoraDesde.Text, this.cmbHoraHasta.Text, txtComentario.Text);
                     this.turnoDAO.Modificar(turno);
                 }
                 this.DialogResult = DialogResult.OK;
@@ -283,12 +295,7 @@ namespace Vista
 
         private void dtFechaTurno_ValueChanged(object sender, EventArgs e)
         {
-            if (this.buscadorDeTurnos is not null)
-            {
-                this.buscadorDeTurnos.CancelarBusqueda();
-            }
-
-            this.buscadorDeTurnos.BuscarHorarios(dtFechaTurno.Value);
+            BuscarHorarios();
             this.cmbHoraDesde.Enabled = false;
             this.cmbHoraDesde.Items.Clear();
             this.cmbHoraHasta.Enabled = false;

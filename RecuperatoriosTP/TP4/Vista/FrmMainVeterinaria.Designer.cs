@@ -117,6 +117,7 @@
             // lstClientes
             // 
             this.lstClientes.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.lstClientes.Enabled = false;
             this.lstClientes.FormattingEnabled = true;
             this.lstClientes.ItemHeight = 15;
             this.lstClientes.Location = new System.Drawing.Point(6, 22);
@@ -212,6 +213,7 @@
             // lstMascotas
             // 
             this.lstMascotas.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.lstMascotas.Enabled = false;
             this.lstMascotas.FormattingEnabled = true;
             this.lstMascotas.ItemHeight = 15;
             this.lstMascotas.Location = new System.Drawing.Point(6, 22);
@@ -246,14 +248,14 @@
             // mnuImportarToolStripMenuItem
             // 
             this.mnuImportarToolStripMenuItem.Name = "mnuImportarToolStripMenuItem";
-            this.mnuImportarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mnuImportarToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.mnuImportarToolStripMenuItem.Text = "Importar clientes";
             this.mnuImportarToolStripMenuItem.Click += new System.EventHandler(this.mnuImportarToolStripMenuItem_Click);
             // 
             // mnuExportarToolStripMenuItem
             // 
             this.mnuExportarToolStripMenuItem.Name = "mnuExportarToolStripMenuItem";
-            this.mnuExportarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mnuExportarToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.mnuExportarToolStripMenuItem.Text = "Exportar clientes";
             this.mnuExportarToolStripMenuItem.Click += new System.EventHandler(this.mnuExportarToolStripMenuItem_Click);
             // 
@@ -300,7 +302,7 @@
             this.rtbProximoTurno.TabIndex = 4;
             this.rtbProximoTurno.Text = "";
             // 
-            // FrmMain2
+            // FrmMainVeterinaria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -310,9 +312,10 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "FrmMain2";
+            this.Name = "FrmMainVeterinaria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Veterinaria";
+            this.Activated += new System.EventHandler(this.FrmMainVeterinaria_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMainVeterinaria_FormClosing);
             this.Load += new System.EventHandler(this.FrmMainVeterinaria_Load);
             this.groupBox1.ResumeLayout(false);

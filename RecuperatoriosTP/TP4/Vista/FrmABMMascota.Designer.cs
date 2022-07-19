@@ -34,6 +34,8 @@
             this.lblNombreCliente = new System.Windows.Forms.Label();
             this.lblDniCliente = new System.Windows.Forms.Label();
             this.grpMascota = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbTipoMascota = new System.Windows.Forms.ComboBox();
             this.chkActivo = new System.Windows.Forms.CheckBox();
             this.txtPeso = new System.Windows.Forms.NumericUpDown();
             this.dtFechaNacimiento = new System.Windows.Forms.DateTimePicker();
@@ -44,8 +46,6 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cmbTipoMascota = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.grpCliente.SuspendLayout();
             this.grpMascota.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPeso)).BeginInit();
@@ -118,13 +118,31 @@
             this.grpMascota.TabStop = false;
             this.grpMascota.Text = "Mascota";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(217, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(30, 15);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Tipo";
+            // 
+            // cmbTipoMascota
+            // 
+            this.cmbTipoMascota.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTipoMascota.FormattingEnabled = true;
+            this.cmbTipoMascota.Location = new System.Drawing.Point(217, 40);
+            this.cmbTipoMascota.Name = "cmbTipoMascota";
+            this.cmbTipoMascota.Size = new System.Drawing.Size(121, 23);
+            this.cmbTipoMascota.TabIndex = 2;
+            // 
             // chkActivo
             // 
             this.chkActivo.AutoSize = true;
             this.chkActivo.Location = new System.Drawing.Point(229, 94);
             this.chkActivo.Name = "chkActivo";
             this.chkActivo.Size = new System.Drawing.Size(60, 19);
-            this.chkActivo.TabIndex = 17;
+            this.chkActivo.TabIndex = 5;
             this.chkActivo.Text = "Activo";
             this.chkActivo.UseVisualStyleBackColor = true;
             // 
@@ -144,7 +162,7 @@
             0});
             this.txtPeso.Name = "txtPeso";
             this.txtPeso.Size = new System.Drawing.Size(75, 23);
-            this.txtPeso.TabIndex = 16;
+            this.txtPeso.TabIndex = 4;
             // 
             // dtFechaNacimiento
             // 
@@ -155,7 +173,7 @@
             this.dtFechaNacimiento.MinDate = new System.DateTime(1800, 1, 1, 0, 0, 0, 0);
             this.dtFechaNacimiento.Name = "dtFechaNacimiento";
             this.dtFechaNacimiento.Size = new System.Drawing.Size(101, 23);
-            this.dtFechaNacimiento.TabIndex = 15;
+            this.dtFechaNacimiento.TabIndex = 3;
             this.dtFechaNacimiento.Value = new System.DateTime(2022, 6, 17, 0, 0, 0, 0);
             // 
             // lblFechaNacimiento
@@ -192,7 +210,7 @@
             this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(200, 23);
-            this.txtNombre.TabIndex = 11;
+            this.txtNombre.TabIndex = 1;
             // 
             // btnCancelar
             // 
@@ -200,7 +218,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(312, 13);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(77, 23);
-            this.btnCancelar.TabIndex = 10;
+            this.btnCancelar.TabIndex = 7;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -210,7 +228,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(224, 13);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(77, 23);
-            this.btnAceptar.TabIndex = 9;
+            this.btnAceptar.TabIndex = 6;
             this.btnAceptar.Text = "Agregar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -225,24 +243,6 @@
             this.groupBox1.Size = new System.Drawing.Size(395, 42);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
-            // 
-            // cmbTipoMascota
-            // 
-            this.cmbTipoMascota.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTipoMascota.FormattingEnabled = true;
-            this.cmbTipoMascota.Location = new System.Drawing.Point(217, 40);
-            this.cmbTipoMascota.Name = "cmbTipoMascota";
-            this.cmbTipoMascota.Size = new System.Drawing.Size(121, 23);
-            this.cmbTipoMascota.TabIndex = 18;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(217, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 15);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Tipo";
             // 
             // FrmABMMascota
             // 

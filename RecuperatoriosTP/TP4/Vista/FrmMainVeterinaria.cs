@@ -62,6 +62,11 @@ namespace Vista
             }
         }
 
+        private void FrmMainVeterinaria_Activated(object sender, EventArgs e)
+        {
+            this.temporizadorRestante.Reiniciar();
+        }
+
         #endregion
 
         #region ListBox
@@ -567,6 +572,11 @@ namespace Vista
             this.lstClientes.Update();
             this.lstClientes.Refresh();
             HabilitarControlesCliente(false);
+
+            if (clientes.Any())
+            {
+                this.lstClientes.Enabled = true;
+            }
         }
 
         /// <summary>
@@ -605,6 +615,15 @@ namespace Vista
             this.lstMascotas.Update();
             this.lstMascotas.Refresh();
             HabilitarControlesMascota(false);
+
+            if (mascotas.Any())
+            {
+                this.lstMascotas.Enabled = true;
+            }
+            else
+            {
+                this.lstMascotas.Enabled = false;
+            }
         }
 
         /// <summary>

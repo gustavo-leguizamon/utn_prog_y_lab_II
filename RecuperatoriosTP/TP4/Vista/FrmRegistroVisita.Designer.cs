@@ -63,7 +63,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(203, 13);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(77, 23);
-            this.btnAceptar.TabIndex = 11;
+            this.btnAceptar.TabIndex = 6;
             this.btnAceptar.Text = "Guardar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -74,7 +74,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(286, 13);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(77, 23);
-            this.btnCancelar.TabIndex = 12;
+            this.btnCancelar.TabIndex = 7;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -84,7 +84,7 @@
             this.rtbObservaciones.Location = new System.Drawing.Point(18, 86);
             this.rtbObservaciones.Name = "rtbObservaciones";
             this.rtbObservaciones.Size = new System.Drawing.Size(344, 96);
-            this.rtbObservaciones.TabIndex = 1;
+            this.rtbObservaciones.TabIndex = 5;
             this.rtbObservaciones.Text = "";
             // 
             // txtPesoActual
@@ -103,7 +103,7 @@
             0});
             this.txtPesoActual.Name = "txtPesoActual";
             this.txtPesoActual.Size = new System.Drawing.Size(67, 23);
-            this.txtPesoActual.TabIndex = 2;
+            this.txtPesoActual.TabIndex = 4;
             // 
             // dtHoraLLegada
             // 
@@ -113,7 +113,7 @@
             this.dtHoraLLegada.Name = "dtHoraLLegada";
             this.dtHoraLLegada.ShowUpDown = true;
             this.dtHoraLLegada.Size = new System.Drawing.Size(62, 23);
-            this.dtHoraLLegada.TabIndex = 3;
+            this.dtHoraLLegada.TabIndex = 2;
             // 
             // dtHoraSalida
             // 
@@ -123,7 +123,7 @@
             this.dtHoraSalida.Name = "dtHoraSalida";
             this.dtHoraSalida.ShowUpDown = true;
             this.dtHoraSalida.Size = new System.Drawing.Size(62, 23);
-            this.dtHoraSalida.TabIndex = 4;
+            this.dtHoraSalida.TabIndex = 3;
             // 
             // label1
             // 
@@ -176,7 +176,7 @@
             this.dtFechaVisita.Location = new System.Drawing.Point(18, 27);
             this.dtFechaVisita.Name = "dtFechaVisita";
             this.dtFechaVisita.Size = new System.Drawing.Size(96, 23);
-            this.dtFechaVisita.TabIndex = 10;
+            this.dtFechaVisita.TabIndex = 1;
             // 
             // label6
             // 

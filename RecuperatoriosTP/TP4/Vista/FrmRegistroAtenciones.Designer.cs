@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pbrBusqueda = new System.Windows.Forms.ProgressBar();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.dtFechaHasta = new System.Windows.Forms.DateTimePicker();
             this.dtFechaDesde = new System.Windows.Forms.DateTimePicker();
             this.lblFechaHasta = new System.Windows.Forms.Label();
             this.lblFechaDesde = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dtgAtenciones = new System.Windows.Forms.DataGridView();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgAtenciones)).BeginInit();
@@ -43,6 +44,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.pbrBusqueda);
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.dtFechaHasta);
             this.groupBox1.Controls.Add(this.dtFechaDesde);
@@ -50,10 +52,28 @@
             this.groupBox1.Controls.Add(this.lblFechaDesde);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(828, 100);
+            this.groupBox1.Size = new System.Drawing.Size(818, 100);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
+            // 
+            // pbrBusqueda
+            // 
+            this.pbrBusqueda.Enabled = false;
+            this.pbrBusqueda.Location = new System.Drawing.Point(570, 71);
+            this.pbrBusqueda.Name = "pbrBusqueda";
+            this.pbrBusqueda.Size = new System.Drawing.Size(242, 23);
+            this.pbrBusqueda.TabIndex = 7;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(6, 71);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 6;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // dtFechaHasta
             // 
@@ -111,21 +131,11 @@
             this.dtgAtenciones.Size = new System.Drawing.Size(812, 298);
             this.dtgAtenciones.TabIndex = 1;
             // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Location = new System.Drawing.Point(6, 71);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscar.TabIndex = 6;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
             // FrmRegistroAtenciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(852, 450);
+            this.ClientSize = new System.Drawing.Size(838, 450);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmRegistroAtenciones";
@@ -149,5 +159,6 @@
         private System.Windows.Forms.Label lblFechaHasta;
         private System.Windows.Forms.DateTimePicker dtFechaHasta;
         private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.ProgressBar pbrBusqueda;
     }
 }

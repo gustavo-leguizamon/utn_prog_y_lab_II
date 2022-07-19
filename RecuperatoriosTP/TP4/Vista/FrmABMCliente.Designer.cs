@@ -79,7 +79,7 @@
             this.dtFechaNacimiento.Location = new System.Drawing.Point(148, 143);
             this.dtFechaNacimiento.Name = "dtFechaNacimiento";
             this.dtFechaNacimiento.Size = new System.Drawing.Size(117, 23);
-            this.dtFechaNacimiento.TabIndex = 3;
+            this.dtFechaNacimiento.TabIndex = 5;
             // 
             // lblDni
             // 
@@ -96,7 +96,7 @@
             this.txtApellido.MaxLength = 100;
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(200, 23);
-            this.txtApellido.TabIndex = 7;
+            this.txtApellido.TabIndex = 2;
             // 
             // lblApellido
             // 
@@ -117,14 +117,14 @@
             0});
             this.txtDni.Name = "txtDni";
             this.txtDni.Size = new System.Drawing.Size(120, 23);
-            this.txtDni.TabIndex = 8;
+            this.txtDni.TabIndex = 4;
             // 
             // btnAceptar
             // 
             this.btnAceptar.Location = new System.Drawing.Point(272, 12);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(77, 23);
-            this.btnAceptar.TabIndex = 9;
+            this.btnAceptar.TabIndex = 7;
             this.btnAceptar.Text = "Registrar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -134,7 +134,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(355, 12);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(77, 23);
-            this.btnCancelar.TabIndex = 10;
+            this.btnCancelar.TabIndex = 8;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -145,7 +145,7 @@
             this.txtDireccion.MaxLength = 100;
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(438, 23);
-            this.txtDireccion.TabIndex = 12;
+            this.txtDireccion.TabIndex = 3;
             // 
             // lblDireccion
             // 
@@ -172,7 +172,7 @@
             this.chkActivo.Location = new System.Drawing.Point(284, 143);
             this.chkActivo.Name = "chkActivo";
             this.chkActivo.Size = new System.Drawing.Size(60, 19);
-            this.chkActivo.TabIndex = 14;
+            this.chkActivo.TabIndex = 6;
             this.chkActivo.Text = "Activo";
             this.chkActivo.UseVisualStyleBackColor = true;
             // 

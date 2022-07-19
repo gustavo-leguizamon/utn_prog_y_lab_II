@@ -122,7 +122,7 @@ namespace Datos
                 short? estadoTurnoId = estadoTurno?.Id;
 
                 string query = @"SELECT 
-                                T.Id AS 'NroTurno', T.Fecha, T.Comentario, ET.Id AS 'EstadoTurnoId',
+                                T.Id AS 'NroTurno', T.Fecha, T.HoraInicio, T.HoraFin, T.Comentario, ET.Id AS 'EstadoTurnoId',
                                 ET.Descripcion AS 'Estado', C.Dni, C.Apellido + ' ' + C.Nombre AS 'Cliente', M.Nombre AS 'Mascota'
                                 FROM Turnos T JOIN Mascotas     M  ON T.MascotaId = M.Id
                                               JOIN EstadosTurno ET ON T.EstadoTurnoId = ET.Id
@@ -130,11 +130,13 @@ namespace Datos
                                 WHERE (@estado IS NULL OR @estado = 0 OR T.EstadoTurnoId = @estado)";
 
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("estado", estadoTurnoId);
+                command.Parameters.AddWithValue("estado", estadoTurnoId.HasValue ? estadoTurnoId : DBNull.Value);
 
                 SqlDataReader reader = command.ExecuteReader();
                 long nroTurno;
                 DateTime fecha;
+                Tiempo desde;
+                Tiempo hasta;
                 string comentario;
                 short estadoId;
                 string estado;
@@ -144,12 +146,14 @@ namespace Datos
                 {
                     nroTurno = Convert.ToInt64(reader["NroTurno"].ToString());
                     fecha = Convert.ToDateTime(reader["Fecha"].ToString());
+                    desde = new Tiempo(reader["HoraInicio"].ToString());
+                    hasta = new Tiempo(reader["HoraFin"].ToString());
                     comentario = reader["Comentario"].ToString();
                     estadoId = Convert.ToInt16(reader["EstadoTurnoId"].ToString());
                     estado = reader["Estado"].ToString();
                     cliente = reader["Cliente"].ToString();
                     mascota = reader["Mascota"].ToString();
-                    InformacionTurno informacionTurno = new InformacionTurno(nroTurno, fecha, comentario, estadoId, estado, cliente, mascota);
+                    InformacionTurno informacionTurno = new InformacionTurno(nroTurno, fecha, desde, hasta, comentario, estadoId, estado, cliente, mascota);
                     list.Add(informacionTurno);
                 }
             }

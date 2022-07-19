@@ -211,13 +211,16 @@ namespace Vista
                 {
                     SeCompletaronTodosLosCampos();
                     EsDniUnico();
-                    Cliente cliente = new Cliente(this.cliente.Id, (long)this.txtDni.Value, this.txtNombre.Text, this.txtApellido.Text, this.dtFechaNacimiento.Value, this.txtDireccion.Text, this.chkActivo.Checked);
+                    Cliente cliente;
                     if (this.eFrmABM == eFrmABM.Crear)
                     {
+
+                        cliente = new Cliente((long)this.txtDni.Value, this.txtNombre.Text, this.txtApellido.Text, this.dtFechaNacimiento.Value, this.txtDireccion.Text, this.chkActivo.Checked);
                         this.clienteDAO.Guardar(cliente);
                     }
                     else if (this.eFrmABM == eFrmABM.Editar)
                     {
+                        cliente = new Cliente(this.cliente.Id, (long)this.txtDni.Value, this.txtNombre.Text, this.txtApellido.Text, this.dtFechaNacimiento.Value, this.txtDireccion.Text, this.chkActivo.Checked);
                         this.clienteDAO.Modificar(cliente);
                     }
                     this.DialogResult = DialogResult.OK;

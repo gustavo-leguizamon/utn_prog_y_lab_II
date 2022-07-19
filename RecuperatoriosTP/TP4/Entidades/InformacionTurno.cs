@@ -10,6 +10,8 @@ namespace Entidades
     {
         private long turnoId;
         private DateTime fecha;
+        private Tiempo desde;
+        private Tiempo hasta;
         private string comentario;
         private string estado;
         private string cliente;
@@ -30,6 +32,10 @@ namespace Entidades
         public DateTime Fecha
         {
             get { return fecha; }
+        }
+
+        public string Horario { 
+            get { return $"{this.desde}-{this.hasta}"; } 
         }
 
         public string Comentario
@@ -53,10 +59,12 @@ namespace Entidades
         }
 
 
-        public InformacionTurno(long turnoId, DateTime fecha, string comentario, short estadoId, string estado, string cliente, string mascota)
+        public InformacionTurno(long turnoId, DateTime fecha, Tiempo desde, Tiempo hasta, string comentario, short estadoId, string estado, string cliente, string mascota)
         {
             this.turnoId = turnoId;
             this.fecha = fecha;
+            this.desde = desde;
+            this.hasta = hasta;
             this.comentario = comentario;
             this.estadoTurnoId = estadoId;
             this.estado = estado;

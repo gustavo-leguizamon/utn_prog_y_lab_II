@@ -15,6 +15,13 @@ namespace Vista
 {
     public partial class FrmListadoDeTurnos : Form
     {
+        private enum eBotonesEnColumnas
+        {
+            Cancelar = 8,
+            Reprogramar = 9,
+            Atender = 10,
+        }
+
         private TurnoDAO turnoDAO;
         private EstadoTurnoDAO estadoTurnoDAO;
 
@@ -84,6 +91,14 @@ namespace Vista
             btnReprogramar.DefaultCellStyle.BackColor = Color.Yellow;
             this.dtgTurnos.Columns.Add(btnReprogramar);
 
+            DataGridViewButtonColumn btnAtencion = new DataGridViewButtonColumn();
+            btnAtencion.HeaderText = "";
+            btnAtencion.Text = "Atención";
+            btnAtencion.Name = "btnAtencion";
+            btnAtencion.UseColumnTextForButtonValue = true;
+            btnAtencion.DefaultCellStyle.BackColor = Color.Green;
+            this.dtgTurnos.Columns.Add(btnAtencion);
+
             this.dtgTurnos.Update();
             this.dtgTurnos.Refresh();
         }
@@ -93,13 +108,15 @@ namespace Vista
         /// </summary>
         private void MarcarFilas()
         {
+            short estadoTurno;
             foreach (DataGridViewRow row in this.dtgTurnos.Rows)
             {
-                if (Convert.ToInt16(row.Cells["EstadoTurnoId"].Value) == (short)EstadoTurno.eEstadoTurno.Cancelado)
+                estadoTurno = Convert.ToInt16(row.Cells["EstadoTurnoId"].Value);
+                if (estadoTurno == (short)EstadoTurno.eEstadoTurno.Cancelado)
                 {
                     row.DefaultCellStyle.BackColor = Color.Red;
                 }
-                else if (Convert.ToInt16(row.Cells["EstadoTurnoId"].Value) == (short)EstadoTurno.eEstadoTurno.Atendido)
+                else if (estadoTurno == (short)EstadoTurno.eEstadoTurno.Atendido)
                 {
                     row.DefaultCellStyle.BackColor = Color.Green;
                 }
@@ -127,6 +144,14 @@ namespace Vista
             Turno turno = this.turnoDAO.LeerPorId(turnoId, new Type[] { typeof(Mascota) });
             Form form = new FrmABMTurno(this.turnoDAO, eFrmABM.Editar, turno);
             form.ShowDialog();
+        }
+
+        private void AtenderTurno(long turnoId)
+        {
+            if (MessageBox.Show("Desea terminar el turno?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.turnoDAO.CambiarEstado(turnoId, EstadoTurno.eEstadoTurno.Atendido);
+            }
         }
 
         /// <summary>
@@ -197,13 +222,24 @@ namespace Vista
         {
             try
             {
-                if (e.ColumnIndex == 7) //Cancelar
+                DataGridViewRow row = this.dtgTurnos.Rows[e.RowIndex];
+                if (row != null && 
+                    row.DefaultCellStyle.BackColor != Color.Red &&
+                    row.DefaultCellStyle.BackColor != Color.Green)
                 {
-                    CancelarTurno(ObtenerTurnoId(e.RowIndex));
-                }
-                else if (e.ColumnIndex == 8) //Reprogramar
-                {
-                    ReprogramarTurno(ObtenerTurnoId(e.RowIndex));
+                    long turnoId = ObtenerTurnoId(e.RowIndex);
+                    if (e.ColumnIndex == (int)eBotonesEnColumnas.Cancelar)
+                    {
+                        CancelarTurno(turnoId);
+                    }
+                    else if (e.ColumnIndex == (int)eBotonesEnColumnas.Reprogramar)
+                    {
+                        ReprogramarTurno(turnoId);
+                    }
+                    else if (e.ColumnIndex == (int)eBotonesEnColumnas.Atender)
+                    {
+                        AtenderTurno(turnoId);
+                    }
                 }
             }
             catch (Exception ex)
@@ -216,7 +252,13 @@ namespace Vista
         {
             try
             {
-                ReprogramarTurno(ObtenerTurnoId(e.RowIndex));
+                DataGridViewRow row = this.dtgTurnos.Rows[e.RowIndex];
+                if (row != null &&
+                    row.DefaultCellStyle.BackColor != Color.Red &&
+                    row.DefaultCellStyle.BackColor != Color.Green)
+                {
+                    ReprogramarTurno(ObtenerTurnoId(e.RowIndex));
+                }
             }
             catch (Exception ex)
             {

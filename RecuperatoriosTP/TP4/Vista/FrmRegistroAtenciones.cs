@@ -75,10 +75,19 @@ namespace Vista
         /// <exception cref="ValidacionException">Lanzada cuando la fecha inicial sea mayor que la final</exception>
         private void ValidarFechas()
         {
-            if (this.dtFechaDesde.Value > this.dtFechaHasta.Value)
+            if (this.dtFechaDesde.Value.Date > this.dtFechaHasta.Value.Date)
             {
                 throw new ValidacionException("Fecha desde debe ser menor o igual a la fecha hasta");
             }
+        }
+
+        /// <summary>
+        /// Establece las configuraciones iniciales de los controles
+        /// </summary>
+        private void ConfigurarControles()
+        {
+            this.dtFechaDesde.MaxDate = DateTime.Today;
+            this.dtFechaHasta.MaxDate = DateTime.Today;
         }
 
         #endregion
@@ -92,6 +101,7 @@ namespace Vista
             try
             {
                 BuscarAtenciones(DateTime.Today, DateTime.Today);
+                ConfigurarControles();
             }
             catch (Exception ex)
             {
@@ -109,6 +119,8 @@ namespace Vista
             {
                 ValidarFechas();
                 BuscarAtenciones(this.dtFechaDesde.Value, this.dtFechaHasta.Value);
+                if (this.dtgAtenciones.Rows.Count == 0)
+                    MessageBox.Show("No hay registros en las fechas seleccionadas");
             }
             catch (Exception ex)
             {
